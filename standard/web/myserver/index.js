@@ -1,21 +1,45 @@
 var myServer = {
-	loninUser: {
+	loginUser: {
 		id: null,
 		username: null
 	},
 	width: 0,
 	height: 0,
-	viewport: null,
 
-	mapContainer: null,
+	infomationNotification: null,// 系统信息通知窗口
+	viewport: null,// 视窗
+	mapContainer: null,// 地图容器
+
 	mainContent: null,
 
+	/**
+	 * 获取系统信息通知窗口
+	 * @returns Base.ux.Notification
+	 */
+	getInfomationNotification: function() {
+		return this.infomationNotification;
+	},
+	/**
+	 * 获取地图容器
+	 * @returns Base.gis.MapContainer
+	 */
 	getMapContainer: function() {
 		return this.mapContainer ? this.mapContainer : this.viewport.getComponent("mapContainer");
 	},
+	/**
+	 * 获取 OpenLayers 3 地图对象
+	 * @returns ol.Map
+	 */
 	getMapObject: function() {
 		return this.getMapContainer().map;
 	},
+	/**
+	 * 显示系统信息通知窗口
+	 */
+	showInfomationNotification: function() {
+		this.infomationNotification.show();
+	},
+
 	setMenuTreeContent: function(moduleId) {
 		this.getMenuTreePanel().loadTree(moduleId);
 	},
@@ -29,23 +53,14 @@ var myServer = {
 	},
 	getMainContent: function() {
 		return this.mainContent;
-	},
-	allProps: function(obj) {
-		var props = "";
-		for (var p in obj) {
-			if (typeof(obj[p]) == "function") {
-				props += p + "()" + ";\n";
-			} else {
-				props += p + "=" + obj[p] + ";\n";
-			}
-		}
-		alert(props);
 	}
 };
 
 Ext.onReady(function() {
 	myServer.width = document.body.clientWidth;
 	myServer.height = document.body.clientHeight;
+
+	myServer.infomationNotification = Ext.create('Base.InfomationNotification').show();
 
 	myServer.viewport = Ext.create('Ext.container.Viewport', {
 		renderTo: Ext.getBody(),
@@ -55,11 +70,8 @@ Ext.onReady(function() {
 		]
 	});
 
-	Ext.create('Base.ux.Notification', {
-		title: '信息提示栏',
-		html: '登录用户， 当前应用（下拉）， 当前地图专题（下拉）， 最小化的业务窗口列表（下拉复选框， 选中显示， 不选中最小化）， 退出按钮'
-	}).show();
-	Ext.create('Base.ux.Notification', {
+
+	/*Ext.create('Base.ux.Notification', {
 		title: '地图维护',
 		html: 'Map, View, Source, Layer 配置， 专题配置， 专题权限（精确到部门， 职位， 用户, 角色）'
 	}).show();
@@ -74,7 +86,7 @@ Ext.onReady(function() {
 	Ext.create('Base.ux.Notification', {
 		title: '业务展示',
 		html: '业务功能1， 业务功能2， 业务功能3'
-	}).show();
+	}).show();*/
 
 	// 上面的每一个通知框， 都叫做“功能区域”
 	// 用户登录， 根据权限， 来展示拥有的功能区域。 功能区域内的功能可以有多种表现（按钮， 菜单）

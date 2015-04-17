@@ -19,8 +19,8 @@
 	<script type="text/javascript" src="${ctx}/myserver/index.js"></script>
 	<script type="text/javascript">
 		var ctx = '${ctx}';
-		myServer.loninUser.id = '${sessionScope.sessionVo.userId}';
-		myServer.loninUser.username = '${sessionScope.sessionVo.username}';
+		myServer.loginUser.id = '${sessionScope.sessionVo.userId}';
+		myServer.loginUser.username = '${sessionScope.sessionVo.username}';
 
 		Ext.Loader.setConfig({
 			enabled: true,
@@ -31,11 +31,12 @@
 			}
 		});
 
-	//	Ext.require(['*']);
-
 		Ext.EventManager.on(Ext.isIE ? document : window, 'keydown', function(e, t) {
-			if (e.getKey() == e.BACKSPACE &&(t.disabled || t.readOnly)) {
+			var key = e.getKey();
+			if (key == e.BACKSPACE && (t.disabled || t.readOnly)) {
 				e.stopEvent();
+			} else if (key == e.T) {
+				myServer.showInfomationNotification();
 			}
 		});
 
