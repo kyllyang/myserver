@@ -12,22 +12,24 @@
 	<title>我的服务器</title>
 	<link rel="stylesheet" type="text/css" href="${ctx}/resource/component/ext-4.2.1.883/resources/css/ext-all.css"/>
 	<link rel="stylesheet" type="text/css" href="${ctx}/resource/component/v3.4.0-dist/ol.css"/>
-	<%--<link rel="stylesheet" type="text/css" href="${ctx}/resource/css/data-view.css"/>--%>
 	<script type="text/javascript" src="${ctx}/resource/component/ext-4.2.1.883/ext-all.js"></script>
 	<script type="text/javascript" src="${ctx}/resource/component/ext-4.2.1.883/locale/ext-lang-zh_CN.js"></script>
 	<script type="text/javascript" src="${ctx}/resource/component/v3.4.0-dist/ol.js"></script>
 	<script type="text/javascript" src="${ctx}/myserver/index.js"></script>
 	<script type="text/javascript">
 		var ctx = '${ctx}';
-		myServer.loginUser.id = '${sessionScope.sessionVo.userId}';
-		myServer.loginUser.username = '${sessionScope.sessionVo.username}';
+
+		myServer.loginUser = {
+			id: '${sessionScope.sessionVo.userId}',
+			username: '${sessionScope.sessionVo.username}'
+		};
 
 		Ext.Loader.setConfig({
 			enabled: true,
 			paths: {
 				Base: ctx + '/myserver/base',
-				SysManager: ctx + '/myserver/sysmanager',
-				Meaord: ctx + '/myserver/meaord'
+				Sys: ctx + '/myserver/sys',
+				Meaord: ctx + '/business/meaord'
 			}
 		});
 
@@ -37,6 +39,8 @@
 				e.stopEvent();
 			} else if (key == e.T) {
 				myServer.showInfomationNotification();
+			} else if (key == e.F) {
+				myServer.showFunctionNotification();
 			}
 		});
 

@@ -7,6 +7,8 @@ Ext.define('Base.InfomationNotification', {
 	position: 'tr',
 	slideInDuration: '500',
 	closeAction: 'hide',
+	resizable: false,
+	border: false,
 
 	initComponent: function() {
 		this.callParent();
@@ -55,15 +57,11 @@ Ext.define('Base.InfomationNotification', {
 		});
 		var windowButton = Ext.create('Ext.button.Button', {
 			text: '窗口列表',
-			icon: ctx + '/resource/image/icon/user.png',
+			icon: ctx + '/resource/image/icon/window.png',
 			menu: Ext.create('Ext.menu.Menu', {
-				items: [{
+				items: [Ext.create('Ext.menu.CheckItem', {
 					text: '窗口1'
-				},{
-					text: '窗口2'
-				},{
-					text: '窗口3'
-				}]
+				})]
 			})
 		});
 		var exitButton = Ext.create('Ext.button.Button', {
@@ -98,5 +96,8 @@ Ext.define('Base.InfomationNotification', {
 		form.add(exitButton);
 
 		this.add(form);
+
+		myServer.getMapContainer().loadMap();
+		myServer.setFunctionNotification(Ext.create('Base.FunctionNotification').show());
 	}
 });

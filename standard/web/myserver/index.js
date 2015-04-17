@@ -1,74 +1,79 @@
 var myServer = {
-	loginUser: {
-		id: null,
-		username: null
-	},
-	width: 0,
-	height: 0,
+	loginUser: null,// 登录用户信息 {id, username}
 
-	infomationNotification: null,// 系统信息通知窗口
+	width: 0,// 浏览器窗口的内部宽度， 不包括工具栏和滚动条
+	height: 0,// 浏览器窗口的内部高度， 不包括工具栏和滚动条
+
 	viewport: null,// 视窗
 	mapContainer: null,// 地图容器
+	infomationNotification: null,// 系统信息通知窗口
+	functionNotification: null,// 功能模块通知窗口
 
-	mainContent: null,
-
-	/**
-	 * 获取系统信息通知窗口
-	 * @returns Base.ux.Notification
-	 */
-	getInfomationNotification: function() {
-		return this.infomationNotification;
+	setLoginUser: function(value) {
+		this.loginUser = value;
 	},
-	/**
-	 * 获取地图容器
-	 * @returns Base.gis.MapContainer
-	 */
+	getLoginUser: function() {
+		return this.loginUser;
+	},
+	setWidth: function(value) {
+		this.width = value;
+	},
+	getWidth: function() {
+		return this.width;
+	},
+	setHeight: function(value) {
+		this.height = value;
+	},
+	getHeight: function() {
+		return this.height;
+	},
+	setViewport: function(value) {
+		this.viewport = value;
+	},
+	getViewport: function() {
+		return this.viewport;
+	},
 	getMapContainer: function() {
 		return this.mapContainer ? this.mapContainer : this.viewport.getComponent("mapContainer");
 	},
-	/**
-	 * 获取 OpenLayers 3 地图对象
-	 * @returns ol.Map
-	 */
 	getMapObject: function() {
-		return this.getMapContainer().map;
+		return this.getMapContainer().getMap();
 	},
-	/**
-	 * 显示系统信息通知窗口
-	 */
+	setInfomationNotification: function(value) {
+		this.infomationNotification = value;
+	},
+	getInfomationNotification: function() {
+		return this.infomationNotification;
+	},
 	showInfomationNotification: function() {
-		this.infomationNotification.show();
+		this.getInfomationNotification().show();
 	},
-
-	setMenuTreeContent: function(moduleId) {
-		this.getMenuTreePanel().loadTree(moduleId);
+	setFunctionNotification: function(value) {
+		this.functionNotification = value;
 	},
-	setMainContent: function(component) {
-		var mc = this.getMainContainer();
-		if (mc) {
-			mc.removeAll();
-			mc.add(component);
-			this.mainContent = component;
-		}
+	getFunctionNotification: function() {
+		return this.functionNotification;
 	},
-	getMainContent: function() {
-		return this.mainContent;
+	showFunctionNotification: function() {
+		this.getFunctionNotification().show();
 	}
 };
 
 Ext.onReady(function() {
-	myServer.width = document.body.clientWidth;
-	myServer.height = document.body.clientHeight;
+	myServer.setWidth(window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth);
+	myServer.setHeight(window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight);
 
-	myServer.infomationNotification = Ext.create('Base.InfomationNotification').show();
-
-	myServer.viewport = Ext.create('Ext.container.Viewport', {
+	myServer.setViewport(Ext.create('Ext.container.Viewport', {
 		renderTo: Ext.getBody(),
 		layout: 'fit',
 		items: [
 			Ext.create('Base.gis.MapContainer')
 		]
-	});
+	}));
+
+	myServer.setInfomationNotification(Ext.create('Base.InfomationNotification').show());
+
+
 
 
 	/*Ext.create('Base.ux.Notification', {

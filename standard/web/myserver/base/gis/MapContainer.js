@@ -8,9 +8,8 @@ Ext.define('Base.gis.MapContainer', {
 
 	initComponent: function() {
 		this.callParent();
-		this.on('render', this.onRenderHandler, this);
 	},
-	onRenderHandler: function(container, eOpts) {
+	loadMap: function() {
 		this.map = new ol.Map({
 			layers: [
 				new ol.layer.Tile({source: new ol.source.OSM()})
@@ -21,5 +20,8 @@ Ext.define('Base.gis.MapContainer', {
 			}),
 			target: 'mapDiv'
 		});
+	},
+	getMap: function() {
+		return this.map;
 	}
 });
