@@ -143,7 +143,7 @@ Ext.define('Meaord.dishes.DishesFormPanel', {
 			},
 			waitMsg: '正在载入数据...',
 			success: function(form, action) {
-				this.getComponent('photoContainer').update('<img src="' + ctx + '/sysmanager/attachment/view.ctrl?qc.entityName=org.kyll.myserver.business.meaord.entity.MeaordDishes&qc.entityId=' + id + '&r=' + Math.random() + '" border="0" width="328px" height="310px"/>');
+				this.getComponent('photoContainer').update('<img src="' + ctx + '/sys/attachment/view.ctrl?qc.entityName=org.kyll.myserver.business.meaord.entity.MeaordDishes&qc.entityId=' + id + '&r=' + Math.random() + '" border="0" width="328px" height="310px"/>');
 				this.getDockedComponent(0).items.get(2).show();
 			},
 			failure: function() {

@@ -5,7 +5,7 @@ Ext.define('SysManager.module.ModuleGridPanel', {
 
 	initComponent: function() {
 		Ext.apply(this, {
-			url: ctx + '/sysmanager/module/list.ctrl',
+			url: ctx + '/sys/module/list.ctrl',
 			sortProperty: 'sort',
 			sortDirection: 'asc',
 			idProperty: 'id',
@@ -126,7 +126,7 @@ Ext.define('SysManager.module.ModuleGridPanel', {
 	doDeleteEvent: function(ids) {
 		var record = myServer.getMainContent().getComponent('moduleTreePanel').getSelectedRecord();
 		Ext.Ajax.request({
-			url: ctx + '/sysmanager/module/delete.ctrl',
+			url: ctx + '/sys/module/delete.ctrl',
 			params: {
 				ids: ids
 			},

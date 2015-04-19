@@ -5,7 +5,7 @@ Ext.define('Sys.dict.DictItemGridPanel', {
 
 	initComponent: function() {
 		Ext.apply(this, {
-			url: ctx + '/sysmanager/dictitem/list.ctrl',
+			url: ctx + '/sys/dictitem/list.ctrl',
 			sortProperty: 'sort',
 			sortDirection: 'asc',
 			enableEditBtn: false,
@@ -139,7 +139,7 @@ Ext.define('Sys.dict.DictItemGridPanel', {
 		}
 
 		Ext.Ajax.request({
-			url: ctx + '/sysmanager/dictitem/delete.ctrl',
+			url: ctx + '/sys/dictitem/delete.ctrl',
 			params: {
 				ids: validIds
 			},
@@ -168,7 +168,7 @@ Ext.define('Sys.dict.DictItemGridPanel', {
 
 		if(datas.length > 0) {
 			Ext.Ajax.request({
-				url: ctx + '/sysmanager/dictitem/save.ctrl',
+				url: ctx + '/sys/dictitem/save.ctrl',
 				params: {
 					dictItemJson: Ext.encode(datas)
 				},

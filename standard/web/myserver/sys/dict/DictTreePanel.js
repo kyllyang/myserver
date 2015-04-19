@@ -16,7 +16,7 @@ Ext.define('Sys.dict.DictTreePanel', {
 			model: 'TreeModel',
 			proxy: {
 				type: 'ajax',
-				url: ctx + '/sysmanager/dict/tree.ctrl'
+				url: ctx + '/sys/dict/tree.ctrl'
 			},
 			reader: {
 				type: 'json'

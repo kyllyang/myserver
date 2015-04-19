@@ -14,7 +14,7 @@ Ext.define('SysManager.role.ModuleTreePanel', {
 			model: 'TreeModel',
 			proxy: {
 				type: 'ajax',
-				url: ctx + '/sysmanager/module/tree.ctrl',
+				url: ctx + '/sys/module/tree.ctrl',
 				extraParams: {
 					checked: false
 				}
@@ -82,7 +82,7 @@ Ext.define('SysManager.role.ModuleTreePanel', {
 			}
 
 			Ext.Ajax.request({
-				url: ctx + '/sysmanager/role/saveModule.ctrl',
+				url: ctx + '/sys/role/saveModule.ctrl',
 				params: {
 					roleId: record.get('id'),
 					moduleIds: moduleIds

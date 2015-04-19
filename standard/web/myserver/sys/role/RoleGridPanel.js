@@ -9,7 +9,7 @@ Ext.define('SysManager.role.RoleGridPanel', {
 
 	initComponent: function() {
 		Ext.apply(this, {
-			url: ctx + '/sysmanager/role/list.ctrl',
+			url: ctx + '/sys/role/list.ctrl',
 			sortProperty: 'sort',
 			sortDirection: 'asc',
 			enableEditBtn: false,
@@ -128,7 +128,7 @@ Ext.define('SysManager.role.RoleGridPanel', {
 	},
 	doDeleteEvent: function(ids) {
 		Ext.Ajax.request({
-			url: ctx + '/sysmanager/role/delete.ctrl',
+			url: ctx + '/sys/role/delete.ctrl',
 			params: {
 				ids: ids
 			},
@@ -156,7 +156,7 @@ Ext.define('SysManager.role.RoleGridPanel', {
 
 		if(datas.length > 0) {
 			Ext.Ajax.request({
-				url: ctx + '/sysmanager/role/save.ctrl',
+				url: ctx + '/sys/role/save.ctrl',
 				params: {
 					roleJson: Ext.encode(datas)
 				},

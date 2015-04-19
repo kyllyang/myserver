@@ -5,7 +5,7 @@ Ext.define('SysManager.user.UserGridPanel', {
 
 	initComponent: function() {
 		Ext.apply(this, {
-			url: ctx + '/sysmanager/user/list.ctrl',
+			url: ctx + '/sys/user/list.ctrl',
 			sortProperty: 'sort',
 			sortDirection: 'asc',
 			idProperty: 'id',
@@ -109,7 +109,7 @@ Ext.define('SysManager.user.UserGridPanel', {
 	},
 	doDeleteEvent: function(ids) {
 		Ext.Ajax.request({
-			url: ctx + '/sysmanager/user/delete.ctrl',
+			url: ctx + '/sys/user/delete.ctrl',
 			params: {
 				ids: ids
 			},

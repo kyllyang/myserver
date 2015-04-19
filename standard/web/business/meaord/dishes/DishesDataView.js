@@ -27,7 +27,7 @@ Ext.define('Meaord.dishes.DishesDataView', {
 			tpl: [
 				'<tpl for=".">',
 				'<div class="thumb-wrap" id="{id}">',
-				'<div class="thumb"><img src="' + ctx + '/sysmanager/attachment/view.ctrl?qc.entityName=org.kyll.myserver.business.meaord.entity.MeaordDishes&qc.entityId={id}&r=' + Math.random() + '" title="{name}"></div>',
+				'<div class="thumb"><img src="' + ctx + '/sys/attachment/view.ctrl?qc.entityName=org.kyll.myserver.business.meaord.entity.MeaordDishes&qc.entityId={id}&r=' + Math.random() + '" title="{name}"></div>',
 				'<span class="x-editable">{name}({price}元)</span></div>',
 				'</tpl>',
 				'<div class="x-clear"></div>'
@@ -60,7 +60,7 @@ Ext.define('Meaord.dishes.DishesDataView', {
 		this.tpl = new Ext.XTemplate(
 			'<tpl for=".">',
 			'<div class="thumb-wrap" id="{id}">',
-			'<div class="thumb"><img src="' + ctx + '/sysmanager/attachment/view.ctrl?qc.entityName=org.kyll.myserver.business.meaord.entity.MeaordDishes&qc.entityId={id}&r=' + Math.random() + '" title="{name}"></div>',
+			'<div class="thumb"><img src="' + ctx + '/sys/attachment/view.ctrl?qc.entityName=org.kyll.myserver.business.meaord.entity.MeaordDishes&qc.entityId={id}&r=' + Math.random() + '" title="{name}"></div>',
 			'<span class="x-editable">{name}({price}元)</span></div>',
 			'</tpl>',
 			'<div class="x-clear"></div>'

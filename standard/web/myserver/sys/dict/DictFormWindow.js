@@ -105,7 +105,7 @@ Ext.define('Sys.dict.DictFormWindow', {
 
 		if (this.entityId) {
 			this.getComponent('editForm').getForm().load({
-				url: ctx + '/sysmanager/dict/input.ctrl',
+				url: ctx + '/sys/dict/input.ctrl',
 				params: {
 					id: this.entityId
 				},
@@ -123,7 +123,7 @@ Ext.define('Sys.dict.DictFormWindow', {
 		var form = this.getComponent('editForm').getForm();
 		if (form.isValid()) {
 			form.submit({
-				url: ctx + '/sysmanager/dict/save.ctrl',
+				url: ctx + '/sys/dict/save.ctrl',
 				waitMsg: '正在保存数据，请稍候...',
 				success: function(form, action) {
 					Ext.Msg.alert('系统提示', '数据保存成功！');

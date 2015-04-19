@@ -1,7 +1,7 @@
 package org.kyll.myserver.util;
 
-import org.kyll.myserver.business.sysmanager.entity.Config;
-import org.kyll.myserver.business.sysmanager.service.ConfigService;
+import org.kyll.myserver.business.sys.entity.Config;
+import org.kyll.myserver.business.sys.service.ConfigService;
 import org.springframework.context.ApplicationContext;
 
 import java.util.HashMap;

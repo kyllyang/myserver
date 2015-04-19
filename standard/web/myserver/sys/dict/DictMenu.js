@@ -49,7 +49,7 @@ Ext.define('Sys.dict.DictMenu', {
 		Ext.MessageBox.confirm("系统提示", "确定要删除数据吗？", function (btn) {
 			if ('yes' == btn) {
 				Ext.Ajax.request({
-					url: ctx + '/sysmanager/dict/delete.ctrl',
+					url: ctx + '/sys/dict/delete.ctrl',
 					params: {
 						ids: [this.dictTreePanel.getSelectedRecord().get('id')]
 					},

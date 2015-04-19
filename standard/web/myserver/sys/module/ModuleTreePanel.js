@@ -16,7 +16,7 @@ Ext.define('SysManager.module.ModuleTreePanel', {
 			model: 'TreeModel',
 			proxy: {
 				type: 'ajax',
-				url: ctx + '/sysmanager/module/tree.ctrl'
+				url: ctx + '/sys/module/tree.ctrl'
 			},
 			reader: {
 				type: 'json'

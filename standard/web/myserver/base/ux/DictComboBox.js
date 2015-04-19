@@ -17,7 +17,7 @@ Ext.define("Base.ux.DictComboBox", {
 			model: 'SysItem',
 			proxy: {
 				type: 'ajax',
-				url: ctx + '/sysmanager/dictitem/list.ctrl',
+				url: ctx + '/sys/dictitem/list.ctrl',
 				extraParams: {
 					'qc.invokeCode': this.invokeCode,
 					limit: 65535

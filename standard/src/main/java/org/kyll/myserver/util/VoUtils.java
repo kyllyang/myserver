@@ -2,7 +2,7 @@ package org.kyll.myserver.util;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.kyll.myserver.base.paginated.Dataset;
-import org.kyll.myserver.business.sysmanager.entity.Attachment;
+import org.kyll.myserver.business.sys.entity.Attachment;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.lang.reflect.InvocationTargetException;
