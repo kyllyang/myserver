@@ -11,6 +11,8 @@ Ext.define('Sys.dict.DictFormWindow', {
 	resizable: false,
 	layout: 'fit',
 
+	dictTreePanel: null,
+
 	initComponent: function() {
 		this.callParent();
 
@@ -26,7 +28,7 @@ Ext.define('Sys.dict.DictFormWindow', {
 			]
 		});
 
-		var record = myServer.getMainContent().getComponent('dictTreePanel').getSelectedRecord();
+		var record = this.dictTreePanel.getSelectedRecord();
 
 		var parentNameText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '上级数据字典',
@@ -127,8 +129,8 @@ Ext.define('Sys.dict.DictFormWindow', {
 					Ext.Msg.alert('系统提示', '数据保存成功！');
 					this.closeForm();
 
-					var record = myServer.getMainContent().getComponent('dictTreePanel').getSelectedRecord();
-					myServer.getMainContent().getComponent('dictTreePanel').loadTreeNode(record.parentNode && record.parentNode.get('id') ? record.parentNode.get('id') : null);
+					var record = this.dictTreePanel.getSelectedRecord();
+					this.dictTreePanel.loadTreeNode(record.parentNode && record.parentNode.get('id') ? record.parentNode.get('id') : null);
 				},
 				failure: function(form, action) {
 					Ext.Msg.alert('系统提示', '无法保存数据！');

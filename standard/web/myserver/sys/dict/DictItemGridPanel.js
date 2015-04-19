@@ -111,14 +111,14 @@ Ext.define('Sys.dict.DictItemGridPanel', {
 
 			this.store.proxy.actionMethods = {read: 'POST'};
 			Ext.apply(this.store.proxy.extraParams, {
-				'qc.dictId': myServer.getMainContent().getComponent('dictTreePanel').getSelectedRecord().get('id'),
+				'qc.dictId': this.ownerCt.getComponent('dictTreePanel').getSelectedRecord().get('id'),
 				'qc.key': form.findField('key').getValue(),
 				'qc.value': form.findField('value').getValue()
 			});
 		}, this);
 	},
 	doAddEvent: function() {
-		if (myServer.getMainContent().getComponent('dictTreePanel').getSelectedRecord().get('id')) {
+		if (this.ownerCt.getComponent('dictTreePanel').getSelectedRecord().get('id')) {
 			var record = Ext.ModelManager.create({
 				key: '键',
 				value: '值',
@@ -159,7 +159,7 @@ Ext.define('Sys.dict.DictItemGridPanel', {
 		for (var i = 0; i < records.length; i++) {
 			datas.push({
 				id: records[i].get('id'),
-				dictId: myServer.getMainContent().getComponent('dictTreePanel').getSelectedRecord().get('id'),
+				dictId: this.ownerCt.getComponent('dictTreePanel').getSelectedRecord().get('id'),
 				key: records[i].get('key'),
 				value: records[i].get('value'),
 				sort: records[i].get('sort')

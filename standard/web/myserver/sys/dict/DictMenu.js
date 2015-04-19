@@ -1,6 +1,8 @@
 Ext.define('Sys.dict.DictMenu', {
 	extend: 'Ext.menu.Menu',
 
+	dictTreePanel: null,
+
 	initComponent: function() {
 		this.callParent();
 
@@ -13,7 +15,7 @@ Ext.define('Sys.dict.DictMenu', {
 			}
 		}));
 
-		if (myServer.getMainContent().getComponent('dictTreePanel').getSelectedRecord().get('id')) {
+		if (this.dictTreePanel.getSelectedRecord().get('id')) {
 			this.add(Ext.create('Ext.menu.Item', {
 				text: '编辑',
 				icon: ctx + '/resource/image/icon/edit.png',
@@ -33,11 +35,14 @@ Ext.define('Sys.dict.DictMenu', {
 		}
 	},
 	doAddEvent: function(item, e, eOpts) {
-		Ext.create('Sys.dict.DictFormWindow').show();
+		Ext.create('Sys.dict.DictFormWindow', {
+			dictTreePanel: this.dictTreePanel
+		}).show();
 	},
 	doEditEvent: function(item, e, eOpts) {
 		Ext.create('Sys.dict.DictFormWindow', {
-			entityId: myServer.getMainContent().getComponent('dictTreePanel').getSelectedRecord().get('id')
+			dictTreePanel: this.dictTreePanel,
+			entityId: this.dictTreePanel.getSelectedRecord().get('id')
 		}).show();
 	},
 	doDeleteEvent: function(item, e, eOpts) {
@@ -46,13 +51,13 @@ Ext.define('Sys.dict.DictMenu', {
 				Ext.Ajax.request({
 					url: ctx + '/sysmanager/dict/delete.ctrl',
 					params: {
-						ids: [myServer.getMainContent().getComponent('dictTreePanel').getSelectedRecord().get('id')]
+						ids: [this.dictTreePanel.getSelectedRecord().get('id')]
 					},
 					success: function(response, opts) {
 						Ext.Msg.alert("系统提示", "数据删除成功！");
 
-						var record = myServer.getMainContent().getComponent('dictTreePanel').getSelectedRecord();
-						myServer.getMainContent().getComponent('dictTreePanel').loadTreeNode(record.parentNode && record.parentNode.get('id') ? record.parentNode.get('id') : null);
+						var record = this.dictTreePanel.getSelectedRecord();
+						this.dictTreePanel.loadTreeNode(record.parentNode && record.parentNode.get('id') ? record.parentNode.get('id') : null);
 					},
 					failure: function(response, opts) {
 						Ext.Msg.alert("系统提示", "数据删除失败！");

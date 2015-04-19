@@ -34,12 +34,14 @@ Ext.define('Sys.dict.DictTreePanel', {
 		this.callParent();
 
 		this.on('itemcontextmenu', function(treePanel, record, item, index, e, eOpts) {
-			Ext.create('Sys.dict.DictMenu').showAt(e.getXY());
+			Ext.create('Sys.dict.DictMenu', {
+				dictTreePanel: this
+			}).showAt(e.getXY());
 			e.stopEvent();
 		}, this);
 
 		this.on('select', function(treePanel, record, index, eOpts) {
-			myServer.getMainContent().getComponent('dictItemGridPanel').queryData();
+			this.ownerCt.getComponent('dictItemGridPanel').queryData();
 		}, this);
 
 		this.getStore().on('load', function(store, node, records, successful, eOpts) {
