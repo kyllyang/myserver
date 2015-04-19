@@ -1,4 +1,4 @@
-Ext.define('SysManager.dict.DictTreePanel', {
+Ext.define('Sys.dict.DictTreePanel', {
 	extend: 'Ext.tree.Panel',
 
 	currentNodeId: null,
@@ -34,7 +34,7 @@ Ext.define('SysManager.dict.DictTreePanel', {
 		this.callParent();
 
 		this.on('itemcontextmenu', function(treePanel, record, item, index, e, eOpts) {
-			Ext.create('SysManager.dict.DictMenu').showAt(e.getXY());
+			Ext.create('Sys.dict.DictMenu').showAt(e.getXY());
 			e.stopEvent();
 		}, this);
 

@@ -1,4 +1,4 @@
-Ext.define('SysManager.dict.DictContainer', {
+Ext.define('Sys.dict.DictContainer', {
 	extend: 'Ext.container.Container',
 
 	layout: 'border',
@@ -6,13 +6,13 @@ Ext.define('SysManager.dict.DictContainer', {
 	initComponent: function() {
 		this.callParent();
 
-		this.add(Ext.create('SysManager.dict.DictTreePanel', {
+		this.add(Ext.create('Sys.dict.DictTreePanel', {
 			region: 'west',
 			split: true,
 			collapsible: true,
-			width: (myServer.width - myServer.getMenuTreePanel().getWidth()) / 3
+			width: myServer.getWidth() / 6
 		}));
-		this.add(Ext.create('SysManager.dict.DictItemGridPanel', {
+		this.add(Ext.create('Sys.dict.DictItemGridPanel', {
 			region: 'center'
 		}));
 	}

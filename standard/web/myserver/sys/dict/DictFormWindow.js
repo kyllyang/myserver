@@ -1,4 +1,4 @@
-Ext.define('SysManager.dict.DictFormWindow', {
+Ext.define('Sys.dict.DictFormWindow', {
 	extend: 'Ext.window.Window',
 
 	entityId: null,

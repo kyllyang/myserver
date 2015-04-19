@@ -8,6 +8,7 @@ var myServer = {
 	mapContainer: null,// 地图容器
 	infomationNotification: null,// 系统信息通知窗口
 	functionNotification: null,// 功能模块通知窗口
+	businessWindowMap: null,// 业务窗口集合
 
 	setLoginUser: function(value) {
 		this.loginUser = value;
@@ -56,12 +57,17 @@ var myServer = {
 	},
 	showFunctionNotification: function() {
 		this.getFunctionNotification().show();
+	},
+	getBusinessWindowMap: function() {
+		return this.businessWindowMap;
 	}
 };
 
 Ext.onReady(function() {
 	myServer.setWidth(window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth);
 	myServer.setHeight(window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight);
+
+	myServer.businessWindowMap = new Ext.util.HashMap();
 
 	myServer.setViewport(Ext.create('Ext.container.Viewport', {
 		renderTo: Ext.getBody(),
@@ -71,7 +77,30 @@ Ext.onReady(function() {
 		]
 	}));
 
-	myServer.setInfomationNotification(Ext.create('Base.InfomationNotification').show());
+	// 通过 ajax 获取 application JSON
+	myServer.setInfomationNotification(Ext.create('Base.InfomationNotification', {
+		applications: [{
+			id: '1',
+			name: '应用1',
+			thematics: [{
+				id: '1',
+				name: '专题1'
+			}, {
+				id: '2',
+				name: '专题2'
+			}]
+		}, {
+			id: '2',
+			name: '应用2',
+			thematics: [{
+				id: '2',
+				name: '专题2'
+			}, {
+				id: '3',
+				name: '专题3'
+			}]
+		}]
+	}).show());
 
 
 

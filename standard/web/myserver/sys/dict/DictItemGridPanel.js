@@ -1,4 +1,4 @@
-Ext.define('SysManager.dict.DictItemGridPanel', {
+Ext.define('Sys.dict.DictItemGridPanel', {
 	extend: 'Base.ux.GridPanel',
 
 	itemId: 'dictItemGridPanel',

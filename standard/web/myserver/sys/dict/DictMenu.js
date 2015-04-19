@@ -1,4 +1,4 @@
-Ext.define('SysManager.dict.DictMenu', {
+Ext.define('Sys.dict.DictMenu', {
 	extend: 'Ext.menu.Menu',
 
 	initComponent: function() {
@@ -33,10 +33,10 @@ Ext.define('SysManager.dict.DictMenu', {
 		}
 	},
 	doAddEvent: function(item, e, eOpts) {
-		Ext.create('SysManager.dict.DictFormWindow').show();
+		Ext.create('Sys.dict.DictFormWindow').show();
 	},
 	doEditEvent: function(item, e, eOpts) {
-		Ext.create('SysManager.dict.DictFormWindow', {
+		Ext.create('Sys.dict.DictFormWindow', {
 			entityId: myServer.getMainContent().getComponent('dictTreePanel').getSelectedRecord().get('id')
 		}).show();
 	},

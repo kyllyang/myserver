@@ -10,6 +10,11 @@ Ext.define('Base.InfomationNotification', {
 	resizable: false,
 	border: false,
 
+	applications: [],
+	applicationComboBox: null,
+	thematicComboBox: null,
+	windowButton: null,
+
 	initComponent: function() {
 		this.callParent();
 
@@ -17,52 +22,62 @@ Ext.define('Base.InfomationNotification', {
 			text: myServer.loginUser.username,
 			icon: ctx + '/resource/image/icon/user.png'
 		});
-		var applicationComboBox = Ext.create('Ext.form.field.ComboBox', {
+		this.applicationComboBox = Ext.create('Ext.form.field.ComboBox', {
 			store: Ext.create('Ext.data.Store', {
 				fields: ['id', 'name'],
-				data : [
-					{id: '1', name: '应用1'},
-					{id: '2', name: '应用2'},
-					{id: '3', name: '应用3'}
-				]
+				data: this.applications
 			}),
 			queryMode: 'local',
 			displayField: 'name',
 			valueField: 'id',
 			editable: false,
 			listeners: {
+				change: function(comboBox, newValue, oldValue, eOpts) {
+					for (var i = 0; i < this.applications.length; i++) {
+						if (newValue == this.applications[i].id) {
+							this.thematicComboBox.getStore().loadData(this.applications[i].thematics);
+							break;
+						}
+					}
+				},
 				afterrender: function(comboBox, eOpts) {
 					comboBox.select(comboBox.getStore().getAt(0));
-				}
+				},
+				scope: this
 			}
 		});
-		var thematicComboBox = Ext.create('Ext.form.field.ComboBox', {
+		this.thematicComboBox = Ext.create('Ext.form.field.ComboBox', {
 			store: Ext.create('Ext.data.Store', {
 				fields: ['id', 'name'],
-				data : [
-					{id: '1', name: '专题1'},
-					{id: '2', name: '专题2'},
-					{id: '3', name: '专题3'}
-				]
+				listeners: {
+					datachanged: function(store, eOpts) {
+						this.thematicComboBox.select(store.getAt(0));
+					},
+					scope: this
+				}
 			}),
 			queryMode: 'local',
 			displayField: 'name',
 			valueField: 'id',
 			editable: false,
 			listeners: {
+				change: function(comboBox, newValue, oldValue, eOpts) {
+					this.loadMapAndFunction();
+				},
 				afterrender: function(comboBox, eOpts) {
 					comboBox.select(comboBox.getStore().getAt(0));
-				}
+				},
+				scope: this
 			}
 		});
-		var windowButton = Ext.create('Ext.button.Button', {
+		this.windowButton = Ext.create('Ext.button.Button', {
 			text: '窗口列表',
 			icon: ctx + '/resource/image/icon/window.png',
-			menu: Ext.create('Ext.menu.Menu', {
+			menu: Ext.create('Ext.menu.Menu'/*, {
 				items: [Ext.create('Ext.menu.CheckItem', {
 					text: '窗口1'
 				})]
-			})
+			}*/)
 		});
 		var exitButton = Ext.create('Ext.button.Button', {
 			text: '退出',
@@ -90,14 +105,41 @@ Ext.define('Base.InfomationNotification', {
 			border: false
 		});
 		form.add(loginUserButton);
-		form.add(applicationComboBox);
-		form.add(thematicComboBox);
-		form.add(windowButton);
+		form.add(this.applicationComboBox);
+		form.add(this.thematicComboBox);
+		form.add(this.windowButton);
 		form.add(exitButton);
 
 		this.add(form);
-
+	},
+	refreshWindowButton: function() {
+		var businessWindowMap = myServer.getBusinessWindowMap();
+		businessWindowMap.each(function(key, value, length) {
+			this.windowButton.menu.add(Ext.create('Ext.menu.CheckItem', {
+				itemId: key,
+				text: value.title,
+				listeners: {
+					checkchange: function(checkItem, checked, eOpts) {
+						var businessWindow = businessWindowMap.get(key);
+						if (checked) {
+							businessWindow.show();
+						} else {
+							businessWindow.hide();
+						}
+					},
+					scope: this
+				}
+			}))
+		}, this);
+	},
+	setWindowCheckItemChecked: function(menuId) {
+		this.windowButton.menu.getComponent(menuId).setChecked(true);
+	},
+	loadMapAndFunction: function(applicationId, thematicId) {
 		myServer.getMapContainer().loadMap();
-		myServer.setFunctionNotification(Ext.create('Base.FunctionNotification').show());
+		myServer.setFunctionNotification(Ext.create('Base.FunctionNotification', {
+			applicationId: applicationId,
+			thematicId: thematicId
+		}).show());
 	}
 });
