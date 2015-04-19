@@ -93,13 +93,13 @@ Ext.define('Sys.dict.DictFormWindow', {
 				xtype: 'button',
 				text: '保存',
 				handler: this.saveForm,
-				scope:this,
+				scope: this,
 				hidden: this.readOnlyForm
 			}, {
 				xtype: 'button',
 				text: '关闭',
 				handler: this.closeForm,
-				scope:this
+				scope: this
 			}]
 		}));
 

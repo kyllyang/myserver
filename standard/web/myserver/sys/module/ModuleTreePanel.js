@@ -1,4 +1,4 @@
-Ext.define('SysManager.module.ModuleTreePanel', {
+Ext.define('Sys.module.ModuleTreePanel', {
 	extend: 'Ext.tree.Panel',
 
 	currentNodeId: null,
@@ -35,7 +35,7 @@ Ext.define('SysManager.module.ModuleTreePanel', {
 
 		this.on('select', function(treePanel, record, index, eOpts) {
 			if ('2' != record.get('type')) {
-				myServer.getMainContent().getComponent('moduleGridPanel').queryData(record.get('id'));
+				this.ownerCt.getComponent('moduleGridPanel').queryData(record.get('id'));
 			}
 		}, this);
 

@@ -100,10 +100,10 @@ public class ModuleCtrl {
 		@Override
 		public void handler(Module module, ModuleVo moduleVo) {
 			if (typeDictMap == null) {
-				typeDictMap = dictItemService.getMap("sysmanager_module_type");
+				typeDictMap = dictItemService.getMap("sys_module_type");
 			}
 			if (funcTypeDictMap == null) {
-				funcTypeDictMap = dictItemService.getMap("sysmanager_module_funcType");
+				funcTypeDictMap = dictItemService.getMap("sys_module_funcType");
 			}
 
 			Module parent = module.getParent();

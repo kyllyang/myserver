@@ -1,8 +1,8 @@
--- MySQL dump 10.11
+-- MySQL dump 10.13  Distrib 5.6.22, for Win64 (x86_64)
 --
 -- Host: localhost    Database: myserver
 -- ------------------------------------------------------
--- Server version	5.0.51b-community
+-- Server version	5.6.22
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -20,19 +20,19 @@
 --
 
 DROP TABLE IF EXISTS `meaord_dishes`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `meaord_dishes` (
-  `id_` int(11) NOT NULL auto_increment,
-  `name_` varchar(255) default NULL,
-  `description_` varchar(255) default NULL,
-  `price_` float default NULL,
-  `sort_` int(11) default NULL,
-  `type_` varchar(255) default NULL,
-  `restaurant_id_` int(11) default NULL,
-  PRIMARY KEY  (`id_`)
+  `id_` int(11) NOT NULL AUTO_INCREMENT,
+  `name_` varchar(255) DEFAULT NULL,
+  `description_` varchar(255) DEFAULT NULL,
+  `price_` float DEFAULT NULL,
+  `sort_` int(11) DEFAULT NULL,
+  `type_` varchar(255) DEFAULT NULL,
+  `restaurant_id_` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_`)
 ) ENGINE=MyISAM AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `meaord_dishes`
@@ -49,19 +49,19 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `meaord_member`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `meaord_member` (
-  `id_` int(11) NOT NULL auto_increment,
-  `user_id_` int(11) default NULL,
-  `name_` varchar(255) default NULL,
-  `phone1_` varchar(255) default NULL,
-  `phone2_` varchar(255) default NULL,
-  `balance` float default NULL,
-  `sort_` int(11) default NULL,
-  PRIMARY KEY  (`id_`)
+  `id_` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id_` int(11) DEFAULT NULL,
+  `name_` varchar(255) DEFAULT NULL,
+  `phone1_` varchar(255) DEFAULT NULL,
+  `phone2_` varchar(255) DEFAULT NULL,
+  `balance` float DEFAULT NULL,
+  `sort_` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `meaord_member`
@@ -77,19 +77,19 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `meaord_restaurant`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `meaord_restaurant` (
-  `id_` int(11) NOT NULL auto_increment,
-  `name_` varchar(255) default NULL,
-  `description_` varchar(255) default NULL,
-  `linkman_` varchar(255) default NULL,
-  `phone1_` varchar(255) default NULL,
-  `phone2_` varchar(255) default NULL,
-  `sort_` int(11) default NULL,
-  PRIMARY KEY  (`id_`)
+  `id_` int(11) NOT NULL AUTO_INCREMENT,
+  `name_` varchar(255) DEFAULT NULL,
+  `description_` varchar(255) DEFAULT NULL,
+  `linkman_` varchar(255) DEFAULT NULL,
+  `phone1_` varchar(255) DEFAULT NULL,
+  `phone2_` varchar(255) DEFAULT NULL,
+  `sort_` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `meaord_restaurant`
@@ -106,20 +106,20 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `sys_attachment`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sys_attachment` (
-  `id_` int(11) NOT NULL auto_increment,
-  `entity_name_` varchar(255) default NULL,
-  `entity_id_` varchar(255) default NULL,
-  `content_type_` varchar(255) default NULL,
-  `original_filename_` varchar(255) default NULL,
-  `random_filename_` varchar(255) default NULL,
-  `file_size_` int(11) default NULL,
-  `extension_name_` varchar(255) default NULL,
-  PRIMARY KEY  (`id_`)
+  `id_` int(11) NOT NULL AUTO_INCREMENT,
+  `entity_name_` varchar(255) DEFAULT NULL,
+  `entity_id_` varchar(255) DEFAULT NULL,
+  `content_type_` varchar(255) DEFAULT NULL,
+  `original_filename_` varchar(255) DEFAULT NULL,
+  `random_filename_` varchar(255) DEFAULT NULL,
+  `file_size_` int(11) DEFAULT NULL,
+  `extension_name_` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_`)
 ) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `sys_attachment`
@@ -136,15 +136,15 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `sys_config`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sys_config` (
-  `id_` int(11) NOT NULL auto_increment,
-  `key_` varchar(255) default NULL,
-  `value_` varchar(255) default NULL,
-  PRIMARY KEY  (`id_`)
+  `id_` int(11) NOT NULL AUTO_INCREMENT,
+  `key_` varchar(255) DEFAULT NULL,
+  `value_` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `sys_config`
@@ -161,17 +161,17 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `sys_department`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sys_department` (
-  `id_` int(11) NOT NULL auto_increment,
-  `parent_id_` int(11) default NULL,
-  `name_` varchar(255) default NULL,
-  `description_` varchar(255) default NULL,
-  `sort_` int(11) default NULL,
-  PRIMARY KEY  (`id_`)
+  `id_` int(11) NOT NULL AUTO_INCREMENT,
+  `parent_id_` int(11) DEFAULT NULL,
+  `name_` varchar(255) DEFAULT NULL,
+  `description_` varchar(255) DEFAULT NULL,
+  `sort_` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `sys_department`
@@ -187,18 +187,18 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `sys_dict`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sys_dict` (
-  `id_` int(11) NOT NULL auto_increment,
-  `invoke_code_` varchar(255) default NULL,
-  `name_` varchar(255) default NULL,
-  `parent_id_` int(11) default NULL,
-  `sort_` int(11) default NULL,
-  PRIMARY KEY  (`id_`),
+  `id_` int(11) NOT NULL AUTO_INCREMENT,
+  `invoke_code_` varchar(255) DEFAULT NULL,
+  `name_` varchar(255) DEFAULT NULL,
+  `parent_id_` int(11) DEFAULT NULL,
+  `sort_` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_`),
   UNIQUE KEY `unique_invoke_code_` (`invoke_code_`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `sys_dict`
@@ -206,7 +206,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `sys_dict` WRITE;
 /*!40000 ALTER TABLE `sys_dict` DISABLE KEYS */;
-INSERT INTO `sys_dict` VALUES (1,'sysmanager_module_type','系统管理-模块-类型',NULL,1),(2,'sysmanager_module_funcType','系统管理-模块-功能类型',NULL,2),(7,'r','r',NULL,3);
+INSERT INTO `sys_dict` VALUES (1,'sys','系统管理',NULL,1),(8,'sys_module','模块',1,1),(9,'sys_module_type','类型',8,1),(10,'sys_module_funcType','功能类型',8,2);
 /*!40000 ALTER TABLE `sys_dict` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -215,17 +215,17 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `sys_dict_item`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sys_dict_item` (
-  `id_` int(11) NOT NULL auto_increment,
-  `key_` varchar(255) default NULL,
-  `value_` varchar(255) default NULL,
-  `dict_id_` int(11) default NULL,
-  `sort_` int(11) default NULL,
-  PRIMARY KEY  (`id_`)
+  `id_` int(11) NOT NULL AUTO_INCREMENT,
+  `key_` varchar(255) DEFAULT NULL,
+  `value_` varchar(255) DEFAULT NULL,
+  `dict_id_` int(11) DEFAULT NULL,
+  `sort_` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `sys_dict_item`
@@ -233,7 +233,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `sys_dict_item` WRITE;
 /*!40000 ALTER TABLE `sys_dict_item` DISABLE KEYS */;
-INSERT INTO `sys_dict_item` VALUES (1,'sysmanager_module_type','系统管理-模块-类型',NULL,1),(2,'1','模块',1,1),(3,'2','功能',1,2),(4,'sysmanager_module_funcType','系统管理-模块-功能类型',NULL,2),(5,'1','JavaScript',2,1),(6,'2','URL',2,2);
+INSERT INTO `sys_dict_item` VALUES (7,'2','功能',9,2),(8,'1','模块',9,1),(9,'2','URL',10,2),(10,'1','JavaScript',10,1);
 /*!40000 ALTER TABLE `sys_dict_item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -242,16 +242,16 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `sys_employee`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sys_employee` (
-  `id_` int(11) NOT NULL auto_increment,
+  `id_` int(11) NOT NULL AUTO_INCREMENT,
   `name_` varchar(255) NOT NULL,
-  `user_id_` int(11) default NULL,
-  `sort_` int(11) default NULL,
-  PRIMARY KEY  (`id_`)
+  `user_id_` int(11) DEFAULT NULL,
+  `sort_` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `sys_employee`
@@ -267,17 +267,17 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `sys_job`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sys_job` (
-  `id_` int(11) NOT NULL auto_increment,
+  `id_` int(11) NOT NULL AUTO_INCREMENT,
   `department_id_` int(11) NOT NULL,
   `name_` varchar(255) NOT NULL,
   `description_` varchar(255) NOT NULL,
-  `sort_` int(11) default NULL,
-  PRIMARY KEY  (`id_`)
+  `sort_` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `sys_job`
@@ -293,18 +293,18 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `sys_menu`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sys_menu` (
-  `id_` int(11) NOT NULL auto_increment,
-  `parent_id_` int(11) default NULL,
-  `name_` varchar(255) default NULL,
-  `description_` varchar(255) default NULL,
-  `sort_` int(11) default NULL,
+  `id_` int(11) NOT NULL AUTO_INCREMENT,
+  `parent_id_` int(11) DEFAULT NULL,
+  `name_` varchar(255) DEFAULT NULL,
+  `description_` varchar(255) DEFAULT NULL,
+  `sort_` int(11) DEFAULT NULL,
   `function_id_` int(11) NOT NULL,
-  PRIMARY KEY  (`id_`)
+  PRIMARY KEY (`id_`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `sys_menu`
@@ -320,20 +320,20 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `sys_module`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sys_module` (
-  `id_` int(11) NOT NULL auto_increment,
-  `parent_id_` int(11) default NULL,
+  `id_` int(11) NOT NULL AUTO_INCREMENT,
+  `parent_id_` int(11) DEFAULT NULL,
   `name_` varchar(255) NOT NULL,
   `description_` varchar(255) NOT NULL,
-  `sort_` int(11) default NULL,
-  `type_` int(11) default NULL,
-  `func_type_` int(11) default NULL,
-  `func_code_` varchar(20000) default NULL,
-  PRIMARY KEY  (`id_`)
+  `sort_` int(11) DEFAULT NULL,
+  `type_` int(11) DEFAULT NULL,
+  `func_type_` int(11) DEFAULT NULL,
+  `func_code_` varchar(20000) DEFAULT NULL,
+  PRIMARY KEY (`id_`)
 ) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `sys_module`
@@ -341,7 +341,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `sys_module` WRITE;
 /*!40000 ALTER TABLE `sys_module` DISABLE KEYS */;
-INSERT INTO `sys_module` VALUES (8,1,'qq','',1,1,NULL,NULL),(9,8,'qqq','',1,1,NULL,NULL),(10,9,'qqqq','',1,1,NULL,NULL),(11,8,'www','',1,1,NULL,NULL),(13,1,'ee','',1,1,NULL,NULL),(14,1,'rr','',1,1,NULL,NULL),(15,1,'tt','',1,1,NULL,NULL),(16,1,'yy','',1,1,NULL,NULL),(17,1,'uu','',1,1,NULL,NULL),(18,8,'ii','',1,1,NULL,NULL),(19,1,'ii','',1,1,NULL,NULL),(20,12,'1','',1,1,NULL,NULL),(26,9,'wwww','',1,1,NULL,NULL),(27,NULL,'系统管理','',99,1,NULL,NULL),(28,27,'用户管理','',1,2,1,'{className: \'SysManager.user.UserContainer\', config: {}}'),(29,27,'角色管理','',2,2,1,'{className: \'SysManager.role.RoleContainer\', config: {}}'),(30,27,'模块管理','',3,2,1,'{className: \'SysManager.module.ModuleContainer\', config: {}}'),(33,27,'组织机构','',4,1,NULL,NULL),(34,33,'员工管理','',1,2,1,'{\'\', config: {}}'),(35,33,'组织管理','',2,2,1,'{\'\', config:[]}'),(36,27,'数据字典','',5,2,1,'{className: \'SysManager.dict.DictContainer\', config: {}}'),(37,NULL,'餐饮订单','',1,1,NULL,NULL),(38,37,'餐厅菜品维护','',1,2,1,'{className: \'Meaord.restaurant.RestaurantGridPanel\', config: {}}');
+INSERT INTO `sys_module` VALUES (8,1,'qq','',1,1,NULL,NULL),(9,8,'qqq','',1,1,NULL,NULL),(10,9,'qqqq','',1,1,NULL,NULL),(11,8,'www','',1,1,NULL,NULL),(13,1,'ee','',1,1,NULL,NULL),(14,1,'rr','',1,1,NULL,NULL),(15,1,'tt','',1,1,NULL,NULL),(16,1,'yy','',1,1,NULL,NULL),(17,1,'uu','',1,1,NULL,NULL),(18,8,'ii','',1,1,NULL,NULL),(19,1,'ii','',1,1,NULL,NULL),(20,12,'1','',1,1,NULL,NULL),(26,9,'wwww','',1,1,NULL,NULL),(27,NULL,'系统管理','',99,1,NULL,NULL),(28,27,'用户管理','',1,2,1,'{className: \'SysManager.user.UserContainer\', config: {}}'),(29,27,'角色管理','',2,2,1,'{className: \'SysManager.role.RoleContainer\', config: {}}'),(30,27,'模块管理','',3,2,1,'{className: \'SysManager.module.ModuleContainer\', config: {}}'),(33,27,'组织机构','',4,1,NULL,NULL),(36,27,'数据字典','',5,2,1,'{className: \'Sys.dict.DictContainer\', config: {}}'),(37,NULL,'餐饮订单','',1,1,NULL,NULL),(38,37,'餐厅菜品维护','',1,2,1,'{className: \'Meaord.restaurant.RestaurantGridPanel\', config: {}}');
 /*!40000 ALTER TABLE `sys_module` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -350,16 +350,16 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `sys_role`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sys_role` (
-  `id_` int(11) NOT NULL auto_increment,
-  `name_` varchar(255) default NULL,
-  `description_` varchar(255) default NULL,
-  `sort_` int(11) default NULL,
-  PRIMARY KEY  (`id_`)
+  `id_` int(11) NOT NULL AUTO_INCREMENT,
+  `name_` varchar(255) DEFAULT NULL,
+  `description_` varchar(255) DEFAULT NULL,
+  `sort_` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `sys_role`
@@ -376,14 +376,14 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `sys_role_module`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sys_role_module` (
   `role_id_` int(11) NOT NULL,
-  `module_id_` int(11) NOT NULL default '0',
-  PRIMARY KEY  (`role_id_`,`module_id_`)
+  `module_id_` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`role_id_`,`module_id_`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `sys_role_module`
@@ -400,18 +400,18 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `sys_user`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sys_user` (
-  `id_` int(11) NOT NULL auto_increment,
-  `username_` varchar(255) default NULL,
-  `password_` varchar(255) default NULL,
-  `sort_` int(11) default NULL,
-  `email_` varchar(255) default NULL,
-  `freeze_` int(11) default NULL,
-  PRIMARY KEY  (`id_`)
+  `id_` int(11) NOT NULL AUTO_INCREMENT,
+  `username_` varchar(255) DEFAULT NULL,
+  `password_` varchar(255) DEFAULT NULL,
+  `sort_` int(11) DEFAULT NULL,
+  `email_` varchar(255) DEFAULT NULL,
+  `freeze_` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `sys_user`
@@ -428,14 +428,14 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `sys_user_role`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sys_user_role` (
-  `user_id_` int(11) NOT NULL default '0',
-  `role_id_` int(11) NOT NULL default '0',
-  PRIMARY KEY  (`user_id_`,`role_id_`)
+  `user_id_` int(11) NOT NULL DEFAULT '0',
+  `role_id_` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`user_id_`,`role_id_`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `sys_user_role`
@@ -452,14 +452,14 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `test`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `test` (
-  `id_` int(11) NOT NULL auto_increment,
-  `value_` varchar(255) default NULL,
-  PRIMARY KEY  (`id_`)
+  `id_` int(11) NOT NULL AUTO_INCREMENT,
+  `value_` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
-SET character_set_client = @saved_cs_client;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `test`
@@ -480,4 +480,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-02-13  3:31:35
+-- Dump completed on 2015-04-19 17:53:00

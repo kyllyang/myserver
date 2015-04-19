@@ -1,4 +1,4 @@
-Ext.define('SysManager.module.ModuleGridPanel', {
+Ext.define('Sys.module.ModuleGridPanel', {
 	extend: 'Base.ux.GridPanel',
 
 	itemId: 'moduleGridPanel',
@@ -104,27 +104,40 @@ Ext.define('SysManager.module.ModuleGridPanel', {
 		}, this);
 	},
 	doAddEvent: function() {
-		var record = myServer.getMainContent().getComponent('moduleTreePanel').getSelectedRecord();
+		var record = this.ownerCt.getComponent('moduleTreePanel').getSelectedRecord();
 		if (record) {
 			if ('2' == record.get('type')) {
 				Ext.Msg.alert("系统提示", "功能下不能添加模块！");
 			} else {
-				Ext.create('SysManager.module.ModuleFormWindow', {parentEntity: record}).show();
+				Ext.create('Sys.module.ModuleFormWindow', {
+					moduleTreePanel: this.ownerCt.getComponent('moduleTreePanel'),
+					moduleGridPanel: this,
+					parentEntity: record
+				}).show();
 			}
 		} else {
 			Ext.Msg.alert("系统提示", "请首先选择一个上级模块！");
 		}
 	},
 	doEditEvent: function(id) {
-		var record = myServer.getMainContent().getComponent('moduleTreePanel').getSelectedRecord();
-		Ext.create('SysManager.module.ModuleFormWindow', {entityId: id, parentEntity: record}).show();
+		var record = this.ownerCt.getComponent('moduleTreePanel').getSelectedRecord();
+		Ext.create('Sys.module.ModuleFormWindow', {
+			moduleTreePanel: this.ownerCt.getComponent('moduleTreePanel'),
+			moduleGridPanel: this,
+			entityId: id,
+			parentEntity: record
+		}).show();
 	},
 	doViewEvent: function(id) {
-		var record = myServer.getMainContent().getComponent('moduleTreePanel').getSelectedRecord();
-		Ext.create('SysManager.module.ModuleFormWindow', {entityId: id, parentEntity: record, readOnlyForm: true}).show();
+		var record = this.ownerCt.getComponent('moduleTreePanel').getSelectedRecord();
+		Ext.create('Sys.module.ModuleFormWindow', {
+			entityId: id,
+			parentEntity: record,
+			readOnlyForm: true
+		}).show();
 	},
 	doDeleteEvent: function(ids) {
-		var record = myServer.getMainContent().getComponent('moduleTreePanel').getSelectedRecord();
+		var record = this.ownerCt.getComponent('moduleTreePanel').getSelectedRecord();
 		Ext.Ajax.request({
 			url: ctx + '/sys/module/delete.ctrl',
 			params: {
@@ -133,7 +146,7 @@ Ext.define('SysManager.module.ModuleGridPanel', {
 			success: function(response, opts) {
 				Ext.Msg.alert("系统提示", "数据删除成功！");
 				this.queryData(record.get('id'));
-				myServer.getMainContent().getComponent('moduleTreePanel').loadTreeNode(record.get('id'));
+				this.ownerCt.getComponent('moduleTreePanel').loadTreeNode(record.get('id'));
 			},
 			failure: function(response, opts) {
 				Ext.Msg.alert("系统提示", "数据删除失败！");

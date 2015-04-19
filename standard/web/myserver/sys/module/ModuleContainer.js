@@ -1,4 +1,4 @@
-Ext.define('SysManager.module.ModuleContainer', {
+Ext.define('Sys.module.ModuleContainer', {
 	extend: 'Ext.container.Container',
 
 	layout: 'border',
@@ -6,13 +6,13 @@ Ext.define('SysManager.module.ModuleContainer', {
 	initComponent: function() {
 		this.callParent();
 
-		this.add(Ext.create('SysManager.module.ModuleTreePanel', {
+		this.add(Ext.create('Sys.module.ModuleTreePanel', {
 			region: 'west',
 			split: true,
 			collapsible: true,
-			width: (myServer.width - myServer.getMenuTreePanel().getWidth()) / 3
+			width: myServer.getWidth() / 6
 		}));
-		this.add(Ext.create('SysManager.module.ModuleGridPanel', {
+		this.add(Ext.create('Sys.module.ModuleGridPanel', {
 			region: 'center'
 		}));
 	}

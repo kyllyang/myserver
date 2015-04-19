@@ -1,6 +1,11 @@
 Ext.define('Base.InfomationNotification', {
 	extend: 'Base.ux.Notification',
 
+	applications: [],
+	applicationComboBox: null,
+	thematicComboBox: null,
+	windowButton: null,
+
 	title: '系统信息',
 	autoClose: false,
 	draggable: true,
@@ -9,11 +14,6 @@ Ext.define('Base.InfomationNotification', {
 	closeAction: 'hide',
 	resizable: false,
 	border: false,
-
-	applications: [],
-	applicationComboBox: null,
-	thematicComboBox: null,
-	windowButton: null,
 
 	initComponent: function() {
 		this.callParent();
@@ -73,11 +73,7 @@ Ext.define('Base.InfomationNotification', {
 		this.windowButton = Ext.create('Ext.button.Button', {
 			text: '窗口列表',
 			icon: ctx + '/resource/image/icon/window.png',
-			menu: Ext.create('Ext.menu.Menu'/*, {
-				items: [Ext.create('Ext.menu.CheckItem', {
-					text: '窗口1'
-				})]
-			}*/)
+			menu: Ext.create('Ext.menu.Menu')
 		});
 		var exitButton = Ext.create('Ext.button.Button', {
 			text: '退出',
@@ -120,6 +116,7 @@ Ext.define('Base.InfomationNotification', {
 			this.windowButton.menu.add(Ext.create('Ext.menu.CheckItem', {
 				itemId: key,
 				text: value.title,
+				checked: !businessWindowMap.get(key).isHidden(),
 				listeners: {
 					checkchange: function(checkItem, checked, eOpts) {
 						var businessWindow = businessWindowMap.get(key);

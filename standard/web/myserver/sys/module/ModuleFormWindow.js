@@ -1,6 +1,8 @@
-Ext.define('SysManager.module.ModuleFormWindow', {
+Ext.define('Sys.module.ModuleFormWindow', {
 	extend: 'Ext.window.Window',
 
+	moduleTreePanel: null,
+	moduleGridPanel: null,
 	entityId: null,
 	parentEntity: null,
 	readOnlyForm: false,
@@ -46,31 +48,28 @@ Ext.define('SysManager.module.ModuleFormWindow', {
 			labelSeparator: '：',
 			name: 'name',
 			maxLength: 50,
-			allowBlank: false,
-			readOnly: this.readOnlyForm
+			allowBlank: false
 		});
 		var typeCombobox = Ext.create('Base.ux.DictComboBox', {
-			invokeCode: 'sysmanager_module_type',
+			invokeCode: 'sys_module_type',
 			fieldLabel: '<span style="color: #FF0000;">*</span>类型',
 			labelAlign: 'right',
 			labelSeparator: '：',
 			name: 'type',
 			allowBlank: false,
-			readOnly: this.readOnlyForm,
 			listeners: {
 				change: this.typeComboboxChangeEvent,
 				scope: this
 			}
 		});
 		var funcTypeCombobox = Ext.create('Base.ux.DictComboBox', {
-			invokeCode: 'sysmanager_module_funcType',
+			invokeCode: 'sys_module_funcType',
 			fieldLabel: '<span style="color: #FF0000;">*</span>功能类型',
 			labelAlign: 'right',
 			labelSeparator: '：',
 			name: 'funcType',
 			hidden: true,
-			allowBlank: true,
-			readOnly: this.readOnlyForm
+			allowBlank: true
 		});
 		var funcCodeTextarea = Ext.create('Ext.form.field.TextArea', {
 			fieldLabel: '<span style="color: #FF0000;">*</span>功能代码',
@@ -79,16 +78,14 @@ Ext.define('SysManager.module.ModuleFormWindow', {
 			name: 'funcCode',
 			maxLength: 20000,
 			hidden: true,
-			allowBlank: true,
-			readOnly: this.readOnlyForm
+			allowBlank: true
 		});
 		var descriptionTextarea = Ext.create('Ext.form.field.TextArea', {
 			fieldLabel: '描述',
 			labelAlign: 'right',
 			labelSeparator: '：',
 			name: 'description',
-			maxLength: 100,
-			readOnly: this.readOnlyForm
+			maxLength: 100
 		});
 		var sortNumber = Ext.create('Ext.form.field.Number', {
 			fieldLabel: '排序',
@@ -97,11 +94,10 @@ Ext.define('SysManager.module.ModuleFormWindow', {
 			name: 'sort',
 			value: 1,
 			minValue: 1,
-			allowDecimals: false,
-			readOnly: this.readOnlyForm
+			allowDecimals: false
 		});
 
-		this.add(Ext.create('Ext.form.Panel', {
+		var formPanel = Ext.create('Ext.form.Panel', {
 			itemId: 'editForm',
 			frame: true,
 			autoHeight: true,
@@ -131,15 +127,22 @@ Ext.define('SysManager.module.ModuleFormWindow', {
 				xtype: 'button',
 				text: '保存',
 				handler: this.saveForm,
-				scope:this,
+				scope: this,
 				hidden: this.readOnlyForm
 			}, {
 				xtype: 'button',
 				text: '关闭',
 				handler: this.closeForm,
-				scope:this
+				scope: this
 			}]
-		}));
+		});
+		this.add(formPanel);
+
+		if (this.readOnlyForm) {
+			formPanel.getForm().getFields().each(function(item, index, len) {
+				item.setReadOnly(true);
+			}, this);
+		}
 
 		if (this.entityId) {
 			this.getComponent('editForm').getForm().load({
@@ -183,8 +186,8 @@ Ext.define('SysManager.module.ModuleFormWindow', {
 					Ext.Msg.alert('系统提示', '数据保存成功！');
 					this.closeForm();
 
-					myServer.getMainContent().getComponent('moduleGridPanel').queryData(this.parentEntity.get('id'));
-					myServer.getMainContent().getComponent('moduleTreePanel').loadTreeNode(this.parentEntity.get('id'));
+					this.moduleGridPanel.queryData(this.parentEntity.get('id'));
+					this.moduleTreePanel.loadTreeNode(this.parentEntity.get('id'));
 				},
 				failure: function(form, action) {
 					Ext.Msg.alert('系统提示', '无法保存数据！');
