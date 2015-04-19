@@ -5,13 +5,23 @@ Ext.define('Base.BusinessWindow', {
 	height: myServer.getHeight() * 0.6,
 	border: false,
 	layout: 'fit',
+	minimizable: true,
 
 	title: null,
 	menuId: null,
 	funcCode: null,
+
 	listeners: {
+		minimize: function(win, eOpts) {
+			win.hide();
+			myServer.getInfomationNotification().setWindowCheckItemChecked(this.menuId, false);
+		},
 		show: function(win, eOpts) {
-			myServer.getInfomationNotification().setWindowCheckItemChecked(this.menuId);
+			myServer.getInfomationNotification().setWindowCheckItemChecked(this.menuId, true);
+		},
+		close: function(panel, eOpts) {
+			myServer.getBusinessWindowMap().removeAtKey(this.menuId);
+			myServer.getInfomationNotification().refreshWindowButton();
 		},
 		scope: this
 	},

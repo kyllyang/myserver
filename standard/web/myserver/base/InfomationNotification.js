@@ -113,6 +113,8 @@ Ext.define('Base.InfomationNotification', {
 		this.add(form);
 	},
 	refreshWindowButton: function() {
+		this.windowButton.menu.removeAll();
+
 		var businessWindowMap = myServer.getBusinessWindowMap();
 		businessWindowMap.each(function(key, value, length) {
 			this.windowButton.menu.add(Ext.create('Ext.menu.CheckItem', {
@@ -132,8 +134,8 @@ Ext.define('Base.InfomationNotification', {
 			}))
 		}, this);
 	},
-	setWindowCheckItemChecked: function(menuId) {
-		this.windowButton.menu.getComponent(menuId).setChecked(true);
+	setWindowCheckItemChecked: function(menuId, checked) {
+		this.windowButton.menu.getComponent(menuId).setChecked(checked);
 	},
 	loadMapAndFunction: function(applicationId, thematicId) {
 		myServer.getMapContainer().loadMap();
