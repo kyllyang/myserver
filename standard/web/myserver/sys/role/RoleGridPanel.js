@@ -2,7 +2,7 @@ var cellEditing = Ext.create('Ext.grid.plugin.CellEditing', {
 	clicksToEdit: 1
 });
 
-Ext.define('SysManager.role.RoleGridPanel', {
+Ext.define('Sys.role.RoleGridPanel', {
 	extend: 'Base.ux.GridPanel',
 
 	itemId: 'roleGridPanel',
@@ -102,7 +102,7 @@ Ext.define('SysManager.role.RoleGridPanel', {
 		this.callParent();
 
 		this.on('itemclick', function(grid, record, item, index, e, eOpts){
-			myServer.getMainContent().getComponent('moduleTreePanel').loadTree(record.get('id'));
+			this.ownerCt.getComponent('moduleTreePanel').loadTree(record.get('id'));
 		});
 
 		this.store.on('beforeload', function(store, operation, eOpts) {

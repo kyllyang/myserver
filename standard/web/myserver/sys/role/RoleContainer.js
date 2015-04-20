@@ -1,4 +1,4 @@
-Ext.define('SysManager.role.RoleContainer', {
+Ext.define('Sys.role.RoleContainer', {
 	extend: 'Ext.container.Container',
 
 	layout: 'border',
@@ -6,14 +6,14 @@ Ext.define('SysManager.role.RoleContainer', {
 	initComponent: function() {
 		this.callParent();
 
-		this.add(Ext.create('SysManager.role.RoleGridPanel', {
+		this.add(Ext.create('Sys.role.RoleGridPanel', {
 			region: 'center'
 		}));
-		this.add(Ext.create('SysManager.role.ModuleTreePanel', {
+		this.add(Ext.create('Sys.role.ModuleTreePanel', {
 			region: 'east',
 			split: true,
 			collapsible: true,
-			width: (myServer.width - myServer.getMenuTreePanel().getWidth()) / 3
+			width: myServer.getWidth() / 6
 		}));
 	}
 });

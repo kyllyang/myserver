@@ -4,7 +4,7 @@ Ext.define('Base.FunctionNotification', {
 	applicationId: null,
 	thematicId: null,
 
-	title: '功能模块',
+	title: '业务菜单',
 	autoClose: false,
 	draggable: true,
 	position: 'l',
@@ -47,6 +47,13 @@ Ext.define('Base.FunctionNotification', {
 				}, {
 					text: '系统管理',
 					children: [{
+						id: '3',
+						text: '角色管理',
+						leaf: true,
+						funcCode: {
+							className: 'Sys.role.RoleContainer'
+						}
+					}, {
 						id: '1',
 						text: '数据字典',
 						leaf: true,

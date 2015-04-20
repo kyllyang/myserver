@@ -1,4 +1,4 @@
-Ext.define('SysManager.role.ModuleTreePanel', {
+Ext.define('Sys.role.ModuleTreePanel', {
 	extend: 'Ext.tree.Panel',
 
 	itemId: 'moduleTreePanel',
@@ -73,7 +73,7 @@ Ext.define('SysManager.role.ModuleTreePanel', {
 		this.getStore().load();
 	},
 	saveTree: function() {
-		var record = myServer.getMainContent().getComponent('roleGridPanel').getSelectedRecord();
+		var record = this.ownerCt.getComponent('roleGridPanel').getSelectedRecord();
 		if (record) {
 			var records = this.getChecked();
 			var moduleIds = [];
