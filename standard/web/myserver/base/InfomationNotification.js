@@ -1,8 +1,7 @@
 Ext.define('Base.InfomationNotification', {
 	extend: 'Base.ux.Notification',
 
-	applications: [],
-	applicationComboBox: null,
+	moduleComboBox: null,
 	thematicComboBox: null,
 	windowButton: null,
 
@@ -18,54 +17,77 @@ Ext.define('Base.InfomationNotification', {
 	initComponent: function() {
 		this.callParent();
 
+		Ext.define("DataModel", {
+			extend: 'Ext.data.Model',
+			fields: [
+				{name: 'id'},
+				{name: 'name'}
+			]
+		});
+
 		var loginUserButton = Ext.create('Ext.button.Button', {
 			text: myServer.loginUser.username,
 			icon: ctx + '/resource/image/icon/user.png'
 		});
-		this.applicationComboBox = Ext.create('Ext.form.field.ComboBox', {
+		this.moduleComboBox = Ext.create('Ext.form.field.ComboBox', {
 			store: Ext.create('Ext.data.Store', {
-				fields: ['id', 'name'],
-				data: this.applications
+				model: 'DataModel',
+				proxy: {
+					type: 'ajax',
+					url: ctx + '/app/module/application.ctrl',
+					reader: {
+						type: 'json'
+					}
+				},
+				autoLoad: true,
+				listeners: {
+					load: function(store, records, successful, eOpts) {
+						this.moduleComboBox.select(records[0]);
+					},
+					scope: this
+				}
 			}),
-			queryMode: 'local',
+			queryMode: 'remote',
 			displayField: 'name',
 			valueField: 'id',
 			editable: false,
 			listeners: {
 				change: function(comboBox, newValue, oldValue, eOpts) {
-					for (var i = 0; i < this.applications.length; i++) {
-						if (newValue == this.applications[i].id) {
-							this.thematicComboBox.getStore().loadData(this.applications[i].thematics);
-							break;
-						}
-					}
-				},
-				afterrender: function(comboBox, eOpts) {
-					comboBox.select(comboBox.getStore().getAt(0));
+					var store = this.thematicComboBox.getStore();
+					store.proxy.actionMethods = {read: 'POST'};
+					Ext.apply(store.proxy.extraParams, {
+						'qc.moduleId': newValue
+					});
+					store.load();
 				},
 				scope: this
 			}
 		});
 		this.thematicComboBox = Ext.create('Ext.form.field.ComboBox', {
 			store: Ext.create('Ext.data.Store', {
-				fields: ['id', 'name'],
+				model: 'DataModel',
+				proxy: {
+					type: 'ajax',
+					url: ctx + '/gis/thematic/list.ctrl',
+					reader: {
+						type: 'json'
+					}
+				},
+				autoLoad: false,
 				listeners: {
-					datachanged: function(store, eOpts) {
-						this.thematicComboBox.select(store.getAt(0));
+					load: function(store, records, successful, eOpts) {
+						this.thematicComboBox.select(records[0]);
 					},
 					scope: this
 				}
 			}),
-			queryMode: 'local',
+			queryMode: 'remote',
 			displayField: 'name',
 			valueField: 'id',
 			editable: false,
 			listeners: {
 				change: function(comboBox, newValue, oldValue, eOpts) {
-					this.loadMapAndFunction();
-				},
-				afterrender: function(comboBox, eOpts) {
-					comboBox.select(comboBox.getStore().getAt(0));
+					this.loadMapAndFunction(this.moduleComboBox.getValue(), newValue);
 				},
 				scope: this
 			}
@@ -101,7 +123,7 @@ Ext.define('Base.InfomationNotification', {
 			border: false
 		});
 		form.add(loginUserButton);
-		form.add(this.applicationComboBox);
+		form.add(this.moduleComboBox);
 		form.add(this.thematicComboBox);
 		form.add(this.windowButton);
 		form.add(exitButton);
@@ -134,10 +156,10 @@ Ext.define('Base.InfomationNotification', {
 	setWindowCheckItemChecked: function(menuId, checked) {
 		this.windowButton.menu.getComponent(menuId).setChecked(checked);
 	},
-	loadMapAndFunction: function(applicationId, thematicId) {
-		myServer.getMapContainer().loadMap();
-		myServer.setFunctionNotification(Ext.create('Base.FunctionNotification', {
-			applicationId: applicationId,
+	loadMapAndFunction: function(moduleId, thematicId) {
+		myServer.getMapContainer().loadMap(moduleId, thematicId);
+		myServer.setMenuNotification(Ext.create('Base.MenuNotification', {
+			moduleId: moduleId,
 			thematicId: thematicId
 		}).show());
 	}

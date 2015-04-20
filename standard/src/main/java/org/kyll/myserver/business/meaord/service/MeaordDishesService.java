@@ -1,7 +1,7 @@
 package org.kyll.myserver.business.meaord.service;
 
 import net.sf.json.JSONArray;
-import org.kyll.myserver.base.BaseService;
+import org.kyll.myserver.base.common.BaseService;
 import org.kyll.myserver.business.meaord.QueryCondition;
 import org.kyll.myserver.business.meaord.entity.MeaordDishes;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;

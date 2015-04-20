@@ -7,7 +7,7 @@ var myServer = {
 	viewport: null,// 视窗
 	mapContainer: null,// 地图容器
 	infomationNotification: null,// 系统信息通知窗口
-	functionNotification: null,// 功能模块通知窗口
+	menuNotification: null,// 业务菜单通知窗口
 	businessWindowMap: null,// 业务窗口集合
 
 	setLoginUser: function(value) {
@@ -49,14 +49,14 @@ var myServer = {
 	showInfomationNotification: function() {
 		this.getInfomationNotification().show();
 	},
-	setFunctionNotification: function(value) {
-		this.functionNotification = value;
+	setMenuNotification: function(value) {
+		this.menuNotification = value;
 	},
-	getFunctionNotification: function() {
-		return this.functionNotification;
+	getMenuNotification: function() {
+		return this.menuNotification;
 	},
 	showFunctionNotification: function() {
-		this.getFunctionNotification().show();
+		this.getMenuNotification().show();
 	},
 	getBusinessWindowMap: function() {
 		return this.businessWindowMap;
@@ -77,30 +77,7 @@ Ext.onReady(function() {
 		]
 	}));
 
-	// 通过 ajax 获取 application JSON
-	myServer.setInfomationNotification(Ext.create('Base.InfomationNotification', {
-		applications: [{
-			id: '1',
-			name: '应用1',
-			thematics: [{
-				id: '1',
-				name: '专题1'
-			}, {
-				id: '2',
-				name: '专题2'
-			}]
-		}, {
-			id: '2',
-			name: '应用2',
-			thematics: [{
-				id: '2',
-				name: '专题2'
-			}, {
-				id: '3',
-				name: '专题3'
-			}]
-		}]
-	}).show());
+	myServer.setInfomationNotification(Ext.create('Base.InfomationNotification').show());
 
 
 

@@ -1,7 +1,7 @@
 package org.kyll.myserver.appconfig;
 
 import org.kyll.myserver.filter.SessionFilter;
-import org.kyll.myserver.util.ConstUtils;
+import org.kyll.myserver.base.util.ConstUtils;
 import org.springframework.orm.hibernate4.support.OpenSessionInViewFilter;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
@@ -42,7 +42,11 @@ public class Initializer implements WebApplicationInitializer {
 		FilterRegistration.Dynamic sessionFilter = servletContext.addFilter("sessionFilter", new SessionFilter());
 		sessionFilter.addMappingForUrlPatterns(null, true, "*.ctrl", "/index.jsp");
 
-		ConstUtils.applicationContext = context;
+		try {
+			ConstUtils.setApplicationContext(context);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private AnnotationConfigWebApplicationContext getContext() {

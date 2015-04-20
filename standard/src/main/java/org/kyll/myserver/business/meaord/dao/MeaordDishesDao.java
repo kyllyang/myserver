@@ -1,6 +1,6 @@
 package org.kyll.myserver.business.meaord.dao;
 
-import org.kyll.myserver.base.BaseHibernateDao;
+import org.kyll.myserver.base.common.BaseHibernateDao;
 import org.kyll.myserver.business.meaord.entity.MeaordDishes;
 import org.springframework.stereotype.Repository;
 

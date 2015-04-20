@@ -1,6 +1,6 @@
 package org.kyll.myserver.business.meaord.vo;
 
-import org.kyll.myserver.base.Vo;
+import org.kyll.myserver.base.common.Vo;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 /**

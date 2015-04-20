@@ -8,7 +8,7 @@ import org.kyll.myserver.business.meaord.dao.MeaordDishesDao;
 import org.kyll.myserver.business.meaord.dao.MeaordRestaurantDao;
 import org.kyll.myserver.business.meaord.entity.MeaordDishes;
 import org.kyll.myserver.business.meaord.service.MeaordDishesService;
-import org.kyll.myserver.business.sys.service.AttachmentService;
+import org.kyll.myserver.base.sys.service.AttachmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

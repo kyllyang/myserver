@@ -1,8 +1,8 @@
 package org.kyll.myserver.business.meaord.service.impl;
 
 import org.apache.commons.lang.StringUtils;
-import org.kyll.myserver.base.paginated.Dataset;
-import org.kyll.myserver.base.paginated.Paginated;
+import org.kyll.myserver.base.common.paginated.Dataset;
+import org.kyll.myserver.base.common.paginated.Paginated;
 import org.kyll.myserver.business.meaord.QueryCondition;
 import org.kyll.myserver.business.meaord.dao.MeaordRestaurantDao;
 import org.kyll.myserver.business.meaord.entity.MeaordRestaurant;

@@ -1,16 +1,14 @@
 package org.kyll.myserver.business.meaord.ctrl;
 
 import net.sf.json.JSONArray;
-import org.kyll.myserver.base.paginated.Dataset;
 import org.kyll.myserver.business.meaord.QueryCondition;
 import org.kyll.myserver.business.meaord.entity.MeaordDishes;
 import org.kyll.myserver.business.meaord.entity.MeaordRestaurant;
 import org.kyll.myserver.business.meaord.service.MeaordDishesService;
 import org.kyll.myserver.business.meaord.vo.MeaordDishesVo;
-import org.kyll.myserver.util.EntityUtils;
-import org.kyll.myserver.util.JsonUtils;
-import org.kyll.myserver.util.RequestUtils;
-import org.kyll.myserver.util.VoUtils;
+import org.kyll.myserver.base.util.JsonUtils;
+import org.kyll.myserver.base.util.RequestUtils;
+import org.kyll.myserver.base.util.POJOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -41,7 +39,7 @@ public class MeaordDishesCtrl {
 	@RequestMapping("/meaord/dishes/list.ctrl")
 	public void list(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		List<MeaordDishes> entityList = meaordDishesService.get(RequestUtils.get(request, "qc", QueryCondition.class));
-		List<MeaordDishesVo> voList = VoUtils.convert(entityList, MeaordDishesVo.class);
+		List<MeaordDishesVo> voList = POJOUtils.convert(entityList, MeaordDishesVo.class);
 
 		response.setContentType("text/plain");
 		response.getWriter().println(JsonUtils.convert(voList));
@@ -50,7 +48,7 @@ public class MeaordDishesCtrl {
 	@RequestMapping("/meaord/dishes/input.ctrl")
 	public void input(Long id, HttpServletResponse response) throws Exception {
 		MeaordDishes entity = meaordDishesService.get(id);
-		MeaordDishesVo entityVo = VoUtils.convert(entity, MeaordDishesVo.class, (meaordDishes, meaordDishesVo) -> {
+		MeaordDishesVo entityVo = POJOUtils.convert(entity, MeaordDishesVo.class, (meaordDishes, meaordDishesVo) -> {
 			MeaordRestaurant meaordRestaurant = meaordDishes.getMeaordRestaurant();
 			meaordDishesVo.setMeaordRestaurantId(meaordRestaurant.getId());
 			meaordDishesVo.setMeaordRestaurantName(meaordRestaurant.getName());
@@ -62,7 +60,7 @@ public class MeaordDishesCtrl {
 
 	@RequestMapping("/meaord/dishes/save.ctrl")
 	public void save(MeaordDishesVo entityVo, HttpServletResponse response) throws Exception {
-		meaordDishesService.save(EntityUtils.convert(entityVo, MeaordDishes.class, meaordDishesService), entityVo.getMeaordRestaurantId(), VoUtils.getCommonsMultipartFileList(entityVo));
+		meaordDishesService.save(POJOUtils.convert(entityVo, MeaordDishes.class, meaordDishesService), entityVo.getMeaordRestaurantId(), POJOUtils.getCommonsMultipartFileList(entityVo));
 
 		response.setContentType("text/plain");
 		response.getWriter().println(JsonUtils.ajaxResult(true));
