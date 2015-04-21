@@ -35,8 +35,7 @@ Ext.define('Base.sys.dict.DictFormWindow', {
 			labelAlign: 'right',
 			labelSeparator: '：',
 			name: 'parentName',
-			value: record.get('id') ? record.get('name') : null,
-			maxLength: 50,
+			value: Ext.isEmpty(record.get('id')) ? null : record.get('name'),
 			disabled: true
 		});
 		var invokeCodeText = Ext.create('Ext.form.field.Text', {

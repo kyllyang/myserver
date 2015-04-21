@@ -1,6 +1,9 @@
 package org.kyll.myserver.base.app.ctrl;
 
+import net.sf.json.JSONArray;
+import org.kyll.myserver.base.app.service.MenuService;
 import org.kyll.myserver.base.util.JsonUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +21,9 @@ import java.util.Map;
 @Controller
 @Scope("request")
 public class MenuCtrl {
+	@Autowired
+	private MenuService menuService;
+
 	@RequestMapping("/app/menu/function.ctrl")
 	public void function(HttpServletResponse response) throws Exception {
 		List<Map<String, Object>> list = new ArrayList<>();
@@ -54,7 +60,7 @@ public class MenuCtrl {
 		map4.put("funcType", "2");
 		Map<String, Object> funcCodeMap4 = new HashMap<>();
 		funcCodeMap4.put("className", "Base.app.menu.MenuContainer");
-		map4.put("funcCode", funcCodeMap3);
+		map4.put("funcCode", funcCodeMap4);
 		map4.put("leaf", true);
 
 		list.add(map1);
@@ -64,5 +70,13 @@ public class MenuCtrl {
 
 		response.setContentType("text/plain");
 		response.getWriter().println(JsonUtils.convert(list));
+	}
+
+	@RequestMapping("/app/menu/tree.ctrl")
+	public void tree(Long parentId, HttpServletResponse response) throws Exception {
+		JSONArray ja = menuService.getTreeJson(parentId);
+
+		response.setContentType("text/plain");
+		response.getWriter().println(ja.toString());
 	}
 }

@@ -32,17 +32,19 @@ Ext.define('Base.sys.role.ModuleTreePanel', {
 			store: store,
 			useArrows: true,
 			buttonAlign: 'center',
-			tbar: [{
-				xtype: 'button',
-				icon: ctx + '/resource/image/icon/expandall.png',
-				handler: this.expandAll,
-				scope: this
-			}, {
-				xtype: 'button',
-				icon: ctx + '/resource/image/icon/collapseall.png',
-				handler: this.collapseAll,
-				scope: this
-			}],
+			header: {
+				items: [{
+					xtype: 'button',
+					icon: ctx + '/resource/image/icon/expandall.png',
+					handler: this.expandAll,
+					scope: this
+				}, {
+					xtype: 'button',
+					icon: ctx + '/resource/image/icon/collapseall.png',
+					handler: this.collapseAll,
+					scope: this
+				}]
+			},
 			buttons:[{
 				xtype: 'button',
 				text: '保存',

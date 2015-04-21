@@ -1,29 +1,29 @@
-Ext.define('Base.app.module.ModuleTreePanel', {
+Ext.define('Base.app.menu.MenuTreePanel', {
 	extend: 'Ext.tree.Panel',
 
 	currentNodeId: null,
 
-	itemId: 'moduleTreePanel',
+	itemId: 'menuTreePanel',
 	autoScroll: true,
 
 	initComponent: function() {
-		Ext.define('DateModel', {
+		Ext.define('DataModel', {
 			extend: 'Ext.data.Model',
-			fields: ['id', 'text', 'type']
+			fields: ['id', 'text']
 		});
 
 		var store = Ext.create('Ext.data.TreeStore', {
-			model: 'DateModel',
+			model: 'DataModel',
 			proxy: {
 				type: 'ajax',
-				url: ctx + '/app/module/tree.ctrl'
+				url: ctx + '/app/menu/tree.ctrl'
 			},
 			reader: {
 				type: 'json'
 			},
 			root: {
 				id: null,
-				text: '应用模块'
+				text: '业务菜单'
 			}
 		});
 
@@ -33,10 +33,15 @@ Ext.define('Base.app.module.ModuleTreePanel', {
 		});
 		this.callParent();
 
+		this.on('itemcontextmenu', function(treePanel, record, item, index, e, eOpts) {
+			Ext.create('Base.app.menu.ContextMenu', {
+				menuTreePanel: this
+			}).showAt(e.getXY());
+			e.stopEvent();
+		}, this);
+
 		this.on('select', function(treePanel, record, index, eOpts) {
-			if ('2' != record.get('type')) {
-				this.ownerCt.getComponent('moduleGridPanel').queryData(record.get('id'));
-			}
+		//	this.ownerCt.getComponent('dictItemGridPanel').queryData();
 		}, this);
 
 		this.getStore().on('load', function(store, node, records, successful, eOpts) {

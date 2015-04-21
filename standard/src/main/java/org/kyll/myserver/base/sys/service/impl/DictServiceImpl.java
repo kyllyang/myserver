@@ -33,7 +33,7 @@ public class DictServiceImpl implements DictService {
 	@Override
 	public JSONArray getTreeJson(Long parentId) {
 		List<Dict> list = dictDao.find("from Dict t order by t.sort");
-		return this.recursiveTree(null, list);
+		return this.recursiveTree(parentId, list);
 	}
 
 	private JSONArray recursiveTree(Long parentId, List<Dict> list) {
@@ -41,7 +41,7 @@ public class DictServiceImpl implements DictService {
 
 		for (Dict dict : list) {
 			Dict parent = dict.getParent();
-			if (parentId == null ? parent == null : parent != null && Objects.equals(parentId, parent.getId())) {
+			if (parentId == null ? parent == null : Objects.equals(parentId, parent.getId())) {
 				Long id = dict.getId();
 
 				JSONObject jo = new JSONObject();
