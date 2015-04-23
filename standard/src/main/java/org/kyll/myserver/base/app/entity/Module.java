@@ -22,7 +22,6 @@ public class Module implements Serializable {
 	private String description;
 	private Integer sort;
 	private Set<Role> roleSet;
-	private Set<Menu> menuSet;
 
 	public Module() {
 	}
@@ -109,14 +108,5 @@ public class Module implements Serializable {
 
 	public void setRoleSet(Set<Role> roleSet) {
 		this.roleSet = roleSet;
-	}
-
-	@ManyToMany(mappedBy = "moduleSet")
-	public Set<Menu> getMenuSet() {
-		return menuSet;
-	}
-
-	public void setMenuSet(Set<Menu> menuSet) {
-		this.menuSet = menuSet;
 	}
 }

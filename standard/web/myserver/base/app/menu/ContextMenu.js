@@ -17,14 +17,6 @@ Ext.define('Base.app.menu.ContextMenu', {
 
 		if (this.menuTreePanel.getSelectedRecord().get('id')) {
 			this.add(Ext.create('Ext.menu.Item', {
-				text: '编辑',
-				icon: ctx + '/resource/image/icon/edit.png',
-				listeners: {
-					click: this.doEditEvent,
-					scope: this
-				}
-			}));
-			this.add(Ext.create('Ext.menu.Item', {
 				text: '删除',
 				icon: ctx + '/resource/image/icon/delete.png',
 				listeners: {
@@ -37,12 +29,6 @@ Ext.define('Base.app.menu.ContextMenu', {
 	doAddEvent: function(item, e, eOpts) {
 		Ext.create('Base.app.menu.MenuFormWindow', {
 			menuTreePanel: this.menuTreePanel
-		}).show();
-	},
-	doEditEvent: function(item, e, eOpts) {
-		Ext.create('Base.app.menu.MenuFormWindow', {
-			menuTreePanel: this.menuTreePanel,
-			entityId: this.menuTreePanel.getSelectedRecord().get('id')
 		}).show();
 	},
 	doDeleteEvent: function(item, e, eOpts) {

@@ -94,7 +94,7 @@ public class ModuleServiceImpl implements ModuleService {
 
 		for (Module module : list) {
 			Module parent = module.getParent();
-			if (parentId == null ? parent == null : Objects.equals(parentId, parent.getId())) {
+			if (parentId == null ? parent == null : parent != null && Objects.equals(parentId, parent.getId())) {
 				Long id = module.getId();
 
 				JSONObject jo = new JSONObject();
@@ -145,12 +145,12 @@ public class ModuleServiceImpl implements ModuleService {
 	}
 
 	@Override
-	public JSONArray getTreeJson(Boolean checked, Long roleId) {
+	public JSONArray getTreeJson(Boolean checked, Boolean function, Long roleId) {
 		List<Module> list = moduleDao.find("from Module t order by t.sort");
-		return this.recursiveTree(null, list, checked, roleId == null ? new HashSet<>() : roleDao.get(roleId).getModuleSet());
+		return this.recursiveTree(null, list, checked, function, roleId == null ? new HashSet<>() : roleDao.get(roleId).getModuleSet());
 	}
 
-	private JSONArray recursiveTree(Long parentId, List<Module> list, Boolean checked, Set<Module> modelSet) {
+	private JSONArray recursiveTree(Long parentId, List<Module> list, Boolean checked, Boolean function, Set<Module> modelSet) {
 		JSONArray ja = new JSONArray();
 
 		for (Module module : list) {
@@ -162,6 +162,7 @@ public class ModuleServiceImpl implements ModuleService {
 				jo.put("id", id);
 				jo.put("text", module.getName());
 				jo.put("type", module.getType());
+
 				if (checked != null) {
 					boolean isChecked = checked;
 					for (Module m : modelSet) {
@@ -173,11 +174,15 @@ public class ModuleServiceImpl implements ModuleService {
 					jo.put("checked", isChecked);
 				}
 
-				JSONArray children = this.recursiveTree(id, list, checked, modelSet);
+				JSONArray children = this.recursiveTree(id, list, checked, function, modelSet);
 				if (children.isEmpty()) {
 					jo.put("leaf", true);
 				} else {
 					jo.put("leaf", false);
+
+					if (function != null && function) {
+						jo.remove("checked");
+					}
 				}
 				jo.put("children", children);
 

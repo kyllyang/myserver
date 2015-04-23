@@ -1,8 +1,12 @@
 package org.kyll.myserver.base.app.ctrl;
 
 import net.sf.json.JSONArray;
+import org.kyll.myserver.base.app.entity.Menu;
+import org.kyll.myserver.base.app.entity.Module;
 import org.kyll.myserver.base.app.service.MenuService;
+import org.kyll.myserver.base.app.vo.MenuVo;
 import org.kyll.myserver.base.util.JsonUtils;
+import org.kyll.myserver.base.util.POJOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -78,5 +82,33 @@ public class MenuCtrl {
 
 		response.setContentType("text/plain");
 		response.getWriter().println(ja.toString());
+	}
+
+	@RequestMapping("/app/menu/input.ctrl")
+	public void input(Long id, HttpServletResponse response) throws Exception {
+		Menu entity = menuService.get(id);
+		MenuVo entityVo = POJOUtils.convert(entity, MenuVo.class, (menu, menuVo) -> {
+			Menu parent = menu.getParent();
+			if (parent != null) {
+				menuVo.setParentId(parent.getId());
+				menuVo.setParentName(parent.getName());
+			}
+			Module function = menu.getFunction();
+			if (function != null) {
+				menuVo.setFunctionId(function.getId());
+				menuVo.setFunctionName(function.getName());
+			}
+		});
+
+		response.setContentType("text/plain");
+		response.getWriter().println(JsonUtils.convert(entityVo));
+	}
+
+	@RequestMapping("/app/menu/save.ctrl")
+	public void save(MenuVo entityVo, HttpServletResponse response) throws Exception {
+		menuService.save(POJOUtils.convert(entityVo, Menu.class, menuService), entityVo.getParentId());
+
+		response.setContentType("text/plain");
+		response.getWriter().println(JsonUtils.ajaxResult(true));
 	}
 }

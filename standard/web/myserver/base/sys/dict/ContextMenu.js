@@ -1,4 +1,4 @@
-Ext.define('Base.sys.dict.DictMenu', {
+Ext.define('Base.sys.dict.ContextMenu', {
 	extend: 'Ext.menu.Menu',
 
 	dictTreePanel: null,

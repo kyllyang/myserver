@@ -41,7 +41,7 @@ public class DictServiceImpl implements DictService {
 
 		for (Dict dict : list) {
 			Dict parent = dict.getParent();
-			if (parentId == null ? parent == null : Objects.equals(parentId, parent.getId())) {
+			if (parentId == null ? parent == null : parent != null && Objects.equals(parentId, parent.getId())) {
 				Long id = dict.getId();
 
 				JSONObject jo = new JSONObject();

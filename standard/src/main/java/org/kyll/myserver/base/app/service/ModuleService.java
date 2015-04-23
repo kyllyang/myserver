@@ -20,7 +20,7 @@ public interface ModuleService extends BaseService<Module, Long> {
 
 	Dataset<Module> get(QueryCondition qc, Paginated pg);
 
-	JSONArray getTreeJson(Boolean checked, Long roleId);
+	JSONArray getTreeJson(Boolean checked, Boolean function, Long roleId);
 
 	void save(Module module, Long parentId);
 

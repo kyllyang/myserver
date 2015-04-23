@@ -34,7 +34,7 @@ Ext.define('Base.sys.dict.DictTreePanel', {
 		this.callParent();
 
 		this.on('itemcontextmenu', function(treePanel, record, item, index, e, eOpts) {
-			Ext.create('Base.sys.dict.DictMenu', {
+			Ext.create('Base.sys.dict.ContextMenu', {
 				dictTreePanel: this
 			}).showAt(e.getXY());
 			e.stopEvent();

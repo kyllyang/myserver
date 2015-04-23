@@ -38,7 +38,7 @@ public class MenuServiceImpl implements MenuService {
 
 		for (Menu menu : list) {
 			Menu parent = menu.getParent();
-			if (parentId == null ? parent == null : Objects.equals(parentId, parent.getId())) {
+			if (parentId == null ? parent == null : parent != null && Objects.equals(parentId, parent.getId())) {
 				Long id = menu.getId();
 
 				JSONObject jo = new JSONObject();
@@ -53,5 +53,18 @@ public class MenuServiceImpl implements MenuService {
 			}
 		}
 		return ja;
+	}
+
+	@Override
+	public void save(Menu menu, Long parentId) {
+		if (parentId != null) {
+			menu.setParent(this.get(parentId));
+		}
+		menuDao.save(menu);
+	}
+
+	@Override
+	public void delete(Long[] ids) {
+		menuDao.delete(ids);
 	}
 }

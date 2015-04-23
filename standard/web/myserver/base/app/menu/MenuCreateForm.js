@@ -1,4 +1,4 @@
-Ext.define('Base.app.menu.MenuForm', {
+Ext.define('Base.app.menu.MenuCreateForm', {
 	extend: 'Ext.form.Panel',
 
 	menuTreePanel: null,
@@ -24,6 +24,8 @@ Ext.define('Base.app.menu.MenuForm', {
 				{name: 'functionName'}
 			]
 		});
+
+		var that = this;
 
 		Ext.apply(this, {
 			reader: Ext.create('Ext.data.JsonReader', {
@@ -63,11 +65,32 @@ Ext.define('Base.app.menu.MenuForm', {
 			allowBlank: false
 		});
 		var functionPicker = Ext.create('Base.ux.FunctionPicker', {
-			fieldLabel: '<span style="color: #FF0000;">*</span>功能',
+			fieldLabel: '功能',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'functionId',
-			allowBlank: false
+			name: 'functionText',
+			onDetermine: function(nodes) {
+				var ids = [];
+				var texts = [];
+				for (var i = 0; i < nodes.length; i++) {
+					ids.push(nodes[i].get('id'));
+					texts.push(nodes[i].get('text'));
+				}
+
+				if (!Ext.isEmpty(ids)) {
+					var form = that.getForm();
+					form.findField('functionId').setValue(ids.join(','));
+					form.findField('functionText').setValue(texts.join(','));
+				}
+			},
+			listeners: {
+				change: function(picker, newValue, oldValue, eOpts) {
+					if (Ext.isEmpty(newValue)) {
+						that.getForm().findField('functionId').setValue('');
+					}
+				},
+				scope: this
+			}
 		});
 		var descriptionTextarea = Ext.create('Ext.form.field.TextArea', {
 			fieldLabel: '描述',
@@ -94,6 +117,9 @@ Ext.define('Base.app.menu.MenuForm', {
 			xtype: 'hidden',
 			name: 'parentId',
 			value: Ext.isEmpty(record.get('id')) ? null : record.get('id')
+		}, {
+			xtype: 'hidden',
+			name: 'functionId'
 		},
 			parentNameText,
 			nameText,
@@ -101,5 +127,28 @@ Ext.define('Base.app.menu.MenuForm', {
 			descriptionTextarea,
 			sortNumber
 		]);
+	},
+	saveForm: function() {
+		var form = this.getForm();
+		if (form.isValid()) {
+			form.submit({
+				url: ctx + '/app/menu/save.ctrl',
+				waitMsg: '正在保存数据，请稍候...',
+				success: function(form, action) {
+					Ext.Msg.alert('系统提示', '数据保存成功！');
+					this.closeForm();
+
+					var id = this.menuTreePanel.getSelectedRecord().get('id');
+					this.menuTreePanel.loadTreeNode(Ext.isEmpty(id) ? null : id);
+				},
+				failure: function(form, action) {
+					Ext.Msg.alert('系统提示', '无法保存数据！');
+				},
+				scope: this
+			});
+		}
+	},
+	closeForm: function() {
+		this.ownerCt.close();
 	}
 });

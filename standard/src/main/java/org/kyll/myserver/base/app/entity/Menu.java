@@ -17,7 +17,6 @@ public class Menu implements Serializable {
 	private String description;
 	private Integer sort;
 	private Module function;
-	private Set<Module> moduleSet;
 
 	public Menu() {
 	}
@@ -78,15 +77,5 @@ public class Menu implements Serializable {
 
 	public void setFunction(Module function) {
 		this.function = function;
-	}
-
-	@ManyToMany
-	@JoinTable(name = "SYS_MENU_MODULE", joinColumns = {@JoinColumn(name = "MENU_ID_")}, inverseJoinColumns = {@JoinColumn(name = "MODULE_ID_")})
-	public Set<Module> getModuleSet() {
-		return moduleSet;
-	}
-
-	public void setModuleSet(Set<Module> moduleSet) {
-		this.moduleSet = moduleSet;
 	}
 }

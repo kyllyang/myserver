@@ -55,8 +55,8 @@ public class ModuleCtrl {
 	}
 
 	@RequestMapping("/app/module/tree.ctrl")
-	public void tree(Boolean checked, Long roleId, HttpServletResponse response) throws Exception {
-		JSONArray ja = moduleService.getTreeJson(checked, roleId);
+	public void tree(Boolean checked, Boolean function, Long roleId, HttpServletResponse response) throws Exception {
+		JSONArray ja = moduleService.getTreeJson(checked, function, roleId);
 
 		response.setContentType("text/plain");
 		response.getWriter().println(ja.toString());

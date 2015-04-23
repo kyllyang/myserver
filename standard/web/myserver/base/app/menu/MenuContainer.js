@@ -12,8 +12,8 @@ Ext.define('Base.app.menu.MenuContainer', {
 			collapsible: true,
 			width: myServer.getWidth() / 6
 		}));
-		/*this.add(Ext.create('Base.app.menu.MenuForm', {
+		this.add(Ext.create('Base.app.menu.MenuEditForm', {
 			region: 'center'
-		}));*/
+		}));
 	}
 });

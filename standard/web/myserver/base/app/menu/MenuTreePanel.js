@@ -41,7 +41,7 @@ Ext.define('Base.app.menu.MenuTreePanel', {
 		}, this);
 
 		this.on('select', function(treePanel, record, index, eOpts) {
-		//	this.ownerCt.getComponent('dictItemGridPanel').queryData();
+			this.ownerCt.getComponent('editForm').loadForm();
 		}, this);
 
 		this.getStore().on('load', function(store, node, records, successful, eOpts) {
