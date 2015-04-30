@@ -4,12 +4,12 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Query;
+import org.kyll.myserver.base.QueryCondition;
 import org.kyll.myserver.base.common.paginated.Dataset;
 import org.kyll.myserver.base.common.paginated.Paginated;
-import org.kyll.myserver.base.sys.QueryCondition;
 import org.kyll.myserver.base.app.dao.ModuleDao;
+import org.kyll.myserver.base.sys.dao.EmployeeDao;
 import org.kyll.myserver.base.sys.dao.RoleDao;
-import org.kyll.myserver.base.sys.dao.UserDao;
 import org.kyll.myserver.base.app.entity.Module;
 import org.kyll.myserver.base.sys.entity.Role;
 import org.kyll.myserver.base.sys.service.RoleService;
@@ -34,7 +34,7 @@ public class RoleServiceImpl implements RoleService {
 	@Autowired
 	private RoleDao roleDao;
 	@Autowired
-	private UserDao userDao;
+	private EmployeeDao employeeDao;
 	@Autowired
 	private ModuleDao moduleDao;
 
@@ -49,7 +49,7 @@ public class RoleServiceImpl implements RoleService {
 		if (userId == null) {
 			roleSet = new HashSet<>();
 		} else {
-			roleSet = userDao.get(userId).getRoleSet();
+			roleSet = employeeDao.get(userId).getRoleSet();
 		}
 
 		JSONArray ja = new JSONArray();
@@ -122,7 +122,7 @@ public class RoleServiceImpl implements RoleService {
 		List<Module> moduleList = query.list();
 
 		Role role = roleDao.get(roleId);
-		Set<Module> moduleSet = role.getModuleSet();
+		Set<Module> moduleSet = role.getFunctionSet();
 		moduleSet.clear();
 		moduleSet.addAll(moduleList);
 		roleDao.save(role);

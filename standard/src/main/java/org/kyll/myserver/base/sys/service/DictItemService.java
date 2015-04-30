@@ -1,10 +1,10 @@
 package org.kyll.myserver.base.sys.service;
 
 import net.sf.json.JSONArray;
+import org.kyll.myserver.base.QueryCondition;
 import org.kyll.myserver.base.common.BaseService;
 import org.kyll.myserver.base.common.paginated.Dataset;
 import org.kyll.myserver.base.common.paginated.Paginated;
-import org.kyll.myserver.base.sys.QueryCondition;
 import org.kyll.myserver.base.sys.entity.DictItem;
 
 import java.util.Map;

@@ -1,7 +1,7 @@
 package org.kyll.myserver.base.sys.service.impl;
 
 import org.apache.commons.lang.StringUtils;
-import org.kyll.myserver.base.sys.QueryCondition;
+import org.kyll.myserver.base.QueryCondition;
 import org.kyll.myserver.base.sys.dao.AttachmentDao;
 import org.kyll.myserver.base.sys.entity.Attachment;
 import org.kyll.myserver.base.sys.service.AttachmentService;

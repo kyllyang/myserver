@@ -1,40 +1,24 @@
-package org.kyll.myserver.base.sys;
+package org.kyll.myserver.base;
 
 /**
  * User: Kyll
- * Date: 2014-11-05 14:04
+ * Date: 2015-04-28 19:25
  */
 public class QueryCondition {
-	private Long id;
-	private Long parentId;
 	private String username;
-	private String email;
+	private String password;
+	private Long parentId;
+	private String type;
 	private String name;
-	private Integer type;
-	private Integer funcType;
+	private String funcType;
 	private String description;
+	private Long id;
 	private String entityName;
 	private String entityId;
 	private Long dictId;
 	private String invokeCode;
 
 	public QueryCondition() {
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getParentId() {
-		return parentId;
-	}
-
-	public void setParentId(Long parentId) {
-		this.parentId = parentId;
 	}
 
 	public String getUsername() {
@@ -45,12 +29,28 @@ public class QueryCondition {
 		this.username = username;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Long getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(Long parentId) {
+		this.parentId = parentId;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public String getName() {
@@ -61,19 +61,11 @@ public class QueryCondition {
 		this.name = name;
 	}
 
-	public Integer getType() {
-		return type;
-	}
-
-	public void setType(Integer type) {
-		this.type = type;
-	}
-
-	public Integer getFuncType() {
+	public String getFuncType() {
 		return funcType;
 	}
 
-	public void setFuncType(Integer funcType) {
+	public void setFuncType(String funcType) {
 		this.funcType = funcType;
 	}
 
@@ -83,6 +75,14 @@ public class QueryCondition {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getEntityName() {

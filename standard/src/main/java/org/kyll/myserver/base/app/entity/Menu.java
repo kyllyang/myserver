@@ -9,7 +9,7 @@ import java.util.Set;
  * Date: 2015-04-20 11:06
  */
 @Entity
-@Table(name = "SYS_MENU")
+@Table(name = "MS_APP_MENU")
 public class Menu implements Serializable {
 	private Long id;
 	private Menu parent;
@@ -70,7 +70,7 @@ public class Menu implements Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "MODULE_ID_")
+	@JoinColumn(name = "FUNCTION_ID_")
 	public Module getFunction() {
 		return function;
 	}

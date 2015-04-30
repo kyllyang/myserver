@@ -13,7 +13,7 @@ import java.io.Serializable;
  * Date: 2014-12-02 16:27
  */
 @Entity
-@Table(name = "SYS_CONFIG")
+@Table(name = "MS_SYS_CONFIG")
 public class Config implements Serializable {
 	private Long id;
 	private String key;

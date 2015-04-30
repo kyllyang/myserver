@@ -13,7 +13,7 @@ import java.io.Serializable;
  * Date: 2014-12-02 13:24
  */
 @Entity
-@Table(name = "SYS_ATTACHMENT")
+@Table(name = "MS_SYS_ATTACHMENT")
 public class Attachment implements Serializable {
 	private Long id;
 	private String entityName;

@@ -3,6 +3,7 @@ package org.kyll.myserver.base.app.service.impl;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.kyll.myserver.base.app.dao.MenuDao;
+import org.kyll.myserver.base.app.dao.ModuleDao;
 import org.kyll.myserver.base.app.entity.Menu;
 import org.kyll.myserver.base.app.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ import java.util.Objects;
 public class MenuServiceImpl implements MenuService {
 	@Autowired
 	private MenuDao menuDao;
+	@Autowired
+	private ModuleDao moduleDao;
 
 	@Override
 	public Menu get(Long id) {
@@ -56,9 +59,12 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	@Override
-	public void save(Menu menu, Long parentId) {
+	public void save(Menu menu, Long parentId, Long functionId) {
 		if (parentId != null) {
 			menu.setParent(this.get(parentId));
+		}
+		if (functionId != null) {
+			menu.setFunction(moduleDao.get(functionId));
 		}
 		menuDao.save(menu);
 	}

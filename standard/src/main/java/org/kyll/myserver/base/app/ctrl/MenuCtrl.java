@@ -106,7 +106,7 @@ public class MenuCtrl {
 
 	@RequestMapping("/app/menu/save.ctrl")
 	public void save(MenuVo entityVo, HttpServletResponse response) throws Exception {
-		menuService.save(POJOUtils.convert(entityVo, Menu.class, menuService), entityVo.getParentId());
+		menuService.save(POJOUtils.convert(entityVo, Menu.class, menuService), entityVo.getParentId(), entityVo.getFunctionId());
 
 		response.setContentType("text/plain");
 		response.getWriter().println(JsonUtils.ajaxResult(true));

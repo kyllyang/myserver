@@ -53,7 +53,7 @@ Ext.define('Base.app.menu.MenuCreateForm', {
 			labelAlign: 'right',
 			labelSeparator: '：',
 			name: 'parentName',
-			value: Ext.isEmpty(record.get('id')) ? null : record.get('name'),
+			value: Ext.isEmpty(record.get('id')) ? null : record.get('text'),
 			disabled: true
 		});
 		var nameText = Ext.create('Ext.form.field.Text', {
@@ -109,6 +109,7 @@ Ext.define('Base.app.menu.MenuCreateForm', {
 			allowDecimals: false,
 			readOnly: this.readOnlyForm
 		});
+		var menuModuleThematicGridPanel = Ext.create('Base.app.menu.MenuModuleThematicGridPanel');
 
 		this.add([{
 			xtype: 'hidden',
@@ -125,7 +126,8 @@ Ext.define('Base.app.menu.MenuCreateForm', {
 			nameText,
 			functionPicker,
 			descriptionTextarea,
-			sortNumber
+			sortNumber,
+			menuModuleThematicGridPanel
 		]);
 	},
 	saveForm: function() {

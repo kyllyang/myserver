@@ -1,17 +1,15 @@
 Ext.define('Base.app.menu.MenuFormWindow', {
 	extend: 'Ext.window.Window',
 
-	entityId: null,
+	menuTreePanel: null,
 
 	title: '菜单信息',
-	width: 600,
-	height: 240,
+	width: 800,
+	height: 450,
 	border: false,
 	modal: true,
 	resizable: false,
 	layout: 'fit',
-
-	menuTreePanel: null,
 
 	initComponent: function() {
 		this.callParent();

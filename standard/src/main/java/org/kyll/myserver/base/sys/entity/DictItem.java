@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Date: 2015-02-05 14:52
  */
 @Entity
-@Table(name = "SYS_DICT_ITEM")
+@Table(name = "MS_SYS_DICT_ITEM")
 public class DictItem implements Serializable {
 	private Long id;
 	private Dict dict;

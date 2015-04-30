@@ -2,14 +2,14 @@ package org.kyll.myserver.base.sys.service.impl;
 
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Query;
+import org.kyll.myserver.base.QueryCondition;
 import org.kyll.myserver.base.common.paginated.Dataset;
 import org.kyll.myserver.base.common.paginated.Paginated;
-import org.kyll.myserver.base.sys.QueryCondition;
+import org.kyll.myserver.base.sys.dao.EmployeeDao;
 import org.kyll.myserver.base.sys.dao.RoleDao;
-import org.kyll.myserver.base.sys.dao.UserDao;
+import org.kyll.myserver.base.sys.entity.Employee;
 import org.kyll.myserver.base.sys.entity.Role;
-import org.kyll.myserver.base.sys.entity.User;
-import org.kyll.myserver.base.sys.service.UserService;
+import org.kyll.myserver.base.sys.service.EmployeeService;
 import org.kyll.myserver.base.util.HqlUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,49 +25,43 @@ import java.util.Set;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class UserServiceImpl implements UserService {
+public class EmployeeServiceImpl implements EmployeeService {
 	@Autowired
-	private UserDao userDao;
+	private EmployeeDao employeeDao;
 	@Autowired
 	private RoleDao roleDao;
 
 	@Override
-	public User login(User user) {
-		List<User> userList = userDao.find("from User t where t.username = '" + user.getUsername() + "' and t.password = '" + user.getPassword() + "' and t.freeze <> '1'");
-		return userList.isEmpty() ? null : userList.get(0);
+	public Employee login(String username, String password) {
+		List<Employee> employeeList = employeeDao.find("from Employee t where t.username = '" + username + "' and t.password = '" + password + "' and t.freeze <> '1'");
+		return employeeList.isEmpty() ? null : employeeList.get(0);
 	}
 
 	@Override
-	public User get(Long id) {
-		return userDao.get(id);
+	public Employee get(Long id) {
+		return employeeDao.get(id);
 	}
 
 	@Override
-	public Dataset<User> get(QueryCondition qc, Paginated pg) {
-		StringBuilder hql = new StringBuilder("from User t where 1 = 1");
-		if (qc != null) {
-			String username = qc.getUsername();
-			if (StringUtils.isNotBlank(username)) {
-				hql.append(" and lower(t.username) like lower('%").append(username).append("%')");
-			}
-			String email = qc.getEmail();
-			if (StringUtils.isNotBlank(email)) {
-				hql.append(" and lower(t.email) like lower('%").append(email).append("%')");
-			}
+	public Dataset<Employee> get(QueryCondition qc, Paginated pg) {
+		StringBuilder hql = new StringBuilder("from Employee t where 1 = 1");
+		String username = qc.getUsername();
+		if (StringUtils.isNotBlank(username)) {
+			hql.append(" and lower(t.username) like lower('%").append(username).append("%')");
 		}
 		HqlUtils.appendOrderBy(hql, "t", pg);
-		return userDao.find(hql, pg);
+		return employeeDao.find(hql, pg);
 	}
 
 	@Override
-	public boolean save(User user) {
-		List<User> userList = userDao.find("from User t where t.username = '" + user.getUsername() + "'");
+	public boolean save(Employee user) {
+		List<Employee> userList = employeeDao.find("from Employee t where t.username = '" + user.getUsername() + "'");
 		boolean result = userList.isEmpty();
 		if (!result) {
 			result = Objects.equals(userList.get(0).getId(), user.getId());
 		}
 		if (result) {
-			userDao.save(user);
+			employeeDao.save(user);
 		}
 		return result;
 	}
@@ -79,15 +73,15 @@ public class UserServiceImpl implements UserService {
 		query.setParameterList("roleIds", roleIds);
 		List<Role> roleList = query.list();
 
-		User user = userDao.get(userId);
+		Employee user = employeeDao.get(userId);
 		Set<Role> roleSet = user.getRoleSet();
 		roleSet.clear();
 		roleSet.addAll(roleList);
-		userDao.save(user);
+		employeeDao.save(user);
 	}
 
 	@Override
 	public void delete(Long... ids) {
-		userDao.delete(ids);
+		employeeDao.delete(ids);
 	}
 }

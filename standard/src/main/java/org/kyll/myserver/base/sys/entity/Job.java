@@ -16,7 +16,7 @@ import java.io.Serializable;
  * Date: 2014-11-05 12:57
  */
 @Entity
-@Table(name = "SYS_JOB")
+@Table(name = "MS_SYS_JOB")
 public class Job implements Serializable {
 	private Long id;
 	private Department department;

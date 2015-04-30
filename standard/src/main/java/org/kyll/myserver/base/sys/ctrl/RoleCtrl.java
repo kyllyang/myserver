@@ -1,8 +1,8 @@
 package org.kyll.myserver.base.sys.ctrl;
 
 import net.sf.json.JSONArray;
+import org.kyll.myserver.base.QueryCondition;
 import org.kyll.myserver.base.common.paginated.Dataset;
-import org.kyll.myserver.base.sys.QueryCondition;
 import org.kyll.myserver.base.sys.entity.Role;
 import org.kyll.myserver.base.sys.service.RoleService;
 import org.kyll.myserver.base.sys.vo.RoleVo;

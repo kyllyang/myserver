@@ -11,14 +11,13 @@ import java.util.Set;
  * Date: 2014-11-05 13:04
  */
 @Entity
-@Table(name = "SYS_ROLE")
+@Table(name = "MS_SYS_ROLE")
 public class Role implements Serializable {
 	private Long id;
 	private String name;
 	private String description;
 	private Integer sort;
-	private Set<User> userSet;
-	private Set<Module> moduleSet;
+	private Set<Module> functionSet;
 
 	public Role() {
 	}
@@ -61,22 +60,13 @@ public class Role implements Serializable {
 		this.sort = sort;
 	}
 
-	@ManyToMany(mappedBy = "roleSet")
-	public Set<User> getUserSet() {
-		return userSet;
-	}
-
-	public void setUserSet(Set<User> userSet) {
-		this.userSet = userSet;
-	}
-
 	@ManyToMany
-	@JoinTable(name = "SYS_ROLE_MODULE", joinColumns = {@JoinColumn(name = "ROLE_ID_")}, inverseJoinColumns = {@JoinColumn(name = "MODULE_ID_")})
-	public Set<Module> getModuleSet() {
-		return moduleSet;
+	@JoinTable(name = "MS_SYS_ROLE_FUNCTION", joinColumns = {@JoinColumn(name = "ROLE_ID_")}, inverseJoinColumns = {@JoinColumn(name = "FUNCTION_ID_")})
+	public Set<Module> getFunctionSet() {
+		return functionSet;
 	}
 
-	public void setModuleSet(Set<Module> moduleSet) {
-		this.moduleSet = moduleSet;
+	public void setFunctionSet(Set<Module> functionSet) {
+		this.functionSet = functionSet;
 	}
 }

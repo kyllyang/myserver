@@ -1,6 +1,6 @@
 package org.kyll.myserver.base.sys.ctrl;
 
-import org.kyll.myserver.base.sys.QueryCondition;
+import org.kyll.myserver.base.QueryCondition;
 import org.kyll.myserver.base.sys.entity.Attachment;
 import org.kyll.myserver.base.sys.service.AttachmentService;
 import org.kyll.myserver.base.util.ConstUtils;

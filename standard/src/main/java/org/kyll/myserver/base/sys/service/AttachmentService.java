@@ -1,7 +1,7 @@
 package org.kyll.myserver.base.sys.service;
 
+import org.kyll.myserver.base.QueryCondition;
 import org.kyll.myserver.base.common.BaseService;
-import org.kyll.myserver.base.sys.QueryCondition;
 import org.kyll.myserver.base.sys.entity.Attachment;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 

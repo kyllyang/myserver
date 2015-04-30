@@ -3,33 +3,43 @@ Ext.define('Base.sys.dict.DictTreePanel', {
 
 	currentNodeId: null,
 
-	itemId: 'dictTreePanel',
-	autoScroll: true,
-
 	initComponent: function() {
 		Ext.define('DataModel', {
 			extend: 'Ext.data.Model',
 			fields: ['id', 'text', 'name']
 		});
 
-		var store = Ext.create('Ext.data.TreeStore', {
-			model: 'DataModel',
-			proxy: {
-				type: 'ajax',
-				url: ctx + '/sys/dict/tree.ctrl'
-			},
-			reader: {
-				type: 'json'
-			},
-			root: {
-				id: null,
-				text: '数据字典'
-			}
-		});
-
 		Ext.apply(this, {
-			store: store,
-			useArrows: true
+			itemId: 'dictTreePanel',
+			autoScroll: true,
+			useArrows: true,
+			store: Ext.create('Ext.data.TreeStore', {
+				model: 'DataModel',
+				proxy: {
+					type: 'ajax',
+					url: ctx + '/sys/dict/tree.ctrl'
+				},
+				reader: {
+					type: 'json'
+				},
+				root: {
+					id: null,
+					text: '数据字典'
+				}
+			}),
+			header: {
+				items: [{
+					xtype: 'button',
+					icon: ctx + '/resource/image/icon/expandall.png',
+					handler: this.expandAll,
+					scope: this
+				}, {
+					xtype: 'button',
+					icon: ctx + '/resource/image/icon/collapseall.png',
+					handler: this.collapseAll,
+					scope: this
+				}]
+			}
 		});
 		this.callParent();
 

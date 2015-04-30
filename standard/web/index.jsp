@@ -28,7 +28,7 @@
 			enabled: true,
 			paths: {
 				Base: ctx + '/myserver/base',
-				Business: ctx + '/myserver/business/meaord'
+				Business: ctx + '/myserver/business'
 			}
 		});
 

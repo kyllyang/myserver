@@ -3,15 +3,15 @@ package org.kyll.myserver.base.app.service.impl;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
+import org.kyll.myserver.base.QueryCondition;
 import org.kyll.myserver.base.common.paginated.Dataset;
 import org.kyll.myserver.base.common.paginated.Paginated;
-import org.kyll.myserver.base.app.QueryCondition;
 import org.kyll.myserver.base.app.dao.ModuleDao;
+import org.kyll.myserver.base.sys.dao.EmployeeDao;
 import org.kyll.myserver.base.sys.dao.RoleDao;
-import org.kyll.myserver.base.sys.dao.UserDao;
 import org.kyll.myserver.base.app.entity.Module;
+import org.kyll.myserver.base.sys.entity.Employee;
 import org.kyll.myserver.base.sys.entity.Role;
-import org.kyll.myserver.base.sys.entity.User;
 import org.kyll.myserver.base.app.service.ModuleService;
 import org.kyll.myserver.base.util.HqlUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ public class ModuleServiceImpl implements ModuleService {
 	@Autowired
 	private ModuleDao moduleDao;
 	@Autowired
-	private UserDao userDao;
+	private EmployeeDao employeeDao;
 	@Autowired
 	private RoleDao roleDao;
 
@@ -49,10 +49,10 @@ public class ModuleServiceImpl implements ModuleService {
 	public List<Module> getTopModule(Long userId) {
 		Set<Module> moduleSet = new HashSet<>();
 
-		User user = userDao.get(userId);
+		Employee user = employeeDao.get(userId);
 		Set<Role> roleSet = user.getRoleSet();
 		for (Role role : roleSet) {
-			moduleSet.addAll(role.getModuleSet().stream().map(this::getTopModule).collect(Collectors.toList()));
+			moduleSet.addAll(role.getFunctionSet().stream().map(this::getTopModule).collect(Collectors.toList()));
 		}
 
 		List<Module> moduleList = new ArrayList<>(moduleSet);
@@ -71,10 +71,10 @@ public class ModuleServiceImpl implements ModuleService {
 		Set<Module> resultModuleSet = new HashSet<>();
 
 		Module topModule;
-		User user = userDao.get(userId);
+		Employee user = employeeDao.get(userId);
 		Set<Role> roleSet = user.getRoleSet();
 		for (Role role : roleSet) {
-			Set<Module> moduleSet = role.getModuleSet();
+			Set<Module> moduleSet = role.getFunctionSet();
 			for (Module module : moduleSet) {
 				topModule = this.getTopModule(module);
 				if (Objects.equals(moduleId, topModule.getId())) {
@@ -131,12 +131,12 @@ public class ModuleServiceImpl implements ModuleService {
 			if (StringUtils.isNotBlank(name)) {
 				hql.append(" and lower(t.name) like lower('%").append(name).append("%')");
 			}
-			Integer type = qc.getType();
-			if (type != null) {
+			String type = qc.getType();
+			if (StringUtils.isNotBlank(type)) {
 				hql.append(" and t.type = '").append(type).append("'");
 			}
-			Integer funcType = qc.getFuncType();
-			if (funcType != null) {
+			String funcType = qc.getFuncType();
+			if (StringUtils.isNotBlank(funcType)) {
 				hql.append(" and t.funcType = '").append(funcType).append("'");
 			}
 		}
@@ -147,7 +147,7 @@ public class ModuleServiceImpl implements ModuleService {
 	@Override
 	public JSONArray getTreeJson(Boolean checked, Boolean function, Long roleId) {
 		List<Module> list = moduleDao.find("from Module t order by t.sort");
-		return this.recursiveTree(null, list, checked, function, roleId == null ? new HashSet<>() : roleDao.get(roleId).getModuleSet());
+		return this.recursiveTree(null, list, checked, function, roleId == null ? new HashSet<>() : roleDao.get(roleId).getFunctionSet());
 	}
 
 	private JSONArray recursiveTree(Long parentId, List<Module> list, Boolean checked, Boolean function, Set<Module> modelSet) {

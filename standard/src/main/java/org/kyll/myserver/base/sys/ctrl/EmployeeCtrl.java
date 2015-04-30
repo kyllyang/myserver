@@ -1,9 +1,9 @@
 package org.kyll.myserver.base.sys.ctrl;
 
+import org.kyll.myserver.base.QueryCondition;
 import org.kyll.myserver.base.common.paginated.Dataset;
-import org.kyll.myserver.base.sys.QueryCondition;
-import org.kyll.myserver.base.sys.entity.User;
-import org.kyll.myserver.base.sys.service.UserService;
+import org.kyll.myserver.base.sys.entity.Employee;
+import org.kyll.myserver.base.sys.service.EmployeeService;
 import org.kyll.myserver.base.sys.vo.SessionVo;
 import org.kyll.myserver.base.sys.vo.UserVo;
 import org.kyll.myserver.base.util.JsonUtils;
@@ -24,13 +24,13 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 @Scope("request")
-public class UserCtrl {
+public class EmployeeCtrl {
 	@Autowired
-	private UserService userService;
+	private EmployeeService employeeService;
 
 	@RequestMapping("/login.ctrl")
-	public void login(User user, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		User loginUser = userService.login(user);
+	public void login(String username, String password, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Employee loginUser = employeeService.login(username, password);
 		String contextPath = request.getContextPath();
 		if (loginUser == null) {
 			response.sendRedirect(contextPath + "/login.jsp");
@@ -54,7 +54,7 @@ public class UserCtrl {
 
 	@RequestMapping("/sys/user/list.ctrl")
 	public void list(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		Dataset<User> dataset = userService.get(RequestUtils.get(request, "qc", QueryCondition.class), RequestUtils.getPaginated(request));
+		Dataset<Employee> dataset = employeeService.get(RequestUtils.get(request, "qc", QueryCondition.class), RequestUtils.getPaginated(request));
 		Dataset<UserVo> voDataset = POJOUtils.convert(dataset, UserVo.class);
 
 		response.setContentType("text/plain");
@@ -63,7 +63,7 @@ public class UserCtrl {
 
 	@RequestMapping("/sys/user/input.ctrl")
 	public void input(Long id, HttpServletResponse response) throws Exception {
-		User entity = userService.get(id);
+		Employee entity = employeeService.get(id);
 		UserVo entityVo = POJOUtils.convert(entity, UserVo.class);
 
 		response.setContentType("text/plain");
@@ -72,7 +72,7 @@ public class UserCtrl {
 
 	@RequestMapping("/sys/user/save.ctrl")
 	public void save(UserVo entityVo, HttpServletResponse response) throws Exception {
-		boolean result = userService.save(POJOUtils.convert(entityVo, User.class, userService));
+		boolean result = employeeService.save(POJOUtils.convert(entityVo, Employee.class, employeeService));
 
 		response.setContentType("text/plain");
 		response.getWriter().println(JsonUtils.ajaxResult(result));
@@ -80,7 +80,7 @@ public class UserCtrl {
 
 	@RequestMapping("/sys/user/saveRole.ctrl")
 	public void saveModule(Long userId, Long[] roleIds, HttpServletResponse response) throws Exception {
-		userService.save(userId, roleIds);
+		employeeService.save(userId, roleIds);
 
 		response.setContentType("text/plain");
 		response.getWriter().println(JsonUtils.ajaxResult(true));
@@ -88,7 +88,7 @@ public class UserCtrl {
 
 	@RequestMapping("/sys/user/delete.ctrl")
 	public void delete(Long[] ids, HttpServletResponse response) throws Exception {
-		userService.delete(ids);
+		employeeService.delete(ids);
 
 		response.setContentType("text/plain");
 		response.getWriter().println(JsonUtils.ajaxResult(true));

@@ -11,17 +11,16 @@ import java.util.Set;
  * Date: 2014-11-05 12:54
  */
 @Entity
-@Table(name = "SYS_MODULE")
+@Table(name = "MS_APP_MODULE")
 public class Module implements Serializable {
 	private Long id;
 	private Module parent;
 	private String name;
-	private Integer type;
-	private Integer funcType;
+	private String type;
+	private String funcType;
 	private String funcCode;
 	private String description;
 	private Integer sort;
-	private Set<Role> roleSet;
 
 	public Module() {
 	}
@@ -57,20 +56,20 @@ public class Module implements Serializable {
 	}
 
 	@Column(name = "TYPE_")
-	public Integer getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(Integer type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
 	@Column(name = "FUNC_TYPE_")
-	public Integer getFuncType() {
+	public String getFuncType() {
 		return funcType;
 	}
 
-	public void setFuncType(Integer funcType) {
+	public void setFuncType(String funcType) {
 		this.funcType = funcType;
 	}
 
@@ -99,14 +98,5 @@ public class Module implements Serializable {
 
 	public void setSort(Integer sort) {
 		this.sort = sort;
-	}
-
-	@ManyToMany(mappedBy = "moduleSet")
-	public Set<Role> getRoleSet() {
-		return roleSet;
-	}
-
-	public void setRoleSet(Set<Role> roleSet) {
-		this.roleSet = roleSet;
 	}
 }
