@@ -42,14 +42,14 @@ Ext.define('Base.app.module.ModuleGridPanel', {
 					fieldLabel: '模块名称',
 					name: 'name'
 				}, Ext.create('Base.ux.DictComboBox', {
-					invokeCode: 'sysmanager_module_type',
+					invokeCode: 'app_module_type',
 					initAutoLoad: false,
 					fieldLabel: '类型',
 					labelAlign: 'right',
 					labelSeparator: '：',
 					name: 'type'
 				}), Ext.create('Base.ux.DictComboBox', {
-					invokeCode: 'sysmanager_module_funcType',
+					invokeCode: 'app_module_funcType',
 					initAutoLoad: false,
 					fieldLabel: '功能类型',
 					labelAlign: 'right',
@@ -111,7 +111,6 @@ Ext.define('Base.app.module.ModuleGridPanel', {
 			} else {
 				Ext.create('Base.app.module.ModuleFormWindow', {
 					moduleTreePanel: this.ownerCt.getComponent('moduleTreePanel'),
-					moduleGridPanel: this,
 					parentEntity: record
 				}).show();
 			}
@@ -123,7 +122,6 @@ Ext.define('Base.app.module.ModuleGridPanel', {
 		var record = this.ownerCt.getComponent('moduleTreePanel').getSelectedRecord();
 		Ext.create('Base.app.module.ModuleFormWindow', {
 			moduleTreePanel: this.ownerCt.getComponent('moduleTreePanel'),
-			moduleGridPanel: this,
 			entityId: id,
 			parentEntity: record
 		}).show();
@@ -131,6 +129,7 @@ Ext.define('Base.app.module.ModuleGridPanel', {
 	doViewEvent: function(id) {
 		var record = this.ownerCt.getComponent('moduleTreePanel').getSelectedRecord();
 		Ext.create('Base.app.module.ModuleFormWindow', {
+			moduleTreePanel: this.ownerCt.getComponent('moduleTreePanel'),
 			entityId: id,
 			parentEntity: record,
 			readOnlyForm: true

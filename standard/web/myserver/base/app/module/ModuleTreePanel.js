@@ -3,40 +3,55 @@ Ext.define('Base.app.module.ModuleTreePanel', {
 
 	currentNodeId: null,
 
-	itemId: 'moduleTreePanel',
-	autoScroll: true,
-
 	initComponent: function() {
 		Ext.define('DateModel', {
 			extend: 'Ext.data.Model',
 			fields: ['id', 'text', 'type']
 		});
 
-		var store = Ext.create('Ext.data.TreeStore', {
-			model: 'DateModel',
-			proxy: {
-				type: 'ajax',
-				url: ctx + '/app/module/tree.ctrl'
-			},
-			reader: {
-				type: 'json'
-			},
-			root: {
-				id: null,
-				text: '应用模块'
-			}
-		});
-
 		Ext.apply(this, {
-			store: store,
-			useArrows: true
+			itemId: 'moduleTreePanel',
+			autoScroll: true,
+			useArrows: true,
+			store: Ext.create('Ext.data.TreeStore', {
+				model: 'DateModel',
+				proxy: {
+					type: 'ajax',
+					url: ctx + '/app/module/tree.ctrl'
+				},
+				reader: {
+					type: 'json'
+				},
+				root: {
+					id: null,
+					text: '应用模块'
+				}
+			}),
+			header: {
+				items: [{
+					xtype: 'button',
+					icon: ctx + '/resource/image/icon/expandall.png',
+					handler: this.expandAll,
+					scope: this
+				}, {
+					xtype: 'button',
+					icon: ctx + '/resource/image/icon/collapseall.png',
+					handler: this.collapseAll,
+					scope: this
+				}]
+			}
 		});
 		this.callParent();
 
+		this.on('itemcontextmenu', function(treePanel, record, item, index, e, eOpts) {
+			Ext.create('Base.app.module.ContextMenu', {
+				moduleTreePanel: this
+			}).showAt(e.getXY());
+			e.stopEvent();
+		}, this);
+
 		this.on('select', function(treePanel, record, index, eOpts) {
-			if ('2' != record.get('type')) {
-				this.ownerCt.getComponent('moduleGridPanel').queryData(record.get('id'));
-			}
+			this.ownerCt.getComponent('moduleGridPanel').queryData(record.get('id'));
 		}, this);
 
 		this.getStore().on('load', function(store, node, records, successful, eOpts) {
@@ -48,7 +63,9 @@ Ext.define('Base.app.module.ModuleTreePanel', {
 				tempNode = tempNode.parentNode;
 			}
 
-			this.getSelectionModel().select(selectNode);
+			var selectionModel = this.getSelectionModel();
+			selectionModel.deselect(selectNode);
+			selectionModel.select(selectNode);
 		}, this);
 
 		this.getStore().load();

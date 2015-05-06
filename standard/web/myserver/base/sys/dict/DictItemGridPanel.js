@@ -1,10 +1,9 @@
 Ext.define('Base.sys.dict.DictItemGridPanel', {
 	extend: 'Base.ux.GridPanel',
 
-	itemId: 'dictItemGridPanel',
-
 	initComponent: function() {
 		Ext.apply(this, {
+			itemId: 'dictItemGridPanel',
 			url: ctx + '/sys/dictitem/list.ctrl',
 			sortProperty: 'sort',
 			sortDirection: 'asc',

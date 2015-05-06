@@ -11,9 +11,9 @@ public class ModuleVo implements Vo<Long> {
 	private Long parentId;
 	private String parentName;
 	private String name;
-	private Integer type;
+	private String type;
 	private String typeText;
-	private Integer funcType;
+	private String funcType;
 	private String funcTypeText;
 	private String funcCode;
 	private String description;
@@ -55,11 +55,11 @@ public class ModuleVo implements Vo<Long> {
 		this.name = name;
 	}
 
-	public Integer getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(Integer type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
@@ -71,11 +71,11 @@ public class ModuleVo implements Vo<Long> {
 		this.typeText = typeText;
 	}
 
-	public Integer getFuncType() {
+	public String getFuncType() {
 		return funcType;
 	}
 
-	public void setFuncType(Integer funcType) {
+	public void setFuncType(String funcType) {
 		this.funcType = funcType;
 	}
 

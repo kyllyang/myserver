@@ -63,7 +63,9 @@ Ext.define('Base.sys.dict.DictTreePanel', {
 				tempNode = tempNode.parentNode;
 			}
 
-			this.getSelectionModel().select(selectNode);
+			var selectionModel = this.getSelectionModel();
+			selectionModel.deselect(selectNode);
+			selectionModel.select(selectNode);
 		}, this);
 
 		this.getStore().load();

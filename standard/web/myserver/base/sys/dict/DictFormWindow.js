@@ -2,6 +2,7 @@ Ext.define('Base.sys.dict.DictFormWindow', {
 	extend: 'Ext.window.Window',
 
 	entityId: null,
+	dictTreePanel: null,
 
 	title: '数据字典信息',
 	width: 600,
@@ -10,8 +11,6 @@ Ext.define('Base.sys.dict.DictFormWindow', {
 	modal: true,
 	resizable: false,
 	layout: 'fit',
-
-	dictTreePanel: null,
 
 	initComponent: function() {
 		this.callParent();

@@ -2,9 +2,7 @@ Ext.define('Base.app.module.ModuleFormWindow', {
 	extend: 'Ext.window.Window',
 
 	moduleTreePanel: null,
-	moduleGridPanel: null,
 	entityId: null,
-	parentEntity: null,
 	readOnlyForm: false,
 
 	title: '模块信息',
@@ -25,20 +23,22 @@ Ext.define('Base.app.module.ModuleFormWindow', {
 				{name: 'parentId'},
 				{name: 'parentName'},
 				{name: 'name'},
-				{name: 'type', type: 'string'},
-				{name: 'funcType', type: 'string'},
+				{name: 'type'},
+				{name: 'funcType'},
 				{name: 'funcCode'},
 				{name: 'description'},
 				{name: 'sort'}
 			]
 		});
 
+		var record = this.moduleTreePanel.getSelectedRecord();
+
 		var parentNameText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '上级模块',
 			labelAlign: 'right',
 			labelSeparator: '：',
 			name: 'parentName',
-			value: this.parentEntity.get('text'),
+			value: Ext.isEmpty(record.get('id')) ? null : record.get('text'),
 			maxLength: 50,
 			disabled: true
 		});
@@ -113,7 +113,7 @@ Ext.define('Base.app.module.ModuleFormWindow', {
 			}, {
 				xtype: 'hidden',
 				name: 'parentId',
-				value: this.parentEntity.get('id')
+				value: record.get('id') ? record.get('id') : null
 			},
 				parentNameText,
 				nameText,
@@ -186,8 +186,8 @@ Ext.define('Base.app.module.ModuleFormWindow', {
 					Ext.Msg.alert('系统提示', '数据保存成功！');
 					this.closeForm();
 
-					this.moduleGridPanel.queryData(this.parentEntity.get('id'));
-					this.moduleTreePanel.loadTreeNode(this.parentEntity.get('id'));
+					var record = this.moduleTreePanel.getSelectedRecord();
+					this.moduleTreePanel.loadTreeNode(Ext.isEmpty(record) ? null : record.get('id'));
 				},
 				failure: function(form, action) {
 					Ext.Msg.alert('系统提示', '无法保存数据！');
