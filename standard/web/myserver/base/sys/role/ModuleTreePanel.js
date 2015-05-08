@@ -1,37 +1,35 @@
 Ext.define('Base.sys.role.ModuleTreePanel', {
 	extend: 'Ext.tree.Panel',
 
-	itemId: 'moduleTreePanel',
-	autoScroll: true,
-
 	initComponent: function() {
 		Ext.define('TreeModel', {
 			extend: 'Ext.data.Model',
 			fields: ['id', 'text']
 		});
 
-		var store = Ext.create('Ext.data.TreeStore', {
-			model: 'TreeModel',
-			proxy: {
-				type: 'ajax',
-				url: ctx + '/app/module/tree.ctrl',
-				extraParams: {
-					checked: false
-				}
-			},
-			reader: {
-				type: 'json'
-			},
-			root: {
-				id: null,
-				text: '应用模块'
-			}
-		});
-
 		Ext.apply(this, {
-			store: store,
+			itemId: 'moduleTreePanel',
+			autoScroll: true,
 			useArrows: true,
 			buttonAlign: 'center',
+			store: Ext.create('Ext.data.TreeStore', {
+				model: 'TreeModel',
+				proxy: {
+					type: 'ajax',
+					url: ctx + '/app/module/tree.ctrl',
+					extraParams: {
+						checked: false
+					}
+				},
+				reader: {
+					type: 'json'
+				},
+				root: {
+					id: null,
+					text: '应用模块',
+					expanded: true
+				}
+			}),
 			header: {
 				items: [{
 					xtype: 'button',
@@ -49,8 +47,7 @@ Ext.define('Base.sys.role.ModuleTreePanel', {
 				xtype: 'button',
 				text: '保存',
 				handler: this.saveTree,
-				scope:this,
-				hidden: this.readOnlyForm
+				scope: this
 			}]
 		});
 		this.callParent();
@@ -63,8 +60,6 @@ Ext.define('Base.sys.role.ModuleTreePanel', {
 				child.fireEvent('checkchange', child, checked);
 			});
 		});
-
-		this.getStore().load();
 	},
 	loadTree: function(roleId) {
 		this.store.proxy.actionMethods = {read: 'POST'};
