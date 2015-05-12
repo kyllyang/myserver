@@ -1,5 +1,5 @@
 Ext.define('Base.sys.role.ModuleTreePanel', {
-	extend: 'Ext.tree.Panel',
+	extend: 'Base.ux.TreePanel',
 
 	initComponent: function() {
 		Ext.define('TreeModel', {
@@ -27,6 +27,7 @@ Ext.define('Base.sys.role.ModuleTreePanel', {
 				root: {
 					id: null,
 					text: '应用模块',
+					checked: false,
 					expanded: true
 				}
 			}),
@@ -51,15 +52,6 @@ Ext.define('Base.sys.role.ModuleTreePanel', {
 			}]
 		});
 		this.callParent();
-
-		this.on('checkchange', function(node, checked) {
-			node.expand();
-			node.checked = checked;
-			node.eachChild(function(child) {
-				child.set('checked', checked);
-				child.fireEvent('checkchange', child, checked);
-			});
-		});
 	},
 	loadTree: function(roleId) {
 		this.store.proxy.actionMethods = {read: 'POST'};
