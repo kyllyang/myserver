@@ -1,0 +1,10 @@
+URL 命名规范
+/gis/thematic/dataset.ctrl 获取数据(带分页)
+/gis/thematic/list.ctrl 获取数据(不带分页)
+/gis/thematic/input.ctrl 获取单个数据
+/gis/thematic/save.ctrl 保存数据
+/gis/thematic/delete.ctrl 删除数据
+
+分页方法命名规范
+第一个参数是查询条件对象， 第二个参数分页条件对象
+Dataset<Thematic> get(QueryCondition qc, Paginated pg);

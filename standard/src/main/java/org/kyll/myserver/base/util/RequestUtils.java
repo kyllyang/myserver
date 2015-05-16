@@ -20,30 +20,34 @@ import java.util.*;
  * User: Kyll
  * Date: 2014-11-08 08:39
  */
-public class RequestUtils {
+public final class RequestUtils {
 	public static SessionVo getSessionVo(HttpServletRequest request) {
-		return (SessionVo) request.getSession().getAttribute("sessionVo");
+		return (SessionVo) request.getSession().getAttribute(ConstUtils.SESSION_NAME);
 	}
 
 	public static Paginated getPaginated(HttpServletRequest request) {
 		Paginated paginated = new Paginated();
-		paginated.setStartRecord(NumberUtils.toInt(request.getParameter("start"), Paginated.DEFAULT_STARTRECORD));
-		paginated.setMaxRecord(NumberUtils.toInt(request.getParameter("limit"), Paginated.DEFAULT_MAXRECORD));
+		paginated.setStartRecord(NumberUtils.toInt(request.getParameter(ConstUtils.PAGINATED_START), Paginated.DEFAULT_STARTRECORD));
+		paginated.setMaxRecord(NumberUtils.toInt(request.getParameter(ConstUtils.PAGINATED_LIMIT), Paginated.DEFAULT_MAXRECORD));
 
-		String sort = request.getParameter("sort");
+		String sort = request.getParameter(ConstUtils.PAGINATED_SORT);
 		if (StringUtils.isNotBlank(sort)) {
 			JSONArray ja = JSONArray.fromObject(sort);
 			List<Paginated.Sort> sortList = new ArrayList<>();
 			for (int i = 0; i < ja.size(); i++) {
 				JSONObject jo = ja.getJSONObject(0);
 				Paginated.Sort paginatedSort = paginated.new Sort();
-				paginatedSort.setProperty(jo.getString("property"));
-				paginatedSort.setDirection(jo.getString("direction"));
+				paginatedSort.setProperty(jo.getString(ConstUtils.PAGINATED_PROPERTY));
+				paginatedSort.setDirection(jo.getString(ConstUtils.PAGINATED_DIRECTION));
 				sortList.add(paginatedSort);
 			}
 			paginated.setSortList(sortList);
 		}
 		return paginated;
+	}
+
+	public static <T> T getQueryCondition(HttpServletRequest request, Class<T> clazz) {
+		return get(request, ConstUtils.QUERY_CONDITION_PREFIX, clazz);
 	}
 
 	public static <T> T get(HttpServletRequest request, String prefix, Class<T> clazz) {

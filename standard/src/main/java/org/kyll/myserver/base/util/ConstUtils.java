@@ -15,9 +15,33 @@ import java.util.Map;
  */
 public final class ConstUtils {
 	/**
+	 * HttpSession 保存 Session 信息的参数名称
+	 */
+	public static final String SESSION_NAME = "sessionVo";
+	/**
 	 * HttpServletRequest 请求字符串中作为查询条件的参数名前缀
 	 */
 	public static final String QUERY_CONDITION_PREFIX = "qc";
+	/**
+	 * HttpServletRequest 请求字符串中作为分页条件的参数名称 起始记录索引值
+	 */
+	public static final String PAGINATED_START = "start";
+	/**
+	 * HttpServletRequest 请求字符串中作为分页条件的参数名称 每页记录数量
+	 */
+	public static final String PAGINATED_LIMIT = "limit";
+	/**
+	 * HttpServletRequest 请求字符串中作为分页条件的参数名称 排序信息
+	 */
+	public static final String PAGINATED_SORT = "sort";
+	/**
+	 * HttpServletRequest 请求字符串中作为分页条件的参数名称 排序属性
+	 */
+	public static final String PAGINATED_PROPERTY = "property";
+	/**
+	 * HttpServletRequest 请求字符串中作为分页条件的参数名称 排序方向
+	 */
+	public static final String PAGINATED_DIRECTION = "direction";
 
 	private static ApplicationContext applicationContext;
 	private static boolean assignApplicationContext = false;

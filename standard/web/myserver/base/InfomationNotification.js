@@ -119,16 +119,16 @@ Ext.define('Base.InfomationNotification', {
 			scope: this
 		});
 
-		var form = Ext.create('Ext.toolbar.Toolbar', {
+		var toolbar = Ext.create('Ext.toolbar.Toolbar', {
 			border: false
 		});
-		form.add(loginUserButton);
-		form.add(this.moduleComboBox);
-		form.add(this.thematicComboBox);
-		form.add(this.windowButton);
-		form.add(exitButton);
+		toolbar.add(loginUserButton);
+		toolbar.add(this.moduleComboBox);
+		toolbar.add(this.thematicComboBox);
+		toolbar.add(this.windowButton);
+		toolbar.add(exitButton);
 
-		this.add(form);
+		this.add(toolbar);
 	},
 	refreshWindowButton: function() {
 		this.windowButton.menu.removeAll();

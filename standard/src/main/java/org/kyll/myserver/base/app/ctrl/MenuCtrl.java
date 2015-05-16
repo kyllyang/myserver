@@ -67,10 +67,20 @@ public class MenuCtrl {
 		map4.put("funcCode", funcCodeMap4);
 		map4.put("leaf", true);
 
+		Map<String, Object> map5 = new HashMap<>();
+		map5.put("id", 5);
+		map5.put("text", "专题管理");
+		map5.put("funcType", "2");
+		Map<String, Object> funcCodeMap5 = new HashMap<>();
+		funcCodeMap5.put("className", "Base.gis.thematic.ThematicContainer");
+		map5.put("funcCode", funcCodeMap5);
+		map5.put("leaf", true);
+
 		list.add(map1);
 		list.add(map2);
 		list.add(map3);
 		list.add(map4);
+		list.add(map5);
 
 		response.setContentType("text/plain");
 		response.getWriter().println(JsonUtils.convert(list));
