@@ -31,7 +31,7 @@ CREATE TABLE `ms_app_menu` (
   `function_id_` int(11) default NULL,
   PRIMARY KEY  (`id_`),
   UNIQUE KEY `unique_id_` (`id_`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -40,7 +40,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `ms_app_menu` WRITE;
 /*!40000 ALTER TABLE `ms_app_menu` DISABLE KEYS */;
-INSERT INTO `ms_app_menu` VALUES (1,NULL,'系统维护','',3,NULL),(2,1,'组织结构','',1,33),(3,1,'角色管理','',2,29),(4,1,'数据字典','',3,36),(5,NULL,'应用模块','',2,NULL),(6,NULL,'地理信息','',1,NULL),(7,5,'模块管理','',1,40),(8,5,'菜单管理','',2,43);
+INSERT INTO `ms_app_menu` VALUES (1,NULL,'系统维护','',3,NULL),(2,1,'组织结构','',1,33),(3,1,'角色管理','',2,29),(4,1,'数据字典','',3,36),(5,NULL,'应用模块','',2,NULL),(6,NULL,'地理信息','',1,NULL),(7,5,'模块管理','',1,40),(8,5,'菜单管理','',2,43),(11,6,'专题管理','',1,59);
 /*!40000 ALTER TABLE `ms_app_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -54,11 +54,10 @@ SET character_set_client = utf8;
 CREATE TABLE `ms_app_menu_application_thematic` (
   `menu_id_` int(11) NOT NULL,
   `application_id_` int(11) default NULL,
-  `thematic_id` int(11) NOT NULL,
+  `thematic_id` int(11) default NULL,
   `id_` int(11) NOT NULL auto_increment,
-  PRIMARY KEY  (`id_`),
   UNIQUE KEY `unique_id_` (`id_`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -67,6 +66,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `ms_app_menu_application_thematic` WRITE;
 /*!40000 ALTER TABLE `ms_app_menu_application_thematic` DISABLE KEYS */;
+INSERT INTO `ms_app_menu_application_thematic` VALUES (10,37,4,13),(9,41,NULL,11),(11,41,NULL,14),(9,NULL,4,10),(7,41,NULL,15),(8,41,NULL,16),(2,41,NULL,17),(3,41,NULL,18),(4,41,NULL,19);
 /*!40000 ALTER TABLE `ms_app_menu_application_thematic` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -88,7 +88,7 @@ CREATE TABLE `ms_app_module` (
   `func_code_` varchar(20000) default NULL,
   PRIMARY KEY  (`id_`),
   UNIQUE KEY `unique_id_` (`id_`)
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -97,7 +97,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `ms_app_module` WRITE;
 /*!40000 ALTER TABLE `ms_app_module` DISABLE KEYS */;
-INSERT INTO `ms_app_module` VALUES (27,41,'系统管理','',3,'1',NULL,NULL),(29,27,'角色管理','',2,'2','1','{className: \'Base.sys.role.RoleContainer\', config: {}}'),(33,27,'组织机构','',1,'2','1','{className: \'Base.sys.org.OrgContainer\', config: {}}'),(36,27,'数据字典','',3,'2','1','{className: \'Base.sys.dict.DictContainer\', config: {}}'),(37,NULL,'餐饮订单','',1,'1',NULL,NULL),(38,37,'餐厅菜品维护','',1,'2','1','{className: \'Meaord.restaurant.RestaurantGridPanel\', config: {}}'),(39,41,'应用管理','',2,'1',NULL,NULL),(40,39,'模块管理','',1,'2','1','{className: \'Base.app.module.ModuleContainer\', config: {}}'),(41,NULL,'运行维护','',1,'1',NULL,NULL),(42,41,'地图管理','',1,'1',NULL,NULL),(43,39,'菜单管理','',2,'2','1','{className: \'Base.app.menu.MenuContainer\', config: {}}'),(58,53,'aa','',1,'1',NULL,NULL);
+INSERT INTO `ms_app_module` VALUES (27,41,'系统管理','',3,'1',NULL,NULL),(29,27,'角色管理','',2,'2','1','{className: \'Base.sys.role.RoleContainer\', config: {}}'),(33,27,'组织机构','',1,'2','1','{className: \'Base.sys.org.OrgContainer\', config: {}}'),(36,27,'数据字典','',3,'2','1','{className: \'Base.sys.dict.DictContainer\', config: {}}'),(37,NULL,'餐饮订单','',1,'1',NULL,NULL),(38,37,'餐厅菜品维护','',1,'2','1','{className: \'Meaord.restaurant.RestaurantGridPanel\', config: {}}'),(39,41,'应用管理','',2,'1',NULL,NULL),(40,39,'模块管理','',1,'2','1','{className: \'Base.app.module.ModuleContainer\', config: {}}'),(41,NULL,'运行维护','',1,'1',NULL,NULL),(42,41,'地图管理','',1,'1',NULL,NULL),(43,39,'菜单管理','',2,'2','1','{className: \'Base.app.menu.MenuContainer\', config: {}}'),(58,53,'aa','',1,'1',NULL,NULL),(59,42,'专题管理','',1,'2','1','{className: \'Base.gis.thematic.ThematicContainer\', config: {}}');
 /*!40000 ALTER TABLE `ms_app_module` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,7 +114,7 @@ CREATE TABLE `ms_gis_thematic` (
   `sort_` int(11) NOT NULL,
   PRIMARY KEY  (`id_`),
   UNIQUE KEY `unique_id_` (`id_`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -123,6 +123,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `ms_gis_thematic` WRITE;
 /*!40000 ALTER TABLE `ms_gis_thematic` DISABLE KEYS */;
+INSERT INTO `ms_gis_thematic` VALUES (1,'专题一',1),(3,'专题二',2),(4,'专题三',3),(5,'专题四',4);
 /*!40000 ALTER TABLE `ms_gis_thematic` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -361,7 +362,7 @@ CREATE TABLE `ms_sys_role` (
   `sort_` int(11) default NULL,
   PRIMARY KEY  (`id_`),
   UNIQUE KEY `unique_id_` (`id_`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -370,7 +371,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `ms_sys_role` WRITE;
 /*!40000 ALTER TABLE `ms_sys_role` DISABLE KEYS */;
-INSERT INTO `ms_sys_role` VALUES (3,'系统管理员','x',1),(5,'餐饮订单管理员','',2);
+INSERT INTO `ms_sys_role` VALUES (3,'系统管理员','x',1),(5,'餐饮订单管理员','',2),(6,'12','',1);
 /*!40000 ALTER TABLE `ms_sys_role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -394,7 +395,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `ms_sys_role_function` WRITE;
 /*!40000 ALTER TABLE `ms_sys_role_function` DISABLE KEYS */;
-INSERT INTO `ms_sys_role_function` VALUES (3,27),(3,28),(3,29),(3,30),(3,33),(3,34),(3,35),(3,36),(3,39),(3,40),(3,41),(3,42),(3,43),(5,29),(5,30),(5,31),(5,37),(5,38);
+INSERT INTO `ms_sys_role_function` VALUES (3,27),(3,28),(3,29),(3,30),(3,33),(3,34),(3,35),(3,36),(3,39),(3,40),(3,41),(3,42),(3,43),(5,29),(5,30),(5,31),(5,37),(5,38),(6,27),(6,29),(6,33),(6,36),(6,37),(6,38),(6,39),(6,40),(6,41),(6,42),(6,43);
 /*!40000 ALTER TABLE `ms_sys_role_function` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -407,4 +408,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-05-08  7:32:38
+-- Dump completed on 2015-05-17  4:37:13
