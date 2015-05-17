@@ -1,7 +1,7 @@
 Ext.define('Base.MenuNotification', {
 	extend: 'Base.ux.Notification',
 
-	moduleId: null,
+	applicationId: null,
 	thematicId: null,
 
 	title: '业务菜单',
@@ -34,7 +34,8 @@ Ext.define('Base.MenuNotification', {
 					type: 'ajax',
 					url: ctx + '/app/menu/function.ctrl',
 					extraParams: {
-						moduleId: this.moduleId
+						applicationId: this.applicationId,
+						thematicId: this.thematicId
 					}
 				},
 				reader: {

@@ -156,10 +156,16 @@ Ext.define('Base.InfomationNotification', {
 	setWindowCheckItemChecked: function(menuId, checked) {
 		this.windowButton.menu.getComponent(menuId).setChecked(checked);
 	},
-	loadMapAndFunction: function(moduleId, thematicId) {
-		myServer.getMapContainer().loadMap(moduleId, thematicId);
+	loadMapAndFunction: function(applicationId, thematicId) {
+		myServer.getMapContainer().loadMap(applicationId, thematicId);
+
+		var menuNotification = myServer.getMenuNotification();
+		if (!Ext.isEmpty(menuNotification)) {
+			menuNotification.close();
+		}
+
 		myServer.setMenuNotification(Ext.create('Base.MenuNotification', {
-			moduleId: moduleId,
+			applicationId: applicationId,
 			thematicId: thematicId
 		}).show());
 	}
