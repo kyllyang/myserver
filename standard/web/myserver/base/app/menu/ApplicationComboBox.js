@@ -14,7 +14,7 @@ Ext.define("Base.app.menu.ApplicationComboBox", {
 			model: 'DataModel',
 			proxy: {
 				type: 'ajax',
-				url: ctx + '/app/module/application.ctrl',
+				url: ctx + '/app/module/application/list.ctrl',
 				reader: {
 					type: 'json'
 				}

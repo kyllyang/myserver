@@ -17,6 +17,7 @@ public class QueryCondition {
 	private String entityId;
 	private Long dictId;
 	private String invokeCode;
+	private Long moduleId;
 
 	public QueryCondition() {
 	}
@@ -115,5 +116,13 @@ public class QueryCondition {
 
 	public void setInvokeCode(String invokeCode) {
 		this.invokeCode = invokeCode;
+	}
+
+	public Long getModuleId() {
+		return moduleId;
+	}
+
+	public void setModuleId(Long moduleId) {
+		this.moduleId = moduleId;
 	}
 }

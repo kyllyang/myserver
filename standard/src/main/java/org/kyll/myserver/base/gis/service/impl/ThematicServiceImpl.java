@@ -31,16 +31,25 @@ public class ThematicServiceImpl implements ThematicService {
 	@Override
 	public Dataset<Thematic> get(QueryCondition qc, Paginated pg) {
 		StringBuilder hql = new StringBuilder("from Thematic t where 1 = 1");
-		this.appendQueryCondition(hql, qc);
+		String name = qc.getName();
+		if (StringUtils.isNotBlank(name)) {
+			hql.append(" and t.name like '%").append(name).append("%'");
+		}
 		hql.append(" order by t.sort asc");
 		return thematicDao.find(hql, pg);
 	}
 
 	@Override
 	public List<Thematic> get(QueryCondition qc) {
-		StringBuilder hql = new StringBuilder("from Thematic t where 1 = 1");
-		this.appendQueryCondition(hql, qc);
-		hql.append(" order by t.sort asc");
+		StringBuilder hql;
+		Long moduleId = qc.getModuleId();
+		if (moduleId == null) {
+			hql = new StringBuilder("from Thematic t");
+			hql.append(" order by t.sort asc");
+		} else {
+			hql = new StringBuilder("select t.thematic from MenuApplicationThematic t where t.application.id = '" + moduleId + "'");
+			hql.append(" order by t.thematic.sort asc");
+		}
 		return thematicDao.find(hql);
 	}
 
@@ -52,15 +61,5 @@ public class ThematicServiceImpl implements ThematicService {
 	@Override
 	public void delete(Long[] ids) {
 		thematicDao.delete(ids);
-	}
-
-	private StringBuilder appendQueryCondition(StringBuilder hql, QueryCondition qc) {
-		if (qc != null) {
-			String name = qc.getName();
-			if (StringUtils.isNotBlank(name)) {
-				hql.append(" and t.name like '%").append(name).append("%'");
-			}
-		}
-		return hql;
 	}
 }

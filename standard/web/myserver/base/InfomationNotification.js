@@ -53,6 +53,7 @@ Ext.define('Base.InfomationNotification', {
 			editable: false,
 			listeners: {
 				change: function(comboBox, newValue, oldValue, eOpts) {
+					this.thematicComboBox.clearValue();
 					var store = this.thematicComboBox.getStore();
 					store.proxy.actionMethods = {read: 'POST'};
 					Ext.apply(store.proxy.extraParams, {

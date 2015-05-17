@@ -46,12 +46,13 @@ public class ModuleCtrl {
 		response.getWriter().println(JsonUtils.convert(voList));
 	}
 
-	@RequestMapping("/app/module/leftMenu.ctrl")
-	public void leftMenu(Long moduleId, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		JSONArray ja = moduleService.getLeftMenu(((SessionVo) request.getSession().getAttribute("sessionVo")).getUserId(), moduleId);
+	@RequestMapping("/app/module/application/list.ctrl")
+	public void applicationList(HttpServletResponse response) throws Exception {
+		List<Module> entityList = moduleService.getTopModule(null);
+		List<ModuleVo> voList = POJOUtils.convert(entityList, ModuleVo.class);
 
 		response.setContentType("text/plain");
-		response.getWriter().println(ja.toString());
+		response.getWriter().println(JsonUtils.convert(voList));
 	}
 
 	@RequestMapping("/app/module/tree.ctrl")

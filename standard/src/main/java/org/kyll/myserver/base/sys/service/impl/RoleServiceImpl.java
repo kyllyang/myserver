@@ -19,10 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * User: Kyll
@@ -117,9 +114,14 @@ public class RoleServiceImpl implements RoleService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void save(Long roleId, Long[] moduleIds) {
-		Query query = moduleDao.createQuery("from Module t where t.id in (:moduleIds)");
-		query.setParameterList("moduleIds", moduleIds);
-		List<Module> moduleList = query.list();
+		List<Module> moduleList;
+		if (moduleIds == null) {
+			moduleList = new ArrayList<>();
+		} else {
+			Query query = moduleDao.createQuery("from Module t where t.id in (:moduleIds)");
+			query.setParameterList("moduleIds", moduleIds);
+			moduleList = query.list();
+		}
 
 		Role role = roleDao.get(roleId);
 		Set<Module> moduleSet = role.getFunctionSet();

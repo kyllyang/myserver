@@ -47,74 +47,27 @@ public class ModuleServiceImpl implements ModuleService {
 
 	@Override
 	public List<Module> getTopModule(Long userId) {
-		Set<Module> moduleSet = new HashSet<>();
+		List<Module> moduleList;
+		if (userId == null) {
+			moduleList = moduleDao.find("from Module t where t.parent is null order by t.sort asc");
+		} else {
+			Set<Module> moduleSet = new HashSet<>();
 
-		Employee user = employeeDao.get(userId);
-		Set<Role> roleSet = user.getRoleSet();
-		for (Role role : roleSet) {
-			moduleSet.addAll(role.getFunctionSet().stream().map(this::getTopModule).collect(Collectors.toList()));
+			Employee user = employeeDao.get(userId);
+			Set<Role> roleSet = user.getRoleSet();
+			for (Role role : roleSet) {
+				moduleSet.addAll(role.getFunctionSet().stream().map(this::getTopModule).collect(Collectors.toList()));
+			}
+
+			moduleList = new ArrayList<>(moduleSet);
+			Collections.sort(moduleList, (o1, o2) -> o1.getSort() - o2.getSort());
 		}
-
-		List<Module> moduleList = new ArrayList<>(moduleSet);
-		Collections.sort(moduleList, (o1, o2) -> o1.getSort() - o2.getSort());
-
 		return moduleList;
 	}
 
 	private Module getTopModule(Module module) {
 		Module parent = module.getParent();
 		return parent == null ? module : this.getTopModule(parent);
-	}
-
-	@Override
-	public JSONArray getLeftMenu(Long userId, Long moduleId) {
-		Set<Module> resultModuleSet = new HashSet<>();
-
-		Module topModule;
-		Employee user = employeeDao.get(userId);
-		Set<Role> roleSet = user.getRoleSet();
-		for (Role role : roleSet) {
-			Set<Module> moduleSet = role.getFunctionSet();
-			for (Module module : moduleSet) {
-				topModule = this.getTopModule(module);
-				if (Objects.equals(moduleId, topModule.getId())) {
-					resultModuleSet.add(module);
-				}
-			}
-		}
-
-		List<Module> moduleList = new ArrayList<>(resultModuleSet);
-		Collections.sort(moduleList, (o1, o2) -> o1.getSort() - o2.getSort());
-
-		return this.recursiveMenu(moduleId, moduleList);
-	}
-
-	private JSONArray recursiveMenu(Long parentId, List<Module> list) {
-		JSONArray ja = new JSONArray();
-
-		for (Module module : list) {
-			Module parent = module.getParent();
-			if (parentId == null ? parent == null : parent != null && Objects.equals(parentId, parent.getId())) {
-				Long id = module.getId();
-
-				JSONObject jo = new JSONObject();
-				jo.put("id", id);
-				jo.put("text", module.getName());
-				jo.put("funcType", module.getFuncType());
-				jo.put("funcCode", module.getFuncCode());
-
-				JSONArray children = this.recursiveMenu(id, list);
-				if (children.isEmpty()) {
-					jo.put("leaf", true);
-				} else {
-					jo.put("leaf", false);
-				}
-				jo.put("children", children);
-
-				ja.add(jo);
-			}
-		}
-		return ja;
 	}
 
 	@Override

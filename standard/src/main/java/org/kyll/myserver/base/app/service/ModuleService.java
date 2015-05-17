@@ -16,8 +16,6 @@ import java.util.List;
 public interface ModuleService extends BaseService<Module, Long> {
 	List<Module> getTopModule(Long userId);
 
-	JSONArray getLeftMenu(Long userId, Long moduleId);
-
 	Dataset<Module> get(QueryCondition qc, Paginated pg);
 
 	JSONArray getTreeJson(Boolean checked, Boolean function, Long roleId);

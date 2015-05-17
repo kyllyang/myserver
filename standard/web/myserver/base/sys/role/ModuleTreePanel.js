@@ -80,7 +80,7 @@ Ext.define('Base.sys.role.ModuleTreePanel', {
 					Ext.Msg.alert('系统提示', '数据保存成功！');
 				},
 				failure: function(response, opts) {
-					Ext.Msg.alert("系统提示", "数据删除失败！");
+					Ext.Msg.alert("系统提示", "数据保存失败！");
 				},
 				scope: this
 			});
