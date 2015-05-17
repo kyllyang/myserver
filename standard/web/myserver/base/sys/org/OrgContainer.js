@@ -1,4 +1,4 @@
-Ext.define('SysManager.org.OrgContainer', {
+Ext.define('Base.sys.org.OrgContainer', {
 	extend: 'Ext.container.Container',
 
 	layout: 'border',
@@ -6,13 +6,13 @@ Ext.define('SysManager.org.OrgContainer', {
 	initComponent: function() {
 		this.callParent();
 
-		this.add(Ext.create('SysManager.org.OrgTreePanel', {
+		this.add(Ext.create('Base.sys.org.OrgTreePanel', {
 			region: 'west',
 			split: true,
 			collapsible: true,
 			width: (myServer.width - myServer.getMenuTreePanel().getWidth()) / 3
 		}));
-		this.add(Ext.create('SysManager.org.OrgTabPanel', {
+		this.add(Ext.create('Base.sys.org.OrgTabPanel', {
 			region: 'center'
 		}));
 	}
