@@ -1,10 +1,14 @@
 package org.kyll.myserver.base.app.ctrl;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.kyll.myserver.base.app.entity.Menu;
+import org.kyll.myserver.base.app.entity.MenuApplicationThematic;
 import org.kyll.myserver.base.app.entity.Module;
+import org.kyll.myserver.base.app.service.MenuApplicationThematicService;
 import org.kyll.myserver.base.app.service.MenuService;
 import org.kyll.myserver.base.app.vo.MenuVo;
+import org.kyll.myserver.base.gis.entity.Thematic;
 import org.kyll.myserver.base.util.JsonUtils;
 import org.kyll.myserver.base.util.POJOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +31,8 @@ import java.util.Map;
 public class MenuCtrl {
 	@Autowired
 	private MenuService menuService;
+	@Autowired
+	private MenuApplicationThematicService menuApplicationThematicService;
 
 	@RequestMapping("/app/menu/function.ctrl")
 	public void function(HttpServletResponse response) throws Exception {
@@ -108,6 +114,22 @@ public class MenuCtrl {
 				menuVo.setFunctionId(function.getId());
 				menuVo.setFunctionName(function.getName());
 			}
+			JSONArray ja = new JSONArray();
+			for (MenuApplicationThematic menuApplicationThematic : menuApplicationThematicService.getByMenu(menu.getId())) {
+				Module application = menuApplicationThematic.getApplication();
+				Thematic thematic = menuApplicationThematic.getThematic();
+
+				JSONObject jo = new JSONObject();
+				jo.put("id", menuApplicationThematic.getId());
+				if (application != null) {
+					jo.put("moduleId", application.getId());
+				}
+				if (thematic != null) {
+					jo.put("thematicId", thematic.getId());
+				}
+				ja.add(jo);
+			}
+			menuVo.setMats(ja.toString());
 		});
 
 		response.setContentType("text/plain");
@@ -116,7 +138,15 @@ public class MenuCtrl {
 
 	@RequestMapping("/app/menu/save.ctrl")
 	public void save(MenuVo entityVo, HttpServletResponse response) throws Exception {
-		menuService.save(POJOUtils.convert(entityVo, Menu.class, menuService), entityVo.getParentId(), entityVo.getFunctionId());
+		menuService.save(POJOUtils.convert(entityVo, Menu.class, menuService), entityVo.getParentId(), entityVo.getFunctionId(), entityVo.getMats());
+
+		response.setContentType("text/plain");
+		response.getWriter().println(JsonUtils.ajaxResult(true));
+	}
+
+	@RequestMapping("/app/menu/delete.ctrl")
+	public void delete(Long[] ids, HttpServletResponse response) throws Exception {
+		menuService.delete(ids);
 
 		response.setContentType("text/plain");
 		response.getWriter().println(JsonUtils.ajaxResult(true));

@@ -11,7 +11,7 @@ import org.kyll.myserver.base.app.entity.Menu;
 public interface MenuService extends BaseService<Menu, Long> {
 	JSONArray getTreeJson(Long parentId);
 
-	void save(Menu menu, Long parentId, Long functionId);
+	void save(Menu menu, Long parentId, Long functionId, String mats);
 
 	void delete(Long[] ids);
 }

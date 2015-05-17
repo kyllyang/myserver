@@ -14,7 +14,7 @@ Ext.define('Base.app.menu.MenuFormWindow', {
 	initComponent: function() {
 		this.callParent();
 
-		this.add(Ext.create('Base.app.menu.MenuCreateForm', {
+		this.add(Ext.create('Base.app.menu.MenuForm', {
 			menuTreePanel: this.menuTreePanel
 		}));
 	}

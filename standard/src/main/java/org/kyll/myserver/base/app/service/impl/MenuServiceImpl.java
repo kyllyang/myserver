@@ -2,10 +2,14 @@ package org.kyll.myserver.base.app.service.impl;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.kyll.myserver.base.app.dao.MenuApplicationThematicDao;
 import org.kyll.myserver.base.app.dao.MenuDao;
 import org.kyll.myserver.base.app.dao.ModuleDao;
 import org.kyll.myserver.base.app.entity.Menu;
+import org.kyll.myserver.base.app.entity.MenuApplicationThematic;
 import org.kyll.myserver.base.app.service.MenuService;
+import org.kyll.myserver.base.gis.dao.ThematicDao;
+import org.kyll.myserver.base.util.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +28,10 @@ public class MenuServiceImpl implements MenuService {
 	private MenuDao menuDao;
 	@Autowired
 	private ModuleDao moduleDao;
+	@Autowired
+	private ThematicDao thematicDao;
+	@Autowired
+	private MenuApplicationThematicDao menuApplicationThematicDao;
 
 	@Override
 	public Menu get(Long id) {
@@ -59,7 +67,7 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	@Override
-	public void save(Menu menu, Long parentId, Long functionId) {
+	public void save(Menu menu, Long parentId, Long functionId, String mats) {
 		if (parentId != null) {
 			menu.setParent(this.get(parentId));
 		}
@@ -67,6 +75,25 @@ public class MenuServiceImpl implements MenuService {
 			menu.setFunction(moduleDao.get(functionId));
 		}
 		menuDao.save(menu);
+
+		menuApplicationThematicDao.delete(menuApplicationThematicDao.find("from MenuApplicationThematic t where t.menu.id = '" + menu.getId() + "'"));
+
+		JSONArray ja = JSONArray.fromObject(mats);
+		for (int i = 0, size = ja.size(); i < size; i++) {
+			JSONObject jo = ja.getJSONObject(i);
+			Long moduleId = JsonUtils.getLong(jo, "moduleId");
+			Long thematicId = JsonUtils.getLong(jo, "thematicId");
+
+			MenuApplicationThematic menuApplicationThematic = new MenuApplicationThematic();
+			menuApplicationThematic.setMenu(menu);
+			if (moduleId != null) {
+				menuApplicationThematic.setApplication(moduleDao.get(moduleId));
+			}
+			if (thematicId != null) {
+				menuApplicationThematic.setThematic(thematicDao.get(thematicId));
+			}
+			menuApplicationThematicDao.save(menuApplicationThematic);
+		}
 	}
 
 	@Override

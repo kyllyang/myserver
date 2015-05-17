@@ -15,6 +15,7 @@ public class MenuVo implements Vo<Long> {
 	private Integer sort;
 	private Long functionId;
 	private String functionName;
+	private String mats;
 
 	public MenuVo() {
 	}
@@ -82,5 +83,13 @@ public class MenuVo implements Vo<Long> {
 
 	public void setFunctionName(String functionName) {
 		this.functionName = functionName;
+	}
+
+	public String getMats() {
+		return mats;
+	}
+
+	public void setMats(String mats) {
+		this.mats = mats;
 	}
 }

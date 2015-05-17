@@ -6,14 +6,18 @@ Ext.define('Base.app.menu.MenuContainer', {
 	initComponent: function() {
 		this.callParent();
 
-		this.add(Ext.create('Base.app.menu.MenuTreePanel', {
+		var menuTreePanel = Ext.create('Base.app.menu.MenuTreePanel', {
 			region: 'west',
 			split: true,
 			collapsible: true,
 			width: myServer.getWidth() / 6
-		}));
-		this.add(Ext.create('Base.app.menu.MenuEditForm', {
-			region: 'center'
-		}));
+		});
+		var menuForm = Ext.create('Base.app.menu.MenuForm', {
+			region: 'center',
+			menuTreePanel: menuTreePanel,
+			hideCloseButton: true
+		});
+		this.add(menuTreePanel);
+		this.add(menuForm);
 	}
 });

@@ -1,4 +1,4 @@
-Ext.define("Base.app.menu.ApplicationComboBox", {
+Ext.define("Base.app.menu.ThematicComboBox", {
 	extend: 'Ext.form.field.ComboBox',
 
 	initComponent: function() {
@@ -14,7 +14,7 @@ Ext.define("Base.app.menu.ApplicationComboBox", {
 			model: 'DataModel',
 			proxy: {
 				type: 'ajax',
-				url: ctx + '/app/module/application.ctrl',
+				url: ctx + '/gis/thematic/list.ctrl',
 				reader: {
 					type: 'json'
 				}

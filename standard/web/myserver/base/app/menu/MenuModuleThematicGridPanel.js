@@ -2,11 +2,12 @@ Ext.define('Base.app.menu.MenuModuleThematicGridPanel', {
 	extend: 'Base.ux.GridPanel',
 
 	menuId: null,
+	title: '关联应用与专题',
 	itemId: 'menuModuleThematicGridPanel',
-	height: 200,
 
 	initComponent: function() {
 		var applicationComboBox = Ext.create('Base.app.menu.ApplicationComboBox');
+		var thematicComboBox = Ext.create('Base.app.menu.ThematicComboBox');
 
 		Ext.apply(this, {
 			url: ctx + '/app/mmt/list.ctrl',
@@ -34,9 +35,9 @@ Ext.define('Base.app.menu.MenuModuleThematicGridPanel', {
 			}, {
 				text: '专题',
 				dataIndex: 'thematicId',
-				field: {
-					maxLength: 100,
-					allowBlank: false
+				editor: thematicComboBox,
+				renderer: function(value, metaData, record, rowIndex, colIndex, store, view) {
+					return Ext.isEmpty(value) ? '' : thematicComboBox.findRecord('id', value).get('name');
 				},
 				flex: 1
 			}],
@@ -75,36 +76,16 @@ Ext.define('Base.app.menu.MenuModuleThematicGridPanel', {
 		this.getPlugin('cellEditingPlugin').startEditByPosition({row: 0, column: 0});
 	},
 	doDeleteEvent: function(ids) {
-		var validIds = [];
-		for (var i = 0; i < ids.length; i++) {
-			if (ids[i]) {
-				validIds.push(ids[i]);
-			}
-		}
-
-		Ext.Ajax.request({
-			url: ctx + '/app/mmt/delete.ctrl',
-			params: {
-				ids: validIds
-			},
-			success: function(response, opts) {
-				Ext.Msg.alert("系统提示", "数据删除成功！");
-				this.queryData();
-			},
-			failure: function(response, opts) {
-				Ext.Msg.alert("系统提示", "数据删除失败！");
-			},
-			scope: this
-		});
+		this.getStore().remove(this.getSelectionModel().getSelection());
 	},
 	getData: function() {
-		var records = this.getStore().getModifiedRecords();
+		var store = this.getStore();
 		var datas = [];
-		for (var i = 0; i < records.length; i++) {
+		for (var i = 0; i < store.getCount(); i++) {
+			var record = store.getAt(i);
 			datas.push({
-				id: records[i].get('id'),
-				moduleId: records[i].get('moduleId'),
-				thematicId: records[i].get('thematicId')
+				moduleId: record.get('moduleId'),
+				thematicId: record.get('thematicId')
 			});
 		}
 		return datas;

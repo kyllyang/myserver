@@ -3,33 +3,43 @@ Ext.define('Base.app.menu.MenuTreePanel', {
 
 	currentNodeId: null,
 
-	itemId: 'menuTreePanel',
-	autoScroll: true,
-
 	initComponent: function() {
 		Ext.define('DataModel', {
 			extend: 'Ext.data.Model',
 			fields: ['id', 'text']
 		});
 
-		var store = Ext.create('Ext.data.TreeStore', {
-			model: 'DataModel',
-			proxy: {
-				type: 'ajax',
-				url: ctx + '/app/menu/tree.ctrl'
-			},
-			reader: {
-				type: 'json'
-			},
-			root: {
-				id: null,
-				text: '业务菜单'
-			}
-		});
-
 		Ext.apply(this, {
-			store: store,
-			useArrows: true
+			itemId: 'menuTreePanel',
+			autoScroll: true,
+			useArrows: true,
+			store: Ext.create('Ext.data.TreeStore', {
+				model: 'DataModel',
+				proxy: {
+					type: 'ajax',
+					url: ctx + '/app/menu/tree.ctrl'
+				},
+				reader: {
+					type: 'json'
+				},
+				root: {
+					id: null,
+					text: '业务菜单'
+				}
+			}),
+			header: {
+				items: [{
+					xtype: 'button',
+					icon: ctx + '/resource/image/icon/expandall.png',
+					handler: this.expandAll,
+					scope: this
+				}, {
+					xtype: 'button',
+					icon: ctx + '/resource/image/icon/collapseall.png',
+					handler: this.collapseAll,
+					scope: this
+				}]
+			}
 		});
 		this.callParent();
 
@@ -41,7 +51,7 @@ Ext.define('Base.app.menu.MenuTreePanel', {
 		}, this);
 
 		this.on('select', function(treePanel, record, index, eOpts) {
-			this.ownerCt.getComponent('editForm').loadForm();
+			this.ownerCt.getComponent('menuForm').loadForm();
 		}, this);
 
 		this.getStore().on('load', function(store, node, records, successful, eOpts) {

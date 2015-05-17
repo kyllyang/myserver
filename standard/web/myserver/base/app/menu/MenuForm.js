@@ -1,7 +1,10 @@
-Ext.define('Base.app.menu.MenuEditForm', {
+Ext.define('Base.app.menu.MenuForm', {
 	extend: 'Ext.form.Panel',
 
-	itemId: 'editForm',
+	menuTreePanel: null,
+	hideCloseButton: false,
+
+	itemId: 'menuForm',
 	frame: true,
 	autoHeight: true,
 	autoScroll: true,
@@ -19,7 +22,8 @@ Ext.define('Base.app.menu.MenuEditForm', {
 				{name: 'description'},
 				{name: 'sort'},
 				{name: 'functionId'},
-				{name: 'functionName'}
+				{name: 'functionName'},
+				{name: 'mats'}
 			]
 		});
 
@@ -33,19 +37,27 @@ Ext.define('Base.app.menu.MenuEditForm', {
 				xtype: 'button',
 				itemId: 'saveButton',
 				text: '保存',
-				disabled: true,
 				handler: this.saveForm,
 				scope: this,
 				hidden: this.readOnlyForm
+			}, {
+				xtype: 'button',
+				text: '关闭',
+				handler: this.closeForm,
+				scope: this,
+				hidden: this.hideCloseButton
 			}]
 		});
 		this.callParent();
+
+		var record = this.menuTreePanel.getSelectedRecord();
 
 		var parentNameText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '上级菜单',
 			labelAlign: 'right',
 			labelSeparator: '：',
 			name: 'parentName',
+			value: Ext.isEmpty(record) || Ext.isEmpty(record.get('id')) ? null : record.get('text'),
 			disabled: true
 		});
 		var nameText = Ext.create('Ext.form.field.Text', {
@@ -98,25 +110,30 @@ Ext.define('Base.app.menu.MenuEditForm', {
 			name: 'sort',
 			value: 1,
 			minValue: 1,
-			allowDecimals: false,
-			readOnly: this.readOnlyForm
+			allowDecimals: false
 		});
+		var menuModuleThematicGridPanel = Ext.create('Base.app.menu.MenuModuleThematicGridPanel');
 
 		this.add([{
 			xtype: 'hidden',
 			name: 'id'
 		}, {
 			xtype: 'hidden',
-			name: 'parentId'
+			name: 'parentId',
+			value: Ext.isEmpty(record) || Ext.isEmpty(record.get('id')) ? null : record.get('id')
 		}, {
 			xtype: 'hidden',
 			name: 'functionId'
+		}, {
+			xtype: 'hidden',
+			name: 'mats'
 		},
 			parentNameText,
 			nameText,
 			functionPicker,
 			descriptionTextarea,
-			sortNumber
+			sortNumber,
+			menuModuleThematicGridPanel
 		]);
 	},
 	loadForm: function() {
@@ -135,6 +152,17 @@ Ext.define('Base.app.menu.MenuEditForm', {
 					},
 					waitMsg: '正在载入数据...',
 					success: function(form, action) {
+						var store = this.down('#menuModuleThematicGridPanel').getStore();
+						store.removeAll();
+
+						var mats = Ext.decode(form.findField("mats").getValue());
+						for (var i = 0; i < mats.length; i++) {
+							store.add({
+								id: mats[i].id,
+								moduleId: mats[i].moduleId,
+								thematicId: mats[i].thematicId
+							});
+						}
 						this.down('#saveButton').setDisabled(false);
 					},
 					failure: function() {
@@ -156,24 +184,32 @@ Ext.define('Base.app.menu.MenuEditForm', {
 		form.findField('description').setValue('');
 		form.findField('sort').setValue(1);
 		this.down('#saveButton').setDisabled(true);
+		this.down('#menuModuleThematicGridPanel').getStore().removeAll();
 	},
 	saveForm: function() {
 		var form = this.getForm();
 		if (form.isValid()) {
+			form.findField("mats").setValue(Ext.encode(this.down('#menuModuleThematicGridPanel').getData()));
 			form.submit({
 				url: ctx + '/app/menu/save.ctrl',
 				waitMsg: '正在保存数据，请稍候...',
 				success: function(form, action) {
 					Ext.Msg.alert('系统提示', '数据保存成功！');
+					this.closeForm();
 
-					var record = this.ownerCt.getComponent('menuTreePanel').getSelectedRecord();
-					this.ownerCt.getComponent('menuTreePanel').loadTreeNode(record.parentNode && record.parentNode.get('id') ? record.parentNode.get('id') : null);
+					var id = this.menuTreePanel.getSelectedRecord().get('id');
+					this.menuTreePanel.loadTreeNode(Ext.isEmpty(id) ? null : id);
 				},
 				failure: function(form, action) {
 					Ext.Msg.alert('系统提示', '无法保存数据！');
 				},
 				scope: this
 			});
+		}
+	},
+	closeForm: function() {
+		if (!this.hideCloseButton) {
+			this.ownerCt.close();
 		}
 	}
 });
