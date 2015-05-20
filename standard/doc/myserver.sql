@@ -57,7 +57,7 @@ CREATE TABLE `ms_app_menu_application_thematic` (
   `thematic_id` int(11) default NULL,
   `id_` int(11) NOT NULL auto_increment,
   UNIQUE KEY `unique_id_` (`id_`)
-) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -66,7 +66,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `ms_app_menu_application_thematic` WRITE;
 /*!40000 ALTER TABLE `ms_app_menu_application_thematic` DISABLE KEYS */;
-INSERT INTO `ms_app_menu_application_thematic` VALUES (10,37,4,13),(9,41,NULL,11),(11,41,NULL,14),(9,NULL,4,10),(7,41,NULL,15),(8,41,NULL,16),(2,41,NULL,17),(3,41,NULL,18),(4,41,NULL,19);
+INSERT INTO `ms_app_menu_application_thematic` VALUES (10,37,4,13),(9,41,NULL,11),(9,NULL,4,10),(1,41,1,22),(5,41,1,21),(6,41,1,20);
 /*!40000 ALTER TABLE `ms_app_menu_application_thematic` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -362,7 +362,7 @@ CREATE TABLE `ms_sys_role` (
   `sort_` int(11) default NULL,
   PRIMARY KEY  (`id_`),
   UNIQUE KEY `unique_id_` (`id_`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -371,7 +371,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `ms_sys_role` WRITE;
 /*!40000 ALTER TABLE `ms_sys_role` DISABLE KEYS */;
-INSERT INTO `ms_sys_role` VALUES (3,'系统管理员','x',1),(5,'餐饮订单管理员','',2),(6,'12','',1);
+INSERT INTO `ms_sys_role` VALUES (3,'系统管理员','x',1),(5,'餐饮订单管理员','',2);
 /*!40000 ALTER TABLE `ms_sys_role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -395,7 +395,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `ms_sys_role_function` WRITE;
 /*!40000 ALTER TABLE `ms_sys_role_function` DISABLE KEYS */;
-INSERT INTO `ms_sys_role_function` VALUES (3,27),(3,28),(3,29),(3,30),(3,33),(3,34),(3,35),(3,36),(3,39),(3,40),(3,41),(3,42),(3,43),(5,29),(5,30),(5,31),(5,37),(5,38),(6,27),(6,29),(6,33),(6,36),(6,37),(6,38),(6,39),(6,40),(6,41),(6,42),(6,43);
+INSERT INTO `ms_sys_role_function` VALUES (3,27),(3,29),(3,33),(3,36),(3,39),(3,40),(3,41),(3,42),(3,43),(3,59),(5,29),(5,30),(5,31),(5,37),(5,38);
 /*!40000 ALTER TABLE `ms_sys_role_function` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -408,4 +408,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-05-17  4:37:13
+-- Dump completed on 2015-05-20  0:35:07
