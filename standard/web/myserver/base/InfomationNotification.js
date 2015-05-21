@@ -158,16 +158,18 @@ Ext.define('Base.InfomationNotification', {
 		this.windowButton.menu.getComponent(menuId).setChecked(checked);
 	},
 	loadMapAndFunction: function(applicationId, thematicId) {
-		myServer.getMapContainer().loadMap(applicationId, thematicId);
+		if (!Ext.isEmpty(thematicId)) {
+			myServer.getMapContainer().loadMap(applicationId, thematicId);
 
-		var menuNotification = myServer.getMenuNotification();
-		if (!Ext.isEmpty(menuNotification)) {
-			menuNotification.close();
+			var menuNotification = myServer.getMenuNotification();
+			if (!Ext.isEmpty(menuNotification)) {
+				menuNotification.close();
+			}
+
+			myServer.setMenuNotification(Ext.create('Base.MenuNotification', {
+				applicationId: applicationId,
+				thematicId: thematicId
+			}).show());
 		}
-
-		myServer.setMenuNotification(Ext.create('Base.MenuNotification', {
-			applicationId: applicationId,
-			thematicId: thematicId
-		}).show());
 	}
 });

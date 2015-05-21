@@ -12,11 +12,13 @@ import java.util.Set;
 @Table(name = "MS_SYS_EMPLOYEE")
 public class Employee implements Serializable {
 	private Long id;
+	private String name;
 	private String username;
 	private String password;
 	private Integer freeze;
-	private String name;
+	private String email;
 	private Integer sort;
+	private Department department;
 	private Set<Role> roleSet;
 
 	public Employee() {
@@ -31,6 +33,15 @@ public class Employee implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	@Column(name = "NAME_")
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Column(name = "USERNAME_")
@@ -60,13 +71,13 @@ public class Employee implements Serializable {
 		this.freeze = freeze;
 	}
 
-	@Column(name = "NAME_")
-	public String getName() {
-		return name;
+	@Column(name = "EMAIL_")
+	public String getEmail() {
+		return email;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	@Column(name = "SORT_")
@@ -76,6 +87,16 @@ public class Employee implements Serializable {
 
 	public void setSort(Integer sort) {
 		this.sort = sort;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DEPARTMENT_ID_")
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
 	}
 
 	@ManyToMany

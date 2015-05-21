@@ -5,6 +5,7 @@ import org.hibernate.Query;
 import org.kyll.myserver.base.QueryCondition;
 import org.kyll.myserver.base.common.paginated.Dataset;
 import org.kyll.myserver.base.common.paginated.Paginated;
+import org.kyll.myserver.base.sys.dao.DepartmentDao;
 import org.kyll.myserver.base.sys.dao.EmployeeDao;
 import org.kyll.myserver.base.sys.dao.RoleDao;
 import org.kyll.myserver.base.sys.entity.Employee;
@@ -29,6 +30,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Autowired
 	private EmployeeDao employeeDao;
 	@Autowired
+	private DepartmentDao departmentDao;
+	@Autowired
 	private RoleDao roleDao;
 
 	@Override
@@ -49,31 +52,38 @@ public class EmployeeServiceImpl implements EmployeeService {
 		if (StringUtils.isNotBlank(username)) {
 			hql.append(" and lower(t.username) like lower('%").append(username).append("%')");
 		}
+		Long departmentId = qc.getDepartmentId();
+		if (departmentId != null) {
+			hql.append(" and t.department.id = '").append(departmentId).append("'");
+		}
 		HqlUtils.appendOrderBy(hql, "t", pg);
 		return employeeDao.find(hql, pg);
 	}
 
 	@Override
-	public boolean save(Employee user) {
-		List<Employee> userList = employeeDao.find("from Employee t where t.username = '" + user.getUsername() + "'");
+	public boolean save(Employee employee, Long departmentId) {
+		List<Employee> userList = employeeDao.find("from Employee t where t.username = '" + employee.getUsername() + "'");
 		boolean result = userList.isEmpty();
 		if (!result) {
-			result = Objects.equals(userList.get(0).getId(), user.getId());
+			result = Objects.equals(userList.get(0).getId(), employee.getId());
 		}
 		if (result) {
-			employeeDao.save(user);
+			if (departmentId != null) {
+				employee.setDepartment(departmentDao.get(departmentId));
+			}
+			employeeDao.save(employee);
 		}
 		return result;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public void save(Long userId, Long[] roleIds) {
+	public void save(Long employeeId, Long[] roleIds) {
 		Query query = roleDao.createQuery("from Role t where t.id in (:roleIds)");
 		query.setParameterList("roleIds", roleIds);
 		List<Role> roleList = query.list();
 
-		Employee user = employeeDao.get(userId);
+		Employee user = employeeDao.get(employeeId);
 		Set<Role> roleSet = user.getRoleSet();
 		roleSet.clear();
 		roleSet.addAll(roleList);

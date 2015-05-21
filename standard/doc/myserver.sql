@@ -199,7 +199,7 @@ CREATE TABLE `ms_sys_department` (
   `sort_` int(11) default NULL,
   PRIMARY KEY  (`id_`),
   UNIQUE KEY `unique_id_` (`id_`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -208,6 +208,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `ms_sys_department` WRITE;
 /*!40000 ALTER TABLE `ms_sys_department` DISABLE KEYS */;
+INSERT INTO `ms_sys_department` VALUES (1,NULL,'部门1','描述1',1),(3,1,'部门2','描述2',1),(4,3,'部门3','',1),(5,1,'部门4','',1),(6,NULL,'部门5','',1);
 /*!40000 ALTER TABLE `ms_sys_department` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -282,9 +283,11 @@ CREATE TABLE `ms_sys_employee` (
   `password_` varchar(255) NOT NULL,
   `freeze_` int(11) NOT NULL,
   `name_` varchar(255) NOT NULL,
+  `department_id_` int(11) default NULL,
+  `email_` varchar(255) default NULL,
   PRIMARY KEY  (`id_`),
   UNIQUE KEY `unique_id_` (`id_`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -293,7 +296,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `ms_sys_employee` WRITE;
 /*!40000 ALTER TABLE `ms_sys_employee` DISABLE KEYS */;
-INSERT INTO `ms_sys_employee` VALUES (1,NULL,'admin','123',0,'');
+INSERT INTO `ms_sys_employee` VALUES (1,1,'admin','123',0,'杨磊',1,'kyllyang@gmail.com'),(2,1,'cjc','123456',1,'赵嘉琛',6,'');
 /*!40000 ALTER TABLE `ms_sys_employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -319,33 +322,6 @@ LOCK TABLES `ms_sys_employee_role` WRITE;
 /*!40000 ALTER TABLE `ms_sys_employee_role` DISABLE KEYS */;
 INSERT INTO `ms_sys_employee_role` VALUES (1,3),(1,5),(6,3);
 /*!40000 ALTER TABLE `ms_sys_employee_role` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `ms_sys_job`
---
-
-DROP TABLE IF EXISTS `ms_sys_job`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
-CREATE TABLE `ms_sys_job` (
-  `id_` int(11) NOT NULL auto_increment,
-  `department_id_` int(11) NOT NULL,
-  `name_` varchar(255) NOT NULL,
-  `description_` varchar(255) NOT NULL,
-  `sort_` int(11) default NULL,
-  PRIMARY KEY  (`id_`),
-  UNIQUE KEY `unique_id_` (`id_`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
-
---
--- Dumping data for table `ms_sys_job`
---
-
-LOCK TABLES `ms_sys_job` WRITE;
-/*!40000 ALTER TABLE `ms_sys_job` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ms_sys_job` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -408,4 +384,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-05-20  0:35:07
+-- Dump completed on 2015-05-21 12:03:53

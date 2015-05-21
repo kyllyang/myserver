@@ -6,15 +6,18 @@ import org.kyll.myserver.base.common.Vo;
  * User: Kyll
  * Date: 2014-11-07 13:52
  */
-public class UserVo implements Vo<Long> {
+public class EmployeeVo implements Vo<Long> {
 	private Long id;
+	private String name;
 	private String username;
 	private String password;
-	private String email;
 	private Integer freeze;
+	private String email;
 	private Integer sort;
+	private Long departmentId;
+	private String departmentName;
 
-	public UserVo() {
+	public EmployeeVo() {
 	}
 
 	@Override
@@ -24,6 +27,14 @@ public class UserVo implements Vo<Long> {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getUsername() {
@@ -64,5 +75,21 @@ public class UserVo implements Vo<Long> {
 
 	public void setSort(Integer sort) {
 		this.sort = sort;
+	}
+
+	public Long getDepartmentId() {
+		return departmentId;
+	}
+
+	public void setDepartmentId(Long departmentId) {
+		this.departmentId = departmentId;
+	}
+
+	public String getDepartmentName() {
+		return departmentName;
+	}
+
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
 	}
 }

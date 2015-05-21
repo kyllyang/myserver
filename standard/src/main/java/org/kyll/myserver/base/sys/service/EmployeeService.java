@@ -15,7 +15,7 @@ public interface EmployeeService extends BaseService<Employee, Long> {
 
 	Dataset<Employee> get(QueryCondition qc, Paginated pg);
 
-	boolean save(Employee employee);
+	boolean save(Employee employee, Long departmentId);
 
 	void save(Long employeeId, Long[] roleIds);
 

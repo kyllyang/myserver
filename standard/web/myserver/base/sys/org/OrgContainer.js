@@ -1,19 +1,22 @@
 Ext.define('Base.sys.org.OrgContainer', {
 	extend: 'Ext.container.Container',
 
-	layout: 'border',
-
 	initComponent: function() {
-		this.callParent();
-
-		this.add(Ext.create('Base.sys.org.OrgTreePanel', {
+		var departmentTreePanel = Ext.create('Base.sys.org.DepartmentTreePanel', {
 			region: 'west',
 			split: true,
 			collapsible: true,
-			width: (myServer.width - myServer.getMenuTreePanel().getWidth()) / 3
-		}));
-		this.add(Ext.create('Base.sys.org.OrgTabPanel', {
+			width: myServer.getWidth() / 6
+		});
+		var employeeGridPanel = Ext.create('Base.sys.org.EmployeeGridPanel', {
+			departmentTreePanel: departmentTreePanel,
 			region: 'center'
-		}));
+		});
+
+		Ext.apply(this, {
+			layout: 'border',
+			items: [departmentTreePanel, employeeGridPanel]
+		});
+		this.callParent();
 	}
 });

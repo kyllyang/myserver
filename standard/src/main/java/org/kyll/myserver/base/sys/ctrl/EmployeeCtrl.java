@@ -2,10 +2,11 @@ package org.kyll.myserver.base.sys.ctrl;
 
 import org.kyll.myserver.base.QueryCondition;
 import org.kyll.myserver.base.common.paginated.Dataset;
+import org.kyll.myserver.base.sys.entity.Department;
 import org.kyll.myserver.base.sys.entity.Employee;
 import org.kyll.myserver.base.sys.service.EmployeeService;
 import org.kyll.myserver.base.sys.vo.SessionVo;
-import org.kyll.myserver.base.sys.vo.UserVo;
+import org.kyll.myserver.base.sys.vo.EmployeeVo;
 import org.kyll.myserver.base.util.JsonUtils;
 import org.kyll.myserver.base.util.RequestUtils;
 import org.kyll.myserver.base.util.POJOUtils;
@@ -52,45 +53,56 @@ public class EmployeeCtrl {
 		session.invalidate();
 	}
 
-	@RequestMapping("/sys/user/list.ctrl")
-	public void list(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		Dataset<Employee> dataset = employeeService.get(RequestUtils.get(request, "qc", QueryCondition.class), RequestUtils.getPaginated(request));
-		Dataset<UserVo> voDataset = POJOUtils.convert(dataset, UserVo.class);
+	@RequestMapping("/sys/employee/dataset.ctrl")
+	public void dataset(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Dataset<Employee> dataset = employeeService.get(RequestUtils.getQueryCondition(request, QueryCondition.class), RequestUtils.getPaginated(request));
+		Dataset<EmployeeVo> voDataset = POJOUtils.convert(dataset, EmployeeVo.class, voHandler);
 
 		response.setContentType("text/plain");
 		response.getWriter().println(JsonUtils.convert(voDataset));
 	}
 
-	@RequestMapping("/sys/user/input.ctrl")
+	@RequestMapping("/sys/employee/input.ctrl")
 	public void input(Long id, HttpServletResponse response) throws Exception {
 		Employee entity = employeeService.get(id);
-		UserVo entityVo = POJOUtils.convert(entity, UserVo.class);
+		EmployeeVo entityVo = POJOUtils.convert(entity, EmployeeVo.class, voHandler);
 
 		response.setContentType("text/plain");
 		response.getWriter().println(JsonUtils.convert(entityVo));
 	}
 
-	@RequestMapping("/sys/user/save.ctrl")
-	public void save(UserVo entityVo, HttpServletResponse response) throws Exception {
-		boolean result = employeeService.save(POJOUtils.convert(entityVo, Employee.class, employeeService));
+	@RequestMapping("/sys/employee/save.ctrl")
+	public void save(EmployeeVo entityVo, HttpServletResponse response) throws Exception {
+		boolean result = employeeService.save(POJOUtils.convert(entityVo, Employee.class, employeeService), entityVo.getDepartmentId());
 
 		response.setContentType("text/plain");
 		response.getWriter().println(JsonUtils.ajaxResult(result));
 	}
 
-	@RequestMapping("/sys/user/saveRole.ctrl")
-	public void saveModule(Long userId, Long[] roleIds, HttpServletResponse response) throws Exception {
+	@RequestMapping("/sys/employee/saveRole.ctrl")
+	public void saveRole(Long userId, Long[] roleIds, HttpServletResponse response) throws Exception {
 		employeeService.save(userId, roleIds);
 
 		response.setContentType("text/plain");
 		response.getWriter().println(JsonUtils.ajaxResult(true));
 	}
 
-	@RequestMapping("/sys/user/delete.ctrl")
+	@RequestMapping("/sys/employee/delete.ctrl")
 	public void delete(Long[] ids, HttpServletResponse response) throws Exception {
 		employeeService.delete(ids);
 
 		response.setContentType("text/plain");
 		response.getWriter().println(JsonUtils.ajaxResult(true));
 	}
+
+	private POJOUtils.VoHandler<Employee, EmployeeVo> voHandler = new POJOUtils.VoHandler<Employee, EmployeeVo>() {
+		@Override
+		public void handler(Employee employee, EmployeeVo employeeVo) {
+			Department department = employee.getDepartment();
+			if (department != null) {
+				employeeVo.setDepartmentId(department.getId());
+				employeeVo.setDepartmentName(department.getName());
+			}
+		}
+	};
 }
