@@ -28,8 +28,8 @@ public class RoleCtrl {
 	private RoleService roleService;
 
 	@RequestMapping("/sys/role/tree.ctrl")
-	public void tree(Long userId, HttpServletResponse response) throws Exception {
-		JSONArray ja = roleService.getTreeJson(userId);
+	public void tree(Long employeeId, HttpServletResponse response) throws Exception {
+		JSONArray ja = roleService.getTreeJson(employeeId);
 
 		response.setContentType("text/plain");
 		response.getWriter().println(ja.toString());

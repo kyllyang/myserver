@@ -42,7 +42,10 @@ Ext.define('Base.sys.org.EmployeeGridPanel', {
 				dock: 'top',
 				autoHeight: true,
 				bodyPadding: 5,
-				layout: 'hbox',
+				layout: {
+					type: 'table',
+					columns: 3
+				},
 				defaults: {
 					labelAlign: 'right',
 					labelWidth: 80,
@@ -62,19 +65,25 @@ Ext.define('Base.sys.org.EmployeeGridPanel', {
 					fieldLabel: '电子邮箱',
 					name: 'email'
 				}, {
-					xtype: 'button',
-					text: '查询',
-					width: 80,
-					margin: '0 0 0 10',
-					handler: this.queryData,
-					scope: this
+					xtype: 'container',
+					colspan: 2
 				}, {
-					xtype: 'button',
-					text: '清空',
-					width: 80,
-					margin: '0 0 0 10',
-					handler: this.clear,
-					scope: this
+					xtype: 'container',
+					items: [{
+						xtype: 'button',
+						text: '查询',
+						width: 80,
+						margin: '0 0 0 10',
+						handler: this.queryData,
+						scope: this
+					}, {
+						xtype: 'button',
+						text: '清空',
+						width: 80,
+						margin: '0 0 0 10',
+						handler: this.clear,
+						scope: this
+					}]
 				}]
 			})],
 			listeners: {
@@ -90,6 +99,10 @@ Ext.define('Base.sys.org.EmployeeGridPanel', {
 			}
 		});
 		this.callParent();
+
+		this.on('itemclick', function(grid, record, item, index, e, eOpts){
+			this.ownerCt.getComponent('roleTreePanel').loadTree(record.get('id'));
+		});
 
 		this.on('itemdblclick', function(grid, record, item, index, e, eOpts){
 			this.viewEventHandler();

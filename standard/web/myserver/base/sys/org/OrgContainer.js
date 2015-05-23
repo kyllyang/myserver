@@ -6,16 +6,22 @@ Ext.define('Base.sys.org.OrgContainer', {
 			region: 'west',
 			split: true,
 			collapsible: true,
-			width: myServer.getWidth() / 6
+			width: myServer.getWidth() / 8
 		});
 		var employeeGridPanel = Ext.create('Base.sys.org.EmployeeGridPanel', {
 			departmentTreePanel: departmentTreePanel,
 			region: 'center'
 		});
+		var roleTreePanel = Ext.create('Base.sys.org.RoleTreePanel', {
+			region: 'east',
+			split: true,
+			collapsible: true,
+			width: myServer.getWidth() / 8
+		});
 
 		Ext.apply(this, {
 			layout: 'border',
-			items: [departmentTreePanel, employeeGridPanel]
+			items: [departmentTreePanel, employeeGridPanel, roleTreePanel]
 		});
 		this.callParent();
 	}

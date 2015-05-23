@@ -41,12 +41,12 @@ public class RoleServiceImpl implements RoleService {
 	}
 
 	@Override
-	public JSONArray getTreeJson(Long userId) {
+	public JSONArray getTreeJson(Long employeeId) {
 		Set<Role> roleSet;
-		if (userId == null) {
+		if (employeeId == null) {
 			roleSet = new HashSet<>();
 		} else {
-			roleSet = employeeDao.get(userId).getRoleSet();
+			roleSet = employeeDao.get(employeeId).getRoleSet();
 		}
 
 		JSONArray ja = new JSONArray();

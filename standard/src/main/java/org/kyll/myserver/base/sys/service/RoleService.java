@@ -12,7 +12,7 @@ import org.kyll.myserver.base.sys.entity.Role;
  * Date: 2014-11-10 14:35
  */
 public interface RoleService extends BaseService<Role, Long> {
-	JSONArray getTreeJson(Long userId);
+	JSONArray getTreeJson(Long employeeId);
 
 	Dataset<Role> get(QueryCondition qc, Paginated pg);
 

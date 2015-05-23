@@ -79,15 +79,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void save(Long employeeId, Long[] roleIds) {
-		Query query = roleDao.createQuery("from Role t where t.id in (:roleIds)");
-		query.setParameterList("roleIds", roleIds);
-		List<Role> roleList = query.list();
-
-		Employee user = employeeDao.get(employeeId);
-		Set<Role> roleSet = user.getRoleSet();
+		Employee employee = employeeDao.get(employeeId);
+		Set<Role> roleSet = employee.getRoleSet();
 		roleSet.clear();
-		roleSet.addAll(roleList);
-		employeeDao.save(user);
+		if (roleIds != null) {
+			Query query = roleDao.createQuery("from Role t where t.id in (:roleIds)");
+			query.setParameterList("roleIds", roleIds);
+			roleSet.addAll(query.list());
+		}
+		employeeDao.save(employee);
 	}
 
 	@Override

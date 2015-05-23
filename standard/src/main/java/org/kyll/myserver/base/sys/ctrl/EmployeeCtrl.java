@@ -80,8 +80,8 @@ public class EmployeeCtrl {
 	}
 
 	@RequestMapping("/sys/employee/saveRole.ctrl")
-	public void saveRole(Long userId, Long[] roleIds, HttpServletResponse response) throws Exception {
-		employeeService.save(userId, roleIds);
+	public void saveRole(Long employeeId, Long[] roleIds, HttpServletResponse response) throws Exception {
+		employeeService.save(employeeId, roleIds);
 
 		response.setContentType("text/plain");
 		response.getWriter().println(JsonUtils.ajaxResult(true));
