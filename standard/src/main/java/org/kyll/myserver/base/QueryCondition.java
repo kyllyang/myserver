@@ -20,6 +20,8 @@ public class QueryCondition {
 	private Long moduleId;
 	private Long departmentId;
 	private String originalFilename;
+	private String key;
+	private String value;
 
 	public QueryCondition() {
 	}
@@ -142,5 +144,21 @@ public class QueryCondition {
 
 	public void setOriginalFilename(String originalFilename) {
 		this.originalFilename = originalFilename;
+	}
+
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
 	}
 }
