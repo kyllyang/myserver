@@ -20,9 +20,6 @@ Ext.define('Base.sys.org.EmployeeGridPanel', {
 				text: '用户名称',
 				dataIndex: 'username'
 			}, {
-				text: '密码',
-				dataIndex: 'password'
-			}, {
 				text: '电子邮箱',
 				dataIndex: 'email'
 			}, {

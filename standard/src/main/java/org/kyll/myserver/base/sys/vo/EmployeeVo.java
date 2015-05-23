@@ -11,6 +11,7 @@ public class EmployeeVo implements Vo<Long> {
 	private String name;
 	private String username;
 	private String password;
+	private String passwordReset;
 	private Integer freeze;
 	private String email;
 	private Integer sort;
@@ -51,6 +52,14 @@ public class EmployeeVo implements Vo<Long> {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getPasswordReset() {
+		return passwordReset;
+	}
+
+	public void setPasswordReset(String passwordReset) {
+		this.passwordReset = passwordReset;
 	}
 
 	public String getEmail() {

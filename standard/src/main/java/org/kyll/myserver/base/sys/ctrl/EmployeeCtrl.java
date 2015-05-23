@@ -7,9 +7,7 @@ import org.kyll.myserver.base.sys.entity.Employee;
 import org.kyll.myserver.base.sys.service.EmployeeService;
 import org.kyll.myserver.base.sys.vo.SessionVo;
 import org.kyll.myserver.base.sys.vo.EmployeeVo;
-import org.kyll.myserver.base.util.JsonUtils;
-import org.kyll.myserver.base.util.RequestUtils;
-import org.kyll.myserver.base.util.POJOUtils;
+import org.kyll.myserver.base.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -41,7 +39,7 @@ public class EmployeeCtrl {
 			sessionVo.setUsername(loginUser.getUsername());
 
 			HttpSession session = request.getSession();
-			session.setAttribute("sessionVo", sessionVo);
+			session.setAttribute(ConstUtils.SESSION_NAME, sessionVo);
 
 			response.sendRedirect(contextPath + "/index.jsp");
 		}
@@ -73,7 +71,23 @@ public class EmployeeCtrl {
 
 	@RequestMapping("/sys/employee/save.ctrl")
 	public void save(EmployeeVo entityVo, HttpServletResponse response) throws Exception {
-		boolean result = employeeService.save(POJOUtils.convert(entityVo, Employee.class, employeeService), entityVo.getDepartmentId());
+		Employee employee;
+		Long id = entityVo.getId();
+		if (id == null) {
+			employee = new Employee();
+		} else {
+			employee = employeeService.get(entityVo.getId());
+		}
+
+		String oldPassword = employee.getPassword();
+		POJOUtils.copyProperties(employee, entityVo);
+		if ("0".equals(entityVo.getPasswordReset())) {
+			employee.setPassword(oldPassword);
+		} else {
+			employee.setPassword(StringUtils.encryptSHA(employee.getPassword()));
+		}
+
+		boolean result = employeeService.save(employee, entityVo.getDepartmentId());
 
 		response.setContentType("text/plain");
 		response.getWriter().println(JsonUtils.ajaxResult(result));

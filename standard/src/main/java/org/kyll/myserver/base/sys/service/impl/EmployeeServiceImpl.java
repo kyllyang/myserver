@@ -36,7 +36,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public Employee login(String username, String password) {
-		List<Employee> employeeList = employeeDao.find("from Employee t where t.username = '" + username + "' and t.password = '" + password + "' and t.freeze <> '1'");
+		List<Employee> employeeList = employeeDao.find("from Employee t where t.username = '" + username + "' and t.password = '" + org.kyll.myserver.base.util.StringUtils.encryptSHA(password) + "' and t.freeze <> '1'");
 		return employeeList.isEmpty() ? null : employeeList.get(0);
 	}
 

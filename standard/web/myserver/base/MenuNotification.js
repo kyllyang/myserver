@@ -28,6 +28,9 @@ Ext.define('Base.MenuNotification', {
 		});
 
 		this.add(Ext.create('Ext.tree.Panel', {
+			rootVisible: false,
+			useArrows: true,
+			border: false,
 			store: Ext.create('Ext.data.TreeStore', {
 				model: 'DataModel',
 				proxy: {
@@ -46,9 +49,6 @@ Ext.define('Base.MenuNotification', {
 					expanded: true
 				}
 			}),
-			rootVisible: false,
-			useArrows: true,
-			border: false,
 			listeners: {
 				itemclick: function(treePanel, record, item, index, e, eOpts) {
 					var funcCode = record.get('funcCode');

@@ -23,7 +23,6 @@ Ext.define('Base.sys.org.EmployeeFormWindow', {
 				{name: 'id'},
 				{name: 'name'},
 				{name: 'username'},
-				{name: 'password'},
 				{name: 'email'},
 				{name: 'freeze'},
 				{name: 'sort'},
@@ -60,13 +59,36 @@ Ext.define('Base.sys.org.EmployeeFormWindow', {
 			readOnly: this.readOnlyForm
 		});
 		var passwordText = Ext.create('Ext.form.field.Text', {
+			columnWidth: 0.9,
 			fieldLabel: '<span style="color: #FF0000;">*</span>密码',
 			labelAlign: 'right',
 			labelSeparator: '：',
 			name: 'password',
+			value: Ext.isEmpty(this.entityId) ? '123' : '**********',
 			maxLength: 50,
 			allowBlank: false,
+			disabled: !Ext.isEmpty(this.entityId),
 			readOnly: this.readOnlyForm
+		});
+		var passwordCheckbox = Ext.create('Ext.form.field.Checkbox', {
+			columnWidth: 0.1,
+			name: 'passwordReset',
+			boxLabel: '重置',
+			inputValue: '1',
+			uncheckedValue: '0',
+			checked: Ext.isEmpty(this.entityId),
+			readOnly: Ext.isEmpty(this.entityId) ? true : this.readOnlyForm,
+			listeners: {
+				change: function(checkbox, newValue, oldValue, eOpts) {
+					if (checkbox.getValue()) {
+						passwordText.setDisabled(false);
+						passwordText.setValue('');
+					} else {
+						passwordText.setDisabled(true);
+					}
+				},
+				scope: this
+			}
 		});
 		var emailText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '电子邮箱',
@@ -117,8 +139,11 @@ Ext.define('Base.sys.org.EmployeeFormWindow', {
 			},
 				departmentDisplay,
 				nameText,
-				usernameText,
-				passwordText,
+				usernameText, {
+					xtype: 'container',
+					layout: 'column',
+					items: [passwordText, passwordCheckbox]
+				},
 				emailText,
 				freezeCheckbox,
 				sortNumber

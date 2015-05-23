@@ -60,6 +60,9 @@ var myServer = {
 	},
 	getBusinessWindowMap: function() {
 		return this.businessWindowMap;
+	},
+	encryptSHA: function(value) {
+		return new jsSHA(value, 'TEXT').getHash('SHA-1', 'HEX', 1);
 	}
 };
 
