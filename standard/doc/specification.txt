@@ -8,3 +8,6 @@ URL 命名规范
 分页方法命名规范
 第一个参数是查询条件对象， 第二个参数分页条件对象
 Dataset<Thematic> get(QueryCondition qc, Paginated pg);
+
+extjs4 继承格式
+自定义属性放在  initComponent 方法之前

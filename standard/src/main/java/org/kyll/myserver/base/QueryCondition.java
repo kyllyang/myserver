@@ -19,6 +19,7 @@ public class QueryCondition {
 	private String invokeCode;
 	private Long moduleId;
 	private Long departmentId;
+	private String originalFilename;
 
 	public QueryCondition() {
 	}
@@ -133,5 +134,13 @@ public class QueryCondition {
 
 	public void setDepartmentId(Long departmentId) {
 		this.departmentId = departmentId;
+	}
+
+	public String getOriginalFilename() {
+		return originalFilename;
+	}
+
+	public void setOriginalFilename(String originalFilename) {
+		this.originalFilename = originalFilename;
 	}
 }

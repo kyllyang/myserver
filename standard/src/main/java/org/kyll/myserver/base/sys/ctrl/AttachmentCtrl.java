@@ -1,9 +1,13 @@
 package org.kyll.myserver.base.sys.ctrl;
 
 import org.kyll.myserver.base.QueryCondition;
+import org.kyll.myserver.base.common.paginated.Dataset;
 import org.kyll.myserver.base.sys.entity.Attachment;
 import org.kyll.myserver.base.sys.service.AttachmentService;
+import org.kyll.myserver.base.sys.vo.AttachmentVo;
 import org.kyll.myserver.base.util.ConstUtils;
+import org.kyll.myserver.base.util.JsonUtils;
+import org.kyll.myserver.base.util.POJOUtils;
 import org.kyll.myserver.base.util.RequestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -28,6 +32,15 @@ import java.util.List;
 public class AttachmentCtrl {
 	@Autowired
 	private AttachmentService attachmentService;
+
+	@RequestMapping("/sys/attachment/dataset.ctrl")
+	public void dataset(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Dataset<Attachment> dataset = attachmentService.get(RequestUtils.getQueryCondition(request, QueryCondition.class), RequestUtils.getPaginated(request));
+		Dataset<AttachmentVo> voDataset = POJOUtils.convert(dataset, AttachmentVo.class);
+
+		response.setContentType("text/plain");
+		response.getWriter().println(JsonUtils.convert(voDataset));
+	}
 
 	@RequestMapping("/sys/attachment/view.ctrl")
 	public void view(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -72,5 +85,13 @@ public class AttachmentCtrl {
 				System.err.println("SYS_CONFIG.ATTACHMENT_PATH 不存在， 或者不是目录！");
 			}
 		}
+	}
+
+	@RequestMapping("/sys/attachment/delete.ctrl")
+	public void delete(Long[] ids, HttpServletResponse response) throws Exception {
+		attachmentService.delete(ids);
+
+		response.setContentType("text/plain");
+		response.getWriter().println(JsonUtils.ajaxResult(true));
 	}
 }
