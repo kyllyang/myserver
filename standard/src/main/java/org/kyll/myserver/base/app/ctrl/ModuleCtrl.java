@@ -7,7 +7,6 @@ import org.kyll.myserver.base.app.entity.Module;
 import org.kyll.myserver.base.sys.service.DictItemService;
 import org.kyll.myserver.base.app.service.ModuleService;
 import org.kyll.myserver.base.app.vo.ModuleVo;
-import org.kyll.myserver.base.sys.vo.SessionVo;
 import org.kyll.myserver.base.util.ConstUtils;
 import org.kyll.myserver.base.util.JsonUtils;
 import org.kyll.myserver.base.util.RequestUtils;
@@ -39,7 +38,7 @@ public class ModuleCtrl {
 
 	@RequestMapping("/app/module/application.ctrl")
 	public void application(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		List<Module> entityList = moduleService.getTopModule(RequestUtils.getSessionVo(request).getUserId());
+		List<Module> entityList = moduleService.getApplication(RequestUtils.getSessionVo(request).getUserId());
 		List<ModuleVo> voList = POJOUtils.convert(entityList, ModuleVo.class);
 
 		response.setContentType("text/plain");
@@ -48,7 +47,7 @@ public class ModuleCtrl {
 
 	@RequestMapping("/app/module/application/list.ctrl")
 	public void applicationList(HttpServletResponse response) throws Exception {
-		List<Module> entityList = moduleService.getTopModule(null);
+		List<Module> entityList = moduleService.getApplication(null);
 		List<ModuleVo> voList = POJOUtils.convert(entityList, ModuleVo.class);
 
 		response.setContentType("text/plain");

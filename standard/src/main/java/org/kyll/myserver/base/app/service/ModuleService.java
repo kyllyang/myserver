@@ -14,7 +14,7 @@ import java.util.List;
  * Date: 2014-11-07 13:07
  */
 public interface ModuleService extends BaseService<Module, Long> {
-	List<Module> getTopModule(Long userId);
+	List<Module> getApplication(Long employeeId);
 
 	Dataset<Module> get(QueryCondition qc, Paginated pg);
 

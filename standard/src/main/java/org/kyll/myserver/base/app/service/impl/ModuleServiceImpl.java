@@ -46,15 +46,15 @@ public class ModuleServiceImpl implements ModuleService {
 	}
 
 	@Override
-	public List<Module> getTopModule(Long userId) {
+	public List<Module> getApplication(Long employeeId) {
 		List<Module> moduleList;
-		if (userId == null) {
+		if (employeeId == null) {
 			moduleList = moduleDao.find("from Module t where t.parent is null order by t.sort asc");
 		} else {
 			Set<Module> moduleSet = new HashSet<>();
 
-			Employee user = employeeDao.get(userId);
-			Set<Role> roleSet = user.getRoleSet();
+			Employee employee = employeeDao.get(employeeId);
+			Set<Role> roleSet = employee.getRoleSet();
 			for (Role role : roleSet) {
 				moduleSet.addAll(role.getFunctionSet().stream().map(this::getTopModule).collect(Collectors.toList()));
 			}
