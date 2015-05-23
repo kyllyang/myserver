@@ -88,18 +88,6 @@ Ext.onReady(function() {
 	/*Ext.create('Base.ux.Notification', {
 		title: '地图维护',
 		html: 'Map, View, Source, Layer 配置， 专题配置， 专题权限（精确到部门， 职位， 用户, 角色）'
-	}).show();
-	Ext.create('Base.ux.Notification', {
-		title: '应用维护',
-		html: '应用与地图专题关联， 应用与模块关联， 模块与功能关联， 功能与菜单关联， 业务功能菜单'
-	}).show();
-	Ext.create('Base.ux.Notification', {
-		title: '系统维护',
-		html: '组织机构（部门管理， 职位管理， 用户管理， 角色分配）， 角色管理（角色建立， 与功能关联）， 数据字典， 系统常量配置'
-	}).show();
-	Ext.create('Base.ux.Notification', {
-		title: '业务展示',
-		html: '业务功能1， 业务功能2， 业务功能3'
 	}).show();*/
 
 	// 上面的每一个通知框， 都叫做“功能区域”
