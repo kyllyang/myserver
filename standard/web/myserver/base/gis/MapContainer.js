@@ -23,7 +23,10 @@ Ext.define('Base.gis.MapContainer', {
 			view: new ol.View({
 				center: [0, 0],
 				zoom: 2
-			})
+			}),
+			controls: ol.control.defaults().extend([
+				new ol.control.ScaleLine()
+			])
 		});
 	}
 });
