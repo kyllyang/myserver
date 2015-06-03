@@ -1,13 +1,13 @@
 Ext.define('Base.gis.MapContainer', {
 	extend: 'Ext.container.Container',
 
-	naoDivId: 'mapDiv_' + Ext.data.IdGenerator.get('uuid').generate().replace(/-/g, ''),
+	mapDivId: 'mapDiv_' + Ext.data.IdGenerator.get('uuid').generate().replace(/-/g, ''),
 	map: null,
 
 	initComponent: function() {
 		Ext.apply(this, {
 			itemId: 'mapContainer',
-			html: '<div id="' + this.naoDivId + '" style="width: 100%; height: 100%"></div>'
+			html: '<div id="' + this.mapDivId + '" style="width: 100%; height: 100%"></div>'
 		});
 		this.callParent();
 	},
@@ -16,7 +16,7 @@ Ext.define('Base.gis.MapContainer', {
 	},
 	loadMap: function(moduleId, thematicId) {
 		this.map = new ol.Map({
-			target: this.naoDivId,
+			target: this.mapDivId,
 			layers: [
 				new ol.layer.Tile({source: new ol.source.OSM()})
 			],
