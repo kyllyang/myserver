@@ -3,9 +3,12 @@ package org.kyll.myserver.business.service.impl;
 import org.kyll.myserver.base.common.paginated.Dataset;
 import org.kyll.myserver.base.common.paginated.Paginated;
 import org.kyll.myserver.base.util.HqlUtils;
+import org.kyll.myserver.base.util.POJOUtils;
 import org.kyll.myserver.business.QueryCondition;
 import org.kyll.myserver.business.dao.CustomerDao;
+import org.kyll.myserver.business.dao.CustomerTraceDao;
 import org.kyll.myserver.business.entity.Customer;
+import org.kyll.myserver.business.entity.CustomerTrace;
 import org.kyll.myserver.business.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +23,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class CustomerServiceImpl implements CustomerService {
 	@Autowired
 	private CustomerDao customerDao;
+	@Autowired
+	private CustomerTraceDao customerTraceDao;
 
 	@Override
 	public Customer get(Long id) {
@@ -36,7 +41,16 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public void save(Customer customer) {
+		Long id = customer.getId();
 		customerDao.save(customer);
+		if (id == null) {
+			System.out.println(1 / 0);
+			CustomerTrace customerTrace = new CustomerTrace();
+			POJOUtils.copyProperties(customerTrace, customer);
+			customerTrace.setId(null);
+			customerTrace.setCustomer(customer);
+			customerTraceDao.save(customerTrace);
+		}
 	}
 
 	@Override

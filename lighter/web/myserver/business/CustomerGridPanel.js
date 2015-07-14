@@ -42,6 +42,12 @@ Ext.define('Business.CustomerGridPanel', {
 				text: '拜访成果',
 				dataIndex: 'visitResult'
 			}],
+			tbar: [{
+				text: '跟踪',
+				icon: ctx + '/resource/image/icon/business/trace.png',
+				handler: this.traceList,
+				scope: this
+			}],
 			listeners: {
 				afterRender: function(form, eOpts){
 					this.keyNav = Ext.create('Ext.util.KeyNav', this.el, {
@@ -99,8 +105,16 @@ Ext.define('Business.CustomerGridPanel', {
 			scope: this
 		});
 	},
-	getSelectedRecord: function() {
-		return this.getSelectionModel().getLastSelected();
+	traceList: function() {
+		var records = this.getSelectedRecords();
+		if (records.length == 1) {
+			Ext.create('Business.CustomerTraceWindow', {
+				customerId: records[0].get('id'),
+				customerCompanyName: records[0].get('companyName')
+			}).show();
+		} else {
+			Ext.Msg.alert("系统提示", "请选择一条数据！");
+		}
 	},
 	queryData: function() {
 		this.getStore().load();
