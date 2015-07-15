@@ -64,7 +64,7 @@ Ext.onReady(function() {
 				}, {
 					title: '商务',
 					layout: 'fit',
-					items: []
+					items: [Ext.create('Business.ExpenseTabPanel')]
 				}, {
 					title: '产品',
 					layout: 'fit',
