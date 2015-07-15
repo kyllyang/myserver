@@ -35,6 +35,9 @@ Ext.define('Business.ExpenseGridPanel', {
 					return Ext.Date.format(Ext.Date.parse(value, 'Y-m-d H:i:s.u'), 'Y-m-d');
 				}
 			}, {
+				text: '天数',
+				dataIndex: 'days'
+			}, {
 				text: '车费',
 				dataIndex: 'carExpense'
 			}, {
