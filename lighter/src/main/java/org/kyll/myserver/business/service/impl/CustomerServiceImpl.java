@@ -44,7 +44,6 @@ public class CustomerServiceImpl implements CustomerService {
 		Long id = customer.getId();
 		customerDao.save(customer);
 		if (id == null) {
-			System.out.println(1 / 0);
 			CustomerTrace customerTrace = new CustomerTrace();
 			POJOUtils.copyProperties(customerTrace, customer);
 			customerTrace.setId(null);

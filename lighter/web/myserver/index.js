@@ -60,7 +60,7 @@ Ext.onReady(function() {
 				}, {
 					title: '项目',
 					layout: 'fit',
-					items: []
+					items: [Ext.create('Business.ProjectGridPanel')]
 				}, {
 					title: '商务',
 					layout: 'fit',
