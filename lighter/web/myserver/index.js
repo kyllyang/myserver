@@ -73,7 +73,7 @@ Ext.onReady(function() {
 					title: '产品',
 					layout: 'fit',
 					border: false,
-					items: []
+					items: [Ext.create('Business.ProductTabPanel')]
 				}, {
 					title: '用户',
 					layout: 'fit',
