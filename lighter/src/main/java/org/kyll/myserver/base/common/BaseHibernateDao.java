@@ -1,18 +1,23 @@
 package org.kyll.myserver.base.common;
 
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.HibernateException;
 import org.hibernate.LockMode;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.transform.Transformers;
 import org.kyll.myserver.base.common.paginated.Dataset;
 import org.kyll.myserver.base.common.paginated.Helper;
 import org.kyll.myserver.base.common.paginated.Paginated;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -222,6 +227,29 @@ public class BaseHibernateDao<T extends Serializable, PK extends Serializable> i
 	@Override
 	public List<Map<String, Object>> findBySQL(String sql) {
 		return (List<Map<String, Object>>) getHibernateTemplate().execute(session -> session.createSQLQuery(sql).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP).list());
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Dataset<Map<String, Object>> findBySQL(String sql, Paginated paginated) {
+		int totalCount = getHibernateTemplate().execute(session -> ((Number) ((Map<String, Object>) session.createSQLQuery("select count(1) TOTAL_COUNT from (" + sql + ") t").setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP).uniqueResult()).get("TOTAL_COUNT")).intValue());
+		Dataset<Map<String, Object>> dataset = Helper.makeDateset(paginated, totalCount, null);
+		if (totalCount > 0) {
+			dataset.setDataList((List<Map<String, Object>>) getHibernateTemplate().execute(session -> session.createSQLQuery("select * from (" + sql + ") t").setFirstResult(paginated.getStartRecord()).setMaxResults(paginated.getMaxRecord()).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP).list()));
+		}
+		return dataset;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Dataset<Map<String, Object>> findBySQL(StringBuilder sql, Paginated paginated) {
+		return this.findBySQL(sql.toString(), paginated);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Dataset<Map<String, Object>> findBySQL(StringBuffer sql, Paginated paginated) {
+		return this.findBySQL(sql.toString(), paginated);
 	}
 
 	@SuppressWarnings("unchecked")

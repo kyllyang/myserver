@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * User: Kyll
@@ -48,6 +49,30 @@ public class ExpenseCtrl {
 
 		response.setContentType("text/plain");
 		response.getWriter().println(JsonUtils.convert(voDataset));
+	}
+
+	@RequestMapping("/business/expense/stat/area.ctrl")
+	public void statArea(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Dataset<Map<String, Object>> dataset = expenseService.statArea(RequestUtils.getQueryCondition(request, QueryCondition.class), RequestUtils.getPaginated(request));
+
+		response.setContentType("text/plain");
+		response.getWriter().println(JsonUtils.convert(dataset));
+	}
+
+	@RequestMapping("/business/expense/stat/customer.ctrl")
+	public void statCustomer(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Dataset<Map<String, Object>> dataset = expenseService.statCustomer(RequestUtils.getQueryCondition(request, QueryCondition.class), RequestUtils.getPaginated(request));
+
+		response.setContentType("text/plain");
+		response.getWriter().println(JsonUtils.convert(dataset));
+	}
+
+	@RequestMapping("/business/expense/stat/project.ctrl")
+	public void statProject(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Dataset<Map<String, Object>> dataset = expenseService.statProject(RequestUtils.getQueryCondition(request, QueryCondition.class), RequestUtils.getPaginated(request));
+
+		response.setContentType("text/plain");
+		response.getWriter().println(JsonUtils.convert(dataset));
 	}
 
 	@RequestMapping("/business/expense/input.ctrl")

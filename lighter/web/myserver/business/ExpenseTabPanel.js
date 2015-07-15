@@ -14,17 +14,17 @@ Ext.define('Business.ExpenseTabPanel', {
 				title: '按区域汇总',
 				layout: 'fit',
 				border: false,
-				items: []
+				items: [Ext.create('Business.ExpenseStatAreaGridPanel')]
 			}, {
 				title: '按客户汇总',
 				layout: 'fit',
 				border: false,
-				items: []
+				items: [Ext.create('Business.ExpenseStatCustomerGridPanel')]
 			}, {
 				title: '按项目汇总',
 				layout: 'fit',
 				border: false,
-				items: []
+				items: [Ext.create('Business.ExpenseStatProjectGridPanel')]
 			}, {
 				title: '区域',
 				layout: 'fit',

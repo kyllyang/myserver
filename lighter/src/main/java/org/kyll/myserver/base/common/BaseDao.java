@@ -161,6 +161,11 @@ public interface BaseDao<T extends Serializable, PK extends Serializable> {
 
 	public List<Map<String, Object>> findBySQL(String sql);
 
+	public Dataset<Map<String, Object>> findBySQL(String sql, Paginated paginated);
+
+	public Dataset<Map<String, Object>> findBySQL(StringBuilder sql, Paginated paginated);
+
+	public Dataset<Map<String, Object>> findBySQL(StringBuffer sql, Paginated paginated);
 	/**
 	 * 使用带参数的HQL语句检索数据
 	 * @param hql HQL
