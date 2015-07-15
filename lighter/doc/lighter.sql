@@ -128,6 +128,31 @@ INSERT INTO `ms_gis_thematic` VALUES (1,'专题一',1),(3,'专题二',2),(4,'专
 UNLOCK TABLES;
 
 --
+-- Table structure for table `ms_li_area`
+--
+
+DROP TABLE IF EXISTS `ms_li_area`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `ms_li_area` (
+  `ID_` int(11) NOT NULL auto_increment,
+  `NAME_` varchar(255) default NULL,
+  PRIMARY KEY  (`ID_`),
+  UNIQUE KEY `unique_ID_` (`ID_`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `ms_li_area`
+--
+
+LOCK TABLES `ms_li_area` WRITE;
+/*!40000 ALTER TABLE `ms_li_area` DISABLE KEYS */;
+INSERT INTO `ms_li_area` VALUES (3,'长春市');
+/*!40000 ALTER TABLE `ms_li_area` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `ms_li_customer`
 --
 
@@ -147,7 +172,7 @@ CREATE TABLE `ms_li_customer` (
   `VISIT_RESULT_` varchar(255) default NULL,
   PRIMARY KEY  (`ID_`),
   UNIQUE KEY `unique_ID_` (`ID_`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -156,8 +181,194 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `ms_li_customer` WRITE;
 /*!40000 ALTER TABLE `ms_li_customer` DISABLE KEYS */;
-INSERT INTO `ms_li_customer` VALUES (2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `ms_li_customer` VALUES (20,'2015-07-15','单位名称2','联系人2','职务2','123456','234567','a@b.com','等级2','拜访结果2'),(16,'2015-07-14','单位名称1','联系人1','职务1','123456','234567','a@b.com','等级1','拜访结果1');
 /*!40000 ALTER TABLE `ms_li_customer` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ms_li_customer_trace`
+--
+
+DROP TABLE IF EXISTS `ms_li_customer_trace`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `ms_li_customer_trace` (
+  `ID_` int(11) NOT NULL auto_increment,
+  `VISIT_DATE_` date default NULL,
+  `LINK_MAN_` varchar(255) default NULL,
+  `JOB_` varchar(255) default NULL,
+  `PHONE_` varchar(255) default NULL,
+  `OFFICE_PHONE_` varchar(255) default NULL,
+  `EMAIL_` varchar(255) default NULL,
+  `LEVEL_` varchar(255) default NULL,
+  `VISIT_RESULT_` varchar(255) default NULL,
+  `CUSTOMER_ID_` int(11) default NULL,
+  PRIMARY KEY  (`ID_`),
+  UNIQUE KEY `unique_ID_` (`ID_`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `ms_li_customer_trace`
+--
+
+LOCK TABLES `ms_li_customer_trace` WRITE;
+/*!40000 ALTER TABLE `ms_li_customer_trace` DISABLE KEYS */;
+INSERT INTO `ms_li_customer_trace` VALUES (2,'2015-07-14','联系人1','职务1','123456','234567','a@b.com','等级1','拜访结果1',15),(3,'2015-07-14','联系人11','职务11','1234561','2345671','a1@b.com','等级11','拜访结果11',16),(4,'2015-07-15','联系人2','职务2','123456','234567','a@b.com','等级2','拜访结果2',20),(7,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,21);
+/*!40000 ALTER TABLE `ms_li_customer_trace` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ms_li_expense`
+--
+
+DROP TABLE IF EXISTS `ms_li_expense`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `ms_li_expense` (
+  `ID_` int(11) NOT NULL auto_increment,
+  `START_DATE_` date default NULL,
+  `END_DATE_` date default NULL,
+  `CAR_EXPENSE_` decimal(10,2) default NULL,
+  `CITY_TRAFFIC_EXPENSE_` decimal(10,2) default NULL,
+  `SUBSIDY_EXPENSE_` decimal(10,2) default NULL,
+  `OTHER_EXPENSE_` decimal(10,2) default NULL,
+  `AREA_ID_` int(11) default NULL,
+  `CUSTOMER_ID_` int(11) default NULL,
+  `PROJECT_ID_` int(11) default NULL,
+  PRIMARY KEY  (`ID_`),
+  UNIQUE KEY `unique_ID_` (`ID_`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `ms_li_expense`
+--
+
+LOCK TABLES `ms_li_expense` WRITE;
+/*!40000 ALTER TABLE `ms_li_expense` DISABLE KEYS */;
+INSERT INTO `ms_li_expense` VALUES (1,'2015-07-01','2015-07-15','10.13','20.00','30.00','40.00',3,16,4);
+/*!40000 ALTER TABLE `ms_li_expense` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ms_li_product`
+--
+
+DROP TABLE IF EXISTS `ms_li_product`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `ms_li_product` (
+  `ID_` int(11) NOT NULL auto_increment,
+  `NAME_` varchar(255) default NULL,
+  `MODEL_` varchar(255) default NULL,
+  `UNIT_` varchar(255) default NULL,
+  `AMOUNT_` decimal(10,2) default NULL,
+  `IN_TAX_PRICE_` decimal(10,2) default NULL,
+  `IN_TAX_TOTAL_` decimal(10,2) default NULL,
+  `OUT_TAX_PRICE_` decimal(10,2) default NULL,
+  `OUT_TAX_TOTAL_` decimal(10,2) default NULL,
+  `CUSTOMER_ID_` int(11) default NULL,
+  `PROJECT_ID_` int(11) default NULL,
+  `GROSS_MARGIN_` decimal(10,2) default NULL,
+  `VERNOR_ID_` int(11) default NULL,
+  PRIMARY KEY  (`ID_`),
+  UNIQUE KEY `unique_ID_` (`ID_`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `ms_li_product`
+--
+
+LOCK TABLES `ms_li_product` WRITE;
+/*!40000 ALTER TABLE `ms_li_product` DISABLE KEYS */;
+INSERT INTO `ms_li_product` VALUES (2,'产品名称1','型号1','单位1','1.00','2.20','3.00','4.00','5.00',16,3,'6.00',5);
+/*!40000 ALTER TABLE `ms_li_product` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ms_li_project`
+--
+
+DROP TABLE IF EXISTS `ms_li_project`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `ms_li_project` (
+  `ID_` int(11) NOT NULL auto_increment,
+  `CUSTOMER_ID_` int(11) default NULL,
+  `NAME_` varchar(255) default NULL,
+  `LINK_MAN_` varchar(255) default NULL,
+  `PHONE_` varchar(255) default NULL,
+  `FUND_` varchar(255) default NULL,
+  PRIMARY KEY  (`ID_`),
+  UNIQUE KEY `unique_ID_` (`ID_`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `ms_li_project`
+--
+
+LOCK TABLES `ms_li_project` WRITE;
+/*!40000 ALTER TABLE `ms_li_project` DISABLE KEYS */;
+INSERT INTO `ms_li_project` VALUES (3,16,'项目1','联系人1','123456','资金情况1'),(4,16,'项目2','联系人2','123456','资金情况2');
+/*!40000 ALTER TABLE `ms_li_project` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ms_li_project_trace`
+--
+
+DROP TABLE IF EXISTS `ms_li_project_trace`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `ms_li_project_trace` (
+  `ID_` int(11) NOT NULL auto_increment,
+  `LINK_MAN_` varchar(255) default NULL,
+  `PHONE_` varchar(255) default NULL,
+  `FUND_` varchar(255) default NULL,
+  `RESULT_` varchar(255) default NULL,
+  `SUCCESS_RATE_` varchar(255) default NULL,
+  `PROJECT_ID_` int(11) default NULL,
+  PRIMARY KEY  (`ID_`),
+  UNIQUE KEY `unique_ID_` (`ID_`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `ms_li_project_trace`
+--
+
+LOCK TABLES `ms_li_project_trace` WRITE;
+/*!40000 ALTER TABLE `ms_li_project_trace` DISABLE KEYS */;
+INSERT INTO `ms_li_project_trace` VALUES (2,'项目联系人1','123456','100万','跟踪成果1','项目成功率1',3);
+/*!40000 ALTER TABLE `ms_li_project_trace` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ms_li_verdor`
+--
+
+DROP TABLE IF EXISTS `ms_li_verdor`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `ms_li_verdor` (
+  `ID_` int(11) NOT NULL auto_increment,
+  `NAME_` varchar(255) default NULL,
+  PRIMARY KEY  (`ID_`),
+  UNIQUE KEY `unique_ID_` (`ID_`)
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `ms_li_verdor`
+--
+
+LOCK TABLES `ms_li_verdor` WRITE;
+/*!40000 ALTER TABLE `ms_li_verdor` DISABLE KEYS */;
+INSERT INTO `ms_li_verdor` VALUES (8,'厂商3'),(7,'厂商4'),(6,'厂商2'),(5,'厂商1');
+/*!40000 ALTER TABLE `ms_li_verdor` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -418,4 +629,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-06-19  8:47:09
+-- Dump completed on 2015-07-15 12:56:05
