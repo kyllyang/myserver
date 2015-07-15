@@ -1,6 +1,8 @@
 Ext.define('Business.ProjectGridPanel', {
 	extend: 'Base.ux.GridPanel',
 
+	border: false,
+
 	initComponent: function() {
 		Ext.apply(this, {
 			itemId: 'projectGridPanel',

@@ -53,25 +53,31 @@ Ext.onReady(function() {
 				width: myServer.getWidth() * 0.25
 			}), Ext.create('Ext.tab.Panel', {
 				region: 'center',
+				border: false,
 				items: [{
 					title: '客户',
 					layout: 'fit',
+					border: false,
 					items: [Ext.create('Business.CustomerGridPanel')]
 				}, {
 					title: '项目',
 					layout: 'fit',
+					border: false,
 					items: [Ext.create('Business.ProjectGridPanel')]
 				}, {
 					title: '商务',
 					layout: 'fit',
+					border: false,
 					items: [Ext.create('Business.ExpenseTabPanel')]
 				}, {
 					title: '产品',
 					layout: 'fit',
+					border: false,
 					items: []
 				}, {
 					title: '用户',
 					layout: 'fit',
+					border: false,
 					items: []
 				}]
 			})]

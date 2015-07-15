@@ -1,6 +1,8 @@
 Ext.define('Business.ExpenseGridPanel', {
 	extend: 'Base.ux.GridPanel',
 
+	border: false,
+
 	initComponent: function() {
 		Ext.apply(this, {
 			itemId: 'expenseGridPanel',
@@ -12,41 +14,41 @@ Ext.define('Business.ExpenseGridPanel', {
 				dataIndex: 'id',
 				hidden: true
 			}, {
-				text: '拜访日期',
-				dataIndex: 'visitDate',
+				text: '区域',
+				dataIndex: 'areaName'
+			}, {
+				text: '客户名称',
+				dataIndex: 'customerCompanyName'
+			}, {
+				text: '项目名称',
+				dataIndex: 'projectName'
+			}, {
+				text: '起始日期',
+				dataIndex: 'startDate',
 				renderer: function(value, metaData, record, rowIndex, colIndex, store, view) {
 					return Ext.Date.format(Ext.Date.parse(value, 'Y-m-d H:i:s.u'), 'Y-m-d');
 				}
 			}, {
-				text: '单位名称',
-				dataIndex: 'companyName'
+				text: '结束日期',
+				dataIndex: 'endDate',
+				renderer: function(value, metaData, record, rowIndex, colIndex, store, view) {
+					return Ext.Date.format(Ext.Date.parse(value, 'Y-m-d H:i:s.u'), 'Y-m-d');
+				}
 			}, {
-				text: '联系人',
-				dataIndex: 'linkMan'
+				text: '车费',
+				dataIndex: 'carExpense'
 			}, {
-				text: '职务',
-				dataIndex: 'job'
+				text: '市内交通费',
+				dataIndex: 'cityTrafficExpense'
 			}, {
-				text: '联系电话',
-				dataIndex: 'phone'
+				text: '单位补助',
+				dataIndex: 'subsidyExpense'
 			}, {
-				text: '办公电话',
-				dataIndex: 'officePhone'
+				text: '其他费用',
+				dataIndex: 'otherExpense'
 			}, {
-				text: '邮箱',
-				dataIndex: 'email'
-			}, {
-				text: '等级',
-				dataIndex: 'level'
-			}, {
-				text: '拜访成果',
-				dataIndex: 'visitResult'
-			}],
-			tbar: [{
-				text: '跟踪',
-				icon: ctx + '/resource/image/icon/business/trace.png',
-				handler: this.traceList,
-				scope: this
+				text: '本次总计',
+				dataIndex: 'thisTimeTotal'
 			}],
 			listeners: {
 				afterRender: function(form, eOpts){
@@ -72,26 +74,26 @@ Ext.define('Business.ExpenseGridPanel', {
 		this.queryData();
 	},
 	doAddEvent: function() {
-		Ext.create('Business.CustomerFormWindow', {
-			customerGridPanel: this
+		Ext.create('Business.ExpenseFormWindow', {
+			expenseGridPanel: this
 		}).show();
 	},
 	doEditEvent: function(id) {
-		Ext.create('Business.CustomerFormWindow', {
+		Ext.create('Business.ExpenseFormWindow', {
 			entityId: id,
-			customerGridPanel: this
+			expenseGridPanel: this
 		}).show();
 	},
 	doViewEvent: function(id) {
-		Ext.create('Business.CustomerFormWindow', {
+		Ext.create('Business.ExpenseFormWindow', {
 			entityId: id,
-			customerGridPanel: this,
+			expenseGridPanel: this,
 			readOnlyForm: true
 		}).show();
 	},
 	doDeleteEvent: function(ids) {
 		Ext.Ajax.request({
-			url: ctx + '/business/customer/delete.ctrl',
+			url: ctx + '/business/expense/delete.ctrl',
 			params: {
 				ids: ids
 			},
@@ -104,17 +106,6 @@ Ext.define('Business.ExpenseGridPanel', {
 			},
 			scope: this
 		});
-	},
-	traceList: function() {
-		var records = this.getSelectedRecords();
-		if (records.length == 1) {
-			Ext.create('Business.CustomerTraceWindow', {
-				customerId: records[0].get('id'),
-				customerCompanyName: records[0].get('companyName')
-			}).show();
-		} else {
-			Ext.Msg.alert("系统提示", "请选择一条数据！");
-		}
 	},
 	queryData: function() {
 		this.getStore().load();
