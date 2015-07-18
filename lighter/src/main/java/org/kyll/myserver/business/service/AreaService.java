@@ -7,12 +7,16 @@ import org.kyll.myserver.base.common.paginated.Paginated;
 import org.kyll.myserver.business.QueryCondition;
 import org.kyll.myserver.business.entity.Area;
 
+import java.util.List;
+
 /**
  * User: Kyll
  * Date: 2015-07-15 13:39
  */
 public interface AreaService extends BaseService<Area, Long> {
 	Dataset<Area> get(QueryCondition qc, Paginated pg);
+
+	List<Area> get();
 
 	void save(JSONArray jsonArray);
 

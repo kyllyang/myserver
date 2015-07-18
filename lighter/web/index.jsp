@@ -19,8 +19,17 @@
 
 		myServer.loginUser = {
 			id: '${sessionScope.sessionVo.userId}',
-			username: '${sessionScope.sessionVo.username}'
+			username: '${sessionScope.sessionVo.username}',
+			roles: []
 		};
+
+		<c:forEach items="${sessionScope.sessionVo.roleSet}" var="role">
+		myServer.loginUser.roles.push({
+			id: '${role.id}',
+			code: '${role.code}',
+			name: '${role.name}'
+		});
+		</c:forEach>
 
 		Ext.Loader.setConfig({
 			enabled: true,

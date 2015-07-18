@@ -1,6 +1,10 @@
-package org.kyll.myserver.base.sys.vo;
+package org.kyll.myserver.business.vo;
 
 import org.kyll.myserver.base.common.Vo;
+import org.kyll.myserver.business.entity.Area;
+import org.kyll.myserver.business.entity.Role;
+
+import java.util.List;
 
 /**
  * User: Kyll
@@ -15,8 +19,11 @@ public class EmployeeVo implements Vo<Long> {
 	private Integer freeze;
 	private String email;
 	private Integer sort;
-	private Long departmentId;
-	private String departmentName;
+
+	private Long[] areaIds;
+	private Long[] roleIds;
+	private List<Area> areaList;
+	private List<Role> roleList;
 
 	public EmployeeVo() {
 	}
@@ -86,19 +93,35 @@ public class EmployeeVo implements Vo<Long> {
 		this.sort = sort;
 	}
 
-	public Long getDepartmentId() {
-		return departmentId;
+	public Long[] getAreaIds() {
+		return areaIds;
 	}
 
-	public void setDepartmentId(Long departmentId) {
-		this.departmentId = departmentId;
+	public void setAreaIds(Long[] areaIds) {
+		this.areaIds = areaIds;
 	}
 
-	public String getDepartmentName() {
-		return departmentName;
+	public Long[] getRoleIds() {
+		return roleIds;
 	}
 
-	public void setDepartmentName(String departmentName) {
-		this.departmentName = departmentName;
+	public void setRoleIds(Long[] roleIds) {
+		this.roleIds = roleIds;
+	}
+
+	public List<Area> getAreaList() {
+		return areaList;
+	}
+
+	public void setAreaList(List<Area> areaList) {
+		this.areaList = areaList;
+	}
+
+	public List<Role> getRoleList() {
+		return roleList;
+	}
+
+	public void setRoleList(List<Role> roleList) {
+		this.roleList = roleList;
 	}
 }

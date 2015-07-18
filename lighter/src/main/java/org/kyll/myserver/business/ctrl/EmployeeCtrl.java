@@ -1,12 +1,16 @@
-package org.kyll.myserver.base.sys.ctrl;
+package org.kyll.myserver.business.ctrl;
 
 import org.kyll.myserver.base.QueryCondition;
 import org.kyll.myserver.base.common.paginated.Dataset;
 import org.kyll.myserver.base.sys.entity.Department;
-import org.kyll.myserver.base.sys.entity.Employee;
-import org.kyll.myserver.base.sys.service.EmployeeService;
+import org.kyll.myserver.business.entity.Area;
+import org.kyll.myserver.business.entity.Employee;
+import org.kyll.myserver.business.entity.Role;
+import org.kyll.myserver.business.service.AreaService;
+import org.kyll.myserver.business.service.EmployeeService;
 import org.kyll.myserver.base.sys.vo.SessionVo;
-import org.kyll.myserver.base.sys.vo.EmployeeVo;
+import org.kyll.myserver.business.service.RoleService;
+import org.kyll.myserver.business.vo.EmployeeVo;
 import org.kyll.myserver.base.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -16,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.Set;
 
 /**
  * User: Kyll
@@ -26,17 +32,22 @@ import javax.servlet.http.HttpSession;
 public class EmployeeCtrl {
 	@Autowired
 	private EmployeeService employeeService;
+	@Autowired
+	private AreaService areaService;
+	@Autowired
+	private RoleService roleService;
 
 	@RequestMapping("/login.ctrl")
 	public void login(String username, String password, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		Employee loginUser = employeeService.login(username, password);
+		Employee employee = employeeService.login(username, password);
 		String contextPath = request.getContextPath();
-		if (loginUser == null) {
+		if (employee == null) {
 			response.sendRedirect(contextPath + "/login.jsp");
 		} else {
 			SessionVo sessionVo = new SessionVo();
-			sessionVo.setUserId(loginUser.getId());
-			sessionVo.setUsername(loginUser.getUsername());
+			sessionVo.setUserId(employee.getId());
+			sessionVo.setUsername(employee.getUsername());
+			sessionVo.setRoleSet(employee.getRoleSet());
 
 			HttpSession session = request.getSession();
 			session.setAttribute(ConstUtils.SESSION_NAME, sessionVo);
@@ -51,7 +62,7 @@ public class EmployeeCtrl {
 		session.invalidate();
 	}
 
-	@RequestMapping("/sys/employee/dataset.ctrl")
+	@RequestMapping("/business/employee/dataset.ctrl")
 	public void dataset(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Dataset<Employee> dataset = employeeService.get(RequestUtils.getQueryCondition(request, QueryCondition.class), RequestUtils.getPaginated(request));
 		Dataset<EmployeeVo> voDataset = POJOUtils.convert(dataset, EmployeeVo.class, voHandler);
@@ -60,16 +71,21 @@ public class EmployeeCtrl {
 		response.getWriter().println(JsonUtils.convert(voDataset));
 	}
 
-	@RequestMapping("/sys/employee/input.ctrl")
+	@RequestMapping("/business/employee/input.ctrl")
 	public void input(Long id, HttpServletResponse response) throws Exception {
-		Employee entity = employeeService.get(id);
+		Employee entity;
+		if (id == null) {
+			entity = new Employee();
+		} else {
+			entity = employeeService.get(id);
+		}
 		EmployeeVo entityVo = POJOUtils.convert(entity, EmployeeVo.class, voHandler);
 
 		response.setContentType("text/plain");
 		response.getWriter().println(JsonUtils.convert(entityVo));
 	}
 
-	@RequestMapping("/sys/employee/save.ctrl")
+	@RequestMapping("/business/employee/save.ctrl")
 	public void save(EmployeeVo entityVo, HttpServletResponse response) throws Exception {
 		Employee employee;
 		Long id = entityVo.getId();
@@ -87,21 +103,13 @@ public class EmployeeCtrl {
 			employee.setPassword(StringUtils.encryptSHA(employee.getPassword()));
 		}
 
-		boolean result = employeeService.save(employee, entityVo.getDepartmentId());
+		boolean result = employeeService.save(employee, entityVo.getAreaIds(), entityVo.getRoleIds());
 
 		response.setContentType("text/plain");
 		response.getWriter().println(JsonUtils.ajaxResult(result));
 	}
 
-	@RequestMapping("/sys/employee/saveRole.ctrl")
-	public void saveRole(Long employeeId, Long[] roleIds, HttpServletResponse response) throws Exception {
-		employeeService.save(employeeId, roleIds);
-
-		response.setContentType("text/plain");
-		response.getWriter().println(JsonUtils.ajaxResult(true));
-	}
-
-	@RequestMapping("/sys/employee/delete.ctrl")
+	@RequestMapping("/business/employee/delete.ctrl")
 	public void delete(Long[] ids, HttpServletResponse response) throws Exception {
 		employeeService.delete(ids);
 
@@ -109,14 +117,37 @@ public class EmployeeCtrl {
 		response.getWriter().println(JsonUtils.ajaxResult(true));
 	}
 
-	private POJOUtils.VoHandler<Employee, EmployeeVo> voHandler = new POJOUtils.VoHandler<Employee, EmployeeVo>() {
-		@Override
-		public void handler(Employee employee, EmployeeVo employeeVo) {
-			Department department = employee.getDepartment();
-			if (department != null) {
-				employeeVo.setDepartmentId(department.getId());
-				employeeVo.setDepartmentName(department.getName());
+	private List<Area> areaList;
+	private List<Role> roleList;
+
+	private POJOUtils.VoHandler<Employee, EmployeeVo> voHandler = (employee, employeeVo) -> {
+		Set<Area> areaSet = employee.getAreaSet();
+		if (areaSet != null) {
+			Long[] areaIds = new Long[areaSet.size()];
+			int i = 0;
+			for (Area area : areaSet) {
+				areaIds[i++] = area.getId();
 			}
+			employeeVo.setAreaIds(areaIds);
 		}
+		Set<Role> roleSet = employee.getRoleSet();
+		if (roleSet != null) {
+			Long[] roleIds = new Long[roleSet.size()];
+			int i = 0;
+			for (Role role : roleSet) {
+				roleIds[i++] = role.getId();
+			}
+			employeeVo.setRoleIds(roleIds);
+		}
+
+		if (areaList == null) {
+			areaList = areaService.get();
+		}
+		employeeVo.setAreaList(areaList);
+
+		if (roleList == null) {
+			roleList = roleService.get();
+		}
+		employeeVo.setRoleList(roleList);
 	};
 }

@@ -33,6 +33,16 @@ var myServer = {
 	},
 	getViewport: function() {
 		return this.viewport;
+	},
+	hasPrivilege: function(roleCode) {
+		var result = false;
+		for (var i = 0; i < this.loginUser.roles.length; i++) {
+			if (this.loginUser.roles[i].code == roleCode) {
+				result = true;
+				break;
+			}
+		}
+		return result;
 	}
 };
 
@@ -58,27 +68,32 @@ Ext.onReady(function() {
 					title: '客户',
 					layout: 'fit',
 					border: false,
+					hidden: !myServer.hasPrivilege('CUSTOMER'),
 					items: [Ext.create('Business.CustomerGridPanel')]
 				}, {
 					title: '项目',
 					layout: 'fit',
 					border: false,
+					hidden: !myServer.hasPrivilege('CUSTOMER'),
 					items: [Ext.create('Business.ProjectGridPanel')]
 				}, {
 					title: '商务',
 					layout: 'fit',
 					border: false,
+					hidden: !myServer.hasPrivilege('CUSTOMER'),
 					items: [Ext.create('Business.ExpenseTabPanel')]
 				}, {
 					title: '产品',
 					layout: 'fit',
 					border: false,
+					hidden: !myServer.hasPrivilege('PRODUCT'),
 					items: [Ext.create('Business.ProductTabPanel')]
 				}, {
 					title: '用户',
 					layout: 'fit',
 					border: false,
-					items: []
+					hidden: !myServer.hasPrivilege('USER'),
+					items: [Ext.create('Business.EmployeeGridPanel')]
 				}]
 			})]
 		}]

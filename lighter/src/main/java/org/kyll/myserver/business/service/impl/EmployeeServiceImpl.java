@@ -1,4 +1,4 @@
-package org.kyll.myserver.base.sys.service.impl;
+package org.kyll.myserver.business.service.impl;
 
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Query;
@@ -6,16 +6,18 @@ import org.kyll.myserver.base.QueryCondition;
 import org.kyll.myserver.base.common.paginated.Dataset;
 import org.kyll.myserver.base.common.paginated.Paginated;
 import org.kyll.myserver.base.sys.dao.DepartmentDao;
-import org.kyll.myserver.base.sys.dao.EmployeeDao;
-import org.kyll.myserver.base.sys.dao.RoleDao;
-import org.kyll.myserver.base.sys.entity.Employee;
-import org.kyll.myserver.base.sys.entity.Role;
-import org.kyll.myserver.base.sys.service.EmployeeService;
+import org.kyll.myserver.business.dao.EmployeeDao;
+import org.kyll.myserver.business.dao.RoleDao;
+import org.kyll.myserver.business.entity.Area;
+import org.kyll.myserver.business.entity.Employee;
+import org.kyll.myserver.business.entity.Role;
+import org.kyll.myserver.business.service.EmployeeService;
 import org.kyll.myserver.base.util.HqlUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -29,8 +31,6 @@ import java.util.Set;
 public class EmployeeServiceImpl implements EmployeeService {
 	@Autowired
 	private EmployeeDao employeeDao;
-	@Autowired
-	private DepartmentDao departmentDao;
 	@Autowired
 	private RoleDao roleDao;
 
@@ -60,34 +60,44 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeDao.find(hql, pg);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public boolean save(Employee employee, Long departmentId) {
+	public boolean save(Employee employee, Long[] areaIds, Long[] roleIds) {
 		List<Employee> userList = employeeDao.find("from Employee t where t.username = '" + employee.getUsername() + "'");
 		boolean result = userList.isEmpty();
 		if (!result) {
 			result = Objects.equals(userList.get(0).getId(), employee.getId());
 		}
 		if (result) {
-			if (departmentId != null) {
-				employee.setDepartment(departmentDao.get(departmentId));
+			employeeDao.save(employee);
+
+			Set<Area> areaSet = employee.getAreaSet();
+			if (areaSet == null) {
+				areaSet = new HashSet<>();
+				employee.setAreaSet(areaSet);
 			}
+			areaSet.clear();
+			if (areaIds != null) {
+				Query query = roleDao.createQuery("from Area t where t.id in (:areaIds)");
+				query.setParameterList("areaIds", areaIds);
+				areaSet.addAll(query.list());
+			}
+
+			Set<Role> roleSet = employee.getRoleSet();
+			if (roleSet == null) {
+				roleSet = new HashSet<>();
+				employee.setRoleSet(roleSet);
+			}
+			roleSet.clear();
+			if (roleIds != null) {
+				Query query = roleDao.createQuery("from Role t where t.id in (:roleIds)");
+				query.setParameterList("roleIds", roleIds);
+				roleSet.addAll(query.list());
+			}
+
 			employeeDao.save(employee);
 		}
 		return result;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public void save(Long employeeId, Long[] roleIds) {
-		Employee employee = employeeDao.get(employeeId);
-		Set<Role> roleSet = employee.getRoleSet();
-		roleSet.clear();
-		if (roleIds != null) {
-			Query query = roleDao.createQuery("from Role t where t.id in (:roleIds)");
-			query.setParameterList("roleIds", roleIds);
-			roleSet.addAll(query.list());
-		}
-		employeeDao.save(employee);
 	}
 
 	@Override

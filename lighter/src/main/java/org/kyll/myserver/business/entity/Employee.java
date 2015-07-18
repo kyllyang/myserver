@@ -1,4 +1,4 @@
-package org.kyll.myserver.base.sys.entity;
+package org.kyll.myserver.business.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,7 +9,7 @@ import java.util.Set;
  * Date: 2014-11-05 12:48
  */
 @Entity
-@Table(name = "MS_SYS_EMPLOYEE")
+@Table(name = "MS_LI_EMPLOYEE")
 public class Employee implements Serializable {
 	private Long id;
 	private String name;
@@ -18,7 +18,7 @@ public class Employee implements Serializable {
 	private Integer freeze;
 	private String email;
 	private Integer sort;
-	private Department department;
+	private Set<Area> areaSet;
 	private Set<Role> roleSet;
 
 	public Employee() {
@@ -89,18 +89,18 @@ public class Employee implements Serializable {
 		this.sort = sort;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DEPARTMENT_ID_")
-	public Department getDepartment() {
-		return department;
+	@ManyToMany
+	@JoinTable(name = "MS_LI_EMPLOYEE_AREA", joinColumns = {@JoinColumn(name = "EMPLOYEE_ID_")}, inverseJoinColumns = {@JoinColumn(name = "AREA_ID_")})
+	public Set<Area> getAreaSet() {
+		return areaSet;
 	}
 
-	public void setDepartment(Department department) {
-		this.department = department;
+	public void setAreaSet(Set<Area> areaSet) {
+		this.areaSet = areaSet;
 	}
 
 	@ManyToMany
-	@JoinTable(name = "MS_SYS_EMPLOYEE_ROLE", joinColumns = {@JoinColumn(name = "EMPLOYEE_ID_")}, inverseJoinColumns = {@JoinColumn(name = "ROLE_ID_")})
+	@JoinTable(name = "MS_LI_EMPLOYEE_ROLE", joinColumns = {@JoinColumn(name = "EMPLOYEE_ID_")}, inverseJoinColumns = {@JoinColumn(name = "ROLE_ID_")})
 	public Set<Role> getRoleSet() {
 		return roleSet;
 	}

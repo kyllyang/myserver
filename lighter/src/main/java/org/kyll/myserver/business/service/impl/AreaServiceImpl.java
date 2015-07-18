@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * User: Kyll
  * Date: 2015-07-15 13:40
@@ -35,6 +37,11 @@ public class AreaServiceImpl implements AreaService {
 		this.appendQueryCondition(hql, qc);
 		HqlUtils.appendOrderBy(hql, "t", pg);
 		return areaDao.find(hql, pg);
+	}
+
+	@Override
+	public List<Area> get() {
+		return areaDao.find("from Area t");
 	}
 
 	@Override

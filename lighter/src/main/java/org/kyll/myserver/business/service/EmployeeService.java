@@ -1,10 +1,10 @@
-package org.kyll.myserver.base.sys.service;
+package org.kyll.myserver.business.service;
 
 import org.kyll.myserver.base.QueryCondition;
 import org.kyll.myserver.base.common.BaseService;
 import org.kyll.myserver.base.common.paginated.Dataset;
 import org.kyll.myserver.base.common.paginated.Paginated;
-import org.kyll.myserver.base.sys.entity.Employee;
+import org.kyll.myserver.business.entity.Employee;
 
 /**
  * User: Kyll
@@ -15,9 +15,7 @@ public interface EmployeeService extends BaseService<Employee, Long> {
 
 	Dataset<Employee> get(QueryCondition qc, Paginated pg);
 
-	boolean save(Employee employee, Long departmentId);
-
-	void save(Long employeeId, Long[] roleIds);
+	boolean save(Employee employee, Long[] areaIds, Long[] roleIds);
 
 	void delete(Long... ids);
 }

@@ -1,7 +1,7 @@
-package org.kyll.myserver.base.sys.dao;
+package org.kyll.myserver.business.dao;
 
 import org.kyll.myserver.base.common.BaseHibernateDao;
-import org.kyll.myserver.base.sys.entity.Employee;
+import org.kyll.myserver.business.entity.Employee;
 import org.springframework.stereotype.Repository;
 
 /**

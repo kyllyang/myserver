@@ -1,24 +1,22 @@
-package org.kyll.myserver.base.app.entity;
+package org.kyll.myserver.business.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
 
 /**
  * User: Kyll
- * Date: 2015-04-20 11:06
+ * Date: 2014-11-05 13:04
  */
 @Entity
-@Table(name = "MS_APP_MENU")
-public class Menu implements Serializable {
+@Table(name = "MS_LI_ROLE")
+public class Role implements Serializable {
 	private Long id;
-	private Menu parent;
+	private String code;
 	private String name;
 	private String description;
 	private Integer sort;
-	private Module function;
 
-	public Menu() {
+	public Role() {
 	}
 
 	@Id
@@ -32,14 +30,13 @@ public class Menu implements Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PARENT_ID_")
-	public Menu getParent() {
-		return parent;
+	@Column(name = "CODE_")
+	public String getCode() {
+		return code;
 	}
 
-	public void setParent(Menu parent) {
-		this.parent = parent;
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	@Column(name = "NAME_")
@@ -67,15 +64,5 @@ public class Menu implements Serializable {
 
 	public void setSort(Integer sort) {
 		this.sort = sort;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "FUNCTION_ID_")
-	public Module getFunction() {
-		return function;
-	}
-
-	public void setFunction(Module function) {
-		this.function = function;
 	}
 }
