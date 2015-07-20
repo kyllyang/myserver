@@ -1,5 +1,6 @@
 package org.kyll.myserver.business.ctrl;
 
+import net.sf.json.JSONArray;
 import org.kyll.myserver.base.QueryCondition;
 import org.kyll.myserver.base.common.paginated.Dataset;
 import org.kyll.myserver.base.sys.entity.Department;
@@ -46,7 +47,10 @@ public class EmployeeCtrl {
 		} else {
 			SessionVo sessionVo = new SessionVo();
 			sessionVo.setUserId(employee.getId());
+			sessionVo.setName(employee.getName());
 			sessionVo.setUsername(employee.getUsername());
+			for (Role role : employee.getRoleSet()) {
+			}
 			sessionVo.setRoleSet(employee.getRoleSet());
 
 			HttpSession session = request.getSession();
@@ -69,6 +73,14 @@ public class EmployeeCtrl {
 
 		response.setContentType("text/plain");
 		response.getWriter().println(JsonUtils.convert(voDataset));
+	}
+
+	@RequestMapping("/business/employee/tree.ctrl")
+	public void tree(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		JSONArray ja = employeeService.getTreeJson();
+
+		response.setContentType("text/plain");
+		response.getWriter().println(ja.toString());
 	}
 
 	@RequestMapping("/business/employee/input.ctrl")

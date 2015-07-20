@@ -19,6 +19,7 @@
 
 		myServer.loginUser = {
 			id: '${sessionScope.sessionVo.userId}',
+			name: '${sessionScope.sessionVo.name}',
 			username: '${sessionScope.sessionVo.username}',
 			roles: []
 		};

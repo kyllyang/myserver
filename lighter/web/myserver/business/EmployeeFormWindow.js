@@ -93,13 +93,15 @@ Ext.define('Business.EmployeeFormWindow', {
 			itemId: 'areaCheckboxGroup',
 			fieldLabel: '负责区域',
 			labelAlign: 'right',
-			labelSeparator: '：'
+			labelSeparator: '：',
+			columns: 4
 		});
 		var roleCheckboxGroup = Ext.create('Ext.form.CheckboxGroup', {
 			itemId: 'roleCheckboxGroup',
 			fieldLabel: '角色',
 			labelAlign: 'right',
-			labelSeparator: '：'
+			labelSeparator: '：',
+			columns: 4
 		});
 		var freezeCheckbox = Ext.create('Ext.form.field.Checkbox', {
 			fieldLabel: '冻结',
@@ -217,6 +219,7 @@ Ext.define('Business.EmployeeFormWindow', {
 					Ext.Msg.alert('系统提示', '数据保存成功！');
 					this.closeForm();
 					this.employeeGridPanel.queryData();
+					myServer.getViewport().down('#employeeAreaTreePanel').queryData();
 				},
 				failure: function(form, action) {
 					Ext.Msg.alert('系统提示', '无法保存数据！ 请检查用户名称是否重复。');

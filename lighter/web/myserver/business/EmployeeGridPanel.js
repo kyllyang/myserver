@@ -3,6 +3,8 @@ Ext.define('Business.EmployeeGridPanel', {
 
 	departmentTreePanel: null,
 
+	border: false,
+
 	initComponent: function() {
 		Ext.apply(this, {
 			itemId: 'employeeGridPanel',
@@ -130,6 +132,7 @@ Ext.define('Business.EmployeeGridPanel', {
 			success: function(response, opts) {
 				Ext.Msg.alert("系统提示", "数据删除成功！");
 				this.queryData();
+				myServer.getViewport().down('#employeeAreaTreePanel').queryData();
 			},
 			failure: function(response, opts) {
 				Ext.Msg.alert("系统提示", "数据删除失败！");

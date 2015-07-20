@@ -1,5 +1,7 @@
 package org.kyll.myserver.business.service.impl;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Query;
 import org.kyll.myserver.base.QueryCondition;
@@ -103,5 +105,38 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public void delete(Long... ids) {
 		employeeDao.delete(ids);
+	}
+
+	@Override
+	public JSONArray getTreeJson() {
+		JSONArray ja = new JSONArray();
+		List<Employee> employeeList = employeeDao.find("from Employee t order by t.sort asc");
+		for (Employee employee : employeeList) {
+			JSONObject jo = new JSONObject();
+			jo.put("id", org.kyll.myserver.base.util.StringUtils.generateUUID() + "_employee_" + employee.getId());
+			jo.put("text", employee.getName());
+		//	jo.put("expanded", true);
+
+			Set<Area> areaSet = employee.getAreaSet();
+			if (areaSet.isEmpty()) {
+				jo.put("leaf", true);
+			} else {
+				jo.put("leaf", false);
+
+				JSONArray children = new JSONArray();
+				for (Area area : areaSet) {
+					JSONObject child = new JSONObject();
+					child.put("id", org.kyll.myserver.base.util.StringUtils.generateUUID() + "_area_" + area.getId());
+					child.put("text", area.getName());
+				//	child.put("expanded", true);
+					child.put("leaf", true);
+					children.add(child);
+				}
+				jo.put("children", children);
+			}
+
+			ja.add(jo);
+		}
+		return ja;
 	}
 }

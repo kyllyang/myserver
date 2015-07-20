@@ -3,6 +3,7 @@ package org.kyll.myserver.base.util;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.UUID;
 
 /**
  * User: Kyll
@@ -28,5 +29,9 @@ public class StringUtils {
 			sb.append(Integer.toHexString((b & 0xFF) | 0x100).substring(1, 3));
 		}
 		return sb.toString();
+	}
+
+	public static String generateUUID() {
+		return UUID.randomUUID().toString().replace("-", "");
 	}
 }

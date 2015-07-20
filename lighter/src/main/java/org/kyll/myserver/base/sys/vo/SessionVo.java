@@ -10,6 +10,7 @@ import java.util.Set;
  */
 public class SessionVo {
 	private Long userId;
+	private String name;
 	private String username;
 	private Set<Role> roleSet;
 
@@ -22,6 +23,14 @@ public class SessionVo {
 
 	public void setUserId(Long userId) {
 		this.userId = userId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getUsername() {

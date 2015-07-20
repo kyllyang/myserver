@@ -1,5 +1,6 @@
 package org.kyll.myserver.business.service;
 
+import net.sf.json.JSONArray;
 import org.kyll.myserver.base.QueryCondition;
 import org.kyll.myserver.base.common.BaseService;
 import org.kyll.myserver.base.common.paginated.Dataset;
@@ -18,4 +19,6 @@ public interface EmployeeService extends BaseService<Employee, Long> {
 	boolean save(Employee employee, Long[] areaIds, Long[] roleIds);
 
 	void delete(Long... ids);
+
+	JSONArray getTreeJson();
 }

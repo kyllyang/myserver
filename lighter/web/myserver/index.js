@@ -58,7 +58,7 @@ Ext.onReady(function() {
 			layout: 'border',
 			items: [Ext.create('Business.NotificationToolbar', {
 				region: 'north'
-			}), Ext.create('Business.UserAreaTreePanel', {
+			}), Ext.create('Business.EmployeeAreaTreePanel', {
 				region: 'west',
 				width: myServer.getWidth() * 0.25
 			}), Ext.create('Ext.tab.Panel', {

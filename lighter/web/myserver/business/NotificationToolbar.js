@@ -7,7 +7,7 @@ Ext.define('Business.NotificationToolbar', {
 		this.callParent();
 
 		var loginUserDisplay = Ext.create('Ext.form.field.Display', {
-			value: '欢迎&nbsp;' + myServer.loginUser.username
+			value: '欢迎&nbsp;' + myServer.loginUser.name + '(' + myServer.loginUser.username + ')'
 		});
 		var exitButton = Ext.create('Ext.button.Button', {
 			text: '退出',
