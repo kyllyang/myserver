@@ -22,6 +22,7 @@ public class QueryCondition {
 	private String originalFilename;
 	private String key;
 	private String value;
+	private Long employeeId;
 
 	public QueryCondition() {
 	}
@@ -160,5 +161,13 @@ public class QueryCondition {
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	public Long getEmployeeId() {
+		return employeeId;
+	}
+
+	public void setEmployeeId(Long employeeId) {
+		this.employeeId = employeeId;
 	}
 }

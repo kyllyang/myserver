@@ -54,9 +54,11 @@ Ext.define('Business.ProjectGridPanel', {
 		});
 
 		this.store.on('beforeload', function(store, operation, eOpts) {
+			this.store.proxy.actionMethods = {read: 'POST'};
+			Ext.apply(this.store.proxy.extraParams, {
+				'qc.employeeId': myServer.isAdmin() ? myServer.getViewport().down('#employeeAreaTreePanel').getSelectedRecordEmployeeId() : myServer.loginUser.id
+			});
 		}, this);
-
-		this.queryData();
 	},
 	doAddEvent: function() {
 		Ext.create('Business.ProjectFormWindow', {

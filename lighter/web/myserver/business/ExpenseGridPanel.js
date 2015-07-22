@@ -72,9 +72,12 @@ Ext.define('Business.ExpenseGridPanel', {
 		});
 
 		this.store.on('beforeload', function(store, operation, eOpts) {
+			this.store.proxy.actionMethods = {read: 'POST'};
+			Ext.apply(this.store.proxy.extraParams, {
+				'qc.employeeId': myServer.isAdmin() ? myServer.getViewport().down('#employeeAreaTreePanel').getSelectedRecordEmployeeId() : myServer.loginUser.id,
+				'qc.areaId': myServer.getViewport().down('#employeeAreaTreePanel').getSelectedRecordAreaId()
+			});
 		}, this);
-
-		this.queryData();
 	},
 	doAddEvent: function() {
 		Ext.create('Business.ExpenseFormWindow', {

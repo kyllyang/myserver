@@ -7,6 +7,8 @@ package org.kyll.myserver.business;
 public class QueryCondition {
 	private Long customerId;
 	private Long projectId;
+	private Long employeeId;
+	private Long areaId;
 
 	public QueryCondition() {
 	}
@@ -25,5 +27,21 @@ public class QueryCondition {
 
 	public void setProjectId(Long projectId) {
 		this.projectId = projectId;
+	}
+
+	public Long getEmployeeId() {
+		return employeeId;
+	}
+
+	public void setEmployeeId(Long employeeId) {
+		this.employeeId = employeeId;
+	}
+
+	public Long getAreaId() {
+		return areaId;
+	}
+
+	public void setAreaId(Long areaId) {
+		this.areaId = areaId;
 	}
 }

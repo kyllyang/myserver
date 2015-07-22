@@ -15,7 +15,13 @@ Ext.define('Business.ProductTabPanel', {
 				layout: 'fit',
 				border: false,
 				items: [Ext.create('Business.ProductGridPanel')]
-			}]
+			}],
+			listeners: {
+				tabchange: function(tabPanel, newCard, oldCard, eOpts) {
+					newCard.down('gridpanel').queryData();
+				},
+				scope: this
+			}
 		});
 		this.callParent();
 	}

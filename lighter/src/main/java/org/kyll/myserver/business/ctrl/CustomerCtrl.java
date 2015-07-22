@@ -8,6 +8,7 @@ import org.kyll.myserver.base.util.StringUtils;
 import org.kyll.myserver.business.QueryCondition;
 import org.kyll.myserver.business.entity.Customer;
 import org.kyll.myserver.business.service.CustomerService;
+import org.kyll.myserver.business.service.EmployeeService;
 import org.kyll.myserver.business.vo.CustomerVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -26,6 +27,8 @@ import javax.servlet.http.HttpServletResponse;
 public class CustomerCtrl {
 	@Autowired
 	private CustomerService customerService;
+	@Autowired
+	private EmployeeService employeeService;
 
 	@RequestMapping("/business/customer/dataset.ctrl")
 	public void dataset(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -51,6 +54,10 @@ public class CustomerCtrl {
 		Long id = entityVo.getId();
 		if (id == null) {
 			customer = new Customer();
+			Long employeeId = entityVo.getEmployeeId();
+			if (employeeId != null) {
+				customer.setEmployee(employeeService.get(employeeId));
+			}
 		} else {
 			customer = customerService.get(id);
 		}

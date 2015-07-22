@@ -77,7 +77,11 @@ public class EmployeeCtrl {
 
 	@RequestMapping("/business/employee/tree.ctrl")
 	public void tree(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		JSONArray ja = employeeService.getTreeJson();
+		QueryCondition qc = new QueryCondition();
+		if (!RequestUtils.isAdmin(request)) {
+			qc.setEmployeeId(RequestUtils.getSessionVo(request).getUserId());
+		}
+		JSONArray ja = employeeService.getTreeJson(qc);
 
 		response.setContentType("text/plain");
 		response.getWriter().println(ja.toString());

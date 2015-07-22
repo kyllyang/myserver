@@ -59,9 +59,12 @@ Ext.define('Business.ExpenseStatProjectGridPanel', {
 		});
 
 		this.store.on('beforeload', function(store, operation, eOpts) {
+			this.store.proxy.actionMethods = {read: 'POST'};
+			Ext.apply(this.store.proxy.extraParams, {
+				'qc.employeeId': myServer.isAdmin() ? myServer.getViewport().down('#employeeAreaTreePanel').getSelectedRecordEmployeeId() : myServer.loginUser.id,
+				'qc.areaId': myServer.getViewport().down('#employeeAreaTreePanel').getSelectedRecordAreaId()
+			});
 		}, this);
-
-		this.queryData();
 	},
 	queryData: function() {
 		this.getStore().load();

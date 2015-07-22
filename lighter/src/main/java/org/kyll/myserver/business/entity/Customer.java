@@ -21,6 +21,7 @@ public class Customer implements Serializable {
 	private String email;
 	private String level;
 	private String visitResult;
+	private Employee employee;
 
 	public Customer() {
 	}
@@ -115,5 +116,15 @@ public class Customer implements Serializable {
 
 	public void setVisitResult(String visitResult) {
 		this.visitResult = visitResult;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "EMPLOYEE_ID_")
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 }

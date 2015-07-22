@@ -20,5 +20,5 @@ public interface EmployeeService extends BaseService<Employee, Long> {
 
 	void delete(Long... ids);
 
-	JSONArray getTreeJson();
+	JSONArray getTreeJson(QueryCondition qc);
 }

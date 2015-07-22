@@ -47,6 +47,10 @@ public class ProjectServiceImpl implements ProjectService {
 
     private StringBuilder appendQueryCondition(StringBuilder hql, QueryCondition qc) {
         if (qc != null) {
+            Long employeeId = qc.getEmployeeId();
+            if (employeeId != null) {
+                hql.append(" and t.customer.employee.id = '").append(employeeId).append("'");
+            }
         }
         return hql;
     }

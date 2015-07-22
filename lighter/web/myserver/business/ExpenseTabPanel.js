@@ -30,7 +30,13 @@ Ext.define('Business.ExpenseTabPanel', {
 				layout: 'fit',
 				border: false,
 				items: [Ext.create('Business.AreaGridPanel')]
-			}]
+			}],
+			listeners: {
+				tabchange: function(tabPanel, newCard, oldCard, eOpts) {
+					newCard.down('gridpanel').queryData();
+				},
+				scope: this
+			}
 		});
 		this.callParent();
 	}

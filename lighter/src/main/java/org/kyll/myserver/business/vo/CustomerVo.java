@@ -22,6 +22,8 @@ public class CustomerVo implements Vo<Long> {
 	private String email;
 	private String level;
 	private String visitResult;
+	private Long employeeId;
+	private String employeeName;
 
 	public CustomerVo() {
 	}
@@ -105,5 +107,21 @@ public class CustomerVo implements Vo<Long> {
 
 	public void setVisitResult(String visitResult) {
 		this.visitResult = visitResult;
+	}
+
+	public Long getEmployeeId() {
+		return employeeId;
+	}
+
+	public void setEmployeeId(Long employeeId) {
+		this.employeeId = employeeId;
+	}
+
+	public String getEmployeeName() {
+		return employeeName;
+	}
+
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
 	}
 }

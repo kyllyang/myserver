@@ -7,6 +7,7 @@ import org.apache.commons.lang.math.NumberUtils;
 import org.apache.commons.lang.time.DateUtils;
 import org.kyll.myserver.base.common.paginated.Paginated;
 import org.kyll.myserver.base.sys.vo.SessionVo;
+import org.kyll.myserver.business.entity.Role;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,15 @@ import java.util.*;
  * Date: 2014-11-08 08:39
  */
 public final class RequestUtils {
+	public static boolean isAdmin(HttpServletRequest request) {
+		for (Role role : RequestUtils.getSessionVo(request).getRoleSet()) {
+			if ("ADMIN".equals(role.getCode())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public static SessionVo getSessionVo(HttpServletRequest request) {
 		return (SessionVo) request.getSession().getAttribute(ConstUtils.SESSION_NAME);
 	}

@@ -108,14 +108,21 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public JSONArray getTreeJson() {
+	public JSONArray getTreeJson(QueryCondition qc) {
 		JSONArray ja = new JSONArray();
-		List<Employee> employeeList = employeeDao.find("from Employee t order by t.sort asc");
+
+		StringBuilder hql = new StringBuilder("from Employee t where 1 = 1");
+		Long employeeId = qc.getEmployeeId();
+		if (employeeId != null) {
+			hql.append(" and t.id = '").append(employeeId).append("'");
+		}
+		hql.append(" order by t.sort asc");
+
+		List<Employee> employeeList = employeeDao.find(hql);
 		for (Employee employee : employeeList) {
 			JSONObject jo = new JSONObject();
 			jo.put("id", org.kyll.myserver.base.util.StringUtils.generateUUID() + "_employee_" + employee.getId());
 			jo.put("text", employee.getName());
-		//	jo.put("expanded", true);
 
 			Set<Area> areaSet = employee.getAreaSet();
 			if (areaSet.isEmpty()) {
@@ -128,7 +135,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 					JSONObject child = new JSONObject();
 					child.put("id", org.kyll.myserver.base.util.StringUtils.generateUUID() + "_area_" + area.getId());
 					child.put("text", area.getName());
-				//	child.put("expanded", true);
 					child.put("leaf", true);
 					children.add(child);
 				}

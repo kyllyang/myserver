@@ -59,6 +59,10 @@ public class CustomerServiceImpl implements CustomerService {
 
 	private StringBuilder appendQueryCondition(StringBuilder hql, QueryCondition qc) {
 		if (qc != null) {
+			Long employeeId = qc.getEmployeeId();
+			if (employeeId != null) {
+				hql.append(" and t.employee.id = '").append(employeeId).append("'");
+			}
 		}
 		return hql;
 	}

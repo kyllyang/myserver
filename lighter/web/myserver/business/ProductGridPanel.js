@@ -70,8 +70,6 @@ Ext.define('Business.ProductGridPanel', {
 
 		this.store.on('beforeload', function(store, operation, eOpts) {
 		}, this);
-
-		this.queryData();
 	},
 	doAddEvent: function() {
 		Ext.create('Business.ProductFormWindow', {

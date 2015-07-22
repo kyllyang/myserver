@@ -20,6 +20,7 @@ Ext.define('Business.CustomerFormWindow', {
 			extend: 'Ext.data.Model',
 			fields: [
 				{name: 'id'},
+				{name: 'employeeId'},
 				{name: 'visitDate'},
 				{name: 'companyName'},
 				{name: 'linkMan'},
@@ -132,6 +133,10 @@ Ext.define('Business.CustomerFormWindow', {
 			items: [{
 				xtype: 'hidden',
 				name: 'id'
+			}, {
+				xtype: 'hidden',
+				name: 'employeeId',
+				value: myServer.loginUser.id
 			}, {
 				xtype: 'container',
 				layout: 'column',

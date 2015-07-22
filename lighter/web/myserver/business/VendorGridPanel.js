@@ -50,8 +50,6 @@ Ext.define('Business.VendorGridPanel', {
 			})]
 		});
 		this.callParent();
-
-		this.queryData();
 	},
 	doAddEvent: function() {
 		var record = Ext.ModelManager.create({

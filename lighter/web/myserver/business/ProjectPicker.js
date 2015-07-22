@@ -71,6 +71,12 @@ Ext.define('Business.ProjectPicker', {
 				scope: this
 			}
 		});
+		gridPanel.store.on('beforeload', function(store, operation, eOpts) {
+			gridPanel.store.proxy.actionMethods = {read: 'POST'};
+			Ext.apply(gridPanel.store.proxy.extraParams, {
+				'qc.employeeId': myServer.isAdmin() ? null : myServer.loginUser.id
+			});
+		}, this);
 		return gridPanel;
 	}
 });

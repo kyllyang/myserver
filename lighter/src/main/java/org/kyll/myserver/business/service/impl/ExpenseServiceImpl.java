@@ -38,7 +38,7 @@ public class ExpenseServiceImpl implements ExpenseService {
 
 	@Override
 	public Dataset<Map<String, Object>> statArea(QueryCondition qc, Paginated pg) {
-		return expenseDao.findBySQL(
+		String hql =
 				"select t0.area_id_ areaId,\n" +
 				"       t1.name_ areaName,\n" +
 				"       sum(t0.car_expense_) carExpense,\n" +
@@ -49,13 +49,26 @@ public class ExpenseServiceImpl implements ExpenseService {
 				"  from ms_li_expense t0\n" +
 				"  join ms_li_area t1\n" +
 				"    on t0.area_id_ = t1.id_\n" +
+				"  join ms_li_customer t2\n" +
+				"    on t0.customer_id_ = t2.id_\n" +
+				" where 1 = 1\n";
+		Long employeeId = qc.getEmployeeId();
+		if (employeeId != null) {
+			hql += " and t2.employee_id_ = '" + employeeId + "'";
+		}
+		Long areaId = qc.getAreaId();
+		if (areaId != null) {
+			hql += " and t0.area_id_ = '" + areaId + "'";
+		}
+		hql +=
 				" group by t0.area_id_, t1.name_\n" +
-				" order by t0.area_id_\n", pg);
+				" order by t0.area_id_\n";
+		return expenseDao.findBySQL(hql, pg);
 	}
 
 	@Override
 	public Dataset<Map<String, Object>> statCustomer(QueryCondition qc, Paginated pg) {
-		return expenseDao.findBySQL(
+		String hql =
 				"select t0.customer_id_ customerId,\n" +
 				"       t1.company_name_ customerCompanyName,\n" +
 				"       sum(t0.car_expense_) carExpense,\n" +
@@ -66,13 +79,24 @@ public class ExpenseServiceImpl implements ExpenseService {
 				"  from ms_li_expense t0\n" +
 				"  join ms_li_customer t1\n" +
 				"    on t0.customer_id_ = t1.id_\n" +
+				" where 1 = 1\n";
+		Long employeeId = qc.getEmployeeId();
+		if (employeeId != null) {
+			hql += " and t1.employee_id_ = '" + employeeId + "'";
+		}
+		Long areaId = qc.getAreaId();
+		if (areaId != null) {
+			hql += " and t0.area_id_ = '" + areaId + "'";
+		}
+		hql +=
 				" group by t0.customer_id_, t1.company_name_\n" +
-				" order by t0.customer_id_\n", pg);
+				" order by t0.customer_id_\n";
+		return expenseDao.findBySQL(hql, pg);
 	}
 
 	@Override
 	public Dataset<Map<String, Object>> statProject(QueryCondition qc, Paginated pg) {
-		return expenseDao.findBySQL(
+		String hql =
 				"select t0.project_id_ projectId,\n" +
 				"       t1.name_ projectName,\n" +
 				"       sum(t0.car_expense_) carExpense,\n" +
@@ -83,8 +107,21 @@ public class ExpenseServiceImpl implements ExpenseService {
 				"  from ms_li_expense t0\n" +
 				"  join ms_li_project t1\n" +
 				"    on t0.project_id_ = t1.id_\n" +
+				"  join ms_li_customer t2\n" +
+				"    on t1.customer_id_ = t2.id_\n" +
+				" where 1 = 1\n";
+		Long employeeId = qc.getEmployeeId();
+		if (employeeId != null) {
+			hql += " and t2.employee_id_ = '" + employeeId + "'\n";
+		}
+		Long areaId = qc.getAreaId();
+		if (areaId != null) {
+			hql += " and t0.area_id_ = '" + areaId + "'";
+		}
+		hql +=
 				" group by t0.project_id_, t1.name_\n" +
-				" order by t0.project_id_\n", pg);
+				" order by t0.project_id_\n";
+		return expenseDao.findBySQL(hql, pg);
 	}
 
 	@Override
@@ -99,6 +136,14 @@ public class ExpenseServiceImpl implements ExpenseService {
 
 	private StringBuilder appendQueryCondition(StringBuilder hql, QueryCondition qc) {
 		if (qc != null) {
+			Long employeeId = qc.getEmployeeId();
+			if (employeeId != null) {
+				hql.append(" and (t.customer.employee.id = '").append(employeeId).append("' or t.project.customer.employee.id = '").append(employeeId).append("')");
+			}
+			Long areaId = qc.getAreaId();
+			if (areaId != null) {
+				hql.append(" and t.area.id = '").append(areaId).append("'");
+			}
 		}
 		return hql;
 	}

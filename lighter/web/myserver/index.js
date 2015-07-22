@@ -34,6 +34,14 @@ var myServer = {
 	getViewport: function() {
 		return this.viewport;
 	},
+	isAdmin: function() {
+		for (var i = 0; i < this.loginUser.roles.length; i++) {
+			if ('ADMIN' == this.loginUser.roles[i].code) {
+				return true;
+			}
+		}
+		return false;
+	},
 	hasPrivilege: function(roleCode) {
 		var result = false;
 		for (var i = 0; i < this.loginUser.roles.length; i++) {
@@ -94,7 +102,13 @@ Ext.onReady(function() {
 					border: false,
 					hidden: !myServer.hasPrivilege('USER'),
 					items: [Ext.create('Business.EmployeeGridPanel')]
-				}]
+				}],
+				listeners: {
+					tabchange: function(tabPanel, newCard, oldCard, eOpts) {
+						newCard.down('gridpanel').queryData();
+					},
+					scope: this
+				}
 			})]
 		}]
 	}));

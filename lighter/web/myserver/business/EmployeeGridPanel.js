@@ -102,8 +102,6 @@ Ext.define('Business.EmployeeGridPanel', {
 				'qc.username': form.findField('username').getValue()
 			});
 		}, this);
-
-		this.queryData();
 	},
 	doAddEvent: function() {
 		Ext.create('Business.EmployeeFormWindow', {

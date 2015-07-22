@@ -139,7 +139,7 @@ CREATE TABLE `ms_li_area` (
   `NAME_` varchar(255) default NULL,
   PRIMARY KEY  (`ID_`),
   UNIQUE KEY `unique_ID_` (`ID_`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -148,7 +148,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `ms_li_area` WRITE;
 /*!40000 ALTER TABLE `ms_li_area` DISABLE KEYS */;
-INSERT INTO `ms_li_area` VALUES (3,'长春市');
+INSERT INTO `ms_li_area` VALUES (4,'延边朝鲜族自治州'),(3,'长春市'),(5,'通化市'),(6,'松原市'),(7,'四平市'),(8,'辽源市'),(9,'吉林市'),(10,'白山市'),(11,'白城市');
 /*!40000 ALTER TABLE `ms_li_area` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -170,9 +170,10 @@ CREATE TABLE `ms_li_customer` (
   `EMAIL_` varchar(255) default NULL,
   `LEVEL_` varchar(255) default NULL,
   `VISIT_RESULT_` varchar(255) default NULL,
+  `EMPLOYEE_ID_` int(11) default NULL,
   PRIMARY KEY  (`ID_`),
   UNIQUE KEY `unique_ID_` (`ID_`)
-) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -181,7 +182,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `ms_li_customer` WRITE;
 /*!40000 ALTER TABLE `ms_li_customer` DISABLE KEYS */;
-INSERT INTO `ms_li_customer` VALUES (20,'2015-07-15','单位名称2','联系人2','职务2','123456','234567','a@b.com','等级2','拜访结果2'),(16,'2015-07-14','单位名称1','联系人1','职务1','123456','234567','a@b.com','等级1','拜访结果1');
+INSERT INTO `ms_li_customer` VALUES (20,'2015-07-15','单位名称2','联系人2','职务2','123456','234567','a@b.com','等级2','拜访结果2',22),(16,'2015-07-14','单位名称1','联系人1','职务1','123456','234567','a@b.com','等级1','拜访结果1',22),(22,'2015-07-22','单位名称3','联系人3','职务3','123456','','','','',21);
 /*!40000 ALTER TABLE `ms_li_customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -205,7 +206,7 @@ CREATE TABLE `ms_li_customer_trace` (
   `CUSTOMER_ID_` int(11) default NULL,
   PRIMARY KEY  (`ID_`),
   UNIQUE KEY `unique_ID_` (`ID_`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -214,8 +215,85 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `ms_li_customer_trace` WRITE;
 /*!40000 ALTER TABLE `ms_li_customer_trace` DISABLE KEYS */;
-INSERT INTO `ms_li_customer_trace` VALUES (2,'2015-07-14','联系人1','职务1','123456','234567','a@b.com','等级1','拜访结果1',15),(3,'2015-07-14','联系人11','职务11','1234561','2345671','a1@b.com','等级11','拜访结果11',16),(4,'2015-07-15','联系人2','职务2','123456','234567','a@b.com','等级2','拜访结果2',20),(7,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,21);
+INSERT INTO `ms_li_customer_trace` VALUES (2,'2015-07-14','联系人1','职务1','123456','234567','a@b.com','等级1','拜访结果1',15),(3,'2015-07-14','联系人11','职务11','1234561','2345671','a1@b.com','等级11','拜访结果11',16),(4,'2015-07-15','联系人2','职务2','123456','234567','a@b.com','等级2','拜访结果2',20),(7,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,21),(8,'2015-07-22','联系人3','职务3','','','','','',22),(9,'2015-07-22','联系人','职务','','','','','',23);
 /*!40000 ALTER TABLE `ms_li_customer_trace` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ms_li_employee`
+--
+
+DROP TABLE IF EXISTS `ms_li_employee`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `ms_li_employee` (
+  `id_` int(11) NOT NULL auto_increment,
+  `sort_` int(11) default NULL,
+  `username_` varchar(255) NOT NULL,
+  `password_` varchar(255) NOT NULL,
+  `freeze_` int(11) NOT NULL,
+  `name_` varchar(255) NOT NULL,
+  `department_id_` int(11) default NULL,
+  `email_` varchar(255) default NULL,
+  PRIMARY KEY  (`id_`),
+  UNIQUE KEY `unique_id_` (`id_`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `ms_li_employee`
+--
+
+LOCK TABLES `ms_li_employee` WRITE;
+/*!40000 ALTER TABLE `ms_li_employee` DISABLE KEYS */;
+INSERT INTO `ms_li_employee` VALUES (1,1,'admin','40bd001563085fc35165329ea1ff5c5ecbdbbeef',0,'杨磊',1,'kyllyang@gmail.com'),(21,2,'zzw','40bd001563085fc35165329ea1ff5c5ecbdbbeef',0,'郑忠伟',NULL,''),(22,3,'sqf','40bd001563085fc35165329ea1ff5c5ecbdbbeef',0,'孙庆福',NULL,'');
+/*!40000 ALTER TABLE `ms_li_employee` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ms_li_employee_area`
+--
+
+DROP TABLE IF EXISTS `ms_li_employee_area`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `ms_li_employee_area` (
+  `employee_id_` int(11) NOT NULL default '0',
+  `area_id_` int(11) NOT NULL default '0'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `ms_li_employee_area`
+--
+
+LOCK TABLES `ms_li_employee_area` WRITE;
+/*!40000 ALTER TABLE `ms_li_employee_area` DISABLE KEYS */;
+INSERT INTO `ms_li_employee_area` VALUES (22,3),(22,5),(21,6),(21,3);
+/*!40000 ALTER TABLE `ms_li_employee_area` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ms_li_employee_role`
+--
+
+DROP TABLE IF EXISTS `ms_li_employee_role`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `ms_li_employee_role` (
+  `employee_id_` int(11) NOT NULL default '0',
+  `role_id_` int(11) NOT NULL default '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `ms_li_employee_role`
+--
+
+LOCK TABLES `ms_li_employee_role` WRITE;
+/*!40000 ALTER TABLE `ms_li_employee_role` DISABLE KEYS */;
+INSERT INTO `ms_li_employee_role` VALUES (1,3),(1,6),(1,7),(1,5),(21,5),(22,5);
+/*!40000 ALTER TABLE `ms_li_employee_role` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -238,7 +316,7 @@ CREATE TABLE `ms_li_expense` (
   `PROJECT_ID_` int(11) default NULL,
   PRIMARY KEY  (`ID_`),
   UNIQUE KEY `unique_ID_` (`ID_`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -247,7 +325,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `ms_li_expense` WRITE;
 /*!40000 ALTER TABLE `ms_li_expense` DISABLE KEYS */;
-INSERT INTO `ms_li_expense` VALUES (1,'2015-07-01','2015-07-15','10.13','20.00','30.00','40.00',3,16,4);
+INSERT INTO `ms_li_expense` VALUES (1,'2015-07-01','2015-07-15','10.13','20.00','30.00','40.00',3,16,4),(3,'2015-07-22','2015-07-22','12.00','23.00','34.00','45.00',3,22,5),(4,'2015-07-22','2015-07-22','11.00','22.00','44.00','33.00',6,22,5);
 /*!40000 ALTER TABLE `ms_li_expense` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -303,7 +381,7 @@ CREATE TABLE `ms_li_project` (
   `FUND_` varchar(255) default NULL,
   PRIMARY KEY  (`ID_`),
   UNIQUE KEY `unique_ID_` (`ID_`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -312,7 +390,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `ms_li_project` WRITE;
 /*!40000 ALTER TABLE `ms_li_project` DISABLE KEYS */;
-INSERT INTO `ms_li_project` VALUES (3,16,'项目1','联系人1','123456','资金情况1'),(4,16,'项目2','联系人2','123456','资金情况2');
+INSERT INTO `ms_li_project` VALUES (3,16,'项目1','联系人1','123456','资金情况1'),(4,16,'项目2','联系人2','123456','资金情况2'),(5,22,'项目zzw','联系人zzw','123456','');
 /*!40000 ALTER TABLE `ms_li_project` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -333,7 +411,7 @@ CREATE TABLE `ms_li_project_trace` (
   `PROJECT_ID_` int(11) default NULL,
   PRIMARY KEY  (`ID_`),
   UNIQUE KEY `unique_ID_` (`ID_`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -342,8 +420,36 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `ms_li_project_trace` WRITE;
 /*!40000 ALTER TABLE `ms_li_project_trace` DISABLE KEYS */;
-INSERT INTO `ms_li_project_trace` VALUES (2,'项目联系人1','123456','100万','跟踪成果1','项目成功率1',3);
+INSERT INTO `ms_li_project_trace` VALUES (2,'项目联系人1','123456','100万','跟踪成果1','项目成功率1',3),(3,'联系人zzw','123456','','','',5);
 /*!40000 ALTER TABLE `ms_li_project_trace` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ms_li_role`
+--
+
+DROP TABLE IF EXISTS `ms_li_role`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `ms_li_role` (
+  `id_` int(11) NOT NULL auto_increment,
+  `name_` varchar(255) default NULL,
+  `description_` varchar(255) default NULL,
+  `sort_` int(11) default NULL,
+  `code_` varchar(255) default NULL,
+  PRIMARY KEY  (`id_`),
+  UNIQUE KEY `unique_id_` (`id_`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `ms_li_role`
+--
+
+LOCK TABLES `ms_li_role` WRITE;
+/*!40000 ALTER TABLE `ms_li_role` DISABLE KEYS */;
+INSERT INTO `ms_li_role` VALUES (3,'系统管理员','x',1,'ADMIN'),(5,'客户信息维护','',2,'CUSTOMER'),(6,'用户信息维护',NULL,4,'USER'),(7,'产品信息维护',NULL,3,'PRODUCT');
+/*!40000 ALTER TABLE `ms_li_role` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -515,88 +621,6 @@ INSERT INTO `ms_sys_dict_item` VALUES (12,'2','功能',13,2),(13,'1','模块',13
 UNLOCK TABLES;
 
 --
--- Table structure for table `ms_sys_employee`
---
-
-DROP TABLE IF EXISTS `ms_sys_employee`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
-CREATE TABLE `ms_sys_employee` (
-  `id_` int(11) NOT NULL auto_increment,
-  `sort_` int(11) default NULL,
-  `username_` varchar(255) NOT NULL,
-  `password_` varchar(255) NOT NULL,
-  `freeze_` int(11) NOT NULL,
-  `name_` varchar(255) NOT NULL,
-  `department_id_` int(11) default NULL,
-  `email_` varchar(255) default NULL,
-  PRIMARY KEY  (`id_`),
-  UNIQUE KEY `unique_id_` (`id_`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
-
---
--- Dumping data for table `ms_sys_employee`
---
-
-LOCK TABLES `ms_sys_employee` WRITE;
-/*!40000 ALTER TABLE `ms_sys_employee` DISABLE KEYS */;
-INSERT INTO `ms_sys_employee` VALUES (1,1,'admin','40bd001563085fc35165329ea1ff5c5ecbdbbeef',0,'杨磊',1,'kyllyang@gmail.com');
-/*!40000 ALTER TABLE `ms_sys_employee` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `ms_sys_employee_role`
---
-
-DROP TABLE IF EXISTS `ms_sys_employee_role`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
-CREATE TABLE `ms_sys_employee_role` (
-  `employee_id_` int(11) NOT NULL default '0',
-  `role_id_` int(11) NOT NULL default '0',
-  PRIMARY KEY  (`employee_id_`,`role_id_`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
-
---
--- Dumping data for table `ms_sys_employee_role`
---
-
-LOCK TABLES `ms_sys_employee_role` WRITE;
-/*!40000 ALTER TABLE `ms_sys_employee_role` DISABLE KEYS */;
-INSERT INTO `ms_sys_employee_role` VALUES (1,3);
-/*!40000 ALTER TABLE `ms_sys_employee_role` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `ms_sys_role`
---
-
-DROP TABLE IF EXISTS `ms_sys_role`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
-CREATE TABLE `ms_sys_role` (
-  `id_` int(11) NOT NULL auto_increment,
-  `name_` varchar(255) default NULL,
-  `description_` varchar(255) default NULL,
-  `sort_` int(11) default NULL,
-  PRIMARY KEY  (`id_`),
-  UNIQUE KEY `unique_id_` (`id_`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
-
---
--- Dumping data for table `ms_sys_role`
---
-
-LOCK TABLES `ms_sys_role` WRITE;
-/*!40000 ALTER TABLE `ms_sys_role` DISABLE KEYS */;
-INSERT INTO `ms_sys_role` VALUES (3,'系统管理员','x',1),(5,'餐饮订单管理员','',2);
-/*!40000 ALTER TABLE `ms_sys_role` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `ms_sys_role_function`
 --
 
@@ -629,4 +653,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-07-15 12:56:05
+-- Dump completed on 2015-07-22  5:46:20
