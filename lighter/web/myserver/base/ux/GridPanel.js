@@ -66,7 +66,13 @@ Ext.define('Base.ux.GridPanel', {
 		if (this.enablePaging) {
 			this.bbar = Ext.create('Ext.toolbar.Paging', {
 				store: this.store,
-				displayInfo: true
+				displayInfo: true,
+				items: [{
+					xtype: 'button',
+					icon: ctx + '/resource/image/icon/excel.png',
+					handler: this.exportExcelEventHandler,
+					scope: this
+				}]
 			});
 		}
 
@@ -229,6 +235,11 @@ Ext.define('Base.ux.GridPanel', {
 				Ext.Msg.alert("系统提示", "请选择一条数据！");
 			}
 		}
+	},
+	exportExcelEventHandler: function() {
+		Ext.create('Base.ux.ExcelDialog', {
+			grid: this
+		}).show();
 	}
 });
 
