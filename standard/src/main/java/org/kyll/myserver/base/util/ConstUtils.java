@@ -42,6 +42,22 @@ public final class ConstUtils {
 	 * HttpServletRequest 请求字符串中作为分页条件的参数名称 排序方向
 	 */
 	public static final String PAGINATED_DIRECTION = "direction";
+	/**
+	 * 常用日期时间格式 年-月-日 时:分:秒.毫秒
+	 */
+	public static final String DATETIME_FORMAT_FULL = "yyyy-MM-dd HH:mm:ss.SSS";
+	/**
+	 * 常用日期时间格式 年-月-日 时:分:秒
+	 */
+	public static final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+	/**
+	 * 常用日期 年-月-日
+	 */
+	public static final String DATE_FORMAT = "yyyy-MM-dd";
+	/**
+	 * 常用时间格式 时:分:秒
+	 */
+	public static final String TIME_FORMAT = "HH:mm:ss";
 
 	private static ApplicationContext applicationContext;
 	private static boolean assignApplicationContext = false;

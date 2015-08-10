@@ -1,13 +1,16 @@
 package org.kyll.myserver.base.common;
 
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.HibernateException;
 import org.hibernate.LockMode;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.transform.Transformers;
 import org.kyll.myserver.base.common.paginated.Dataset;
 import org.kyll.myserver.base.common.paginated.Helper;
 import org.kyll.myserver.base.common.paginated.Paginated;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 
 import java.io.Serializable;
@@ -203,7 +206,7 @@ public class BaseHibernateDao<T extends Serializable, PK extends Serializable> i
 		int totalCount = getHibernateTemplate().execute(session -> ((Number) session.createQuery(finalCountHql).uniqueResult()).intValue());
 		Dataset<T> dataset = Helper.makeDateset(paginated, totalCount, null);
 		if (totalCount > 0) {
-			dataset.setDataList(getHibernateTemplate().execute(session -> session.createQuery(hql).setFirstResult(paginated.getStartRecord()).setMaxResults(paginated.getMaxRecord()).list()));
+			dataset.setDataList((List<T>) getHibernateTemplate().execute(session -> session.createQuery(hql).setFirstResult(paginated.getStartRecord()).setMaxResults(paginated.getMaxRecord()).list()));
 		}
 		return dataset;
 	}
@@ -221,7 +224,7 @@ public class BaseHibernateDao<T extends Serializable, PK extends Serializable> i
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Map<String, Object>> findBySQL(String sql) {
-		return getHibernateTemplate().execute(session -> session.createSQLQuery(sql).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP).list());
+		return (List<Map<String, Object>>) getHibernateTemplate().execute(session -> session.createSQLQuery(sql).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP).list());
 	}
 
 	@SuppressWarnings("unchecked")
