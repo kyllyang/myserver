@@ -25,8 +25,22 @@ Ext.define('Base.gis.MapContainer', {
 				zoom: 2
 			}),
 			controls: ol.control.defaults().extend([
-				new ol.control.ScaleLine()
-			])
+				new ol.control.FullScreen(),
+				new ol.control.MousePosition(),
+				new ol.control.OverviewMap(),
+				new ol.control.ScaleLine(),
+				new ol.control.ZoomSlider(),
+				new ol.control.ZoomToExtent()
+			])/*,
+			interactions: [
+				new ol.interaction.DoubleClickZoom(),
+				new ol.interaction.DragAndDrop(),
+				new ol.interaction.KeyboardPan(),
+				new ol.interaction.KeyboardZoom(),
+				new ol.interaction.MouseWheelZoom(),
+				new ol.interaction.Pointer(),
+				new ol.interaction.Select()
+			]*/
 		});
 	}
 });
