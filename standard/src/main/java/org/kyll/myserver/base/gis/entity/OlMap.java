@@ -15,7 +15,6 @@ public class OlMap implements Serializable {
 	private String loadTilesWhileInteracting;// boolean 0: false; 1: true
 	private String logo;
 	private String renderer;// Canvas, DOM, WebGL
-	private String name;
 
 	public OlMap() {
 	}
@@ -65,14 +64,5 @@ public class OlMap implements Serializable {
 
 	public void setRenderer(String renderer) {
 		this.renderer = renderer;
-	}
-
-	@Column(name = "NAME_")
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 }

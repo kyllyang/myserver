@@ -14,7 +14,6 @@ public class OlMapVo implements Vo<Long> {
 	private String loadTilesWhileInteractingText;
 	private String logo;
 	private String renderer;
-	private String name;
 
 	public OlMapVo() {
 	}
@@ -74,13 +73,5 @@ public class OlMapVo implements Vo<Long> {
 
 	public void setRenderer(String renderer) {
 		this.renderer = renderer;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 }

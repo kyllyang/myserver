@@ -27,8 +27,6 @@ public class OlMapCtrl {
 	@Autowired
 	private OlMapService olMapService;
 
-	private static Map<String, String> typeDictMap;
-
 	@RequestMapping("/gis/map/dataset.ctrl")
 	public void dataset(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Dataset<OlMap> dataset = olMapService.get(RequestUtils.getQueryCondition(request, QueryCondition.class), RequestUtils.getPaginated(request));
