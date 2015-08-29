@@ -191,7 +191,6 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 	rendererDragDropContainer: function(container) {
 		container.dragZone = Ext.create('Ext.dd.DragZone', container.getEl(), {
 			getDragData: function(e) {
-
 				var sourceEl = e.getTarget(container.itemSelector, 10), d;
 				if (sourceEl) {
 					d = sourceEl.cloneNode(true);
