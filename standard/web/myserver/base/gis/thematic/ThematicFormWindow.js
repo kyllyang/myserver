@@ -80,6 +80,64 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			labelSeparator: '：',
 			qtip: 'By default, Canvas, DOM and WebGL renderers are tested for support in that order, and the first supported used. Note that at present only the Canvas renderer supports vector data.'
 		});
+		var projectionText = Ext.create('Ext.form.field.Text', {
+			fieldLabel: '<span style="color: #FF0000;">*</span>投影',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'projection',
+			value: 'EPSG:3857',
+			maxLength: 100,
+			allowBlank: false,
+			qtip: 'The projection. Default is EPSG:3857 (Spherical Mercator).'
+		});
+		var centerText = Ext.create('Ext.form.field.Text', {
+			fieldLabel: '<span style="color: #FF0000;">*</span>中心点',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'center',
+			maxLength: 100,
+			allowBlank: false,
+			qtip: 'The initial center for the view. The coordinate system for the center is specified with the projection option. Default is undefined, and layer sources will not be fetched if this is not set.'
+		});
+		var extentText = Ext.create('Ext.form.field.Text', {
+			fieldLabel: '<span style="color: #FF0000;">*</span>范围',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'extent',
+			maxLength: 100,
+			allowBlank: false,
+			qtip: 'The extent that constrains the center, in other words, center cannot be set outside this extent. Default is undefined.'
+		});
+		var resolutionsTextarea = Ext.create('Ext.form.field.TextArea', {
+			columnWidth: 0.5,
+			fieldLabel: '<span style="color: #FF0000;">*</span>分辨率',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'resolutions',
+			rows: 10,
+			maxLength: 255,
+			allowBlank: false,
+			listeners: {
+				change: function(textarea, newValue, oldValue, eOpts) {
+
+				},
+				scope: this
+			},
+			qtip: 'Resolutions to determine the resolution constraint. If set the maxResolution, minResolution, minZoom, maxZoom, and zoomFactor options are ignored.'
+		});
+		var resolutionSlider = Ext.create('Ext.slider.Single', {
+			columnWidth: 0.5,
+			fieldLabel: '<span style="color: #FF0000;">*</span>默认分辨率',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'resolution',
+			vertical: true,
+			height: 150,
+			increment: 1,
+			minValue: 1,
+			maxValue: 10,
+			qtip: 'The initial resolution for the view. The units are projection units per pixel (e.g. meters per pixel). An alternative to setting this is to set zoom. Default is undefined, and layer sources will not be fetched if neither this nor zoom are defined.'
+		});
 
 		var formPanel = Ext.create('Ext.form.Panel', {
 			itemId: 'editForm',
@@ -148,6 +206,15 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 							scope: this
 						}
 					}]
+				}]
+			}, {
+				xtype: 'fieldset',
+				title: '视图',
+				layout: 'form',
+				items: [projectionText, centerText, extentText, {
+					xtype: 'container',
+					layout: 'column',
+					items: [resolutionsTextarea, resolutionSlider]
 				}]
 			}],
 			buttons:[{
