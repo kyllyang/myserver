@@ -11,7 +11,8 @@ import java.io.Serializable;
 @Table(name = "MS_GIS_OL_LAYER")
 public class OlLayer implements Serializable {
 	private Long id;
-	private OlMap olMap;
+	private String name;
+	private Integer sort;
 	private String brightness;
 	private String contrast;
 	private String hue;
@@ -38,14 +39,22 @@ public class OlLayer implements Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "MAP_ID_")
-	public OlMap getOlMap() {
-		return olMap;
+	@Column(name = "NAME_")
+	public String getName() {
+		return name;
 	}
 
-	public void setOlMap(OlMap olMap) {
-		this.olMap = olMap;
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Column(name = "SORT_")
+	public Integer getSort() {
+		return sort;
+	}
+
+	public void setSort(Integer sort) {
+		this.sort = sort;
 	}
 
 	@Column(name = "BRIGHTNESS_")

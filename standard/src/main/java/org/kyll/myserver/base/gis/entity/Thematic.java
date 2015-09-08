@@ -13,7 +13,6 @@ public class Thematic implements Serializable {
 	private Long id;
 	private String name;
 	private Integer sort;
-	private OlMap olMap;
 
 	public Thematic() {
 	}
@@ -45,15 +44,5 @@ public class Thematic implements Serializable {
 
 	public void setSort(Integer sort) {
 		this.sort = sort;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "MAP_ID_")
-	public OlMap getOlMap() {
-		return olMap;
-	}
-
-	public void setOlMap(OlMap olMap) {
-		this.olMap = olMap;
 	}
 }
