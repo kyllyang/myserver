@@ -16,6 +16,8 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 	initComponent: function() {
 		this.callParent();
 
+		var that = this;
+
 		Ext.define('FormModel', {
 			extend: 'Ext.data.Model',
 			fields: [
@@ -25,7 +27,12 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 				{name: 'mapLogo'},
 				{name: 'mapLoadTilesWhileAnimating'},
 				{name: 'mapLoadTilesWhileInteracting'},
-				{name: 'renderer'}
+				{name: 'mapRenderer'},
+				{name: 'viewProjection'},
+				{name: 'viewCenter'},
+				{name: 'viewExtent'},
+				{name: 'viewResolutions'},
+				{name: 'viewResolution'}
 			]
 		});
 
@@ -84,7 +91,7 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			fieldLabel: '<span style="color: #FF0000;">*</span>投影',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'projection',
+			name: 'viewProjection',
 			value: 'EPSG:3857',
 			maxLength: 100,
 			allowBlank: false,
@@ -94,7 +101,7 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			fieldLabel: '<span style="color: #FF0000;">*</span>中心点',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'center',
+			name: 'viewCenter',
 			maxLength: 100,
 			allowBlank: false,
 			qtip: 'The initial center for the view. The coordinate system for the center is specified with the projection option. Default is undefined, and layer sources will not be fetched if this is not set.'
@@ -103,7 +110,7 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			fieldLabel: '<span style="color: #FF0000;">*</span>范围',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'extent',
+			name: 'viewExtent',
 			maxLength: 100,
 			allowBlank: false,
 			qtip: 'The extent that constrains the center, in other words, center cannot be set outside this extent. Default is undefined.'
@@ -113,13 +120,17 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			fieldLabel: '<span style="color: #FF0000;">*</span>分辨率',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'resolutions',
+			name: 'viewResolutions',
 			rows: 10,
 			maxLength: 255,
 			allowBlank: false,
 			listeners: {
 				change: function(textarea, newValue, oldValue, eOpts) {
-
+					if (!Ext.isEmpty(newValue)) {
+						var strs = newValue.split(',');
+						resolutionSlider.setMaxValue(strs.length > 0 ? strs.length : 1);
+						this.getComponent('editForm').getForm().findField('viewResolution').setValue(strs[strs.length - 1]);
+					}
 				},
 				scope: this
 			},
@@ -130,12 +141,19 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			fieldLabel: '<span style="color: #FF0000;">*</span>默认分辨率',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'resolution',
 			vertical: true,
 			height: 150,
 			increment: 1,
 			minValue: 1,
 			maxValue: 10,
+			tipText: function(thumb) {
+				var str = resolutionsTextarea.getValue();
+				if (!Ext.isEmpty(str)) {
+					var strs = str.split(',');
+					that.getComponent('editForm').getForm().findField('viewResolution').setValue(strs[strs.length - thumb.value]);
+					return strs[strs.length - thumb.value];
+				}
+			},
 			qtip: 'The initial resolution for the view. The units are projection units per pixel (e.g. meters per pixel). An alternative to setting this is to set zoom. Default is undefined, and layer sources will not be fetched if neither this nor zoom are defined.'
 		});
 
@@ -154,7 +172,10 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 				name: 'id'
 			}, {
 				xtype: 'hidden',
-				name: 'renderer'
+				name: 'mapRenderer'
+			}, {
+				xtype: 'hidden',
+				name: 'viewResolution'
 			}, {
 				xtype: 'container',
 				layout: 'column',
@@ -304,13 +325,15 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 		for (var i = 0; i < container.items.length; i++) {
 			renderers.push(container.items.get(i).getText());
 		}
-		this.getComponent('editForm').getForm().findField('renderer').setValue(renderers.join(','));
+		this.getComponent('editForm').getForm().findField('mapRenderer').setValue(renderers.join(','));
 	},
 	saveForm: function() {
 		var form = this.getComponent('editForm').getForm();
 		if (form.isValid()) {
 			this.saveRenderer();
 
+			alert(form.findField('mapRenderer').getValue() + ', ' + form.findField('viewResolution').getValue());
+			return;
 			form.submit({
 				url: ctx + '/gis/thematic/save.ctrl',
 				waitMsg: '正在保存数据，请稍候...',
