@@ -88,7 +88,7 @@ CREATE TABLE `ms_app_module` (
   `func_code_` varchar(20000) default NULL,
   PRIMARY KEY  (`id_`),
   UNIQUE KEY `unique_id_` (`id_`)
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -97,7 +97,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `ms_app_module` WRITE;
 /*!40000 ALTER TABLE `ms_app_module` DISABLE KEYS */;
-INSERT INTO `ms_app_module` VALUES (27,41,'系统管理','',3,'1',NULL,NULL),(29,27,'角色管理','',2,'2','1','{className: \'Base.sys.role.RoleContainer\', config: {}}'),(33,27,'组织机构','',1,'2','1','{className: \'Base.sys.org.OrgContainer\', config: {}}'),(36,27,'数据字典','',3,'2','1','{className: \'Base.sys.dict.DictContainer\', config: {}}'),(37,NULL,'餐饮订单','',1,'1',NULL,NULL),(38,37,'餐厅菜品维护','',1,'2','1','{className: \'Meaord.restaurant.RestaurantGridPanel\', config: {}}'),(39,41,'应用管理','',2,'1',NULL,NULL),(40,39,'模块管理','',1,'2','1','{className: \'Base.app.module.ModuleContainer\', config: {}}'),(41,NULL,'运行维护','',1,'1',NULL,NULL),(42,41,'地图管理','',1,'1',NULL,NULL),(43,39,'菜单管理','',2,'2','1','{className: \'Base.app.menu.MenuContainer\', config: {}}'),(58,53,'aa','',1,'1',NULL,NULL),(59,42,'专题管理','',3,'2','1','{className: \'Base.gis.thematic.ThematicContainer\', config: {}}'),(60,27,'附件管理','',4,'2','1','{className: \'Base.sys.attachment.AttachmentContainer\', config: {}}'),(61,27,'系统配置','',5,'2','1','{className: \'Base.sys.config.ConfigContainer\', config: {}}'),(62,42,'图层配置','',1,'2','1','{className: \'Base.gis.layer.LayerContainer\', config: {}}'),(63,42,'地图配置','',2,'2','1','{className: \'Base.gis.map.MapContainer\', config: {}}');
+INSERT INTO `ms_app_module` VALUES (27,41,'系统管理','',3,'1',NULL,NULL),(29,27,'角色管理','',2,'2','1','{className: \'Base.sys.role.RoleContainer\', config: {}}'),(33,27,'组织机构','',1,'2','1','{className: \'Base.sys.org.OrgContainer\', config: {}}'),(36,27,'数据字典','',3,'2','1','{className: \'Base.sys.dict.DictContainer\', config: {}}'),(37,NULL,'餐饮订单','',1,'1',NULL,NULL),(38,37,'餐厅菜品维护','',1,'2','1','{className: \'Meaord.restaurant.RestaurantGridPanel\', config: {}}'),(39,41,'应用管理','',2,'1',NULL,NULL),(40,39,'模块管理','',1,'2','1','{className: \'Base.app.module.ModuleContainer\', config: {}}'),(41,NULL,'运行维护','',1,'1',NULL,NULL),(42,41,'地图管理','',1,'1',NULL,NULL),(43,39,'菜单管理','',2,'2','1','{className: \'Base.app.menu.MenuContainer\', config: {}}'),(58,53,'aa','',1,'1',NULL,NULL),(59,42,'专题管理','',3,'2','1','{className: \'Base.gis.thematic.ThematicContainer\', config: {}}'),(60,27,'附件管理','',4,'2','1','{className: \'Base.sys.attachment.AttachmentContainer\', config: {}}'),(61,27,'系统配置','',5,'2','1','{className: \'Base.sys.config.ConfigContainer\', config: {}}'),(62,42,'图层配置','',1,'2','1','{className: \'Base.gis.layer.LayerContainer\', config: {}}');
 /*!40000 ALTER TABLE `ms_app_module` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -213,9 +213,16 @@ CREATE TABLE `ms_gis_ol_layer` (
   `max_resolution_` varchar(255) default NULL,
   `source_class_name_` varchar(255) default NULL,
   `layer_class_name_` varchar(255) default NULL,
+  `name_` varchar(255) default NULL,
+  `sort_` int(11) default NULL,
+  `preload_` varchar(255) default NULL,
+  `use_interim_tiles_on_error_` varchar(255) default NULL,
+  `update_while_animating_` varchar(255) default NULL,
+  `update_while_interacting_` varchar(255) default NULL,
+  `render_buffer_` varchar(255) default NULL,
   PRIMARY KEY  (`id_`),
   UNIQUE KEY `id__UNIQUE` (`id_`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -224,6 +231,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `ms_gis_ol_layer` WRITE;
 /*!40000 ALTER TABLE `ms_gis_ol_layer` DISABLE KEYS */;
+INSERT INTO `ms_gis_ol_layer` VALUES (1,'0','1','0','1','1','1','','','',NULL,'ol.layer.Tile','图层1',1,'0','1',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `ms_gis_ol_layer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -241,6 +249,7 @@ CREATE TABLE `ms_gis_ol_map` (
   `logo_` varchar(255) default NULL,
   `renderer_` varchar(255) default NULL,
   `name_` varchar(255) default NULL,
+  `thematic_id_` int(11) default NULL,
   PRIMARY KEY  (`id_`),
   UNIQUE KEY `unique_id_` (`id_`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -337,8 +346,6 @@ CREATE TABLE `ms_gis_thematic` (
   `id_` int(11) NOT NULL auto_increment,
   `name_` varchar(255) default NULL,
   `sort_` int(11) default NULL,
-  `map_id_` int(11) default NULL,
-  PRIMARY KEY  (`id_`),
   UNIQUE KEY `unique_id_` (`id_`)
 ) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
@@ -349,7 +356,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `ms_gis_thematic` WRITE;
 /*!40000 ALTER TABLE `ms_gis_thematic` DISABLE KEYS */;
-INSERT INTO `ms_gis_thematic` VALUES (1,'专题一',1,NULL),(3,'专题二',2,NULL),(4,'专题三',3,NULL),(5,'专题四',4,NULL);
+INSERT INTO `ms_gis_thematic` VALUES (1,'专题一',1),(3,'专题二',2),(4,'专题三',3),(5,'专题四',4);
 /*!40000 ALTER TABLE `ms_gis_thematic` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -455,7 +462,7 @@ CREATE TABLE `ms_sys_dict` (
   PRIMARY KEY  (`id_`),
   UNIQUE KEY `unique_id_` (`id_`),
   UNIQUE KEY `unique_invoke_code_` (`invoke_code_`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -464,7 +471,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `ms_sys_dict` WRITE;
 /*!40000 ALTER TABLE `ms_sys_dict` DISABLE KEYS */;
-INSERT INTO `ms_sys_dict` VALUES (1,'sys','系统管理',NULL,1),(11,'app','应用管理',NULL,2),(12,'app_module','模块',11,1),(13,'app_module_type','类型',12,1),(14,'app_module_funcType','功能类型',12,2);
+INSERT INTO `ms_sys_dict` VALUES (1,'sys','系统维护',NULL,2),(11,'app','应用模块',NULL,3),(12,'app_module','模块',11,1),(13,'app_module_type','类型',12,1),(14,'app_module_funcType','功能类型',12,2),(16,'gis','地图管理',NULL,1),(17,'gis_layer','图层',16,1),(18,'gis_layer_class','图层类型',17,1),(19,'gis_layer_titlesize','瓦片尺寸',17,2);
 /*!40000 ALTER TABLE `ms_sys_dict` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -483,7 +490,7 @@ CREATE TABLE `ms_sys_dict_item` (
   `sort_` int(11) default NULL,
   PRIMARY KEY  (`id_`),
   UNIQUE KEY `unique_id_` (`id_`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -492,7 +499,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `ms_sys_dict_item` WRITE;
 /*!40000 ALTER TABLE `ms_sys_dict_item` DISABLE KEYS */;
-INSERT INTO `ms_sys_dict_item` VALUES (12,'2','功能',13,2),(13,'1','模块',13,1),(14,'2','URL',14,2),(15,'1','JavaScript',14,1);
+INSERT INTO `ms_sys_dict_item` VALUES (12,'2','功能',13,2),(13,'1','模块',13,1),(14,'2','URL',14,2),(15,'1','JavaScript',14,1),(16,'ol.layer.Vector','矢量',18,2),(17,'ol.layer.Tile','瓦片',18,1),(18,'512','512, 512',19,2),(19,'256','256, 256',19,1);
 /*!40000 ALTER TABLE `ms_sys_dict_item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -611,4 +618,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-09-02  8:12:12
+-- Dump completed on 2015-09-11  8:24:32
