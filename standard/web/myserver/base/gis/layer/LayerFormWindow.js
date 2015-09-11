@@ -37,7 +37,12 @@ Ext.define('Base.gis.layer.LayerFormWindow', {
 				{name: 'useInterimTilesOnError'},
 				{name: 'updateWhileAnimating'},
 				{name: 'updateWhileInteracting'},
-				{name: 'renderBuffer'}
+				{name: 'renderBuffer'},
+				{name: 'sourceUrl'},
+				{name: 'sourceTileSize'},
+				{name: 'sourceTilePixelRatio'},
+				{name: 'sourceMaxZoom'},
+				{name: 'sourceWrapX'}
 			]
 		});
 
@@ -216,7 +221,6 @@ Ext.define('Base.gis.layer.LayerFormWindow', {
 			qtip: 'When set to true, feature batches will be recreated during interactions. See also updateWhileAnimating.'
 		});
 		var renderBufferNumber = Ext.create('Ext.form.field.Number', {
-			columnWidth: 0.5,
 			fieldLabel: '渲染缓冲',
 			labelAlign: 'right',
 			labelSeparator: '：',
@@ -227,6 +231,63 @@ Ext.define('Base.gis.layer.LayerFormWindow', {
 			allowDecimals: false,
 			hidden: true,
 			qtip: 'The buffer around the viewport extent used by the renderer when getting features from the vector source for the rendering or hit-detection. Recommended value: the size of the largest symbol, line width or label.'
+		});
+		var sourceUrlText = Ext.create('Ext.form.field.Text', {
+			fieldLabel: '<span style="color: #FF0000;">*</span>URL',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'sourceUrl',
+			maxLength: 255,
+			hidden: true,
+			qtip: 'URL template. Must include {x}, {y} or {-y}, and {z} placeholders. A {?-?} template pattern, for example subdomain{a-f}.domain.com,'
+		});
+		var sourceTileSizeCombobox = Ext.create('Base.ux.DictComboBox', {
+			columnWidth: 0.5,
+			invokeCode: 'gis_layer_titlesize',
+			fieldLabel: '<span style="color: #FF0000;">*</span>瓦片尺寸',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'sourceTileSize',
+			allowBlank: false,
+			hidden: true,
+			qtip: 'The tile size used by the tile service.'
+		});
+		var sourceTilePixelRatioNumber = Ext.create('Ext.form.field.Number', {
+			columnWidth: 0.5,
+			fieldLabel: '瓦片像素比率',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'sourceTilePixelRatio',
+			value: 1,
+			minValue: 1,
+			maxValue: 99999,
+			allowDecimals: false,
+			hidden: true,
+			qtip: 'The pixel ratio used by the tile service. For example, if the tile service advertizes 256px by 256px tiles but actually sends 512px by 512px images (for retina/hidpi devices) then tilePixelRatio should be set to 2.'
+		});
+		var sourceMaxZoomNumber = Ext.create('Ext.form.field.Number', {
+			columnWidth: 0.5,
+			fieldLabel: '最大缩放',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'sourceMaxZoom',
+			value: 18,
+			minValue: 1,
+			maxValue: 99999,
+			allowDecimals: false,
+			hidden: true,
+			qtip: 'Optional max zoom level.'
+		});
+		var sourceWrapXCheckbox = Ext.create('Ext.form.field.Checkbox', {
+			columnWidth: 0.5,
+			fieldLabel: '包装水平轴',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'sourceWrapX',
+			inputValue: '1',
+			checked: true,
+			hidden: true,
+			qtip: 'Whether to wrap the world horizontally.'
 		});
 
 		var formPanel = Ext.create('Ext.form.Panel', {
@@ -280,7 +341,15 @@ Ext.define('Base.gis.layer.LayerFormWindow', {
 				xtype: 'container',
 				layout: 'column',
 				items: [updateWhileAnimatingCheckbox, updateWhileInteractingCheckbox]
-			}, renderBufferNumber],
+			}, renderBufferNumber, sourceUrlText, {
+				xtype: 'container',
+				layout: 'column',
+				items: [sourceTileSizeCombobox, sourceTilePixelRatioNumber]
+			}, {
+				xtype: 'container',
+				layout: 'column',
+				items: [sourceMaxZoomNumber, sourceWrapXCheckbox]
+			}],
 			buttons:[{
 				xtype: 'button',
 				text: '保存',
@@ -325,6 +394,11 @@ Ext.define('Base.gis.layer.LayerFormWindow', {
 		if ('ol.layer.Tile' == className) {
 			form.findField('preload').setVisible(true);
 			form.findField('useInterimTilesOnError').setVisible(true);
+			form.findField('sourceUrl').setVisible(true);
+			form.findField('sourceTileSize').setVisible(true);
+			form.findField('sourceTilePixelRatio').setVisible(true);
+			form.findField('sourceMaxZoom').setVisible(true);
+			form.findField('sourceWrapX').setVisible(true);
 
 			form.findField('updateWhileAnimating').setVisible(false);
 			form.findField('updateWhileInteracting').setVisible(false);
@@ -332,6 +406,11 @@ Ext.define('Base.gis.layer.LayerFormWindow', {
 		} else if ('ol.layer.Vector' == className) {
 			form.findField('preload').setVisible(false);
 			form.findField('useInterimTilesOnError').setVisible(false);
+			form.findField('sourceUrl').setVisible(false);
+			form.findField('sourceTileSize').setVisible(false);
+			form.findField('sourceTilePixelRatio').setVisible(false);
+			form.findField('sourceMaxZoom').setVisible(false);
+			form.findField('sourceWrapX').setVisible(false);
 
 			form.findField('updateWhileAnimating').setVisible(true);
 			form.findField('updateWhileInteracting').setVisible(true);
@@ -339,6 +418,11 @@ Ext.define('Base.gis.layer.LayerFormWindow', {
 		} else {
 			form.findField('preload').setVisible(false);
 			form.findField('useInterimTilesOnError').setVisible(false);
+			form.findField('sourceUrl').setVisible(false);
+			form.findField('sourceTileSize').setVisible(false);
+			form.findField('sourceTilePixelRatio').setVisible(false);
+			form.findField('sourceMaxZoom').setVisible(false);
+			form.findField('sourceWrapX').setVisible(false);
 
 			form.findField('updateWhileAnimating').setVisible(false);
 			form.findField('updateWhileInteracting').setVisible(false);
