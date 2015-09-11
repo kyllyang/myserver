@@ -69,6 +69,7 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			labelAlign: 'right',
 			labelSeparator: '：',
 			name: 'mapLoadTilesWhileAnimating',
+			inputValue: '1',
 			qtip: 'When set to true, tiles will be loaded during animations. This may improve the user experience, but can also make animations stutter on devices with slow memory.'
 		});
 		var mapLoadTilesWhileInteractingCheckbox = Ext.create('Ext.form.field.Checkbox', {
@@ -77,6 +78,7 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			labelAlign: 'right',
 			labelSeparator: '：',
 			name: 'mapLoadTilesWhileInteracting',
+			inputValue: '1',
 			qtip: 'When set to true, tiles will be loaded while interacting with the map. This may improve the user experience, but can also make map panning and zooming choppy on devices with slow memory.'
 		});
 		var rendererDisplay = Ext.create('Ext.form.field.Display', {
@@ -332,8 +334,6 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 		if (form.isValid()) {
 			this.saveRenderer();
 
-			alert(form.findField('mapRenderer').getValue() + ', ' + form.findField('viewResolution').getValue());
-			return;
 			form.submit({
 				url: ctx + '/gis/thematic/save.ctrl',
 				waitMsg: '正在保存数据，请稍候...',

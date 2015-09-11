@@ -1,10 +1,10 @@
-Ext.define('Base.gis.map.MapGridPanel', {
+Ext.define('Base.gis.layer.LayerGridPanel', {
 	extend: 'Base.ux.GridPanel',
 
 	initComponent: function() {
 		Ext.apply(this, {
-			itemId: 'thematicGridPanel',
-			url: ctx + '/gis/thematic/dataset.ctrl',
+			itemId: 'layerGridPanel',
+			url: ctx + '/gis/layer/dataset.ctrl',
 			sortProperty: 'sort',
 			sortDirection: 'asc',
 			idProperty: 'id',
@@ -14,6 +14,36 @@ Ext.define('Base.gis.map.MapGridPanel', {
 			}, {
 				text: '名称',
 				dataIndex: 'name'
+			}, {
+				text: '图层类型',
+				dataIndex: 'layerClassNameText'
+			}, {
+				text: '范围',
+				dataIndex: 'extent'
+			}, {
+				text: '最小分辨率',
+				dataIndex: 'minResolution'
+			}, {
+				text: '最大分辨率',
+				dataIndex: 'maxResolution'
+			}, {
+				text: '可见',
+				dataIndex: 'visible'
+			}, {
+				text: '透明度',
+				dataIndex: 'opacity'
+			}, {
+				text: '亮度',
+				dataIndex: 'brightness'
+			}, {
+				text: '对比度',
+				dataIndex: 'contrast'
+			}, {
+				text: '色度',
+				dataIndex: 'hue'
+			}, {
+				text: '饱和度',
+				dataIndex: 'saturation'
 			}],
 			dockedItems: [Ext.create('Ext.form.Panel', {
 				itemId: 'queryForm',
@@ -75,17 +105,17 @@ Ext.define('Base.gis.map.MapGridPanel', {
 		this.queryData();
 	},
 	doAddEvent: function() {
-		Ext.create('Base.gis.thematic.ThematicFormWindow', {opener: this}).show();
+		Ext.create('Base.gis.layer.LayerFormWindow', {opener: this}).show();
 	},
 	doEditEvent: function(id) {
-		Ext.create('Base.gis.thematic.ThematicFormWindow', {opener: this, entityId: id}).show();
+		Ext.create('Base.gis.layer.LayerFormWindow', {opener: this, entityId: id}).show();
 	},
 	doViewEvent: function(id) {
-		Ext.create('Base.gis.thematic.ThematicFormWindow', {opener: this, entityId: id, readOnlyForm: true}).show();
+		Ext.create('Base.gis.layer.LayerFormWindow', {opener: this, entityId: id, readOnlyForm: true}).show();
 	},
 	doDeleteEvent: function(ids) {
 		Ext.Ajax.request({
-			url: ctx + '/gis/thematic/delete.ctrl',
+			url: ctx + '/gis/layer/delete.ctrl',
 			params: {
 				ids: ids
 			},

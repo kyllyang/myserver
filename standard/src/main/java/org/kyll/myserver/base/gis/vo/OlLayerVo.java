@@ -1,15 +1,12 @@
-package org.kyll.myserver.base.gis.entity;
+package org.kyll.myserver.base.gis.vo;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import org.kyll.myserver.base.common.Vo;
 
 /**
  * User: Kyll
- * Date: 2015-08-10 16:30
+ * Date: 2015-09-09 16:06
  */
-@Entity
-@Table(name = "MS_GIS_OL_LAYER")
-public class OlLayer implements Serializable {
+public class OlLayerVo implements Vo<Long> {
 	private Long id;
 	private String name;
 	private Integer sort;
@@ -22,20 +19,19 @@ public class OlLayer implements Serializable {
 	private String extent;
 	private String minResolution;
 	private String maxResolution;
-	private String sourceClassName;// ol.source.ImageVector, ol.source.ImageMapGuide, ol.source.ImageStatic, ol.source.ImageWMS, ol.source.Raster, ol.source.TileDebug, ol.source.TileImage, ol.source.BingMaps, ol.source.TileArcGISRest, ol.source.TileJSON, ol.source.TileWMS, ol.source.WMTS, ol.source.XYZ, ol.source.MapQuest, ol.source.OSM, ol.source.Stamen, ol.source.Zoomify, ol.source.TileUTFGrid, ol.source.Vector, ol.source.Cluster, ol.source.TileVector
-	private String layerClassName;// ol.layer.Image, ol.layer.Tile, ol.layer.Vector, ol.layer.Heatmap
+	private String sourceClassName;
+	private String layerClassName;
+	private String layerClassNameText;
 	private String preload;
 	private String useInterimTilesOnError;
 	private String updateWhileAnimating;
 	private String updateWhileInteracting;
 	private String renderBuffer;
 
-	public OlLayer() {
+	public OlLayerVo() {
 	}
 
-	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
-	@Column(name = "ID_")
+	@Override
 	public Long getId() {
 		return id;
 	}
@@ -44,7 +40,6 @@ public class OlLayer implements Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "NAME_")
 	public String getName() {
 		return name;
 	}
@@ -53,7 +48,6 @@ public class OlLayer implements Serializable {
 		this.name = name;
 	}
 
-	@Column(name = "SORT_")
 	public Integer getSort() {
 		return sort;
 	}
@@ -62,7 +56,6 @@ public class OlLayer implements Serializable {
 		this.sort = sort;
 	}
 
-	@Column(name = "BRIGHTNESS_")
 	public String getBrightness() {
 		return brightness;
 	}
@@ -71,7 +64,6 @@ public class OlLayer implements Serializable {
 		this.brightness = brightness;
 	}
 
-	@Column(name = "CONTRAST_")
 	public String getContrast() {
 		return contrast;
 	}
@@ -80,7 +72,6 @@ public class OlLayer implements Serializable {
 		this.contrast = contrast;
 	}
 
-	@Column(name = "HUE_")
 	public String getHue() {
 		return hue;
 	}
@@ -89,7 +80,6 @@ public class OlLayer implements Serializable {
 		this.hue = hue;
 	}
 
-	@Column(name = "OPACITY_")
 	public String getOpacity() {
 		return opacity;
 	}
@@ -98,7 +88,6 @@ public class OlLayer implements Serializable {
 		this.opacity = opacity;
 	}
 
-	@Column(name = "SATURATION_")
 	public String getSaturation() {
 		return saturation;
 	}
@@ -107,7 +96,6 @@ public class OlLayer implements Serializable {
 		this.saturation = saturation;
 	}
 
-	@Column(name = "VISIBLE_")
 	public String getVisible() {
 		return visible;
 	}
@@ -116,7 +104,6 @@ public class OlLayer implements Serializable {
 		this.visible = visible;
 	}
 
-	@Column(name = "EXTENT_")
 	public String getExtent() {
 		return extent;
 	}
@@ -125,7 +112,6 @@ public class OlLayer implements Serializable {
 		this.extent = extent;
 	}
 
-	@Column(name = "MIN_RESOLUTION_")
 	public String getMinResolution() {
 		return minResolution;
 	}
@@ -134,7 +120,6 @@ public class OlLayer implements Serializable {
 		this.minResolution = minResolution;
 	}
 
-	@Column(name = "MAX_RESOLUTION_")
 	public String getMaxResolution() {
 		return maxResolution;
 	}
@@ -143,7 +128,6 @@ public class OlLayer implements Serializable {
 		this.maxResolution = maxResolution;
 	}
 
-	@Column(name = "SOURCE_CLASS_NAME_")
 	public String getSourceClassName() {
 		return sourceClassName;
 	}
@@ -152,7 +136,6 @@ public class OlLayer implements Serializable {
 		this.sourceClassName = sourceClassName;
 	}
 
-	@Column(name = "LAYER_CLASS_NAME_")
 	public String getLayerClassName() {
 		return layerClassName;
 	}
@@ -161,7 +144,14 @@ public class OlLayer implements Serializable {
 		this.layerClassName = layerClassName;
 	}
 
-	@Column(name = "PRELOAD_")
+	public String getLayerClassNameText() {
+		return layerClassNameText;
+	}
+
+	public void setLayerClassNameText(String layerClassNameText) {
+		this.layerClassNameText = layerClassNameText;
+	}
+
 	public String getPreload() {
 		return preload;
 	}
@@ -170,7 +160,6 @@ public class OlLayer implements Serializable {
 		this.preload = preload;
 	}
 
-	@Column(name = "USE_INTERIM_TILES_ON_ERROR_")
 	public String getUseInterimTilesOnError() {
 		return useInterimTilesOnError;
 	}
@@ -179,7 +168,6 @@ public class OlLayer implements Serializable {
 		this.useInterimTilesOnError = useInterimTilesOnError;
 	}
 
-	@Column(name = "UPDATE_WHILE_ANIMATING_")
 	public String getUpdateWhileAnimating() {
 		return updateWhileAnimating;
 	}
@@ -188,7 +176,6 @@ public class OlLayer implements Serializable {
 		this.updateWhileAnimating = updateWhileAnimating;
 	}
 
-	@Column(name = "UPDATE_WHILE_INTERACTING_")
 	public String getUpdateWhileInteracting() {
 		return updateWhileInteracting;
 	}
@@ -197,7 +184,6 @@ public class OlLayer implements Serializable {
 		this.updateWhileInteracting = updateWhileInteracting;
 	}
 
-	@Column(name = "RENDER_BUFFER_")
 	public String getRenderBuffer() {
 		return renderBuffer;
 	}
