@@ -22,6 +22,7 @@ public class QueryCondition {
 	private String originalFilename;
 	private String key;
 	private String value;
+	private String layerClassName;
 
 	public QueryCondition() {
 	}
@@ -160,5 +161,13 @@ public class QueryCondition {
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	public String getLayerClassName() {
+		return layerClassName;
+	}
+
+	public void setLayerClassName(String layerClassName) {
+		this.layerClassName = layerClassName;
 	}
 }

@@ -12,21 +12,29 @@ public class OlLayerVo implements Vo<Long> {
 	private Integer sort;
 	private String brightness;
 	private String contrast;
-	private String hue;
-	private String opacity;
-	private String saturation;
-	private String visible;
 	private String extent;
+	private String hue;
 	private String minResolution;
 	private String maxResolution;
-	private String sourceClassName;
-	private String layerClassName;
-	private String layerClassNameText;
+	private String opacity;
 	private String preload;
+	private String renderBuffer;
+	private String saturation;
+	private String visible;
 	private String useInterimTilesOnError;
 	private String updateWhileAnimating;
 	private String updateWhileInteracting;
-	private String renderBuffer;
+	private String sourceClassName;
+	private String layerClassName;
+	private String layerClassNameText;
+	private String sourceUrl;
+	private String sourceFormat;
+	private String sourceStrategy;
+	private String sourceTileSize;
+	private String sourceTilePixelRatio;
+	private String sourceMaxZoom;
+	private String sourceUseSpatialIndex;
+	private String sourceWrapX;
 
 	public OlLayerVo() {
 	}
@@ -72,44 +80,20 @@ public class OlLayerVo implements Vo<Long> {
 		this.contrast = contrast;
 	}
 
-	public String getHue() {
-		return hue;
-	}
-
-	public void setHue(String hue) {
-		this.hue = hue;
-	}
-
-	public String getOpacity() {
-		return opacity;
-	}
-
-	public void setOpacity(String opacity) {
-		this.opacity = opacity;
-	}
-
-	public String getSaturation() {
-		return saturation;
-	}
-
-	public void setSaturation(String saturation) {
-		this.saturation = saturation;
-	}
-
-	public String getVisible() {
-		return visible;
-	}
-
-	public void setVisible(String visible) {
-		this.visible = visible;
-	}
-
 	public String getExtent() {
 		return extent;
 	}
 
 	public void setExtent(String extent) {
 		this.extent = extent;
+	}
+
+	public String getHue() {
+		return hue;
+	}
+
+	public void setHue(String hue) {
+		this.hue = hue;
 	}
 
 	public String getMinResolution() {
@@ -128,28 +112,12 @@ public class OlLayerVo implements Vo<Long> {
 		this.maxResolution = maxResolution;
 	}
 
-	public String getSourceClassName() {
-		return sourceClassName;
+	public String getOpacity() {
+		return opacity;
 	}
 
-	public void setSourceClassName(String sourceClassName) {
-		this.sourceClassName = sourceClassName;
-	}
-
-	public String getLayerClassName() {
-		return layerClassName;
-	}
-
-	public void setLayerClassName(String layerClassName) {
-		this.layerClassName = layerClassName;
-	}
-
-	public String getLayerClassNameText() {
-		return layerClassNameText;
-	}
-
-	public void setLayerClassNameText(String layerClassNameText) {
-		this.layerClassNameText = layerClassNameText;
+	public void setOpacity(String opacity) {
+		this.opacity = opacity;
 	}
 
 	public String getPreload() {
@@ -158,6 +126,30 @@ public class OlLayerVo implements Vo<Long> {
 
 	public void setPreload(String preload) {
 		this.preload = preload;
+	}
+
+	public String getRenderBuffer() {
+		return renderBuffer;
+	}
+
+	public void setRenderBuffer(String renderBuffer) {
+		this.renderBuffer = renderBuffer;
+	}
+
+	public String getSaturation() {
+		return saturation;
+	}
+
+	public void setSaturation(String saturation) {
+		this.saturation = saturation;
+	}
+
+	public String getVisible() {
+		return visible;
+	}
+
+	public void setVisible(String visible) {
+		this.visible = visible;
 	}
 
 	public String getUseInterimTilesOnError() {
@@ -184,11 +176,91 @@ public class OlLayerVo implements Vo<Long> {
 		this.updateWhileInteracting = updateWhileInteracting;
 	}
 
-	public String getRenderBuffer() {
-		return renderBuffer;
+	public String getSourceClassName() {
+		return sourceClassName;
 	}
 
-	public void setRenderBuffer(String renderBuffer) {
-		this.renderBuffer = renderBuffer;
+	public void setSourceClassName(String sourceClassName) {
+		this.sourceClassName = sourceClassName;
+	}
+
+	public String getLayerClassName() {
+		return layerClassName;
+	}
+
+	public void setLayerClassName(String layerClassName) {
+		this.layerClassName = layerClassName;
+	}
+
+	public String getLayerClassNameText() {
+		return layerClassNameText;
+	}
+
+	public void setLayerClassNameText(String layerClassNameText) {
+		this.layerClassNameText = layerClassNameText;
+	}
+
+	public String getSourceUrl() {
+		return sourceUrl;
+	}
+
+	public void setSourceUrl(String sourceUrl) {
+		this.sourceUrl = sourceUrl;
+	}
+
+	public String getSourceFormat() {
+		return sourceFormat;
+	}
+
+	public void setSourceFormat(String sourceFormat) {
+		this.sourceFormat = sourceFormat;
+	}
+
+	public String getSourceStrategy() {
+		return sourceStrategy;
+	}
+
+	public void setSourceStrategy(String sourceStrategy) {
+		this.sourceStrategy = sourceStrategy;
+	}
+
+	public String getSourceTileSize() {
+		return sourceTileSize;
+	}
+
+	public void setSourceTileSize(String sourceTileSize) {
+		this.sourceTileSize = sourceTileSize;
+	}
+
+	public String getSourceTilePixelRatio() {
+		return sourceTilePixelRatio;
+	}
+
+	public void setSourceTilePixelRatio(String sourceTilePixelRatio) {
+		this.sourceTilePixelRatio = sourceTilePixelRatio;
+	}
+
+	public String getSourceMaxZoom() {
+		return sourceMaxZoom;
+	}
+
+	public void setSourceMaxZoom(String sourceMaxZoom) {
+		this.sourceMaxZoom = sourceMaxZoom;
+	}
+
+	public String getSourceUseSpatialIndex() {
+		return sourceUseSpatialIndex;
+	}
+
+	public void setSourceUseSpatialIndex(String sourceUseSpatialIndex) {
+		this.sourceUseSpatialIndex = sourceUseSpatialIndex;
+	}
+
+	public String getSourceWrapX() {
+		return sourceWrapX;
+	}
+
+	public void setSourceWrapX(String sourceWrapX) {
+		this.sourceWrapX = sourceWrapX;
 	}
 }

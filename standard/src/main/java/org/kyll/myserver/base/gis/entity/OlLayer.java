@@ -15,20 +15,29 @@ public class OlLayer implements Serializable {
 	private Integer sort;
 	private String brightness;
 	private String contrast;
-	private String hue;
-	private String opacity;
-	private String saturation;
-	private String visible;
 	private String extent;
+	private String hue;
 	private String minResolution;
 	private String maxResolution;
-	private String sourceClassName;// ol.source.ImageVector, ol.source.ImageMapGuide, ol.source.ImageStatic, ol.source.ImageWMS, ol.source.Raster, ol.source.TileDebug, ol.source.TileImage, ol.source.BingMaps, ol.source.TileArcGISRest, ol.source.TileJSON, ol.source.TileWMS, ol.source.WMTS, ol.source.XYZ, ol.source.MapQuest, ol.source.OSM, ol.source.Stamen, ol.source.Zoomify, ol.source.TileUTFGrid, ol.source.Vector, ol.source.Cluster, ol.source.TileVector
-	private String layerClassName;// ol.layer.Image, ol.layer.Tile, ol.layer.Vector, ol.layer.Heatmap
+	private String opacity;
 	private String preload;
+	private String renderBuffer;
+	private String saturation;
+//	private String style;// todo 可能会删除
+	private String visible;
 	private String useInterimTilesOnError;
 	private String updateWhileAnimating;
 	private String updateWhileInteracting;
-	private String renderBuffer;
+	private String sourceClassName;// ol.source.ImageVector, ol.source.ImageMapGuide, ol.source.ImageStatic, ol.source.ImageWMS, ol.source.Raster, ol.source.TileDebug, ol.source.TileImage, ol.source.BingMaps, ol.source.TileArcGISRest, ol.source.TileJSON, ol.source.TileWMS, ol.source.WMTS, ol.source.XYZ, ol.source.MapQuest, ol.source.OSM, ol.source.Stamen, ol.source.Zoomify, ol.source.TileUTFGrid, ol.source.Vector, ol.source.Cluster, ol.source.TileVector
+	private String layerClassName;// ol.layer.Image, ol.layer.Tile, ol.layer.Vector, ol.layer.Heatmap
+	private String sourceUrl;
+	private String sourceFormat;
+	private String sourceStrategy;
+	private String sourceTileSize;
+	private String sourceTilePixelRatio;
+	private String sourceMaxZoom;
+	private String sourceUseSpatialIndex;
+	private String sourceWrapX;
 
 	public OlLayer() {
 	}
@@ -204,5 +213,77 @@ public class OlLayer implements Serializable {
 
 	public void setRenderBuffer(String renderBuffer) {
 		this.renderBuffer = renderBuffer;
+	}
+
+	@Column(name = "SOURCE_URL_")
+	public String getSourceUrl() {
+		return sourceUrl;
+	}
+
+	public void setSourceUrl(String sourceUrl) {
+		this.sourceUrl = sourceUrl;
+	}
+
+	@Column(name = "SOURCE_FORMAT_")
+	public String getSourceFormat() {
+		return sourceFormat;
+	}
+
+	public void setSourceFormat(String sourceFormat) {
+		this.sourceFormat = sourceFormat;
+	}
+
+	@Column(name = "SOURCE_STRATEGY_")
+	public String getSourceStrategy() {
+		return sourceStrategy;
+	}
+
+	public void setSourceStrategy(String sourceStrategy) {
+		this.sourceStrategy = sourceStrategy;
+	}
+
+	@Column(name = "SOURCE_TILE_SIZE_")
+	public String getSourceTileSize() {
+		return sourceTileSize;
+	}
+
+	public void setSourceTileSize(String sourceTileSize) {
+		this.sourceTileSize = sourceTileSize;
+	}
+
+	@Column(name = "SOURCE_TILE_PIXEL_RATIO_")
+	public String getSourceTilePixelRatio() {
+		return sourceTilePixelRatio;
+	}
+
+	public void setSourceTilePixelRatio(String sourceTilePixelRatio) {
+		this.sourceTilePixelRatio = sourceTilePixelRatio;
+	}
+
+	@Column(name = "SOURCE_MAX_ZOOM_")
+	public String getSourceMaxZoom() {
+		return sourceMaxZoom;
+	}
+
+	public void setSourceMaxZoom(String sourceMaxZoom) {
+		this.sourceMaxZoom = sourceMaxZoom;
+	}
+
+	@Column(name = "SOURCE_USE_SPATIAL_INDEX_")
+	public String getSourceUseSpatialIndex() {
+		return sourceUseSpatialIndex;
+	}
+
+	public void setSourceUseSpatialIndex(String sourceUseSpatialIndex) {
+		this.sourceUseSpatialIndex = sourceUseSpatialIndex;
+	}
+
+	@Column(name = "SOURCE_WRAP_X_")
+	public String getSourceWrapX() {
+		return sourceWrapX;
+	}
+
+	public void setSourceWrapX(String sourceWrapX) {
+		this.sourceWrapX = sourceWrapX;
 	}
 }

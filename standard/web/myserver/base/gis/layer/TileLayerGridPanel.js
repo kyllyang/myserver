@@ -1,4 +1,4 @@
-Ext.define('Base.gis.layer.LayerGridPanel', {
+Ext.define('Base.gis.layer.TileLayerGridPanel', {
 	extend: 'Base.ux.GridPanel',
 
 	initComponent: function() {
@@ -98,6 +98,7 @@ Ext.define('Base.gis.layer.LayerGridPanel', {
 
 			this.store.proxy.actionMethods = {read: 'POST'};
 			Ext.apply(this.store.proxy.extraParams, {
+				'qc.layerClassName': 'ol.layer.Tile',
 				'qc.name': form.findField('name').getValue()
 			});
 		}, this);
@@ -105,13 +106,13 @@ Ext.define('Base.gis.layer.LayerGridPanel', {
 		this.queryData();
 	},
 	doAddEvent: function() {
-		Ext.create('Base.gis.layer.LayerFormWindow', {opener: this}).show();
+		Ext.create('Base.gis.layer.TileLayerFormWindow', {opener: this}).show();
 	},
 	doEditEvent: function(id) {
-		Ext.create('Base.gis.layer.LayerFormWindow', {opener: this, entityId: id}).show();
+		Ext.create('Base.gis.layer.TileLayerFormWindow', {opener: this, entityId: id}).show();
 	},
 	doViewEvent: function(id) {
-		Ext.create('Base.gis.layer.LayerFormWindow', {opener: this, entityId: id, readOnlyForm: true}).show();
+		Ext.create('Base.gis.layer.TileLayerFormWindow', {opener: this, entityId: id, readOnlyForm: true}).show();
 	},
 	doDeleteEvent: function(ids) {
 		Ext.Ajax.request({

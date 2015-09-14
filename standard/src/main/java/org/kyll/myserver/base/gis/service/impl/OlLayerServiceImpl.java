@@ -29,6 +29,10 @@ public class OlLayerServiceImpl implements OlLayerService {
 	@Override
 	public Dataset<OlLayer> get(QueryCondition qc, Paginated pg) {
 		StringBuilder hql = new StringBuilder("from OlLayer t where 1 = 1");
+		String layerClassName = qc.getLayerClassName();
+		if (StringUtils.isNotBlank(layerClassName)) {
+			hql.append(" and t.layerClassName = '").append(layerClassName).append("'");
+		}
 		String name = qc.getName();
 		if (StringUtils.isNotBlank(name)) {
 			hql.append(" and t.name like '%").append(name).append("%'");
