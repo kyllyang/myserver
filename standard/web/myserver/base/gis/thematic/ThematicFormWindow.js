@@ -90,6 +90,7 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			qtip: 'By default, Canvas, DOM and WebGL renderers are tested for support in that order, and the first supported used. Note that at present only the Canvas renderer supports vector data.'
 		});
 		var projectionText = Ext.create('Ext.form.field.Text', {
+			columnWidth: 0.5,
 			fieldLabel: '<span style="color: #FF0000;">*</span>投影',
 			labelAlign: 'right',
 			labelSeparator: '：',
@@ -100,6 +101,7 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			qtip: 'The projection. Default is EPSG:3857 (Spherical Mercator).'
 		});
 		var centerText = Ext.create('Ext.form.field.Text', {
+			columnWidth: 0.5,
 			fieldLabel: '<span style="color: #FF0000;">*</span>中心点',
 			labelAlign: 'right',
 			labelSeparator: '：',
@@ -158,6 +160,7 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			},
 			qtip: 'The initial resolution for the view. The units are projection units per pixel (e.g. meters per pixel). An alternative to setting this is to set zoom. Default is undefined, and layer sources will not be fetched if neither this nor zoom are defined.'
 		});
+		var layerGridPanel = Ext.create('Base.gis.thematic.LayerGridPanel');
 
 		var formPanel = Ext.create('Ext.form.Panel', {
 			itemId: 'editForm',
@@ -234,10 +237,43 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 				xtype: 'fieldset',
 				title: '视图',
 				layout: 'form',
-				items: [projectionText, centerText, extentText, {
+				items: [{
+					xtype: 'container',
+					layout: 'column',
+					items: [projectionText, centerText]
+				}, extentText, {
 					xtype: 'container',
 					layout: 'column',
 					items: [resolutionsTextarea, resolutionSlider]
+				}]
+			}, {
+				xtype: 'fieldset',
+				title: '图层',
+				layout: 'form',
+				items: [layerGridPanel]
+			}, {
+				xtype: 'fieldset',
+				title: '控件',
+				layout: 'form',
+				items: [{
+					xtype: 'button',
+					text: 'A'
+				}]
+			}, {
+				xtype: 'fieldset',
+				title: '交互',
+				layout: 'form',
+				items: [{
+					xtype: 'button',
+					text: 'A'
+				}]
+			}, {
+				xtype: 'fieldset',
+				title: '覆盖',
+				layout: 'form',
+				items: [{
+					xtype: 'button',
+					text: 'A'
 				}]
 			}],
 			buttons:[{
