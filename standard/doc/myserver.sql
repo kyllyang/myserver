@@ -110,7 +110,6 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `ms_gis_ol_control` (
   `id_` int(11) NOT NULL auto_increment,
-  `map_id_` int(11) default NULL,
   `control_class_name_` varchar(255) default NULL,
   `auto_hide_` varchar(255) default NULL,
   `collapsed_` varchar(255) default NULL,
@@ -158,7 +157,6 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `ms_gis_ol_interaction` (
   `id_` int(11) NOT NULL auto_increment,
-  `map_id_` int(11) default NULL,
   `interaction_class_name_` varchar(255) default NULL,
   `add_condition_` varchar(255) default NULL,
   `condition_` varchar(255) default NULL,
@@ -256,8 +254,6 @@ CREATE TABLE `ms_gis_ol_map` (
   `load_tiles_while_interacting_` varchar(255) default NULL,
   `logo_` varchar(255) default NULL,
   `renderer_` varchar(255) default NULL,
-  `name_` varchar(255) default NULL,
-  `thematic_id_` int(11) default NULL,
   PRIMARY KEY  (`id_`),
   UNIQUE KEY `unique_id_` (`id_`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -281,7 +277,6 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `ms_gis_ol_overlay` (
   `id_` int(11) NOT NULL auto_increment,
-  `map_id_` int(11) default NULL,
   `element_` varchar(255) default NULL,
   `offset_` varchar(255) default NULL,
   `position_` varchar(255) default NULL,
@@ -314,7 +309,6 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 CREATE TABLE `ms_gis_ol_view` (
   `id_` int(11) NOT NULL auto_increment,
-  `map_id_` int(11) default NULL,
   `center_` varchar(255) default NULL,
   `constrain_rotation_` varchar(255) default NULL,
   `enable_rotation_` varchar(255) default NULL,
@@ -354,6 +348,8 @@ CREATE TABLE `ms_gis_thematic` (
   `id_` int(11) NOT NULL auto_increment,
   `name_` varchar(255) default NULL,
   `sort_` int(11) default NULL,
+  `map_id_` int(11) default NULL,
+  `view_id_` int(11) default NULL,
   UNIQUE KEY `unique_id_` (`id_`)
 ) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 SET character_set_client = @saved_cs_client;
@@ -364,7 +360,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `ms_gis_thematic` WRITE;
 /*!40000 ALTER TABLE `ms_gis_thematic` DISABLE KEYS */;
-INSERT INTO `ms_gis_thematic` VALUES (1,'专题一',1),(3,'专题二',2),(4,'专题三',3),(5,'专题四',4);
+INSERT INTO `ms_gis_thematic` VALUES (1,'专题一',1,NULL,NULL),(3,'专题二',2,NULL,NULL),(4,'专题三',3,NULL,NULL),(5,'专题四',4,NULL,NULL);
 /*!40000 ALTER TABLE `ms_gis_thematic` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -626,4 +622,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-09-14  8:01:23
+-- Dump completed on 2015-09-30  6:34:57
