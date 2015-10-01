@@ -1,8 +1,8 @@
--- MySQL dump 10.11
+-- MySQL dump 10.13  Distrib 5.6.22, for Win64 (x86_64)
 --
 -- Host: localhost    Database: myserver
 -- ------------------------------------------------------
--- Server version	5.0.51b-community
+-- Server version	5.6.22
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -20,19 +20,19 @@
 --
 
 DROP TABLE IF EXISTS `ms_app_menu`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_app_menu` (
-  `id_` int(11) NOT NULL auto_increment,
-  `parent_id_` int(11) default NULL,
-  `name_` varchar(255) default NULL,
-  `description_` varchar(255) default NULL,
-  `sort_` int(11) default NULL,
-  `function_id_` int(11) default NULL,
-  PRIMARY KEY  (`id_`),
+  `id_` int(11) NOT NULL AUTO_INCREMENT,
+  `parent_id_` int(11) DEFAULT NULL,
+  `name_` varchar(255) DEFAULT NULL,
+  `description_` varchar(255) DEFAULT NULL,
+  `sort_` int(11) DEFAULT NULL,
+  `function_id_` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_`),
   UNIQUE KEY `unique_id_` (`id_`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ms_app_menu`
@@ -49,16 +49,16 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `ms_app_menu_application_thematic`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_app_menu_application_thematic` (
   `menu_id_` int(11) NOT NULL,
-  `application_id_` int(11) default NULL,
-  `thematic_id` int(11) default NULL,
-  `id_` int(11) NOT NULL auto_increment,
+  `application_id_` int(11) DEFAULT NULL,
+  `thematic_id` int(11) DEFAULT NULL,
+  `id_` int(11) NOT NULL AUTO_INCREMENT,
   UNIQUE KEY `unique_id_` (`id_`)
 ) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ms_app_menu_application_thematic`
@@ -75,21 +75,21 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `ms_app_module`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_app_module` (
-  `id_` int(11) NOT NULL auto_increment,
-  `parent_id_` int(11) default NULL,
+  `id_` int(11) NOT NULL AUTO_INCREMENT,
+  `parent_id_` int(11) DEFAULT NULL,
   `name_` varchar(255) NOT NULL,
   `description_` varchar(255) NOT NULL,
-  `sort_` int(11) default NULL,
+  `sort_` int(11) DEFAULT NULL,
   `type_` varchar(1) NOT NULL,
-  `func_type_` varchar(1) default NULL,
-  `func_code_` varchar(20000) default NULL,
-  PRIMARY KEY  (`id_`),
+  `func_type_` varchar(1) DEFAULT NULL,
+  `func_code_` varchar(20000) DEFAULT NULL,
+  PRIMARY KEY (`id_`),
   UNIQUE KEY `unique_id_` (`id_`)
 ) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ms_app_module`
@@ -97,7 +97,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `ms_app_module` WRITE;
 /*!40000 ALTER TABLE `ms_app_module` DISABLE KEYS */;
-INSERT INTO `ms_app_module` VALUES (27,41,'系统管理','',3,'1',NULL,NULL),(29,27,'角色管理','',2,'2','1','{className: \'Base.sys.role.RoleContainer\', config: {}}'),(33,27,'组织机构','',1,'2','1','{className: \'Base.sys.org.OrgContainer\', config: {}}'),(36,27,'数据字典','',3,'2','1','{className: \'Base.sys.dict.DictContainer\', config: {}}'),(37,NULL,'餐饮订单','',1,'1',NULL,NULL),(38,37,'餐厅菜品维护','',1,'2','1','{className: \'Meaord.restaurant.RestaurantGridPanel\', config: {}}'),(39,41,'应用管理','',2,'1',NULL,NULL),(40,39,'模块管理','',1,'2','1','{className: \'Base.app.module.ModuleContainer\', config: {}}'),(41,NULL,'运行维护','',1,'1',NULL,NULL),(42,41,'地图管理','',1,'1',NULL,NULL),(43,39,'菜单管理','',2,'2','1','{className: \'Base.app.menu.MenuContainer\', config: {}}'),(58,53,'aa','',1,'1',NULL,NULL),(59,42,'专题管理','',3,'2','1','{className: \'Base.gis.thematic.ThematicContainer\', config: {}}'),(60,27,'附件管理','',4,'2','1','{className: \'Base.sys.attachment.AttachmentContainer\', config: {}}'),(61,27,'系统配置','',5,'2','1','{className: \'Base.sys.config.ConfigContainer\', config: {}}'),(62,42,'矢量图层','',1,'2','1','{className: \'Base.gis.layer.LayerContainer\', config: {layerClassName: \'ol.layer.Vector\'}}'),(63,42,'瓦片图层','',2,'2','1','{className: \'Base.gis.layer.LayerContainer\', config: {layerClassName: \'ol.layer.Tile\'}}');
+INSERT INTO `ms_app_module` VALUES (27,41,'系统管理','',3,'1',NULL,NULL),(29,27,'角色管理','',2,'2','1','{className: \'Base.sys.role.RoleContainer\', config: {}}'),(33,27,'组织机构','',1,'2','1','{className: \'Base.sys.org.OrgContainer\', config: {}}'),(36,27,'数据字典','',3,'2','1','{className: \'Base.sys.dict.DictContainer\', config: {}}'),(38,37,'餐厅菜品维护','',1,'2','1','{className: \'Meaord.restaurant.RestaurantGridPanel\', config: {}}'),(39,41,'应用管理','',2,'1',NULL,NULL),(40,39,'模块管理','',1,'2','1','{className: \'Base.app.module.ModuleContainer\', config: {}}'),(41,NULL,'运行维护','',1,'1',NULL,NULL),(42,41,'地图管理','',1,'1',NULL,NULL),(43,39,'菜单管理','',2,'2','1','{className: \'Base.app.menu.MenuContainer\', config: {}}'),(58,53,'aa','',1,'1',NULL,NULL),(59,42,'专题管理','',3,'2','1','{className: \'Base.gis.thematic.ThematicContainer\', config: {}}'),(60,27,'附件管理','',4,'2','1','{className: \'Base.sys.attachment.AttachmentContainer\', config: {}}'),(61,27,'系统配置','',5,'2','1','{className: \'Base.sys.config.ConfigContainer\', config: {}}'),(62,42,'矢量图层','',1,'2','1','{className: \'Base.gis.layer.LayerContainer\', config: {layerClassName: \'ol.layer.Vector\'}}'),(63,42,'瓦片图层','',2,'2','1','{className: \'Base.gis.layer.LayerContainer\', config: {layerClassName: \'ol.layer.Tile\'}}');
 /*!40000 ALTER TABLE `ms_app_module` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -106,38 +106,39 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `ms_gis_ol_control`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_gis_ol_control` (
-  `id_` int(11) NOT NULL auto_increment,
-  `control_class_name_` varchar(255) default NULL,
-  `auto_hide_` varchar(255) default NULL,
-  `collapsed_` varchar(255) default NULL,
-  `collapse_label_` varchar(255) default NULL,
-  `collapsible_` varchar(255) default NULL,
-  `coordinate_format_` varchar(255) default NULL,
-  `delta_` varchar(255) default NULL,
-  `duration_` varchar(255) default NULL,
-  `extent_` varchar(255) default NULL,
-  `keys_` varchar(255) default NULL,
-  `label_` varchar(255) default NULL,
-  `label_active_` varchar(255) default NULL,
-  `layers_` varchar(255) default NULL,
-  `max_resolution_` varchar(255) default NULL,
-  `min_resolution_` varchar(255) default NULL,
-  `min_width_` varchar(255) default NULL,
-  `projection_` varchar(255) default NULL,
-  `tip_label_` varchar(255) default NULL,
-  `undefined_html_` varchar(255) default NULL,
-  `units_` varchar(255) default NULL,
-  `zoom_in_label_` varchar(255) default NULL,
-  `zoom_in_tip_label_` varchar(255) default NULL,
-  `zoom_out_label_` varchar(255) default NULL,
-  `zoom_out_tip_label_` varchar(255) default NULL,
-  PRIMARY KEY  (`id_`),
+  `id_` int(11) NOT NULL AUTO_INCREMENT,
+  `control_class_name_` varchar(255) DEFAULT NULL,
+  `auto_hide_` varchar(255) DEFAULT NULL,
+  `collapsed_` varchar(255) DEFAULT NULL,
+  `collapse_label_` varchar(255) DEFAULT NULL,
+  `collapsible_` varchar(255) DEFAULT NULL,
+  `coordinate_format_` varchar(255) DEFAULT NULL,
+  `delta_` varchar(255) DEFAULT NULL,
+  `duration_` varchar(255) DEFAULT NULL,
+  `extent_` varchar(255) DEFAULT NULL,
+  `keys_` varchar(255) DEFAULT NULL,
+  `label_` varchar(255) DEFAULT NULL,
+  `label_active_` varchar(255) DEFAULT NULL,
+  `layers_` varchar(255) DEFAULT NULL,
+  `max_resolution_` varchar(255) DEFAULT NULL,
+  `min_resolution_` varchar(255) DEFAULT NULL,
+  `min_width_` varchar(255) DEFAULT NULL,
+  `projection_` varchar(255) DEFAULT NULL,
+  `tip_label_` varchar(255) DEFAULT NULL,
+  `undefined_html_` varchar(255) DEFAULT NULL,
+  `units_` varchar(255) DEFAULT NULL,
+  `zoom_in_label_` varchar(255) DEFAULT NULL,
+  `zoom_in_tip_label_` varchar(255) DEFAULT NULL,
+  `zoom_out_label_` varchar(255) DEFAULT NULL,
+  `zoom_out_tip_label_` varchar(255) DEFAULT NULL,
+  `map_id_` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_`),
   UNIQUE KEY `id__UNIQUE` (`id_`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ms_gis_ol_control`
@@ -153,34 +154,35 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `ms_gis_ol_interaction`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_gis_ol_interaction` (
-  `id_` int(11) NOT NULL auto_increment,
-  `interaction_class_name_` varchar(255) default NULL,
-  `add_condition_` varchar(255) default NULL,
-  `condition_` varchar(255) default NULL,
-  `delta_` varchar(255) default NULL,
-  `duration_` varchar(255) default NULL,
-  `filter_` varchar(255) default NULL,
-  `format_constructors_` varchar(255) default NULL,
-  `handle_down_event_` varchar(255) default NULL,
-  `handle_drag_event_` varchar(255) default NULL,
-  `handle_event_` varchar(255) default NULL,
-  `handle_move_event_` varchar(255) default NULL,
-  `handle_up_event_` varchar(255) default NULL,
-  `layers_` varchar(255) default NULL,
-  `multi_` varchar(255) default NULL,
-  `pixel_delta_` varchar(255) default NULL,
-  `projection_` varchar(255) default NULL,
-  `remove_condition_` varchar(255) default NULL,
-  `style_` varchar(255) default NULL,
-  `toggle_condition_` varchar(255) default NULL,
-  `wrap_x_` varchar(255) default NULL,
-  PRIMARY KEY  (`id_`),
+  `id_` int(11) NOT NULL AUTO_INCREMENT,
+  `interaction_class_name_` varchar(255) DEFAULT NULL,
+  `add_condition_` varchar(255) DEFAULT NULL,
+  `condition_` varchar(255) DEFAULT NULL,
+  `delta_` varchar(255) DEFAULT NULL,
+  `duration_` varchar(255) DEFAULT NULL,
+  `filter_` varchar(255) DEFAULT NULL,
+  `format_constructors_` varchar(255) DEFAULT NULL,
+  `handle_down_event_` varchar(255) DEFAULT NULL,
+  `handle_drag_event_` varchar(255) DEFAULT NULL,
+  `handle_event_` varchar(255) DEFAULT NULL,
+  `handle_move_event_` varchar(255) DEFAULT NULL,
+  `handle_up_event_` varchar(255) DEFAULT NULL,
+  `layers_` varchar(255) DEFAULT NULL,
+  `multi_` varchar(255) DEFAULT NULL,
+  `pixel_delta_` varchar(255) DEFAULT NULL,
+  `projection_` varchar(255) DEFAULT NULL,
+  `remove_condition_` varchar(255) DEFAULT NULL,
+  `style_` varchar(255) DEFAULT NULL,
+  `toggle_condition_` varchar(255) DEFAULT NULL,
+  `wrap_x_` varchar(255) DEFAULT NULL,
+  `map_id_` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_`),
   UNIQUE KEY `id__UNIQUE` (`id_`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ms_gis_ol_interaction`
@@ -196,40 +198,40 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `ms_gis_ol_layer`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_gis_ol_layer` (
-  `id_` int(11) NOT NULL auto_increment,
-  `brightness_` varchar(255) default NULL,
-  `contrast_` varchar(255) default NULL,
-  `hue_` varchar(255) default NULL,
-  `opacity_` varchar(255) default NULL,
-  `saturation_` varchar(255) default NULL,
-  `visible_` varchar(255) default NULL,
-  `extent_` varchar(255) default NULL,
-  `min_resolution_` varchar(255) default NULL,
-  `max_resolution_` varchar(255) default NULL,
-  `source_class_name_` varchar(255) default NULL,
-  `layer_class_name_` varchar(255) default NULL,
-  `name_` varchar(255) default NULL,
-  `sort_` int(11) default NULL,
-  `preload_` varchar(255) default NULL,
-  `use_interim_tiles_on_error_` varchar(255) default NULL,
-  `update_while_animating_` varchar(255) default NULL,
-  `update_while_interacting_` varchar(255) default NULL,
-  `render_buffer_` varchar(255) default NULL,
-  `source_url_` varchar(255) default NULL,
-  `source_format_` varchar(255) default NULL,
-  `source_strategy_` varchar(255) default NULL,
-  `source_tile_size_` varchar(255) default NULL,
-  `source_tile_pixel_ratio_` varchar(255) default NULL,
-  `source_max_zoom_` varchar(255) default NULL,
-  `source_use_spatial_index_` varchar(255) default NULL,
-  `source_wrap_x_` varchar(255) default NULL,
-  PRIMARY KEY  (`id_`),
+  `id_` int(11) NOT NULL AUTO_INCREMENT,
+  `brightness_` varchar(255) DEFAULT NULL,
+  `contrast_` varchar(255) DEFAULT NULL,
+  `hue_` varchar(255) DEFAULT NULL,
+  `opacity_` varchar(255) DEFAULT NULL,
+  `saturation_` varchar(255) DEFAULT NULL,
+  `visible_` varchar(255) DEFAULT NULL,
+  `extent_` varchar(255) DEFAULT NULL,
+  `min_resolution_` varchar(255) DEFAULT NULL,
+  `max_resolution_` varchar(255) DEFAULT NULL,
+  `source_class_name_` varchar(255) DEFAULT NULL,
+  `layer_class_name_` varchar(255) DEFAULT NULL,
+  `name_` varchar(255) DEFAULT NULL,
+  `sort_` int(11) DEFAULT NULL,
+  `preload_` varchar(255) DEFAULT NULL,
+  `use_interim_tiles_on_error_` varchar(255) DEFAULT NULL,
+  `update_while_animating_` varchar(255) DEFAULT NULL,
+  `update_while_interacting_` varchar(255) DEFAULT NULL,
+  `render_buffer_` varchar(255) DEFAULT NULL,
+  `source_url_` varchar(255) DEFAULT NULL,
+  `source_format_` varchar(255) DEFAULT NULL,
+  `source_strategy_` varchar(255) DEFAULT NULL,
+  `source_tile_size_` varchar(255) DEFAULT NULL,
+  `source_tile_pixel_ratio_` varchar(255) DEFAULT NULL,
+  `source_max_zoom_` varchar(255) DEFAULT NULL,
+  `source_use_spatial_index_` varchar(255) DEFAULT NULL,
+  `source_wrap_x_` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_`),
   UNIQUE KEY `id__UNIQUE` (`id_`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ms_gis_ol_layer`
@@ -246,18 +248,18 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `ms_gis_ol_map`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_gis_ol_map` (
-  `id_` int(11) NOT NULL auto_increment,
-  `load_tiles_while_animating_` varchar(255) default NULL,
-  `load_tiles_while_interacting_` varchar(255) default NULL,
-  `logo_` varchar(255) default NULL,
-  `renderer_` varchar(255) default NULL,
-  PRIMARY KEY  (`id_`),
+  `id_` int(11) NOT NULL AUTO_INCREMENT,
+  `load_tiles_while_animating_` varchar(255) DEFAULT NULL,
+  `load_tiles_while_interacting_` varchar(255) DEFAULT NULL,
+  `logo_` varchar(255) DEFAULT NULL,
+  `renderer_` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_`),
   UNIQUE KEY `unique_id_` (`id_`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ms_gis_ol_map`
@@ -265,7 +267,36 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `ms_gis_ol_map` WRITE;
 /*!40000 ALTER TABLE `ms_gis_ol_map` DISABLE KEYS */;
+INSERT INTO `ms_gis_ol_map` VALUES (3,'1','1','','Canvas,DOM,WebGL');
 /*!40000 ALTER TABLE `ms_gis_ol_map` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ms_gis_ol_map_layergroup`
+--
+
+DROP TABLE IF EXISTS `ms_gis_ol_map_layergroup`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ms_gis_ol_map_layergroup` (
+  `id_` int(11) NOT NULL AUTO_INCREMENT,
+  `map_id_` int(11) DEFAULT NULL,
+  `layer_id_` int(11) DEFAULT NULL,
+  `parent_id_` int(11) DEFAULT NULL,
+  `name_` varchar(255) DEFAULT NULL,
+  `sort_` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ms_gis_ol_map_layergroup`
+--
+
+LOCK TABLES `ms_gis_ol_map_layergroup` WRITE;
+/*!40000 ALTER TABLE `ms_gis_ol_map_layergroup` DISABLE KEYS */;
+INSERT INTO `ms_gis_ol_map_layergroup` VALUES (4,3,1,NULL,NULL,NULL),(5,3,2,NULL,NULL,NULL),(6,3,NULL,NULL,'aa',1),(7,3,1,6,NULL,NULL),(8,3,NULL,6,'bb',1),(9,3,2,8,NULL,NULL);
+/*!40000 ALTER TABLE `ms_gis_ol_map_layergroup` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -273,23 +304,24 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `ms_gis_ol_overlay`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_gis_ol_overlay` (
-  `id_` int(11) NOT NULL auto_increment,
-  `element_` varchar(255) default NULL,
-  `offset_` varchar(255) default NULL,
-  `position_` varchar(255) default NULL,
-  `positioning_` varchar(255) default NULL,
-  `stop_event_` varchar(255) default NULL,
-  `insert_first_` varchar(255) default NULL,
-  `auto_pan_` varchar(255) default NULL,
-  `auto_pan_animation_` varchar(255) default NULL,
-  `auto_pan_margin_` varchar(255) default NULL,
-  PRIMARY KEY  (`id_`),
+  `id_` int(11) NOT NULL AUTO_INCREMENT,
+  `element_` varchar(255) DEFAULT NULL,
+  `offset_` varchar(255) DEFAULT NULL,
+  `position_` varchar(255) DEFAULT NULL,
+  `positioning_` varchar(255) DEFAULT NULL,
+  `stop_event_` varchar(255) DEFAULT NULL,
+  `insert_first_` varchar(255) DEFAULT NULL,
+  `auto_pan_` varchar(255) DEFAULT NULL,
+  `auto_pan_animation_` varchar(255) DEFAULT NULL,
+  `auto_pan_margin_` varchar(255) DEFAULT NULL,
+  `map_id_` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_`),
   UNIQUE KEY `id__UNIQUE` (`id_`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ms_gis_ol_overlay`
@@ -305,28 +337,29 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `ms_gis_ol_view`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_gis_ol_view` (
-  `id_` int(11) NOT NULL auto_increment,
-  `center_` varchar(255) default NULL,
-  `constrain_rotation_` varchar(255) default NULL,
-  `enable_rotation_` varchar(255) default NULL,
-  `extent_` varchar(255) default NULL,
-  `max_resolution_` varchar(255) default NULL,
-  `min_resolution_` varchar(255) default NULL,
-  `max_zoom_` varchar(255) default NULL,
-  `min_zoom_` varchar(255) default NULL,
-  `projection_` varchar(255) default NULL,
-  `resolution_` varchar(255) default NULL,
-  `resolutions_` varchar(255) default NULL,
-  `rotation_` varchar(255) default NULL,
-  `zoom_` varchar(255) default NULL,
-  `zoomFactor_` varchar(255) default NULL,
-  PRIMARY KEY  (`id_`),
+  `id_` int(11) NOT NULL AUTO_INCREMENT,
+  `center_` varchar(255) DEFAULT NULL,
+  `constrain_rotation_` varchar(255) DEFAULT NULL,
+  `enable_rotation_` varchar(255) DEFAULT NULL,
+  `extent_` varchar(255) DEFAULT NULL,
+  `max_resolution_` varchar(255) DEFAULT NULL,
+  `min_resolution_` varchar(255) DEFAULT NULL,
+  `max_zoom_` varchar(255) DEFAULT NULL,
+  `min_zoom_` varchar(255) DEFAULT NULL,
+  `projection_` varchar(255) DEFAULT NULL,
+  `resolution_` varchar(255) DEFAULT NULL,
+  `resolutions_` varchar(255) DEFAULT NULL,
+  `rotation_` varchar(255) DEFAULT NULL,
+  `zoom_` varchar(255) DEFAULT NULL,
+  `zoom_factor_` varchar(255) DEFAULT NULL,
+  `map_id_` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_`),
   UNIQUE KEY `id__UNIQUE` (`id_`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ms_gis_ol_view`
@@ -334,6 +367,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `ms_gis_ol_view` WRITE;
 /*!40000 ALTER TABLE `ms_gis_ol_view` DISABLE KEYS */;
+INSERT INTO `ms_gis_ol_view` VALUES (2,'100,200',NULL,NULL,'100,200,300,400',NULL,NULL,NULL,NULL,'EPSG:3857','200','500,400,300,200,100',NULL,NULL,NULL,3);
 /*!40000 ALTER TABLE `ms_gis_ol_view` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -342,17 +376,16 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `ms_gis_thematic`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_gis_thematic` (
-  `id_` int(11) NOT NULL auto_increment,
-  `name_` varchar(255) default NULL,
-  `sort_` int(11) default NULL,
-  `map_id_` int(11) default NULL,
-  `view_id_` int(11) default NULL,
+  `id_` int(11) NOT NULL AUTO_INCREMENT,
+  `name_` varchar(255) DEFAULT NULL,
+  `sort_` int(11) DEFAULT NULL,
+  `map_id_` int(11) DEFAULT NULL,
   UNIQUE KEY `unique_id_` (`id_`)
 ) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ms_gis_thematic`
@@ -360,7 +393,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `ms_gis_thematic` WRITE;
 /*!40000 ALTER TABLE `ms_gis_thematic` DISABLE KEYS */;
-INSERT INTO `ms_gis_thematic` VALUES (1,'专题一',1,NULL,NULL),(3,'专题二',2,NULL,NULL),(4,'专题三',3,NULL,NULL),(5,'专题四',4,NULL,NULL);
+INSERT INTO `ms_gis_thematic` VALUES (1,'专题一',1,3),(3,'专题二',2,NULL),(4,'专题三',3,NULL),(5,'专题四',4,NULL);
 /*!40000 ALTER TABLE `ms_gis_thematic` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -369,21 +402,21 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `ms_sys_attachment`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_sys_attachment` (
-  `id_` int(11) NOT NULL auto_increment,
-  `entity_name_` varchar(255) default NULL,
-  `entity_id_` varchar(255) default NULL,
-  `content_type_` varchar(255) default NULL,
-  `original_filename_` varchar(255) default NULL,
-  `random_filename_` varchar(255) default NULL,
-  `file_size_` int(11) default NULL,
-  `extension_name_` varchar(255) default NULL,
-  PRIMARY KEY  (`id_`),
+  `id_` int(11) NOT NULL AUTO_INCREMENT,
+  `entity_name_` varchar(255) DEFAULT NULL,
+  `entity_id_` varchar(255) DEFAULT NULL,
+  `content_type_` varchar(255) DEFAULT NULL,
+  `original_filename_` varchar(255) DEFAULT NULL,
+  `random_filename_` varchar(255) DEFAULT NULL,
+  `file_size_` int(11) DEFAULT NULL,
+  `extension_name_` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_`),
   UNIQUE KEY `unique_id_` (`id_`)
 ) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ms_sys_attachment`
@@ -400,17 +433,17 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `ms_sys_config`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_sys_config` (
-  `id_` int(11) NOT NULL auto_increment,
-  `key_` varchar(255) default NULL,
-  `value_` varchar(255) default NULL,
-  `sort_` int(11) default NULL,
-  PRIMARY KEY  (`id_`),
+  `id_` int(11) NOT NULL AUTO_INCREMENT,
+  `key_` varchar(255) DEFAULT NULL,
+  `value_` varchar(255) DEFAULT NULL,
+  `sort_` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_`),
   UNIQUE KEY `unique_id_` (`id_`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ms_sys_config`
@@ -427,18 +460,18 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `ms_sys_department`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_sys_department` (
-  `id_` int(11) NOT NULL auto_increment,
-  `parent_id_` int(11) default NULL,
-  `name_` varchar(255) default NULL,
-  `description_` varchar(255) default NULL,
-  `sort_` int(11) default NULL,
-  PRIMARY KEY  (`id_`),
+  `id_` int(11) NOT NULL AUTO_INCREMENT,
+  `parent_id_` int(11) DEFAULT NULL,
+  `name_` varchar(255) DEFAULT NULL,
+  `description_` varchar(255) DEFAULT NULL,
+  `sort_` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_`),
   UNIQUE KEY `unique_id_` (`id_`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ms_sys_department`
@@ -455,19 +488,19 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `ms_sys_dict`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_sys_dict` (
-  `id_` int(11) NOT NULL auto_increment,
-  `invoke_code_` varchar(255) default NULL,
-  `name_` varchar(255) default NULL,
-  `parent_id_` int(11) default NULL,
-  `sort_` int(11) default NULL,
-  PRIMARY KEY  (`id_`),
+  `id_` int(11) NOT NULL AUTO_INCREMENT,
+  `invoke_code_` varchar(255) DEFAULT NULL,
+  `name_` varchar(255) DEFAULT NULL,
+  `parent_id_` int(11) DEFAULT NULL,
+  `sort_` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_`),
   UNIQUE KEY `unique_id_` (`id_`),
   UNIQUE KEY `unique_invoke_code_` (`invoke_code_`)
 ) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ms_sys_dict`
@@ -484,18 +517,18 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `ms_sys_dict_item`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_sys_dict_item` (
-  `id_` int(11) NOT NULL auto_increment,
-  `key_` varchar(255) default NULL,
-  `value_` varchar(255) default NULL,
-  `dict_id_` int(11) default NULL,
-  `sort_` int(11) default NULL,
-  PRIMARY KEY  (`id_`),
+  `id_` int(11) NOT NULL AUTO_INCREMENT,
+  `key_` varchar(255) DEFAULT NULL,
+  `value_` varchar(255) DEFAULT NULL,
+  `dict_id_` int(11) DEFAULT NULL,
+  `sort_` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_`),
   UNIQUE KEY `unique_id_` (`id_`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ms_sys_dict_item`
@@ -512,21 +545,21 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `ms_sys_employee`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_sys_employee` (
-  `id_` int(11) NOT NULL auto_increment,
-  `sort_` int(11) default NULL,
+  `id_` int(11) NOT NULL AUTO_INCREMENT,
+  `sort_` int(11) DEFAULT NULL,
   `username_` varchar(255) NOT NULL,
   `password_` varchar(255) NOT NULL,
   `freeze_` int(11) NOT NULL,
   `name_` varchar(255) NOT NULL,
-  `department_id_` int(11) default NULL,
-  `email_` varchar(255) default NULL,
-  PRIMARY KEY  (`id_`),
+  `department_id_` int(11) DEFAULT NULL,
+  `email_` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_`),
   UNIQUE KEY `unique_id_` (`id_`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ms_sys_employee`
@@ -534,7 +567,7 @@ SET character_set_client = @saved_cs_client;
 
 LOCK TABLES `ms_sys_employee` WRITE;
 /*!40000 ALTER TABLE `ms_sys_employee` DISABLE KEYS */;
-INSERT INTO `ms_sys_employee` VALUES (1,1,'admin','40bd001563085fc35165329ea1ff5c5ecbdbbeef',0,'杨磊',1,'kyllyang@gmail.com'),(2,1,'cjc','40bd001563085fc35165329ea1ff5c5ecbdbbeef',1,'赵嘉琛',6,'');
+INSERT INTO `ms_sys_employee` VALUES (1,1,'admin','40bd001563085fc35165329ea1ff5c5ecbdbbeef',0,'杨磊',1,'kyllyang@gmail.com');
 /*!40000 ALTER TABLE `ms_sys_employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -543,14 +576,14 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `ms_sys_employee_role`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_sys_employee_role` (
-  `employee_id_` int(11) NOT NULL default '0',
-  `role_id_` int(11) NOT NULL default '0',
-  PRIMARY KEY  (`employee_id_`,`role_id_`)
+  `employee_id_` int(11) NOT NULL DEFAULT '0',
+  `role_id_` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`employee_id_`,`role_id_`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ms_sys_employee_role`
@@ -567,17 +600,17 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `ms_sys_role`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_sys_role` (
-  `id_` int(11) NOT NULL auto_increment,
-  `name_` varchar(255) default NULL,
-  `description_` varchar(255) default NULL,
-  `sort_` int(11) default NULL,
-  PRIMARY KEY  (`id_`),
+  `id_` int(11) NOT NULL AUTO_INCREMENT,
+  `name_` varchar(255) DEFAULT NULL,
+  `description_` varchar(255) DEFAULT NULL,
+  `sort_` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_`),
   UNIQUE KEY `unique_id_` (`id_`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ms_sys_role`
@@ -594,14 +627,14 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `ms_sys_role_function`;
-SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_sys_role_function` (
   `role_id_` int(11) NOT NULL,
-  `function_id_` int(11) NOT NULL default '0',
-  PRIMARY KEY  (`role_id_`,`function_id_`)
+  `function_id_` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`role_id_`,`function_id_`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-SET character_set_client = @saved_cs_client;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ms_sys_role_function`
@@ -622,4 +655,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-09-30  6:34:57
+-- Dump completed on 2015-10-01 15:30:46
