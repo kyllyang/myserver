@@ -15,7 +15,6 @@ public class OlMap implements Serializable {
 	private String loadTilesWhileInteracting;// boolean 0: false; 1: true
 	private String logo;
 	private String renderer;// Canvas, DOM, WebGL
-	private Thematic thematic;
 
 	public OlMap() {
 	}
@@ -65,15 +64,5 @@ public class OlMap implements Serializable {
 
 	public void setRenderer(String renderer) {
 		this.renderer = renderer;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "THEMATIC_ID_")
-	public Thematic getThematic() {
-		return thematic;
-	}
-
-	public void setThematic(Thematic thematic) {
-		this.thematic = thematic;
 	}
 }

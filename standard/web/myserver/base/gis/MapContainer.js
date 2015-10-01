@@ -1,7 +1,7 @@
 Ext.define('Base.gis.MapContainer', {
 	extend: 'Ext.container.Container',
 
-	mapDivId: 'mapDiv_' + Ext.data.IdGenerator.get('uuid').generate().replace(/-/g, ''),
+	mapDivId: 'mapDiv_' + myServer.uuid(),
 	map: null,
 
 	initComponent: function() {

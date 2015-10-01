@@ -8,6 +8,7 @@ import net.sf.json.JsonConfig;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Exchanger;
 
 /**
  * User: Kyll
@@ -72,7 +73,10 @@ public class JsonUtils {
 	public static Integer getInteger(JSONObject jo, String name) {
 		Integer result = null;
 		if (jo.has(name)) {
-			result = jo.getInt(name);
+			try {
+				result = jo.getInt(name);
+			} catch (JSONException ignored) {
+			}
 		}
 		return result;
 	}

@@ -1,12 +1,18 @@
 package org.kyll.myserver.base.gis.service.impl;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.kyll.myserver.base.QueryCondition;
 import org.kyll.myserver.base.common.paginated.Dataset;
 import org.kyll.myserver.base.common.paginated.Paginated;
-import org.kyll.myserver.base.gis.dao.ThematicDao;
+import org.kyll.myserver.base.gis.dao.*;
+import org.kyll.myserver.base.gis.entity.OlLayerGroup;
+import org.kyll.myserver.base.gis.entity.OlMap;
+import org.kyll.myserver.base.gis.entity.OlView;
 import org.kyll.myserver.base.gis.entity.Thematic;
 import org.kyll.myserver.base.gis.service.ThematicService;
+import org.kyll.myserver.base.util.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +28,14 @@ import java.util.List;
 public class ThematicServiceImpl implements ThematicService {
 	@Autowired
 	private ThematicDao thematicDao;
+	@Autowired
+	private OlMapDao olMapDao;
+	@Autowired
+	private OlViewDao olViewDao;
+	@Autowired
+	private OlLayerGroupDao olLayerGroupDao;
+	@Autowired
+	private OlLayerDao olLayerDao;
 
 	@Override
 	public Thematic get(Long id) {
@@ -54,8 +68,42 @@ public class ThematicServiceImpl implements ThematicService {
 	}
 
 	@Override
-	public void save(Thematic thematic) {
+	public void save(Thematic thematic, OlMap olMap, OlView olView, String layerGroup) {
+		olMapDao.save(olMap);
+
+		olView.setOlMap(olMap);
+		olViewDao.save(olView);
+
+		thematic.setOlMap(olMap);
 		thematicDao.save(thematic);
+
+		List<OlLayerGroup> olLayerGroupList = olLayerGroupDao.find("from OlLayerGroup t where t.olMap.id = '" + olMap.getId() + "'");
+		olLayerGroupDao.delete(olLayerGroupList);
+		JSONArray ja = JSONObject.fromObject(layerGroup).getJSONArray("children");
+		for (int i = 0; i < ja.size(); i++) {
+			this.saveLayerGroup(ja.getJSONObject(i), null, olMap);
+		}
+	}
+
+	private void saveLayerGroup(JSONObject jo, OlLayerGroup parent, OlMap olMap) {
+		OlLayerGroup olLayerGroup = new OlLayerGroup();
+		olLayerGroup.setParent(parent);
+		olLayerGroup.setOlMap(olMap);
+
+		String id = JsonUtils.getString(jo, "id");
+		if (id.startsWith("g_")) {
+			olLayerGroup.setName(JsonUtils.getString(jo, "name"));
+			olLayerGroup.setSort(JsonUtils.getInteger(jo, "sort"));
+		} else if (id.startsWith("l_")) {
+			olLayerGroup.setOlLayer(olLayerDao.get(Long.parseLong(id.split("_")[1])));
+		}
+
+		olLayerGroupDao.save(olLayerGroup);
+
+		JSONArray ja = jo.getJSONArray("children");
+		for (int i = 0; i < ja.size(); i++) {
+			this.saveLayerGroup(ja.getJSONObject(i), olLayerGroup, olMap);
+		}
 	}
 
 	@Override

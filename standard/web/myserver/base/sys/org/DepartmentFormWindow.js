@@ -40,7 +40,7 @@ Ext.define('Base.sys.org.DepartmentFormWindow', {
 			disabled: true
 		});
 		var nameText = Ext.create('Ext.form.field.Text', {
-			fieldLabel: '<span style="color: #FF0000;">*</span>模块名称',
+			fieldLabel: '<span style="color: #FF0000;">*</span>名称',
 			labelAlign: 'right',
 			labelSeparator: '：',
 			name: 'name',

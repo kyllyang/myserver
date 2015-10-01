@@ -63,6 +63,9 @@ var myServer = {
 	},
 	encryptSHA: function(value) {
 		return new jsSHA(value, 'TEXT').getHash('SHA-1', 'HEX', 1);
+	},
+	uuid: function() {
+		return  Ext.data.IdGenerator.get('uuid').generate().replace(/-/g, '');
 	}
 };
 

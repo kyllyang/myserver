@@ -24,15 +24,18 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 				{name: 'id'},
 				{name: 'name'},
 				{name: 'sort'},
+				{name: 'mapId'},
 				{name: 'mapLogo'},
 				{name: 'mapLoadTilesWhileAnimating'},
 				{name: 'mapLoadTilesWhileInteracting'},
 				{name: 'mapRenderer'},
+				{name: 'viewId'},
 				{name: 'viewProjection'},
 				{name: 'viewCenter'},
 				{name: 'viewExtent'},
 				{name: 'viewResolutions'},
-				{name: 'viewResolution'}
+				{name: 'viewResolution'},
+				{name: 'layerGroup'}
 			]
 		});
 
@@ -55,7 +58,8 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			minValue: 1,
 			allowDecimals: false
 		});
-		var mapLogoFile = Ext.create('Ext.form.field.File', {
+	//	var mapLogoFile = Ext.create('Ext.form.field.File', {
+		var mapLogoFile = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '徽标',
 			labelAlign: 'right',
 			labelSeparator: '：',
@@ -160,7 +164,7 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			},
 			qtip: 'The initial resolution for the view. The units are projection units per pixel (e.g. meters per pixel). An alternative to setting this is to set zoom. Default is undefined, and layer sources will not be fetched if neither this nor zoom are defined.'
 		});
-		var layerGridPanel = Ext.create('Base.gis.thematic.LayerGridPanel');
+		var layerTreePanel = Ext.create('Base.gis.thematic.LayerTreePanel');
 
 		var formPanel = Ext.create('Ext.form.Panel', {
 			itemId: 'editForm',
@@ -171,6 +175,7 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			reader: Ext.create('Ext.data.JsonReader', {
 				model: 'FormModel'
 			}),
+			bodyStyle : 'overflow-x:visible; overflow-y:scroll',
 			layout: 'form',
 			items: [{
 				xtype: 'hidden',
@@ -181,6 +186,15 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			}, {
 				xtype: 'hidden',
 				name: 'viewResolution'
+			}, {
+				xtype: 'hidden',
+				name: 'mapId'
+			}, {
+				xtype: 'hidden',
+				name: 'viewId'
+			}, {
+				xtype: 'hidden',
+				name: 'layerGroup'
 			}, {
 				xtype: 'container',
 				layout: 'column',
@@ -250,7 +264,7 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 				xtype: 'fieldset',
 				title: '图层',
 				layout: 'form',
-				items: [layerGridPanel]
+				items: [layerTreePanel]
 			}, {
 				xtype: 'fieldset',
 				title: '控件',
@@ -306,6 +320,23 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 				},
 				waitMsg: '正在载入数据...',
 				success: function(form, action) {
+					layerTreePanel.mapId = form.findField('mapId').getValue();
+					layerTreePanel.queryData();
+
+					var renderers = form.findField('mapRenderer').getValue().split(',');
+					var rendererButtons = this.down('#rendererContainer').items;
+					for (var i = 0; i < rendererButtons.length; i++) {
+						rendererButtons.get(i).setText(renderers[i]);
+					}
+
+					var resolutions = form.findField('viewResolutions').getValue().split(',');
+					var resolution = form.findField('viewResolution').getValue();
+					for (var i = 0; i < resolutions.length; i++) {
+						if (Ext.String.trim(resolutions[i]) == Ext.String.trim(resolution)) {
+							resolutionSlider.setValue(resolutions.length - i);
+							break;
+						}
+					}
 				},
 				failure: function() {
 					Ext.Msg.alert('系统提示', '无法加载信息！');
@@ -365,10 +396,15 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 		}
 		this.getComponent('editForm').getForm().findField('mapRenderer').setValue(renderers.join(','));
 	},
+	saveLayouGroup: function() {
+		var layerTreePanel = this.down('#layerTreePanel');
+		this.getComponent('editForm').getForm().findField('layerGroup').setValue(Ext.encode(layerTreePanel.getJsonObject(layerTreePanel.getRootNode())));
+	},
 	saveForm: function() {
 		var form = this.getComponent('editForm').getForm();
 		if (form.isValid()) {
 			this.saveRenderer();
+			this.saveLayouGroup();
 
 			form.submit({
 				url: ctx + '/gis/thematic/save.ctrl',
