@@ -137,7 +137,7 @@ CREATE TABLE `ms_gis_ol_control` (
   `map_id_` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_`),
   UNIQUE KEY `id__UNIQUE` (`id_`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -146,6 +146,7 @@ CREATE TABLE `ms_gis_ol_control` (
 
 LOCK TABLES `ms_gis_ol_control` WRITE;
 /*!40000 ALTER TABLE `ms_gis_ol_control` DISABLE KEYS */;
+INSERT INTO `ms_gis_ol_control` VALUES (34,'ol.control.Attribution',NULL,'1','»','1',NULL,NULL,NULL,NULL,NULL,'i',NULL,NULL,NULL,NULL,NULL,NULL,'Attributions',NULL,NULL,NULL,NULL,NULL,NULL,3),(35,'ol.control.FullScreen',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'↔','×',NULL,NULL,NULL,NULL,NULL,'Toggle full-screen',NULL,NULL,NULL,NULL,NULL,NULL,3),(36,'ol.control.MousePosition',NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,'',NULL,NULL,NULL,NULL,NULL,3),(37,'ol.control.OverviewMap',NULL,'1','«','1',NULL,NULL,NULL,NULL,NULL,'»',NULL,NULL,NULL,NULL,NULL,NULL,'Overview map',NULL,NULL,NULL,NULL,NULL,NULL,3),(38,'ol.control.Rotate','1',NULL,NULL,NULL,NULL,NULL,'250',NULL,NULL,'⇧',NULL,NULL,NULL,NULL,NULL,NULL,'Reset rotation',NULL,NULL,NULL,NULL,NULL,NULL,3),(39,'ol.control.ScaleLine',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'64',NULL,NULL,NULL,'metric',NULL,NULL,NULL,NULL,3),(40,'ol.control.Zoom',NULL,NULL,NULL,NULL,NULL,'','250',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'+','Zoom in','-','Zoom out',3),(41,'ol.control.ZoomSlider',NULL,NULL,NULL,NULL,NULL,NULL,'250',NULL,NULL,NULL,NULL,NULL,'','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,3),(42,'ol.control.ZoomToExtent',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,'E',NULL,NULL,NULL,NULL,NULL,NULL,'Zoom to extent',NULL,NULL,NULL,NULL,NULL,NULL,3);
 /*!40000 ALTER TABLE `ms_gis_ol_control` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -159,29 +160,23 @@ DROP TABLE IF EXISTS `ms_gis_ol_interaction`;
 CREATE TABLE `ms_gis_ol_interaction` (
   `id_` int(11) NOT NULL AUTO_INCREMENT,
   `interaction_class_name_` varchar(255) DEFAULT NULL,
-  `add_condition_` varchar(255) DEFAULT NULL,
-  `condition_` varchar(255) DEFAULT NULL,
   `delta_` varchar(255) DEFAULT NULL,
   `duration_` varchar(255) DEFAULT NULL,
-  `filter_` varchar(255) DEFAULT NULL,
-  `format_constructors_` varchar(255) DEFAULT NULL,
-  `handle_down_event_` varchar(255) DEFAULT NULL,
-  `handle_drag_event_` varchar(255) DEFAULT NULL,
-  `handle_event_` varchar(255) DEFAULT NULL,
-  `handle_move_event_` varchar(255) DEFAULT NULL,
-  `handle_up_event_` varchar(255) DEFAULT NULL,
-  `layers_` varchar(255) DEFAULT NULL,
   `multi_` varchar(255) DEFAULT NULL,
   `pixel_delta_` varchar(255) DEFAULT NULL,
   `projection_` varchar(255) DEFAULT NULL,
-  `remove_condition_` varchar(255) DEFAULT NULL,
-  `style_` varchar(255) DEFAULT NULL,
-  `toggle_condition_` varchar(255) DEFAULT NULL,
   `wrap_x_` varchar(255) DEFAULT NULL,
   `map_id_` int(11) DEFAULT NULL,
+  `click_tolerance_` varchar(255) DEFAULT NULL,
+  `kinetic_decay_` varchar(255) DEFAULT NULL,
+  `kinetic_delay_` varchar(255) DEFAULT NULL,
+  `kinetic_min_velocity_` varchar(255) DEFAULT NULL,
+  `pixel_tolerance_` varchar(255) DEFAULT NULL,
+  `snap_tolerance_` varchar(255) DEFAULT NULL,
+  `threshold_` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_`),
   UNIQUE KEY `id__UNIQUE` (`id_`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -190,6 +185,7 @@ CREATE TABLE `ms_gis_ol_interaction` (
 
 LOCK TABLES `ms_gis_ol_interaction` WRITE;
 /*!40000 ALTER TABLE `ms_gis_ol_interaction` DISABLE KEYS */;
+INSERT INTO `ms_gis_ol_interaction` VALUES (99,'ol.interaction.DoubleClickZoom','1','250',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(100,'ol.interaction.DragPan',NULL,NULL,NULL,NULL,NULL,NULL,3,NULL,'','','',NULL,NULL,NULL),(101,'ol.interaction.DragRotate',NULL,'250',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(102,'ol.interaction.DragZoom',NULL,'200',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(103,'ol.interaction.KeyboardPan',NULL,'100',NULL,'128',NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(104,'ol.interaction.KeyboardZoom','1','100',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(105,'ol.interaction.MouseWheelZoom',NULL,'250',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(106,'ol.interaction.PinchRotate',NULL,'250',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,'0.3'),(107,'ol.interaction.PinchZoom',NULL,'400',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `ms_gis_ol_interaction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -258,7 +254,7 @@ CREATE TABLE `ms_gis_ol_map` (
   `renderer_` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_`),
   UNIQUE KEY `unique_id_` (`id_`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -286,7 +282,7 @@ CREATE TABLE `ms_gis_ol_map_layergroup` (
   `name_` varchar(255) DEFAULT NULL,
   `sort_` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -295,7 +291,7 @@ CREATE TABLE `ms_gis_ol_map_layergroup` (
 
 LOCK TABLES `ms_gis_ol_map_layergroup` WRITE;
 /*!40000 ALTER TABLE `ms_gis_ol_map_layergroup` DISABLE KEYS */;
-INSERT INTO `ms_gis_ol_map_layergroup` VALUES (4,3,1,NULL,NULL,NULL),(5,3,2,NULL,NULL,NULL),(6,3,NULL,NULL,'aa',1),(7,3,1,6,NULL,NULL),(8,3,NULL,6,'bb',1),(9,3,2,8,NULL,NULL);
+INSERT INTO `ms_gis_ol_map_layergroup` VALUES (22,3,1,NULL,NULL,NULL),(23,3,2,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `ms_gis_ol_map_layergroup` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -358,7 +354,7 @@ CREATE TABLE `ms_gis_ol_view` (
   `map_id_` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_`),
   UNIQUE KEY `id__UNIQUE` (`id_`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -367,7 +363,7 @@ CREATE TABLE `ms_gis_ol_view` (
 
 LOCK TABLES `ms_gis_ol_view` WRITE;
 /*!40000 ALTER TABLE `ms_gis_ol_view` DISABLE KEYS */;
-INSERT INTO `ms_gis_ol_view` VALUES (2,'100,200',NULL,NULL,'100,200,300,400',NULL,NULL,NULL,NULL,'EPSG:3857','200','500,400,300,200,100',NULL,NULL,NULL,3);
+INSERT INTO `ms_gis_ol_view` VALUES (2,'100,200',NULL,NULL,'100,200,300,400',NULL,NULL,NULL,NULL,'EPSG:3857','200','500,400,300,200,100',NULL,NULL,NULL,3),(3,'1',NULL,NULL,'1',NULL,NULL,NULL,NULL,'EPSG:3857','1','1',NULL,NULL,NULL,4),(4,'1',NULL,NULL,'1',NULL,NULL,NULL,NULL,'EPSG:3857','1','1',NULL,NULL,NULL,5);
 /*!40000 ALTER TABLE `ms_gis_ol_view` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -384,7 +380,7 @@ CREATE TABLE `ms_gis_thematic` (
   `sort_` int(11) DEFAULT NULL,
   `map_id_` int(11) DEFAULT NULL,
   UNIQUE KEY `unique_id_` (`id_`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -499,7 +495,7 @@ CREATE TABLE `ms_sys_dict` (
   PRIMARY KEY (`id_`),
   UNIQUE KEY `unique_id_` (`id_`),
   UNIQUE KEY `unique_invoke_code_` (`invoke_code_`)
-) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -508,7 +504,7 @@ CREATE TABLE `ms_sys_dict` (
 
 LOCK TABLES `ms_sys_dict` WRITE;
 /*!40000 ALTER TABLE `ms_sys_dict` DISABLE KEYS */;
-INSERT INTO `ms_sys_dict` VALUES (1,'sys','系统维护',NULL,2),(11,'app','应用模块',NULL,3),(12,'app_module','模块',11,1),(13,'app_module_type','类型',12,1),(14,'app_module_funcType','功能类型',12,2),(16,'gis','地图管理',NULL,1),(17,'gis_layer','图层',16,1),(18,'gis_layer_class','图层类型',17,1),(19,'gis_layer_titlesize','瓦片尺寸',17,2);
+INSERT INTO `ms_sys_dict` VALUES (1,'sys','系统维护',NULL,2),(11,'app','应用模块',NULL,3),(12,'app_module','模块',11,1),(13,'app_module_type','类型',12,1),(14,'app_module_funcType','功能类型',12,2),(16,'gis','地图管理',NULL,1),(17,'gis_layer','图层',16,1),(18,'gis_layer_class','图层类型',17,1),(19,'gis_layer_titlesize','瓦片尺寸',17,2),(20,'gis_control','控件',16,2),(21,'gis_control_unit','单位',20,1);
 /*!40000 ALTER TABLE `ms_sys_dict` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -527,7 +523,7 @@ CREATE TABLE `ms_sys_dict_item` (
   `sort_` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_`),
   UNIQUE KEY `unique_id_` (`id_`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -536,7 +532,7 @@ CREATE TABLE `ms_sys_dict_item` (
 
 LOCK TABLES `ms_sys_dict_item` WRITE;
 /*!40000 ALTER TABLE `ms_sys_dict_item` DISABLE KEYS */;
-INSERT INTO `ms_sys_dict_item` VALUES (12,'2','功能',13,2),(13,'1','模块',13,1),(14,'2','URL',14,2),(15,'1','JavaScript',14,1),(16,'ol.layer.Vector','矢量',18,2),(17,'ol.layer.Tile','瓦片',18,1),(18,'512','512, 512',19,2),(19,'256','256, 256',19,1);
+INSERT INTO `ms_sys_dict_item` VALUES (12,'2','功能',13,2),(13,'1','模块',13,1),(14,'2','URL',14,2),(15,'1','JavaScript',14,1),(16,'ol.layer.Vector','矢量',18,2),(17,'ol.layer.Tile','瓦片',18,1),(18,'512','512, 512',19,2),(19,'256','256, 256',19,1),(20,'us','美式',21,5),(21,'metric','公制',21,4),(22,'nautical','海里',21,3),(23,'imperial','英制',21,2),(24,'degrees','度',21,1);
 /*!40000 ALTER TABLE `ms_sys_dict_item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -558,7 +554,7 @@ CREATE TABLE `ms_sys_employee` (
   `email_` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_`),
   UNIQUE KEY `unique_id_` (`id_`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -655,4 +651,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-10-01 15:30:46
+-- Dump completed on 2015-10-02 15:52:12
