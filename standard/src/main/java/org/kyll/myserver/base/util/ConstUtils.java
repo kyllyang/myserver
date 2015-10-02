@@ -58,6 +58,18 @@ public final class ConstUtils {
 	 * 常用时间格式 时:分:秒
 	 */
 	public static final String TIME_FORMAT = "HH:mm:ss";
+	/**
+	 * Openlayers 控件类名
+	 */
+	public static final String GIS_OL_CONTROL_ATTRIBUTION = "ol.control.Attribution";
+	public static final String GIS_OL_CONTROL_FULLSCREEN = "ol.control.FullScreen";
+	public static final String GIS_OL_CONTROL_MOUSEPOSITION = "ol.control.MousePosition";
+	public static final String GIS_OL_CONTROL_OVERVIEWMAP = "ol.control.OverviewMap";
+	public static final String GIS_OL_CONTROL_ROTATE = "ol.control.Rotate";
+	public static final String GIS_OL_CONTROL_SCALELINE = "ol.control.ScaleLine";
+	public static final String GIS_OL_CONTROL_ZOOM = "ol.control.Zoom";
+	public static final String GIS_OL_CONTROL_ZOOMSLIDER = "ol.control.ZoomSlider";
+	public static final String GIS_OL_CONTROL_ZOOMTOEXTENT = "ol.control.ZoomToExtent";
 
 	private static ApplicationContext applicationContext;
 	private static boolean assignApplicationContext = false;

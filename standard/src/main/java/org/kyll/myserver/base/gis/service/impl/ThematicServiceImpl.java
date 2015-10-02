@@ -7,10 +7,7 @@ import org.kyll.myserver.base.QueryCondition;
 import org.kyll.myserver.base.common.paginated.Dataset;
 import org.kyll.myserver.base.common.paginated.Paginated;
 import org.kyll.myserver.base.gis.dao.*;
-import org.kyll.myserver.base.gis.entity.OlLayerGroup;
-import org.kyll.myserver.base.gis.entity.OlMap;
-import org.kyll.myserver.base.gis.entity.OlView;
-import org.kyll.myserver.base.gis.entity.Thematic;
+import org.kyll.myserver.base.gis.entity.*;
 import org.kyll.myserver.base.gis.service.ThematicService;
 import org.kyll.myserver.base.util.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +33,12 @@ public class ThematicServiceImpl implements ThematicService {
 	private OlLayerGroupDao olLayerGroupDao;
 	@Autowired
 	private OlLayerDao olLayerDao;
+	@Autowired
+	private OlControlDao olControlDao;
+	@Autowired
+	private OlInteractionDao olInteractionDao;
+	@Autowired
+	private OlOverlayDao olOverlayDao;
 
 	@Override
 	public Thematic get(Long id) {
@@ -68,7 +71,7 @@ public class ThematicServiceImpl implements ThematicService {
 	}
 
 	@Override
-	public void save(Thematic thematic, OlMap olMap, OlView olView, String layerGroup) {
+	public void save(Thematic thematic, OlMap olMap, OlView olView, String layerGroup, List<OlControl> olControlList) {
 		olMapDao.save(olMap);
 
 		olView.setOlMap(olMap);
@@ -82,6 +85,12 @@ public class ThematicServiceImpl implements ThematicService {
 		JSONArray ja = JSONObject.fromObject(layerGroup).getJSONArray("children");
 		for (int i = 0; i < ja.size(); i++) {
 			this.saveLayerGroup(ja.getJSONObject(i), null, olMap);
+		}
+
+		olControlDao.delete(olControlDao.find("from OlControl t where t.olMap.id = '" + olMap.getId() + "'"));
+		for (OlControl olControl : olControlList) {
+			olControl.setOlMap(olMap);
+			olControlDao.save(olControl);
 		}
 	}
 
@@ -108,6 +117,20 @@ public class ThematicServiceImpl implements ThematicService {
 
 	@Override
 	public void delete(Long[] ids) {
+		for (Long id : ids) {
+			Thematic thematic = thematicDao.get(id);
+			OlMap olMap = thematic.getOlMap();
+			if (olMap != null) {
+				Long mapId = olMap.getId();
+				olViewDao.delete(olViewDao.find("from OlView t where t.olMap.id = '" + mapId + "'"));
+				olLayerGroupDao.delete(olLayerGroupDao.find("from OlLayerGroup t where t.olMap.id = '" + mapId + "'"));
+				olControlDao.delete(olControlDao.find("from OlControl t where t.olMap.id = '" + mapId + "'"));
+				olInteractionDao.delete(olInteractionDao.find("from OlInteraction t where t.olMap.id = '" + mapId + "'"));
+				olOverlayDao.delete(olOverlayDao.find("from OlOverlay t where t.olMap.id = '" + mapId + "'"));
+				olMapDao.delete(olMap);
+			}
+		}
+
 		thematicDao.delete(ids);
 	}
 }

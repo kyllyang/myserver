@@ -5,6 +5,7 @@ import org.kyll.myserver.base.QueryCondition;
 import org.kyll.myserver.base.common.paginated.Dataset;
 import org.kyll.myserver.base.common.paginated.Paginated;
 import org.kyll.myserver.base.gis.dao.OlLayerDao;
+import org.kyll.myserver.base.gis.dao.OlLayerGroupDao;
 import org.kyll.myserver.base.gis.entity.OlLayer;
 import org.kyll.myserver.base.gis.service.OlLayerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class OlLayerServiceImpl implements OlLayerService {
 	@Autowired
 	private OlLayerDao olLayerDao;
+	@Autowired
+	private OlLayerGroupDao olLayerGroupDao;
 
 	@Override
 	public OlLayer get(Long id) {
@@ -48,6 +51,10 @@ public class OlLayerServiceImpl implements OlLayerService {
 
 	@Override
 	public void delete(Long[] ids) {
+		for (Long id : ids) {
+			olLayerGroupDao.delete(olLayerGroupDao.find("from OlLayerGroup t where t.olLayer.id = '" + id + "'"));
+		}
+
 		olLayerDao.delete(ids);
 	}
 }
