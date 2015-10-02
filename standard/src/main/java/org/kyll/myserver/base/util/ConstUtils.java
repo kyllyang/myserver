@@ -71,6 +71,24 @@ public final class ConstUtils {
 	public static final String GIS_OL_CONTROL_ZOOMSLIDER = "ol.control.ZoomSlider";
 	public static final String GIS_OL_CONTROL_ZOOMTOEXTENT = "ol.control.ZoomToExtent";
 
+	public static final String GIS_OL_INTERACTION_DOUBLECLICKZOOM = "ol.interaction.DoubleClickZoom";
+	public static final String GIS_OL_INTERACTION_DRAGANDDROP = "ol.interaction.DragAndDrop";
+	public static final String GIS_OL_INTERACTION_DRAGBOX = "ol.interaction.DragBox";
+	public static final String GIS_OL_INTERACTION_DRAGPAN = "ol.interaction.DragPan";
+	public static final String GIS_OL_INTERACTION_DRAGROTATE = "ol.interaction.DragRotate";
+	public static final String GIS_OL_INTERACTION_DRAGROTATEANDZOOM = "ol.interaction.DragRotateAndZoom";
+	public static final String GIS_OL_INTERACTION_DRAGZOOM = "ol.interaction.DragZoom";
+	public static final String GIS_OL_INTERACTION_DRAW = "ol.interaction.Draw";
+	public static final String GIS_OL_INTERACTION_KEYBOARDPAN = "ol.interaction.KeyboardPan";
+	public static final String GIS_OL_INTERACTION_KEYBOARDZOOM = "ol.interaction.KeyboardZoom";
+	public static final String GIS_OL_INTERACTION_MODIFY = "ol.interaction.Modify";
+	public static final String GIS_OL_INTERACTION_MOUSEWHEELZOOM = "ol.interaction.MouseWheelZoom";
+	public static final String GIS_OL_INTERACTION_PINCHROTATE = "ol.interaction.PinchRotate";
+	public static final String GIS_OL_INTERACTION_PINCHZOOM = "ol.interaction.PinchZoom";
+	public static final String GIS_OL_INTERACTION_SELECT = "ol.interaction.Select";
+	public static final String GIS_OL_INTERACTION_SNAP = "ol.interaction.Snap";
+	public static final String GIS_OL_INTERACTION_TRANSLATE = "ol.interaction.Translate";
+
 	private static ApplicationContext applicationContext;
 	private static boolean assignApplicationContext = false;
 

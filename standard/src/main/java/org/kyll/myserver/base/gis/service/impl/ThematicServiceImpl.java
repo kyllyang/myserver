@@ -71,7 +71,7 @@ public class ThematicServiceImpl implements ThematicService {
 	}
 
 	@Override
-	public void save(Thematic thematic, OlMap olMap, OlView olView, String layerGroup, List<OlControl> olControlList) {
+	public void save(Thematic thematic, OlMap olMap, OlView olView, String layerGroup, List<OlControl> olControlList, List<OlInteraction> olInteractionList) {
 		olMapDao.save(olMap);
 
 		olView.setOlMap(olMap);
@@ -91,6 +91,12 @@ public class ThematicServiceImpl implements ThematicService {
 		for (OlControl olControl : olControlList) {
 			olControl.setOlMap(olMap);
 			olControlDao.save(olControl);
+		}
+
+		olInteractionDao.delete(olInteractionDao.find("from OlInteraction t where t.olMap.id = '" + olMap.getId() + "'"));
+		for (OlInteraction olInteraction : olInteractionList) {
+			olInteraction.setOlMap(olMap);
+			olInteractionDao.save(olInteraction);
 		}
 	}
 

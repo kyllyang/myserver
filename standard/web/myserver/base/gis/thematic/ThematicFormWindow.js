@@ -79,7 +79,49 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 				{name: 'controlZoomToExtent'},
 				{name: 'controlZoomToExtentExtent'},
 				{name: 'controlZoomToExtentLabel'},
-				{name: 'controlZoomToExtentTipLabel'}
+				{name: 'controlZoomToExtentTipLabel'},
+				{name: 'interactionDoubleClickZoom'},
+				{name: 'interactionDoubleClickZoomDuration'},
+				{name: 'interactionDoubleClickZoomDelta'},
+				{name: 'interactionDragAndDrop'},
+				{name: 'interactionDragAndDropProjection'},
+				{name: 'interactionDragBox'},
+				{name: 'interactionDragPan'},
+				{name: 'interactionDragPanKineticDecay'},
+				{name: 'interactionDragPanKineticMinVelocity'},
+				{name: 'interactionDragPanKineticDelay'},
+				{name: 'interactionDragRotate'},
+				{name: 'interactionDragRotateDuration'},
+				{name: 'interactionDragRotateAndZoom'},
+				{name: 'interactionDragRotateAndZoomDuration'},
+				{name: 'interactionDragZoom'},
+				{name: 'interactionDragZoomDuration'},
+				{name: 'interactionDraw'},
+				{name: 'interactionDrawClickTolerance'},
+				{name: 'interactionDrawSnapTolerance'},
+				{name: 'interactionDrawWrapX'},
+				{name: 'interactionKeyboardPan'},
+				{name: 'interactionKeyboardPanDuration'},
+				{name: 'interactionKeyboardPanPixelDelta'},
+				{name: 'interactionKeyboardZoom'},
+				{name: 'interactionKeyboardZoomDuration'},
+				{name: 'interactionKeyboardZoomDelta'},
+				{name: 'interactionModify'},
+				{name: 'interactionModifyPixelTolerance'},
+				{name: 'interactionModifyWrapX'},
+				{name: 'interactionMouseWheelZoom'},
+				{name: 'interactionMouseWheelZoomDuration'},
+				{name: 'interactionPinchRotate'},
+				{name: 'interactionPinchRotateDuration'},
+				{name: 'interactionPinchRotateThreshold'},
+				{name: 'interactionPinchZoom'},
+				{name: 'interactionPinchZoomDuration'},
+				{name: 'interactionSelect'},
+				{name: 'interactionSelectMulti'},
+				{name: 'interactionSelectWrapX'},
+				{name: 'interactionSnap'},
+				{name: 'interactionSnapPixelTolerance'},
+				{name: 'interactionTranslate'}
 			]
 		});
 
@@ -209,6 +251,7 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			qtip: 'The initial resolution for the view. The units are projection units per pixel (e.g. meters per pixel). An alternative to setting this is to set zoom. Default is undefined, and layer sources will not be fetched if neither this nor zoom are defined.'
 		});
 		var layerTreePanel = Ext.create('Base.gis.thematic.LayerTreePanel');
+		// control
 		var controlAttributionCheckbox = Ext.create('Ext.form.field.Checkbox', {
 			columnWidth: 0.1,
 			boxLabel: '署名',
@@ -590,6 +633,382 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			maxLength: 100,
 			qtip: 'Text label to use for the button tip. Default is Zoom to extent'
 		});
+		// interaction
+		var interactionDoubleClickZoomCheckbox = Ext.create('Ext.form.field.Checkbox', {
+			columnWidth: 0.1,
+			boxLabel: '双击缩放',
+			name: 'interactionDoubleClickZoom',
+			inputValue: '1',
+			checked: true,
+			readOnly: true,
+			qtip: 'Allows the user to zoom by double-clicking on the map.'
+		});
+		var interactionDoubleClickZoomDurationNumber = Ext.create('Ext.form.field.Number', {
+			fieldLabel: '持续时间',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'interactionDoubleClickZoomDuration',
+			value: 250,
+			minValue: 1,
+			allowDecimals: false,
+			qtip: 'Animation duration in milliseconds. Default is 250.'
+		});
+		var interactionDoubleClickZoomDeltaNumber = Ext.create('Ext.form.field.Number', {
+			fieldLabel: '变焦',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'interactionDoubleClickZoomDelta',
+			value: 1,
+			minValue: 1,
+			allowDecimals: false,
+			qtip: 'The zoom delta applied on each double click, default is 1.'
+		});
+		var interactionDragAndDropCheckbox = Ext.create('Ext.form.field.Checkbox', {
+			columnWidth: 0.1,
+			boxLabel: '拖放',
+			name: 'interactionDragAndDrop',
+			inputValue: '1',
+			qtip: 'Handles input of vector data by drag and drop.'
+		});
+		var interactionDragAndDropProjectionText = Ext.create('Ext.form.field.Text', {
+			fieldLabel: '投影',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'interactionDragAndDropProjection',
+			maxLength: 100,
+			qtip: 'Target projection. By default, the map\'s view\'s projection is used.'
+		});
+		var interactionDragBoxCheckbox = Ext.create('Ext.form.field.Checkbox', {
+			columnWidth: 0.1,
+			boxLabel: '矩形选择',
+			name: 'interactionDragBox',
+			inputValue: '1',
+			qtip: 'Allows the user to draw a vector box by clicking and dragging on the map, normally combined with an ol.events.condition that limits it to when the shift or other key is held down. This is used, for example, for zooming to a specific area of the map (see ol.interaction.DragZoom and ol.interaction.DragRotateAndZoom).This interaction is only supported for mouse devices.'
+		});
+		var interactionDragPanCheckbox = Ext.create('Ext.form.field.Checkbox', {
+			columnWidth: 0.1,
+			boxLabel: '拖动平移',
+			name: 'interactionDragPan',
+			inputValue: '1',
+			checked: true,
+			readOnly: true,
+			qtip: 'Allows the user to pan the map by dragging the map.'
+		});
+		var interactionDragPanKineticDecayNumber = Ext.create('Ext.form.field.Number', {
+			fieldLabel: '衰变',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			width: 222,
+			name: 'interactionDragPanKineticDecay',
+			maxValue: 0,
+			qtip: 'Rate of decay (must be negative).'
+		});
+		var interactionDragPanKineticMinVelocityNumber = Ext.create('Ext.form.field.Number', {
+			fieldLabel: '最小速度',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			width: 222,
+			name: 'interactionDragPanKineticMinVelocity',
+			minValue: 1,
+			allowDecimals: false,
+			qtip: 'Minimum velocity (pixels/millisecond).'
+		});
+		var interactionDragPanKineticDelayNumber = Ext.create('Ext.form.field.Number', {
+			fieldLabel: '延迟',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			width: 222,
+			name: 'interactionDragPanKineticDelay',
+			minValue: 1,
+			allowDecimals: false,
+			qtip: 'Delay to consider to calculate the kinetic initial values (milliseconds).'
+		});
+		var interactionDragRotateCheckbox = Ext.create('Ext.form.field.Checkbox', {
+			columnWidth: 0.1,
+			boxLabel: '拖动旋转',
+			name: 'interactionDragRotate',
+			inputValue: '1',
+			checked: true,
+			readOnly: true,
+			qtip: 'Allows the user to rotate the map by clicking and dragging on the map, normally combined with an ol.events.condition that limits it to when the alt and shift keys are held down.This interaction is only supported for mouse devices.'
+		});
+		var interactionDragRotateDurationNumber = Ext.create('Ext.form.field.Number', {
+			fieldLabel: '持续时间',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'interactionDragRotateDuration',
+			value: 250,
+			minValue: 1,
+			allowDecimals: false,
+			qtip: 'Animation duration in milliseconds. Default is 250.'
+		});
+		var interactionDragRotateAndZoomCheckbox = Ext.create('Ext.form.field.Checkbox', {
+			columnWidth: 0.1,
+			boxLabel: '拖动旋转和缩放',
+			name: 'interactionDragRotateAndZoom',
+			inputValue: '1',
+			qtip: 'Allows the user to zoom and rotate the map by clicking and dragging on the map. By default, this interaction is limited to when the shift key is held down. This interaction is only supported for mouse devices. And this interaction is not included in the default interactions.'
+		});
+		var interactionDragRotateAndZoomDurationNumber = Ext.create('Ext.form.field.Number', {
+			fieldLabel: '持续时间',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'interactionDragRotateAndZoomDuration',
+			value: 400,
+			minValue: 1,
+			allowDecimals: false,
+			qtip: 'Animation duration in milliseconds. Default is 400.'
+		});
+		var interactionDragZoomCheckbox = Ext.create('Ext.form.field.Checkbox', {
+			columnWidth: 0.1,
+			boxLabel: '拖动缩放',
+			name: 'interactionDragZoom',
+			inputValue: '1',
+			checked: true,
+			readOnly: true,
+			qtip: 'Allows the user to zoom the map by clicking and dragging on the map, normally combined with an ol.events.condition that limits it to when a key, shift by default, is held down.'
+		});
+		var interactionDragZoomDurationNumber = Ext.create('Ext.form.field.Number', {
+			fieldLabel: '持续时间',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'interactionDragZoomDuration',
+			value: 200,
+			minValue: 1,
+			allowDecimals: false,
+			qtip: 'Animation duration in milliseconds. Default is 200.'
+		});
+		var interactionDrawCheckbox = Ext.create('Ext.form.field.Checkbox', {
+			columnWidth: 0.1,
+			boxLabel: '绘制',
+			name: 'interactionDraw',
+			inputValue: '1',
+			qtip: 'Interaction for drawing feature geometries.'
+		});
+		var interactionDrawClickToleranceNumber = Ext.create('Ext.form.field.Number', {
+			fieldLabel: '点击公差',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'interactionDrawClickTolerance',
+			value: 6,
+			minValue: 1,
+			allowDecimals: false,
+			qtip: 'The maximum distance in pixels between "down" and "up" for a "up" event to be considered a "click" event and actually add a point/vertex to the geometry being drawn. Default is 6 pixels. That value was chosen for the draw interaction to behave correctly on mouse as well as on touch devices.'
+		});
+		var interactionDrawSnapToleranceNumber = Ext.create('Ext.form.field.Number', {
+			fieldLabel: '捕捉公差',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'interactionDrawSnapTolerance',
+			value: 12,
+			minValue: 1,
+			allowDecimals: false,
+			qtip: 'Pixel distance for snapping to the drawing finish. Default is 12.'
+		});
+		var interactionDrawWrapXCheckbox = Ext.create('Ext.form.field.Checkbox', {
+			fieldLabel: '水平换行',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'interactionDrawWrapX',
+			inputValue: '1',
+			qtip: 'Wrap the world horizontally on the sketch overlay. Default is false.'
+		});
+		var interactionKeyboardPanCheckbox = Ext.create('Ext.form.field.Checkbox', {
+			columnWidth: 0.1,
+			boxLabel: '键盘平移',
+			name: 'interactionKeyboardPan',
+			inputValue: '1',
+			checked: true,
+			readOnly: true,
+			qtip: 'Allows the user to pan the map using keyboard arrows. Note that, although this interaction is by default included in maps, the keys can only be used when browser focus is on the element to which the keyboard events are attached. By default, this is the map div, though you can change this with the keyboardEventTarget in ol.Map. document never loses focus but, for any other element, focus will have to be on, and returned to, this element if the keys are to function. See also ol.interaction.KeyboardZoom.'
+		});
+		var interactionKeyboardPanDurationNumber = Ext.create('Ext.form.field.Number', {
+			fieldLabel: '持续时间',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'interactionKeyboardPanDuration',
+			value: 100,
+			minValue: 1,
+			allowDecimals: false,
+			qtip: 'Animation duration in milliseconds. Default is 100.'
+		});
+		var interactionKeyboardPanPixelDeltaNumber = Ext.create('Ext.form.field.Number', {
+			fieldLabel: '像素间隔',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'interactionKeyboardPanPixelDelta',
+			value: 128,
+			minValue: 1,
+			allowDecimals: false,
+			qtip: 'Pixel The amount to pan on each key press. Default is 128 pixels.'
+		});
+		var interactionKeyboardZoomCheckbox = Ext.create('Ext.form.field.Checkbox', {
+			columnWidth: 0.1,
+			boxLabel: '键盘缩放',
+			name: 'interactionKeyboardZoom',
+			inputValue: '1',
+			checked: true,
+			readOnly: true,
+			qtip: 'Allows the user to zoom the map using keyboard + and -. Note that, although this interaction is by default included in maps, the keys can only be used when browser focus is on the element to which the keyboard events are attached. By default, this is the map div, though you can change this with the keyboardEventTarget in ol.Map. document never loses focus but, for any other element, focus will have to be on, and returned to, this element if the keys are to function. See also ol.interaction.KeyboardPan.'
+		});
+		var interactionKeyboardZoomDurationNumber = Ext.create('Ext.form.field.Number', {
+			fieldLabel: '持续时间',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'interactionKeyboardZoomDuration',
+			value: 100,
+			minValue: 1,
+			allowDecimals: false,
+			qtip: 'Animation duration in milliseconds. Default is 100.'
+		});
+		var interactionKeyboardZoomDeltaNumber = Ext.create('Ext.form.field.Number', {
+			fieldLabel: '变焦',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'interactionKeyboardZoomDelta',
+			value: 1,
+			minValue: 1,
+			allowDecimals: false,
+			qtip: 'The amount to zoom on each key press. Default is 1.'
+		});
+		var interactionModifyCheckbox = Ext.create('Ext.form.field.Checkbox', {
+			columnWidth: 0.1,
+			boxLabel: '修改',
+			name: 'interactionModify',
+			inputValue: '1',
+			qtip: 'Interaction for modifying feature geometries.'
+		});
+		var interactionModifyPixelToleranceNumber = Ext.create('Ext.form.field.Number', {
+			fieldLabel: '像素公差',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'interactionModifyPixelTolerance',
+			value: 10,
+			minValue: 1,
+			allowDecimals: false,
+			qtip: 'Pixel tolerance for considering the pointer close enough to a segment or vertex for editing. Default is 10.'
+		});
+		var interactionModifyWrapXCheckbox = Ext.create('Ext.form.field.Checkbox', {
+			fieldLabel: '水平换行',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'interactionModifyWrapX',
+			inputValue: '1',
+			qtip: 'Wrap the world horizontally on the sketch overlay. Default is false.'
+		});
+		var interactionMouseWheelZoomCheckbox = Ext.create('Ext.form.field.Checkbox', {
+			columnWidth: 0.1,
+			boxLabel: '鼠标滚轮缩放',
+			name: 'interactionMouseWheelZoom',
+			inputValue: '1',
+			checked: true,
+			readOnly: true,
+			qtip: 'Allows the user to zoom the map by scrolling the mouse wheel.'
+		});
+		var interactionMouseWheelZoomDurationNumber = Ext.create('Ext.form.field.Number', {
+			fieldLabel: '持续时间',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'interactionMouseWheelZoomDuration',
+			value: 250,
+			minValue: 1,
+			allowDecimals: false,
+			qtip: 'Animation duration in milliseconds. Default is 250.'
+		});
+		var interactionPinchRotateCheckbox = Ext.create('Ext.form.field.Checkbox', {
+			columnWidth: 0.1,
+			boxLabel: '触屏旋转',
+			name: 'interactionPinchRotate',
+			inputValue: '1',
+			checked: true,
+			readOnly: true,
+			qtip: 'Allows the user to rotate the map by twisting with two fingers on a touch screen.'
+		});
+		var interactionPinchRotateDurationNumber = Ext.create('Ext.form.field.Number', {
+			fieldLabel: '持续时间',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'interactionPinchRotateDuration',
+			value: 250,
+			minValue: 1,
+			allowDecimals: false,
+			qtip: 'The duration of the animation in milliseconds. Default is 250.'
+		});
+		var interactionPinchRotateThresholdNumber = Ext.create('Ext.form.field.Number', {
+			fieldLabel: '阈值',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'interactionPinchRotateThreshold',
+			value: 0.3,
+			qtip: 'Minimal angle in radians to start a rotation. Default is 0.3.'
+		});
+		var interactionPinchZoomCheckbox = Ext.create('Ext.form.field.Checkbox', {
+			columnWidth: 0.1,
+			boxLabel: '触屏缩放',
+			name: 'interactionPinchZoom',
+			inputValue: '1',
+			checked: true,
+			readOnly: true,
+			qtip: 'Allows the user to zoom the map by pinching with two fingers on a touch screen.'
+		});
+		var interactionPinchZoomDurationNumber = Ext.create('Ext.form.field.Number', {
+			fieldLabel: '持续时间',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'interactionPinchZoomDuration',
+			value: 400,
+			minValue: 1,
+			allowDecimals: false,
+			qtip: 'Animation duration in milliseconds. Default is 400.'
+		});
+		var interactionSelectCheckbox = Ext.create('Ext.form.field.Checkbox', {
+			columnWidth: 0.1,
+			boxLabel: '选择',
+			name: 'interactionSelect',
+			inputValue: '1',
+			qtip: 'Interaction for selecting vector features. By default, selected features are styled differently, so this interaction can be used for visual highlighting, as well as selecting features for other actions, such as modification or output. There are three ways of controlling which features are selected: using the browser event as defined by the condition and optionally the toggle, add/remove, and multi options; a layers filter; and a further feature filter using the filter option.'
+		});
+		var interactionSelectMultiCheckbox = Ext.create('Ext.form.field.Checkbox', {
+			fieldLabel: '多选',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'interactionSelectMulti',
+			inputValue: '1',
+			qtip: 'A boolean that determines if the default behaviour should select only single features or all (overlapping) features at the clicked map position. Default is false i.e single select'
+		});
+		var interactionSelectWrapXCheckbox = Ext.create('Ext.form.field.Checkbox', {
+			fieldLabel: '水平换行',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'interactionSelectWrapX',
+			inputValue: '1',
+			checked: true,
+			qtip: 'Wrap the world horizontally on the selection overlay. Default is true.'
+		});
+		var interactionSnapCheckbox = Ext.create('Ext.form.field.Checkbox', {
+			columnWidth: 0.1,
+			boxLabel: '捕捉',
+			name: 'interactionSnap',
+			inputValue: '1',
+			qtip: 'Handles snapping of vector features while modifying or drawing them. The features can come from a ol.source.Vector or ol.Collection Any interaction object that allows the user to interact with the features using the mouse can benefit from the snapping, as long as it is added before.'
+		});
+		var interactionSnapPixelToleranceNumber = Ext.create('Ext.form.field.Number', {
+			fieldLabel: '像素公差',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'interactionSnapPixelTolerance',
+			value: 10,
+			minValue: 1,
+			allowDecimals: false,
+			qtip: 'Pixel tolerance for considering the pointer close enough to a segment or vertex for snapping. Default is 10 pixels.'
+		});
+		var interactionTranslateCheckbox = Ext.create('Ext.form.field.Checkbox', {
+			columnWidth: 0.1,
+			boxLabel: '移动',
+			name: 'interactionTranslate',
+			inputValue: '1',
+			qtip: 'Interaction for translating (moving) features.'
+		});
 
 		var formPanel = Ext.create('Ext.form.Panel', {
 			itemId: 'editForm',
@@ -832,8 +1251,254 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 				title: '交互',
 				layout: 'form',
 				items: [{
-					xtype: 'button',
-					text: 'A'
+					xtype: 'container',
+					layout: 'column',
+					items: [interactionDoubleClickZoomCheckbox, {
+						columnWidth: 0.9,
+						xtype: 'container',
+						layout: {
+							type: 'table',
+							columns: 3
+						},
+						items: [interactionDoubleClickZoomDurationNumber, interactionDoubleClickZoomDeltaNumber, {
+							xtype: 'container'
+						}]
+					}]
+				}, {
+					xtype: 'container',
+					layout: 'column',
+					items: [interactionDragAndDropCheckbox, {
+						columnWidth: 0.9,
+						xtype: 'container',
+						layout: {
+							type: 'table',
+							columns: 3
+						},
+						items: [interactionDragAndDropProjectionText, {
+							xtype: 'container'
+						}, {
+							xtype: 'container'
+						}]
+					}]
+				}, {
+					xtype: 'container',
+					layout: 'column',
+					items: [interactionDragBoxCheckbox, {
+						columnWidth: 0.9,
+						xtype: 'container',
+						html: '实现特定方法'
+					}]
+				}, {
+					xtype: 'container',
+					layout: 'column',
+					items: [interactionDragPanCheckbox, {
+						columnWidth: 0.9,
+						xtype: 'container',
+						layout: {
+							type: 'table',
+							columns: 3
+						},
+						items: [interactionDragPanKineticDecayNumber, interactionDragPanKineticMinVelocityNumber, interactionDragPanKineticDelayNumber]
+					}]
+				}, {
+					xtype: 'container',
+					layout: 'column',
+					items: [interactionDragRotateCheckbox, {
+						columnWidth: 0.9,
+						xtype: 'container',
+						layout: {
+							type: 'table',
+							columns: 3
+						},
+						items: [interactionDragRotateDurationNumber, {
+							xtype: 'container',
+							html: '实现特定方法'
+						}, {
+							xtype: 'container'
+						}]
+					}]
+				}, {
+					xtype: 'container',
+					layout: 'column',
+					items: [interactionDragRotateAndZoomCheckbox, {
+						columnWidth: 0.9,
+						xtype: 'container',
+						layout: {
+							type: 'table',
+							columns: 3
+						},
+						items: [interactionDragRotateAndZoomDurationNumber, {
+							xtype: 'container',
+							html: '实现特定方法'
+						}, {
+							xtype: 'container'
+						}]
+					}]
+				}, {
+					xtype: 'container',
+					layout: 'column',
+					items: [interactionDragZoomCheckbox, {
+						columnWidth: 0.9,
+						xtype: 'container',
+						layout: {
+							type: 'table',
+							columns: 3
+						},
+						items: [interactionDragZoomDurationNumber, {
+							xtype: 'container',
+							html: '实现特定方法'
+						}, {
+							xtype: 'container'
+						}]
+					}]
+				}, {
+					xtype: 'container',
+					layout: 'column',
+					items: [interactionDrawCheckbox, {
+						columnWidth: 0.9,
+						xtype: 'container',
+						layout: {
+							type: 'table',
+							columns: 3
+						},
+						items: [interactionDrawClickToleranceNumber, interactionDrawSnapToleranceNumber, interactionDrawWrapXCheckbox, {
+							xtype: 'container',
+							html: '实现特定方法'
+						}, {
+							xtype: 'container'
+						}, {
+							xtype: 'container'
+						}]
+					}]
+				}, {
+					xtype: 'container',
+					layout: 'column',
+					items: [interactionKeyboardPanCheckbox, {
+						columnWidth: 0.9,
+						xtype: 'container',
+						layout: {
+							type: 'table',
+							columns: 3
+						},
+						items: [interactionKeyboardPanDurationNumber, interactionKeyboardPanPixelDeltaNumber, {
+							xtype: 'container',
+							html: '实现特定方法'
+						}]
+					}]
+				}, {
+					xtype: 'container',
+					layout: 'column',
+					items: [interactionKeyboardZoomCheckbox, {
+						columnWidth: 0.9,
+						xtype: 'container',
+						layout: {
+							type: 'table',
+							columns: 3
+						},
+						items: [interactionKeyboardZoomDurationNumber, interactionKeyboardZoomDeltaNumber, {
+							xtype: 'container',
+							html: '实现特定方法'
+						}]
+					}]
+				}, {
+					xtype: 'container',
+					layout: 'column',
+					items: [interactionModifyCheckbox, {
+						columnWidth: 0.9,
+						xtype: 'container',
+						layout: {
+							type: 'table',
+							columns: 3
+						},
+						items: [interactionModifyPixelToleranceNumber, interactionModifyWrapXCheckbox, {
+							xtype: 'container',
+							html: '实现特定方法'
+						}]
+					}]
+				}, {
+					xtype: 'container',
+					layout: 'column',
+					items: [interactionMouseWheelZoomCheckbox, {
+						columnWidth: 0.9,
+						xtype: 'container',
+						layout: {
+							type: 'table',
+							columns: 3
+						},
+						items: [interactionMouseWheelZoomDurationNumber, {
+							xtype: 'container'
+						}, {
+							xtype: 'container'
+						}]
+					}]
+				}, {
+					xtype: 'container',
+					layout: 'column',
+					items: [interactionPinchRotateCheckbox, {
+						columnWidth: 0.9,
+						xtype: 'container',
+						layout: {
+							type: 'table',
+							columns: 3
+						},
+						items: [interactionPinchRotateDurationNumber, interactionPinchRotateThresholdNumber, {
+							xtype: 'container'
+						}]
+					}]
+				}, {
+					xtype: 'container',
+					layout: 'column',
+					items: [interactionPinchZoomCheckbox, {
+						columnWidth: 0.9,
+						xtype: 'container',
+						layout: {
+							type: 'table',
+							columns: 3
+						},
+						items: [interactionPinchZoomDurationNumber, {
+							xtype: 'container'
+						}, {
+							xtype: 'container'
+						}]
+					}]
+				}, {
+					xtype: 'container',
+					layout: 'column',
+					items: [interactionSelectCheckbox, {
+						columnWidth: 0.9,
+						xtype: 'container',
+						layout: {
+							type: 'table',
+							columns: 3
+						},
+						items: [interactionSelectMultiCheckbox, interactionSelectWrapXCheckbox, {
+							xtype: 'container',
+							html: '实现特定方法'
+						}]
+					}]
+				}, {
+					xtype: 'container',
+					layout: 'column',
+					items: [interactionSnapCheckbox, {
+						columnWidth: 0.9,
+						xtype: 'container',
+						layout: {
+							type: 'table',
+							columns: 3
+						},
+						items: [interactionSnapPixelToleranceNumber, {
+							xtype: 'container'
+						}, {
+							xtype: 'container'
+						}]
+					}]
+				}, {
+					xtype: 'container',
+					layout: 'column',
+					items: [interactionTranslateCheckbox, {
+						columnWidth: 0.9,
+						xtype: 'container'
+					}]
 				}]
 			}, {
 				xtype: 'fieldset',

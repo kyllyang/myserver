@@ -13,24 +13,18 @@ public class OlInteraction implements Serializable {
 	private Long id;
 	private OlMap olMap;
 	private String interactionClassName;// ol.interaction.DoubleClickZoom, ol.interaction.DragAndDrop, ol.interaction.KeyboardPan, ol.interaction.KeyboardZoom, ol.interaction.MouseWheelZoom, ol.interaction.Pointer, ol.interaction.Select
-	private String addCondition;
-	private String condition;
+	private String clickTolerance;
 	private String delta;
 	private String duration;
-	private String filter;
-	private String formatConstructors;
-	private String handleDownEvent;
-	private String handleDragEvent;
-	private String handleEvent;
-	private String handleMoveEvent;
-	private String handleUpEvent;
-	private String layers;
+	private String kineticDecay;
+	private String kineticDelay;
+	private String kineticMinVelocity;
 	private String multi;
 	private String pixelDelta;
+	private String pixelTolerance;
 	private String projection;
-	private String removeCondition;
-	private String style;
-	private String toggleCondition;
+	private String snapTolerance;
+	private String threshold;
 	private String wrapX;
 
 	public OlInteraction() {
@@ -66,22 +60,13 @@ public class OlInteraction implements Serializable {
 		this.interactionClassName = interactionClassName;
 	}
 
-	@Column(name = "ADD_CONDITION_")
-	public String getAddCondition() {
-		return addCondition;
+	@Column(name = "CLICK_TOLERANCE_")
+	public String getClickTolerance() {
+		return clickTolerance;
 	}
 
-	public void setAddCondition(String addCondition) {
-		this.addCondition = addCondition;
-	}
-
-	@Column(name = "CONDITION_")
-	public String getCondition() {
-		return condition;
-	}
-
-	public void setCondition(String condition) {
-		this.condition = condition;
+	public void setClickTolerance(String clickTolerance) {
+		this.clickTolerance = clickTolerance;
 	}
 
 	@Column(name = "DELTA_")
@@ -102,76 +87,31 @@ public class OlInteraction implements Serializable {
 		this.duration = duration;
 	}
 
-	@Column(name = "FILTER_")
-	public String getFilter() {
-		return filter;
+	@Column(name = "KINETIC_DECAY_")
+	public String getKineticDecay() {
+		return kineticDecay;
 	}
 
-	public void setFilter(String filter) {
-		this.filter = filter;
+	public void setKineticDecay(String kineticDecay) {
+		this.kineticDecay = kineticDecay;
 	}
 
-	@Column(name = "FORMAT_CONSTRUCTORS_")
-	public String getFormatConstructors() {
-		return formatConstructors;
+	@Column(name = "KINETIC_DELAY_")
+	public String getKineticDelay() {
+		return kineticDelay;
 	}
 
-	public void setFormatConstructors(String formatConstructors) {
-		this.formatConstructors = formatConstructors;
+	public void setKineticDelay(String kineticDelay) {
+		this.kineticDelay = kineticDelay;
 	}
 
-	@Column(name = "HANDLE_DOWN_EVENT_")
-	public String getHandleDownEvent() {
-		return handleDownEvent;
+	@Column(name = "KINETIC_MIN_VELOCITY_")
+	public String getKineticMinVelocity() {
+		return kineticMinVelocity;
 	}
 
-	public void setHandleDownEvent(String handleDownEvent) {
-		this.handleDownEvent = handleDownEvent;
-	}
-
-	@Column(name = "HANDLE_DRAG_EVENT_")
-	public String getHandleDragEvent() {
-		return handleDragEvent;
-	}
-
-	public void setHandleDragEvent(String handleDragEvent) {
-		this.handleDragEvent = handleDragEvent;
-	}
-
-	@Column(name = "HANDLE_EVENT_")
-	public String getHandleEvent() {
-		return handleEvent;
-	}
-
-	public void setHandleEvent(String handleEvent) {
-		this.handleEvent = handleEvent;
-	}
-
-	@Column(name = "HANDLE_MOVE_EVENT_")
-	public String getHandleMoveEvent() {
-		return handleMoveEvent;
-	}
-
-	public void setHandleMoveEvent(String handleMoveEvent) {
-		this.handleMoveEvent = handleMoveEvent;
-	}
-
-	@Column(name = "HANDLE_UP_EVENT_")
-	public String getHandleUpEvent() {
-		return handleUpEvent;
-	}
-
-	public void setHandleUpEvent(String handleUpEvent) {
-		this.handleUpEvent = handleUpEvent;
-	}
-
-	@Column(name = "LAYERS_")
-	public String getLayers() {
-		return layers;
-	}
-
-	public void setLayers(String layers) {
-		this.layers = layers;
+	public void setKineticMinVelocity(String kineticMinVelocity) {
+		this.kineticMinVelocity = kineticMinVelocity;
 	}
 
 	@Column(name = "MULTI_")
@@ -192,6 +132,15 @@ public class OlInteraction implements Serializable {
 		this.pixelDelta = pixelDelta;
 	}
 
+	@Column(name = "PIXEL_TOLERANCE_")
+	public String getPixelTolerance() {
+		return pixelTolerance;
+	}
+
+	public void setPixelTolerance(String pixelTolerance) {
+		this.pixelTolerance = pixelTolerance;
+	}
+
 	@Column(name = "PROJECTION_")
 	public String getProjection() {
 		return projection;
@@ -201,31 +150,22 @@ public class OlInteraction implements Serializable {
 		this.projection = projection;
 	}
 
-	@Column(name = "REMOVE_CONDITION_")
-	public String getRemoveCondition() {
-		return removeCondition;
+	@Column(name = "SNAP_TOLERANCE_")
+	public String getSnapTolerance() {
+		return snapTolerance;
 	}
 
-	public void setRemoveCondition(String removeCondition) {
-		this.removeCondition = removeCondition;
+	public void setSnapTolerance(String snapTolerance) {
+		this.snapTolerance = snapTolerance;
 	}
 
-	@Column(name = "STYLE_")
-	public String getStyle() {
-		return style;
+	@Column(name = "THRESHOLD_")
+	public String getThreshold() {
+		return threshold;
 	}
 
-	public void setStyle(String style) {
-		this.style = style;
-	}
-
-	@Column(name = "TOGGLE_CONDITION_")
-	public String getToggleCondition() {
-		return toggleCondition;
-	}
-
-	public void setToggleCondition(String toggleCondition) {
-		this.toggleCondition = toggleCondition;
+	public void setThreshold(String threshold) {
+		this.threshold = threshold;
 	}
 
 	@Column(name = "WRAP_X_")

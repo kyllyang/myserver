@@ -2,14 +2,8 @@ package org.kyll.myserver.base.gis.ctrl;
 
 import org.kyll.myserver.base.QueryCondition;
 import org.kyll.myserver.base.common.paginated.Dataset;
-import org.kyll.myserver.base.gis.entity.OlControl;
-import org.kyll.myserver.base.gis.entity.OlMap;
-import org.kyll.myserver.base.gis.entity.OlView;
-import org.kyll.myserver.base.gis.entity.Thematic;
-import org.kyll.myserver.base.gis.service.OlControlService;
-import org.kyll.myserver.base.gis.service.OlMapService;
-import org.kyll.myserver.base.gis.service.OlViewService;
-import org.kyll.myserver.base.gis.service.ThematicService;
+import org.kyll.myserver.base.gis.entity.*;
+import org.kyll.myserver.base.gis.service.*;
 import org.kyll.myserver.base.gis.vo.ThematicVo;
 import org.kyll.myserver.base.util.ConstUtils;
 import org.kyll.myserver.base.util.JsonUtils;
@@ -40,6 +34,8 @@ public class ThematicCtrl {
 	private OlViewService olViewService;
 	@Autowired
 	private OlControlService olControlService;
+	@Autowired
+	private OlInteractionService olInteractionService;
 
 	@RequestMapping("/gis/thematic/dataset.ctrl")
 	public void dataset(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -177,7 +173,119 @@ public class ThematicCtrl {
 			olControlList.add(olControl);
 		}
 
-		thematicService.save(POJOUtils.convert(entityVo, Thematic.class, thematicService), olMap, olView, entityVo.getLayerGroup(), olControlList);
+		List<OlInteraction> olInteractionList = new ArrayList<>();
+		if ("1".equals(entityVo.getInteractionDoubleClickZoom())) {
+			OlInteraction olInteraction = new OlInteraction();
+			olInteraction.setInteractionClassName(ConstUtils.GIS_OL_INTERACTION_DOUBLECLICKZOOM);
+			olInteraction.setDelta(entityVo.getInteractionDoubleClickZoomDelta());
+			olInteraction.setDuration(entityVo.getInteractionDoubleClickZoomDuration());
+			olInteractionList.add(olInteraction);
+		}
+		if ("1".equals(entityVo.getInteractionDragAndDrop())) {
+			OlInteraction olInteraction = new OlInteraction();
+			olInteraction.setInteractionClassName(ConstUtils.GIS_OL_INTERACTION_DRAGANDDROP);
+			olInteraction.setProjection(entityVo.getInteractionDragAndDropProjection());
+			olInteractionList.add(olInteraction);
+		}
+		if ("1".equals(entityVo.getInteractionDragBox())) {
+			OlInteraction olInteraction = new OlInteraction();
+			olInteraction.setInteractionClassName(ConstUtils.GIS_OL_INTERACTION_DRAGBOX);
+			olInteractionList.add(olInteraction);
+		}
+		if ("1".equals(entityVo.getInteractionDragPan())) {
+			OlInteraction olInteraction = new OlInteraction();
+			olInteraction.setInteractionClassName(ConstUtils.GIS_OL_INTERACTION_DRAGPAN);
+			olInteraction.setKineticDecay(entityVo.getInteractionDragPanKineticDecay());
+			olInteraction.setKineticDelay(entityVo.getInteractionDragPanKineticDelay());
+			olInteraction.setKineticMinVelocity(entityVo.getInteractionDragPanKineticMinVelocity());
+			olInteractionList.add(olInteraction);
+		}
+		if ("1".equals(entityVo.getInteractionDragRotate())) {
+			OlInteraction olInteraction = new OlInteraction();
+			olInteraction.setInteractionClassName(ConstUtils.GIS_OL_INTERACTION_DRAGROTATE);
+			olInteraction.setDuration(entityVo.getInteractionDragRotateDuration());
+			olInteractionList.add(olInteraction);
+		}
+		if ("1".equals(entityVo.getInteractionDragRotateAndZoom())) {
+			OlInteraction olInteraction = new OlInteraction();
+			olInteraction.setInteractionClassName(ConstUtils.GIS_OL_INTERACTION_DRAGROTATEANDZOOM);
+			olInteraction.setDuration(entityVo.getInteractionDragRotateAndZoomDuration());
+			olInteractionList.add(olInteraction);
+		}
+		if ("1".equals(entityVo.getInteractionDragZoom())) {
+			OlInteraction olInteraction = new OlInteraction();
+			olInteraction.setInteractionClassName(ConstUtils.GIS_OL_INTERACTION_DRAGZOOM);
+			olInteraction.setDuration(entityVo.getInteractionDragZoomDuration());
+			olInteractionList.add(olInteraction);
+		}
+		if ("1".equals(entityVo.getInteractionDraw())) {
+			OlInteraction olInteraction = new OlInteraction();
+			olInteraction.setInteractionClassName(ConstUtils.GIS_OL_INTERACTION_DRAW);
+			olInteraction.setClickTolerance(entityVo.getInteractionDrawClickTolerance());
+			olInteraction.setSnapTolerance(entityVo.getInteractionDrawSnapTolerance());
+			olInteraction.setWrapX(entityVo.getInteractionDrawWrapX());
+			olInteractionList.add(olInteraction);
+		}
+		if ("1".equals(entityVo.getInteractionKeyboardPan())) {
+			OlInteraction olInteraction = new OlInteraction();
+			olInteraction.setInteractionClassName(ConstUtils.GIS_OL_INTERACTION_KEYBOARDPAN);
+			olInteraction.setDuration(entityVo.getInteractionKeyboardPanDuration());
+			olInteraction.setPixelDelta(entityVo.getInteractionKeyboardPanPixelDelta());
+			olInteractionList.add(olInteraction);
+		}
+		if ("1".equals(entityVo.getInteractionKeyboardZoom())) {
+			OlInteraction olInteraction = new OlInteraction();
+			olInteraction.setInteractionClassName(ConstUtils.GIS_OL_INTERACTION_KEYBOARDZOOM);
+			olInteraction.setDuration(entityVo.getInteractionKeyboardZoomDuration());
+			olInteraction.setDelta(entityVo.getInteractionKeyboardZoomDelta());
+			olInteractionList.add(olInteraction);
+		}
+		if ("1".equals(entityVo.getInteractionModify())) {
+			OlInteraction olInteraction = new OlInteraction();
+			olInteraction.setInteractionClassName(ConstUtils.GIS_OL_INTERACTION_MODIFY);
+			olInteraction.setPixelTolerance(entityVo.getInteractionModifyPixelTolerance());
+			olInteraction.setWrapX(entityVo.getInteractionModifyWrapX());
+			olInteractionList.add(olInteraction);
+		}
+		if ("1".equals(entityVo.getInteractionMouseWheelZoom())) {
+			OlInteraction olInteraction = new OlInteraction();
+			olInteraction.setInteractionClassName(ConstUtils.GIS_OL_INTERACTION_MOUSEWHEELZOOM);
+			olInteraction.setDuration(entityVo.getInteractionMouseWheelZoomDuration());
+			olInteractionList.add(olInteraction);
+		}
+		if ("1".equals(entityVo.getInteractionPinchRotate())) {
+			OlInteraction olInteraction = new OlInteraction();
+			olInteraction.setInteractionClassName(ConstUtils.GIS_OL_INTERACTION_PINCHROTATE);
+			olInteraction.setDuration(entityVo.getInteractionPinchRotateDuration());
+			olInteraction.setThreshold(entityVo.getInteractionPinchRotateThreshold());
+			olInteractionList.add(olInteraction);
+		}
+		if ("1".equals(entityVo.getInteractionPinchZoom())) {
+			OlInteraction olInteraction = new OlInteraction();
+			olInteraction.setInteractionClassName(ConstUtils.GIS_OL_INTERACTION_PINCHZOOM);
+			olInteraction.setDuration(entityVo.getInteractionPinchZoomDuration());
+			olInteractionList.add(olInteraction);
+		}
+		if ("1".equals(entityVo.getInteractionSelect())) {
+			OlInteraction olInteraction = new OlInteraction();
+			olInteraction.setInteractionClassName(ConstUtils.GIS_OL_INTERACTION_SELECT);
+			olInteraction.setMulti(entityVo.getInteractionSelectMulti());
+			olInteraction.setWrapX(entityVo.getInteractionSelectWrapX());
+			olInteractionList.add(olInteraction);
+		}
+		if ("1".equals(entityVo.getInteractionSnap())) {
+			OlInteraction olInteraction = new OlInteraction();
+			olInteraction.setInteractionClassName(ConstUtils.GIS_OL_INTERACTION_SNAP);
+			olInteraction.setPixelTolerance(entityVo.getInteractionSnapPixelTolerance());
+			olInteractionList.add(olInteraction);
+		}
+		if ("1".equals(entityVo.getInteractionTranslate())) {
+			OlInteraction olInteraction = new OlInteraction();
+			olInteraction.setInteractionClassName(ConstUtils.GIS_OL_INTERACTION_TRANSLATE);
+			olInteractionList.add(olInteraction);
+		}
+
+		thematicService.save(POJOUtils.convert(entityVo, Thematic.class, thematicService), olMap, olView, entityVo.getLayerGroup(), olControlList, olInteractionList);
 
 		response.setContentType("text/plain");
 		response.getWriter().println(JsonUtils.ajaxResult(true));
@@ -266,6 +374,71 @@ public class ThematicCtrl {
 					thematicVo.setControlZoomToExtentExtent(olControl.getExtent());
 					thematicVo.setControlZoomToExtentLabel(olControl.getLabel());
 					thematicVo.setControlZoomToExtentTipLabel(olControl.getTipLabel());
+				}
+			}
+
+			List<OlInteraction> olInteractionList = olInteractionService.getByOlMap(olMap.getId());
+			for (OlInteraction olInteraction : olInteractionList) {
+				String interactionClassName = olInteraction.getInteractionClassName();
+				if (ConstUtils.GIS_OL_INTERACTION_DOUBLECLICKZOOM.equals(interactionClassName)) {
+					thematicVo.setInteractionDoubleClickZoom("1");
+					thematicVo.setInteractionDoubleClickZoomDelta(olInteraction.getDelta());
+					thematicVo.setInteractionDoubleClickZoomDuration(olInteraction.getDuration());
+				} else if (ConstUtils.GIS_OL_INTERACTION_DRAGANDDROP.equals(interactionClassName)) {
+					thematicVo.setInteractionDragAndDrop("1");
+					thematicVo.setInteractionDragAndDropProjection(olInteraction.getProjection());
+				} else if (ConstUtils.GIS_OL_INTERACTION_DRAGBOX.equals(interactionClassName)) {
+					thematicVo.setInteractionDragBox("1");
+				} else if (ConstUtils.GIS_OL_INTERACTION_DRAGPAN.equals(interactionClassName)) {
+					thematicVo.setInteractionDragPan("1");
+					thematicVo.setInteractionDragPanKineticDecay(olInteraction.getKineticDecay());
+					thematicVo.setInteractionDragPanKineticDelay(olInteraction.getKineticDelay());
+					thematicVo.setInteractionDragPanKineticMinVelocity(olInteraction.getKineticMinVelocity());
+				} else if (ConstUtils.GIS_OL_INTERACTION_DRAGROTATE.equals(interactionClassName)) {
+					thematicVo.setInteractionDragRotate("1");
+					thematicVo.setInteractionDragRotateDuration(olInteraction.getDuration());
+				} else if (ConstUtils.GIS_OL_INTERACTION_DRAGROTATEANDZOOM.equals(interactionClassName)) {
+					thematicVo.setInteractionDragRotateAndZoom("1");
+					thematicVo.setInteractionDragRotateAndZoomDuration(olInteraction.getDuration());
+				} else if (ConstUtils.GIS_OL_INTERACTION_DRAGZOOM.equals(interactionClassName)) {
+					thematicVo.setInteractionDragZoom("1");
+					thematicVo.setInteractionDragZoomDuration(olInteraction.getDuration());
+				} else if (ConstUtils.GIS_OL_INTERACTION_DRAW.equals(interactionClassName)) {
+					thematicVo.setInteractionDraw("1");
+					thematicVo.setInteractionDrawClickTolerance(olInteraction.getClickTolerance());
+					thematicVo.setInteractionDrawSnapTolerance(olInteraction.getSnapTolerance());
+					thematicVo.setInteractionDrawWrapX(olInteraction.getWrapX());
+				} else if (ConstUtils.GIS_OL_INTERACTION_KEYBOARDPAN.equals(interactionClassName)) {
+					thematicVo.setInteractionKeyboardPan("1");
+					thematicVo.setInteractionKeyboardPanDuration(olInteraction.getDuration());
+					thematicVo.setInteractionKeyboardPanPixelDelta(olInteraction.getPixelDelta());
+				} else if (ConstUtils.GIS_OL_INTERACTION_KEYBOARDZOOM.equals(interactionClassName)) {
+					thematicVo.setInteractionKeyboardZoom("1");
+					thematicVo.setInteractionKeyboardZoomDelta(olInteraction.getDelta());
+					thematicVo.setInteractionKeyboardZoomDuration(olInteraction.getDuration());
+				} else if (ConstUtils.GIS_OL_INTERACTION_MODIFY.equals(interactionClassName)) {
+					thematicVo.setInteractionModify("1");
+					thematicVo.setInteractionModifyPixelTolerance(olInteraction.getPixelTolerance());
+					thematicVo.setInteractionModifyWrapX(olInteraction.getWrapX());
+				} else if (ConstUtils.GIS_OL_INTERACTION_MOUSEWHEELZOOM.equals(interactionClassName)) {
+					thematicVo.setInteractionMouseWheelZoom("1");
+					thematicVo.setInteractionMouseWheelZoomDuration(olInteraction.getDuration());
+				} else if (ConstUtils.GIS_OL_INTERACTION_PINCHROTATE.equals(interactionClassName)) {
+					thematicVo.setInteractionPinchRotate("1");
+					thematicVo.setInteractionPinchRotateDuration(olInteraction.getDuration());
+					thematicVo.setInteractionPinchRotateThreshold(olInteraction.getThreshold());
+				} else if (ConstUtils.GIS_OL_INTERACTION_PINCHZOOM.equals(interactionClassName)) {
+					thematicVo.setInteractionPinchZoom("1");
+					thematicVo.setInteractionPinchZoomDuration(olInteraction.getDuration());
+				} else if (ConstUtils.GIS_OL_INTERACTION_SELECT.equals(interactionClassName)) {
+					thematicVo.setInteractionSelect("1");
+					thematicVo.setInteractionSelectMulti(olInteraction.getMulti());
+					thematicVo.setInteractionSelectWrapX(olInteraction.getWrapX());
+				} else if (ConstUtils.GIS_OL_INTERACTION_SNAP.equals(interactionClassName)) {
+					thematicVo.setInteractionSnap("1");
+					thematicVo.setInteractionSnapPixelTolerance(olInteraction.getPixelTolerance());
+				} else if (ConstUtils.GIS_OL_INTERACTION_TRANSLATE.equals(interactionClassName)) {
+					thematicVo.setInteractionTranslate("1");
 				}
 			}
 		}

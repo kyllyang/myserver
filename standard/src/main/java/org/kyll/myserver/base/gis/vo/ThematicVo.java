@@ -71,6 +71,48 @@ public class ThematicVo implements Vo<Long> {
 	private String controlZoomToExtentLabel;
 	private String controlZoomToExtentTipLabel;
 
+	private String interactionDoubleClickZoom;
+	private String interactionDoubleClickZoomDuration;
+	private String interactionDoubleClickZoomDelta;
+	private String interactionDragAndDrop;
+	private String interactionDragAndDropProjection;
+	private String interactionDragBox;
+	private String interactionDragPan;
+	private String interactionDragPanKineticDecay;
+	private String interactionDragPanKineticMinVelocity;
+	private String interactionDragPanKineticDelay;
+	private String interactionDragRotate;
+	private String interactionDragRotateDuration;
+	private String interactionDragRotateAndZoom;
+	private String interactionDragRotateAndZoomDuration;
+	private String interactionDragZoom;
+	private String interactionDragZoomDuration;
+	private String interactionDraw;
+	private String interactionDrawClickTolerance;
+	private String interactionDrawSnapTolerance;
+	private String interactionDrawWrapX;
+	private String interactionKeyboardPan;
+	private String interactionKeyboardPanDuration;
+	private String interactionKeyboardPanPixelDelta;
+	private String interactionKeyboardZoom;
+	private String interactionKeyboardZoomDuration;
+	private String interactionKeyboardZoomDelta;
+	private String interactionModify;
+	private String interactionModifyPixelTolerance;
+	private String interactionModifyWrapX;
+	private String interactionMouseWheelZoom;
+	private String interactionMouseWheelZoomDuration;
+	private String interactionPinchRotate;
+	private String interactionPinchRotateDuration;
+	private String interactionPinchRotateThreshold;
+	private String interactionPinchZoom;
+	private String interactionPinchZoomDuration;
+	private String interactionSelect;
+	private String interactionSelectMulti;
+	private String interactionSelectWrapX;
+	private String interactionSnap;
+	private String interactionSnapPixelTolerance;
+	private String interactionTranslate;
 
 	public ThematicVo() {
 	}
@@ -546,5 +588,341 @@ public class ThematicVo implements Vo<Long> {
 
 	public void setControlZoomToExtentTipLabel(String controlZoomToExtentTipLabel) {
 		this.controlZoomToExtentTipLabel = controlZoomToExtentTipLabel;
+	}
+
+	public String getInteractionDoubleClickZoom() {
+		return interactionDoubleClickZoom;
+	}
+
+	public void setInteractionDoubleClickZoom(String interactionDoubleClickZoom) {
+		this.interactionDoubleClickZoom = interactionDoubleClickZoom;
+	}
+
+	public String getInteractionDoubleClickZoomDuration() {
+		return interactionDoubleClickZoomDuration;
+	}
+
+	public void setInteractionDoubleClickZoomDuration(String interactionDoubleClickZoomDuration) {
+		this.interactionDoubleClickZoomDuration = interactionDoubleClickZoomDuration;
+	}
+
+	public String getInteractionDoubleClickZoomDelta() {
+		return interactionDoubleClickZoomDelta;
+	}
+
+	public void setInteractionDoubleClickZoomDelta(String interactionDoubleClickZoomDelta) {
+		this.interactionDoubleClickZoomDelta = interactionDoubleClickZoomDelta;
+	}
+
+	public String getInteractionDragAndDrop() {
+		return interactionDragAndDrop;
+	}
+
+	public void setInteractionDragAndDrop(String interactionDragAndDrop) {
+		this.interactionDragAndDrop = interactionDragAndDrop;
+	}
+
+	public String getInteractionDragAndDropProjection() {
+		return interactionDragAndDropProjection;
+	}
+
+	public void setInteractionDragAndDropProjection(String interactionDragAndDropProjection) {
+		this.interactionDragAndDropProjection = interactionDragAndDropProjection;
+	}
+
+	public String getInteractionDragBox() {
+		return interactionDragBox;
+	}
+
+	public void setInteractionDragBox(String interactionDragBox) {
+		this.interactionDragBox = interactionDragBox;
+	}
+
+	public String getInteractionDragPan() {
+		return interactionDragPan;
+	}
+
+	public void setInteractionDragPan(String interactionDragPan) {
+		this.interactionDragPan = interactionDragPan;
+	}
+
+	public String getInteractionDragPanKineticDecay() {
+		return interactionDragPanKineticDecay;
+	}
+
+	public void setInteractionDragPanKineticDecay(String interactionDragPanKineticDecay) {
+		this.interactionDragPanKineticDecay = interactionDragPanKineticDecay;
+	}
+
+	public String getInteractionDragPanKineticMinVelocity() {
+		return interactionDragPanKineticMinVelocity;
+	}
+
+	public void setInteractionDragPanKineticMinVelocity(String interactionDragPanKineticMinVelocity) {
+		this.interactionDragPanKineticMinVelocity = interactionDragPanKineticMinVelocity;
+	}
+
+	public String getInteractionDragPanKineticDelay() {
+		return interactionDragPanKineticDelay;
+	}
+
+	public void setInteractionDragPanKineticDelay(String interactionDragPanKineticDelay) {
+		this.interactionDragPanKineticDelay = interactionDragPanKineticDelay;
+	}
+
+	public String getInteractionDragRotate() {
+		return interactionDragRotate;
+	}
+
+	public void setInteractionDragRotate(String interactionDragRotate) {
+		this.interactionDragRotate = interactionDragRotate;
+	}
+
+	public String getInteractionDragRotateDuration() {
+		return interactionDragRotateDuration;
+	}
+
+	public void setInteractionDragRotateDuration(String interactionDragRotateDuration) {
+		this.interactionDragRotateDuration = interactionDragRotateDuration;
+	}
+
+	public String getInteractionDragRotateAndZoom() {
+		return interactionDragRotateAndZoom;
+	}
+
+	public void setInteractionDragRotateAndZoom(String interactionDragRotateAndZoom) {
+		this.interactionDragRotateAndZoom = interactionDragRotateAndZoom;
+	}
+
+	public String getInteractionDragRotateAndZoomDuration() {
+		return interactionDragRotateAndZoomDuration;
+	}
+
+	public void setInteractionDragRotateAndZoomDuration(String interactionDragRotateAndZoomDuration) {
+		this.interactionDragRotateAndZoomDuration = interactionDragRotateAndZoomDuration;
+	}
+
+	public String getInteractionDragZoom() {
+		return interactionDragZoom;
+	}
+
+	public void setInteractionDragZoom(String interactionDragZoom) {
+		this.interactionDragZoom = interactionDragZoom;
+	}
+
+	public String getInteractionDragZoomDuration() {
+		return interactionDragZoomDuration;
+	}
+
+	public void setInteractionDragZoomDuration(String interactionDragZoomDuration) {
+		this.interactionDragZoomDuration = interactionDragZoomDuration;
+	}
+
+	public String getInteractionDraw() {
+		return interactionDraw;
+	}
+
+	public void setInteractionDraw(String interactionDraw) {
+		this.interactionDraw = interactionDraw;
+	}
+
+	public String getInteractionDrawClickTolerance() {
+		return interactionDrawClickTolerance;
+	}
+
+	public void setInteractionDrawClickTolerance(String interactionDrawClickTolerance) {
+		this.interactionDrawClickTolerance = interactionDrawClickTolerance;
+	}
+
+	public String getInteractionDrawSnapTolerance() {
+		return interactionDrawSnapTolerance;
+	}
+
+	public void setInteractionDrawSnapTolerance(String interactionDrawSnapTolerance) {
+		this.interactionDrawSnapTolerance = interactionDrawSnapTolerance;
+	}
+
+	public String getInteractionDrawWrapX() {
+		return interactionDrawWrapX;
+	}
+
+	public void setInteractionDrawWrapX(String interactionDrawWrapX) {
+		this.interactionDrawWrapX = interactionDrawWrapX;
+	}
+
+	public String getInteractionKeyboardPan() {
+		return interactionKeyboardPan;
+	}
+
+	public void setInteractionKeyboardPan(String interactionKeyboardPan) {
+		this.interactionKeyboardPan = interactionKeyboardPan;
+	}
+
+	public String getInteractionKeyboardPanDuration() {
+		return interactionKeyboardPanDuration;
+	}
+
+	public void setInteractionKeyboardPanDuration(String interactionKeyboardPanDuration) {
+		this.interactionKeyboardPanDuration = interactionKeyboardPanDuration;
+	}
+
+	public String getInteractionKeyboardPanPixelDelta() {
+		return interactionKeyboardPanPixelDelta;
+	}
+
+	public void setInteractionKeyboardPanPixelDelta(String interactionKeyboardPanPixelDelta) {
+		this.interactionKeyboardPanPixelDelta = interactionKeyboardPanPixelDelta;
+	}
+
+	public String getInteractionKeyboardZoom() {
+		return interactionKeyboardZoom;
+	}
+
+	public void setInteractionKeyboardZoom(String interactionKeyboardZoom) {
+		this.interactionKeyboardZoom = interactionKeyboardZoom;
+	}
+
+	public String getInteractionKeyboardZoomDuration() {
+		return interactionKeyboardZoomDuration;
+	}
+
+	public void setInteractionKeyboardZoomDuration(String interactionKeyboardZoomDuration) {
+		this.interactionKeyboardZoomDuration = interactionKeyboardZoomDuration;
+	}
+
+	public String getInteractionKeyboardZoomDelta() {
+		return interactionKeyboardZoomDelta;
+	}
+
+	public void setInteractionKeyboardZoomDelta(String interactionKeyboardZoomDelta) {
+		this.interactionKeyboardZoomDelta = interactionKeyboardZoomDelta;
+	}
+
+	public String getInteractionModify() {
+		return interactionModify;
+	}
+
+	public void setInteractionModify(String interactionModify) {
+		this.interactionModify = interactionModify;
+	}
+
+	public String getInteractionModifyPixelTolerance() {
+		return interactionModifyPixelTolerance;
+	}
+
+	public void setInteractionModifyPixelTolerance(String interactionModifyPixelTolerance) {
+		this.interactionModifyPixelTolerance = interactionModifyPixelTolerance;
+	}
+
+	public String getInteractionModifyWrapX() {
+		return interactionModifyWrapX;
+	}
+
+	public void setInteractionModifyWrapX(String interactionModifyWrapX) {
+		this.interactionModifyWrapX = interactionModifyWrapX;
+	}
+
+	public String getInteractionMouseWheelZoom() {
+		return interactionMouseWheelZoom;
+	}
+
+	public void setInteractionMouseWheelZoom(String interactionMouseWheelZoom) {
+		this.interactionMouseWheelZoom = interactionMouseWheelZoom;
+	}
+
+	public String getInteractionMouseWheelZoomDuration() {
+		return interactionMouseWheelZoomDuration;
+	}
+
+	public void setInteractionMouseWheelZoomDuration(String interactionMouseWheelZoomDuration) {
+		this.interactionMouseWheelZoomDuration = interactionMouseWheelZoomDuration;
+	}
+
+	public String getInteractionPinchRotate() {
+		return interactionPinchRotate;
+	}
+
+	public void setInteractionPinchRotate(String interactionPinchRotate) {
+		this.interactionPinchRotate = interactionPinchRotate;
+	}
+
+	public String getInteractionPinchRotateDuration() {
+		return interactionPinchRotateDuration;
+	}
+
+	public void setInteractionPinchRotateDuration(String interactionPinchRotateDuration) {
+		this.interactionPinchRotateDuration = interactionPinchRotateDuration;
+	}
+
+	public String getInteractionPinchRotateThreshold() {
+		return interactionPinchRotateThreshold;
+	}
+
+	public void setInteractionPinchRotateThreshold(String interactionPinchRotateThreshold) {
+		this.interactionPinchRotateThreshold = interactionPinchRotateThreshold;
+	}
+
+	public String getInteractionPinchZoom() {
+		return interactionPinchZoom;
+	}
+
+	public void setInteractionPinchZoom(String interactionPinchZoom) {
+		this.interactionPinchZoom = interactionPinchZoom;
+	}
+
+	public String getInteractionPinchZoomDuration() {
+		return interactionPinchZoomDuration;
+	}
+
+	public void setInteractionPinchZoomDuration(String interactionPinchZoomDuration) {
+		this.interactionPinchZoomDuration = interactionPinchZoomDuration;
+	}
+
+	public String getInteractionSelect() {
+		return interactionSelect;
+	}
+
+	public void setInteractionSelect(String interactionSelect) {
+		this.interactionSelect = interactionSelect;
+	}
+
+	public String getInteractionSelectMulti() {
+		return interactionSelectMulti;
+	}
+
+	public void setInteractionSelectMulti(String interactionSelectMulti) {
+		this.interactionSelectMulti = interactionSelectMulti;
+	}
+
+	public String getInteractionSelectWrapX() {
+		return interactionSelectWrapX;
+	}
+
+	public void setInteractionSelectWrapX(String interactionSelectWrapX) {
+		this.interactionSelectWrapX = interactionSelectWrapX;
+	}
+
+	public String getInteractionSnap() {
+		return interactionSnap;
+	}
+
+	public void setInteractionSnap(String interactionSnap) {
+		this.interactionSnap = interactionSnap;
+	}
+
+	public String getInteractionSnapPixelTolerance() {
+		return interactionSnapPixelTolerance;
+	}
+
+	public void setInteractionSnapPixelTolerance(String interactionSnapPixelTolerance) {
+		this.interactionSnapPixelTolerance = interactionSnapPixelTolerance;
+	}
+
+	public String getInteractionTranslate() {
+		return interactionTranslate;
+	}
+
+	public void setInteractionTranslate(String interactionTranslate) {
+		this.interactionTranslate = interactionTranslate;
 	}
 }

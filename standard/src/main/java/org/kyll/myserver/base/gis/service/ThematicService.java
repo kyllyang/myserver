@@ -4,10 +4,7 @@ import org.kyll.myserver.base.QueryCondition;
 import org.kyll.myserver.base.common.BaseService;
 import org.kyll.myserver.base.common.paginated.Dataset;
 import org.kyll.myserver.base.common.paginated.Paginated;
-import org.kyll.myserver.base.gis.entity.OlControl;
-import org.kyll.myserver.base.gis.entity.OlMap;
-import org.kyll.myserver.base.gis.entity.OlView;
-import org.kyll.myserver.base.gis.entity.Thematic;
+import org.kyll.myserver.base.gis.entity.*;
 
 import java.util.List;
 
@@ -20,7 +17,7 @@ public interface ThematicService extends BaseService<Thematic, Long> {
 
 	List<Thematic> get(QueryCondition qc);
 
-	void save(Thematic thematic, OlMap olMap, OlView olView, String layerGroup, List<OlControl> olControlList);
+	void save(Thematic thematic, OlMap olMap, OlView olView, String layerGroup, List<OlControl> olControlList, List<OlInteraction> olInteractionList);
 
 	void delete(Long[] ids);
 }
