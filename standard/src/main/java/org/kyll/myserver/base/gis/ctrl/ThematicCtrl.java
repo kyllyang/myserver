@@ -106,6 +106,7 @@ public class ThematicCtrl {
 		if ("1".equals(entityVo.getControlAttribution())) {
 			OlControl olControl = new OlControl();
 			olControl.setControlClassName(ConstUtils.GIS_OL_CONTROL_ATTRIBUTION);
+			olControl.setClassName(entityVo.getControlAttributionClassName());
 			olControl.setCollapsed(entityVo.getControlAttributionCollapsed());
 			olControl.setCollapseLabel(entityVo.getControlAttributionCollapseLabel());
 			olControl.setCollapsible(entityVo.getControlAttributionCollapsible());
@@ -116,6 +117,7 @@ public class ThematicCtrl {
 		if ("1".equals(entityVo.getControlFullScreen())) {
 			OlControl olControl = new OlControl();
 			olControl.setControlClassName(ConstUtils.GIS_OL_CONTROL_FULLSCREEN);
+			olControl.setClassName(entityVo.getControlFullScreenClassName());
 			olControl.setKeys(entityVo.getControlFullScreenKeys());
 			olControl.setLabel(entityVo.getControlFullScreenLabel());
 			olControl.setLabelActive(entityVo.getControlFullScreenLabelActive());
@@ -125,6 +127,7 @@ public class ThematicCtrl {
 		if ("1".equals(entityVo.getControlMousePosition())) {
 			OlControl olControl = new OlControl();
 			olControl.setControlClassName(ConstUtils.GIS_OL_CONTROL_MOUSEPOSITION);
+			olControl.setClassName(entityVo.getControlMousePositionClassName());
 			olControl.setCoordinateFormat(entityVo.getControlMousePositionCoordinateFormat());
 			olControl.setProjection(entityVo.getControlMousePositionProjection());
 			olControl.setUndefinedHTML(entityVo.getControlMousePositionUndefinedHTML());
@@ -143,6 +146,7 @@ public class ThematicCtrl {
 		if ("1".equals(entityVo.getControlRotate())) {
 			OlControl olControl = new OlControl();
 			olControl.setControlClassName(ConstUtils.GIS_OL_CONTROL_ROTATE);
+			olControl.setClassName(entityVo.getControlRotateClassName());
 			olControl.setAutoHide(entityVo.getControlRotateAutoHide());
 			olControl.setDuration(entityVo.getControlRotateDuration());
 			olControl.setLabel(entityVo.getControlRotateLabel());
@@ -152,6 +156,7 @@ public class ThematicCtrl {
 		if ("1".equals(entityVo.getControlScaleLine())) {
 			OlControl olControl = new OlControl();
 			olControl.setControlClassName(ConstUtils.GIS_OL_CONTROL_SCALELINE);
+			olControl.setClassName(entityVo.getControlScaleLineClassName());
 			olControl.setMinWidth(entityVo.getControlScaleLineMinWidth());
 			olControl.setUnits(entityVo.getControlScaleLineUnits());
 			olControlList.add(olControl);
@@ -159,6 +164,7 @@ public class ThematicCtrl {
 		if ("1".equals(entityVo.getControlZoom())) {
 			OlControl olControl = new OlControl();
 			olControl.setControlClassName(ConstUtils.GIS_OL_CONTROL_ZOOM);
+			olControl.setClassName(entityVo.getControlZoomClassName());
 			olControl.setDelta(entityVo.getControlZoomDelta());
 			olControl.setZoomInLabel(entityVo.getControlZoomZoomInLabel());
 			olControl.setZoomOutLabel(entityVo.getControlZoomZoomOutLabel());
@@ -170,6 +176,7 @@ public class ThematicCtrl {
 		if ("1".equals(entityVo.getControlZoomSlider())) {
 			OlControl olControl = new OlControl();
 			olControl.setControlClassName(ConstUtils.GIS_OL_CONTROL_ZOOMSLIDER);
+			olControl.setClassName(entityVo.getControlZoomSliderClassName());
 			olControl.setDuration(entityVo.getControlZoomSliderDuration());
 			olControl.setMaxResolution(entityVo.getControlZoomSliderMaxResolution());
 			olControl.setMinResolution(entityVo.getControlZoomSliderMinResolution());
@@ -178,6 +185,7 @@ public class ThematicCtrl {
 		if ("1".equals(entityVo.getControlZoomToExtent())) {
 			OlControl olControl = new OlControl();
 			olControl.setControlClassName(ConstUtils.GIS_OL_CONTROL_ZOOMTOEXTENT);
+			olControl.setClassName(entityVo.getControlZoomToExtentClassName());
 			olControl.setExtent(entityVo.getControlZoomToExtentExtent());
 			olControl.setLabel(entityVo.getControlZoomToExtentLabel());
 			olControl.setTipLabel(entityVo.getControlZoomToExtentTipLabel());
@@ -343,6 +351,7 @@ public class ThematicCtrl {
 				String controlClassName = olControl.getControlClassName();
 				if (ConstUtils.GIS_OL_CONTROL_ATTRIBUTION.equals(controlClassName)) {
 					thematicVo.setControlAttribution("1");
+					thematicVo.setControlAttributionClassName(olControl.getClassName());
 					thematicVo.setControlAttributionCollapsed(olControl.getCollapsed());
 					thematicVo.setControlAttributionCollapseLabel(olControl.getCollapseLabel());
 					thematicVo.setControlAttributionCollapsible(olControl.getCollapsible());
@@ -350,12 +359,14 @@ public class ThematicCtrl {
 					thematicVo.setControlAttributionTipLabel(olControl.getTipLabel());
 				} else if (ConstUtils.GIS_OL_CONTROL_FULLSCREEN.equals(controlClassName)) {
 					thematicVo.setControlFullScreen("1");
+					thematicVo.setControlFullScreenClassName(olControl.getClassName());
 					thematicVo.setControlFullScreenKeys(olControl.getKeys());
 					thematicVo.setControlFullScreenLabel(olControl.getLabel());
 					thematicVo.setControlFullScreenLabelActive(olControl.getLabelActive());
 					thematicVo.setControlFullScreenTipLabel(olControl.getTipLabel());
 				} else if (ConstUtils.GIS_OL_CONTROL_MOUSEPOSITION.equals(controlClassName)) {
 					thematicVo.setControlMousePosition("1");
+					thematicVo.setControlMousePositionClassName(olControl.getClassName());
 					thematicVo.setControlMousePositionCoordinateFormat(olControl.getCoordinateFormat());
 					thematicVo.setControlMousePositionProjection(olControl.getProjection());
 					thematicVo.setControlMousePositionUndefinedHTML(olControl.getUndefinedHTML());
@@ -368,16 +379,19 @@ public class ThematicCtrl {
 					thematicVo.setControlOverviewMapTipLabel(olControl.getTipLabel());
 				} else if (ConstUtils.GIS_OL_CONTROL_ROTATE.equals(controlClassName)) {
 					thematicVo.setControlRotate("1");
+					thematicVo.setControlRotateClassName(olControl.getClassName());
 					thematicVo.setControlRotateAutoHide(olControl.getAutoHide());
 					thematicVo.setControlRotateDuration(olControl.getDuration());
 					thematicVo.setControlRotateLabel(olControl.getLabel());
 					thematicVo.setControlRotateTipLabel(olControl.getTipLabel());
 				} else if (ConstUtils.GIS_OL_CONTROL_SCALELINE.equals(controlClassName)) {
 					thematicVo.setControlScaleLine("1");
+					thematicVo.setControlScaleLineClassName(olControl.getClassName());
 					thematicVo.setControlScaleLineMinWidth(olControl.getMinWidth());
 					thematicVo.setControlScaleLineUnits(olControl.getUnits());
 				} else if (ConstUtils.GIS_OL_CONTROL_ZOOM.equals(controlClassName)) {
 					thematicVo.setControlZoom("1");
+					thematicVo.setControlZoomClassName(olControl.getClassName());
 					thematicVo.setControlZoomDelta(olControl.getDelta());
 					thematicVo.setControlZoomZoomInLabel(olControl.getZoomInLabel());
 					thematicVo.setControlZoomZoomOutLabel(olControl.getZoomOutLabel());
@@ -386,11 +400,13 @@ public class ThematicCtrl {
 					thematicVo.setControlZoomZoomOutTipLabel(olControl.getZoomOutTipLabel());
 				} else if (ConstUtils.GIS_OL_CONTROL_ZOOMSLIDER.equals(controlClassName)) {
 					thematicVo.setControlZoomSlider("1");
+					thematicVo.setControlZoomSliderClassName(olControl.getClassName());
 					thematicVo.setControlZoomSliderDuration(olControl.getDuration());
 					thematicVo.setControlZoomSliderMaxResolution(olControl.getMaxResolution());
 					thematicVo.setControlZoomSliderMinResolution(olControl.getMinResolution());
 				} else if (ConstUtils.GIS_OL_CONTROL_ZOOMTOEXTENT.equals(controlClassName)) {
 					thematicVo.setControlZoomToExtent("1");
+					thematicVo.setControlZoomToExtentClassName(olControl.getClassName());
 					thematicVo.setControlZoomToExtentExtent(olControl.getExtent());
 					thematicVo.setControlZoomToExtentLabel(olControl.getLabel());
 					thematicVo.setControlZoomToExtentTipLabel(olControl.getTipLabel());

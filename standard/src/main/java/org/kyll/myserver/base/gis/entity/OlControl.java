@@ -14,6 +14,7 @@ public class OlControl implements Serializable {
 	private OlMap olMap;
 	private String controlClassName;// ol.control.Attribution, ol.control.FullScreen, ol.control.MousePosition, ol.control.OverviewMap, ol.control.Rotate, ol.control.ScaleLine, ol.control.Zoom, ol.control.ZoomSlider, ol.control.ZoomToExtent
 	private String autoHide;
+	private String className;
 	private String collapsed;
 	private String collapseLabel;
 	private String collapsible;
@@ -77,6 +78,15 @@ public class OlControl implements Serializable {
 
 	public void setAutoHide(String autoHide) {
 		this.autoHide = autoHide;
+	}
+
+	@Column(name = "CLASS_NAME_")
+	public String getClassName() {
+		return className;
+	}
+
+	public void setClassName(String className) {
+		this.className = className;
 	}
 
 	@Column(name = "COLLAPSED_")

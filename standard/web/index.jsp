@@ -15,7 +15,7 @@
 	<script type="text/javascript" src="${ctx}/resource/component/ext-4.2.1.883/ext-all.js"></script>
 	<script type="text/javascript" src="${ctx}/resource/component/ext-4.2.1.883/locale/ext-lang-zh_CN.js"></script>
 	<script type="text/javascript" src="${ctx}/resource/component/v3.4.0-dist/ol.js"></script>
-	<script type="text/javascript" src="${ctx}/myserver/index.js"></script>
+	<script type="text/javascript" src="${ctx}/myserver/myServer.js"></script>
 	<script type="text/javascript">
 		var ctx = '${ctx}';
 
@@ -45,6 +45,7 @@
 
 		Ext.tip.QuickTipManager.init();
 	</script>
+	<script type="text/javascript" src="${ctx}/myserver/index.js"></script>
 </head>
 <body>
 

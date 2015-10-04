@@ -36,17 +36,20 @@ public class ThematicVo implements Vo<Long> {
 	private String layerGroup;
 
 	private String controlAttribution;
+	private String controlAttributionClassName;
 	private String controlAttributionCollapsible;
 	private String controlAttributionCollapsed;
 	private String controlAttributionLabel;
 	private String controlAttributionCollapseLabel;
 	private String controlAttributionTipLabel;
 	private String controlFullScreen;
+	private String controlFullScreenClassName;
 	private String controlFullScreenKeys;
 	private String controlFullScreenLabel;
 	private String controlFullScreenLabelActive;
 	private String controlFullScreenTipLabel;
 	private String controlMousePosition;
+	private String controlMousePositionClassName;
 	private String controlMousePositionCoordinateFormat;
 	private String controlMousePositionProjection;
 	private String controlMousePositionUndefinedHTML;
@@ -57,14 +60,17 @@ public class ThematicVo implements Vo<Long> {
 	private String controlOverviewMapCollapseLabel;
 	private String controlOverviewMapTipLabel;
 	private String controlRotate;
+	private String controlRotateClassName;
 	private String controlRotateAutoHide;
 	private String controlRotateDuration;
 	private String controlRotateLabel;
 	private String controlRotateTipLabel;
 	private String controlScaleLine;
+	private String controlScaleLineClassName;
 	private String controlScaleLineMinWidth;
 	private String controlScaleLineUnits;
 	private String controlZoom;
+	private String controlZoomClassName;
 	private String controlZoomDuration;
 	private String controlZoomZoomInLabel;
 	private String controlZoomZoomOutLabel;
@@ -72,10 +78,12 @@ public class ThematicVo implements Vo<Long> {
 	private String controlZoomZoomInTipLabel;
 	private String controlZoomZoomOutTipLabel;
 	private String controlZoomSlider;
+	private String controlZoomSliderClassName;
 	private String controlZoomSliderDuration;
 	private String controlZoomSliderMaxResolution;
 	private String controlZoomSliderMinResolution;
 	private String controlZoomToExtent;
+	private String controlZoomToExtentClassName;
 	private String controlZoomToExtentExtent;
 	private String controlZoomToExtentLabel;
 	private String controlZoomToExtentTipLabel;
@@ -327,6 +335,14 @@ public class ThematicVo implements Vo<Long> {
 		this.controlAttribution = controlAttribution;
 	}
 
+	public String getControlAttributionClassName() {
+		return controlAttributionClassName;
+	}
+
+	public void setControlAttributionClassName(String controlAttributionClassName) {
+		this.controlAttributionClassName = controlAttributionClassName;
+	}
+
 	public String getControlAttributionCollapsible() {
 		return controlAttributionCollapsible;
 	}
@@ -375,6 +391,14 @@ public class ThematicVo implements Vo<Long> {
 		this.controlFullScreen = controlFullScreen;
 	}
 
+	public String getControlFullScreenClassName() {
+		return controlFullScreenClassName;
+	}
+
+	public void setControlFullScreenClassName(String controlFullScreenClassName) {
+		this.controlFullScreenClassName = controlFullScreenClassName;
+	}
+
 	public String getControlFullScreenKeys() {
 		return controlFullScreenKeys;
 	}
@@ -413,6 +437,14 @@ public class ThematicVo implements Vo<Long> {
 
 	public void setControlMousePosition(String controlMousePosition) {
 		this.controlMousePosition = controlMousePosition;
+	}
+
+	public String getControlMousePositionClassName() {
+		return controlMousePositionClassName;
+	}
+
+	public void setControlMousePositionClassName(String controlMousePositionClassName) {
+		this.controlMousePositionClassName = controlMousePositionClassName;
 	}
 
 	public String getControlMousePositionCoordinateFormat() {
@@ -495,6 +527,14 @@ public class ThematicVo implements Vo<Long> {
 		this.controlRotate = controlRotate;
 	}
 
+	public String getControlRotateClassName() {
+		return controlRotateClassName;
+	}
+
+	public void setControlRotateClassName(String controlRotateClassName) {
+		this.controlRotateClassName = controlRotateClassName;
+	}
+
 	public String getControlRotateAutoHide() {
 		return controlRotateAutoHide;
 	}
@@ -535,6 +575,14 @@ public class ThematicVo implements Vo<Long> {
 		this.controlScaleLine = controlScaleLine;
 	}
 
+	public String getControlScaleLineClassName() {
+		return controlScaleLineClassName;
+	}
+
+	public void setControlScaleLineClassName(String controlScaleLineClassName) {
+		this.controlScaleLineClassName = controlScaleLineClassName;
+	}
+
 	public String getControlScaleLineMinWidth() {
 		return controlScaleLineMinWidth;
 	}
@@ -557,6 +605,14 @@ public class ThematicVo implements Vo<Long> {
 
 	public void setControlZoom(String controlZoom) {
 		this.controlZoom = controlZoom;
+	}
+
+	public String getControlZoomClassName() {
+		return controlZoomClassName;
+	}
+
+	public void setControlZoomClassName(String controlZoomClassName) {
+		this.controlZoomClassName = controlZoomClassName;
 	}
 
 	public String getControlZoomDuration() {
@@ -615,6 +671,14 @@ public class ThematicVo implements Vo<Long> {
 		this.controlZoomSlider = controlZoomSlider;
 	}
 
+	public String getControlZoomSliderClassName() {
+		return controlZoomSliderClassName;
+	}
+
+	public void setControlZoomSliderClassName(String controlZoomSliderClassName) {
+		this.controlZoomSliderClassName = controlZoomSliderClassName;
+	}
+
 	public String getControlZoomSliderDuration() {
 		return controlZoomSliderDuration;
 	}
@@ -645,6 +709,14 @@ public class ThematicVo implements Vo<Long> {
 
 	public void setControlZoomToExtent(String controlZoomToExtent) {
 		this.controlZoomToExtent = controlZoomToExtent;
+	}
+
+	public String getControlZoomToExtentClassName() {
+		return controlZoomToExtentClassName;
+	}
+
+	public void setControlZoomToExtentClassName(String controlZoomToExtentClassName) {
+		this.controlZoomToExtentClassName = controlZoomToExtentClassName;
 	}
 
 	public String getControlZoomToExtentExtent() {

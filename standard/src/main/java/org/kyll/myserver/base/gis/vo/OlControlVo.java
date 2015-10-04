@@ -10,6 +10,7 @@ public class OlControlVo implements Vo<Long> {
 	private Long id;
 	private String controlClassName;
 	private String autoHide;
+	private String className;
 	private String collapsed;
 	private String collapseLabel;
 	private String collapsible;
@@ -59,6 +60,14 @@ public class OlControlVo implements Vo<Long> {
 
 	public void setAutoHide(String autoHide) {
 		this.autoHide = autoHide;
+	}
+
+	public String getClassName() {
+		return className;
+	}
+
+	public void setClassName(String className) {
+		this.className = className;
 	}
 
 	public String getCollapsed() {

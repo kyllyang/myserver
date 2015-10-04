@@ -46,17 +46,20 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 				{name: 'viewRotation'},
 				{name: 'layerGroup'},
 				{name: 'controlAttribution'},
+				{name: 'controlAttributionClassName'},
 				{name: 'controlAttributionCollapsible'},
 				{name: 'controlAttributionCollapsed'},
 				{name: 'controlAttributionLabel'},
 				{name: 'controlAttributionCollapseLabel'},
 				{name: 'controlAttributionTipLabel'},
 				{name: 'controlFullScreen'},
+				{name: 'controlFullScreenClassName'},
 				{name: 'controlFullScreenKeys'},
 				{name: 'controlFullScreenLabel'},
 				{name: 'controlFullScreenLabelActive'},
 				{name: 'controlFullScreenTipLabel'},
 				{name: 'controlMousePosition'},
+				{name: 'controlMousePositionClassName'},
 				{name: 'controlMousePositionCoordinateFormat'},
 				{name: 'controlMousePositionProjection'},
 				{name: 'controlMousePositionUndefinedHTML'},
@@ -67,14 +70,17 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 				{name: 'controlOverviewMapCollapseLabel'},
 				{name: 'controlOverviewMapTipLabel'},
 				{name: 'controlRotate'},
+				{name: 'controlRotateClassName'},
 				{name: 'controlRotateAutoHide'},
 				{name: 'controlRotateDuration'},
 				{name: 'controlRotateLabel'},
 				{name: 'controlRotateTipLabel'},
 				{name: 'controlScaleLine'},
+				{name: 'controlScaleLineClassName'},
 				{name: 'controlScaleLineMinWidth'},
 				{name: 'controlScaleLineUnits'},
 				{name: 'controlZoom'},
+				{name: 'controlZoomClassName'},
 				{name: 'controlZoomDuration'},
 				{name: 'controlZoomZoomInLabel'},
 				{name: 'controlZoomZoomOutLabel'},
@@ -82,10 +88,12 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 				{name: 'controlZoomZoomInTipLabel'},
 				{name: 'controlZoomZoomOutTipLabel'},
 				{name: 'controlZoomSlider'},
+				{name: 'controlZoomSliderClassName'},
 				{name: 'controlZoomSliderDuration'},
 				{name: 'controlZoomSliderMaxResolution'},
 				{name: 'controlZoomSliderMinResolution'},
 				{name: 'controlZoomToExtent'},
+				{name: 'controlZoomToExtentClassName'},
 				{name: 'controlZoomToExtentExtent'},
 				{name: 'controlZoomToExtentLabel'},
 				{name: 'controlZoomToExtentTipLabel'},
@@ -355,8 +363,16 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			name: 'controlAttribution',
 			inputValue: '1',
 			checked: true,
-			readOnly: true,
 			qtip: 'Control to show all the attributions associated with the layer sources in the map. This control is one of the default controls included in maps. By default it will show in the bottom right portion of the map, but this can be changed by using a css selector for .ol-attribution.'
+		});
+		var controlAttributionClassNameText = Ext.create('Ext.form.field.Text', {
+			fieldLabel: '样式类名',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'controlAttributionClassName',
+			value: 'ol-attribution',
+			maxLength: 100,
+			qtip: 'CSS class name. Default is ol-attribution.'
 		});
 		var controlAttributionCollapsibleCheckbox = Ext.create('Ext.form.field.Checkbox', {
 			fieldLabel: '可折叠',
@@ -410,8 +426,17 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			inputValue: '1',
 			qtip: 'Provides a button that when clicked fills up the full screen with the map. When in full screen mode, a close button is shown to exit full screen mode. The Fullscreen API is used to toggle the map in full screen mode.'
 		});
+		var controlFullScreenClassNameText = Ext.create('Ext.form.field.Text', {
+			fieldLabel: '样式类名',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'controlFullScreenClassName',
+			value: 'ol-full-screen',
+			maxLength: 100,
+			qtip: 'CSS class name. Default is ol-full-screen.'
+		});
 		var controlFullScreenKeysCheckbox = Ext.create('Ext.form.field.Checkbox', {
-			fieldLabel: '按键',
+			fieldLabel: '按键控制',
 			labelAlign: 'right',
 			labelSeparator: '：',
 			name: 'controlFullScreenKeys',
@@ -452,12 +477,23 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			inputValue: '1',
 			qtip: 'A control to show the 2D coordinates of the mouse cursor. By default, these are in the view projection, but can be in any supported projection. By default the control is shown in the top right corner of the map, but this can be changed by using the css selector .ol-mouse-position.'
 		});
-		var controlMousePositionCoordinateFormatText = Ext.create('Ext.form.field.Text', {
+		var controlMousePositionClassNameText = Ext.create('Ext.form.field.Text', {
+			fieldLabel: '样式类名',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'controlMousePositionClassName',
+			value: 'ol-mouse-position',
+			maxLength: 100,
+			qtip: 'CSS class name. Default is ol-mouse-position.'
+		});
+		var controlMousePositionCoordinateFormatNumber = Ext.create('Ext.form.field.Number', {
 			fieldLabel: '坐标格式',
 			labelAlign: 'right',
 			labelSeparator: '：',
 			name: 'controlMousePositionCoordinateFormat',
-			maxLength: 100,
+			value: 9,
+			minValue: 0,
+			allowDecimals: false,
 			qtip: 'Coordinate format.'
 		});
 		var controlMousePositionProjectionText = Ext.create('Ext.form.field.Text', {
@@ -534,8 +570,16 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			name: 'controlRotate',
 			inputValue: '1',
 			checked: true,
-			readOnly: true,
 			qtip: 'A button control to reset rotation to 0. To style this control use css selector .ol-rotate. A .ol-hidden css selector is added to the button when the rotation is 0.'
+		});
+		var controlRotateClassNameText = Ext.create('Ext.form.field.Text', {
+			fieldLabel: '样式类名',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'controlRotateClassName',
+			value: 'ol-rotate',
+			maxLength: 100,
+			qtip: 'CSS class name. Default is ol-rotate.'
 		});
 		var controlRotateAutoHideCheckbox = Ext.create('Ext.form.field.Checkbox', {
 			fieldLabel: '自动隐藏',
@@ -581,6 +625,15 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			inputValue: '1',
 			qtip: 'A control displaying rough x-axis distances, calculated for the center of the viewport. No scale line will be shown when the x-axis distance cannot be calculated in the view projection (e.g. at or beyond the poles in EPSG:4326). By default the scale line will show in the bottom left portion of the map, but this can be changed by using the css selector .ol-scale-line.'
 		});
+		var controlScaleLineClassNameText = Ext.create('Ext.form.field.Text', {
+			fieldLabel: '样式类名',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'controlScaleLineClassName',
+			value: 'ol-scale-line',
+			maxLength: 100,
+			qtip: 'CSS Class name. Default is ol-scale-line.'
+		});
 		var controlScaleLineMinWidthNumber = Ext.create('Ext.form.field.Number', {
 			fieldLabel: '最小宽度',
 			labelAlign: 'right',
@@ -606,8 +659,16 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			name: 'controlZoom',
 			inputValue: '1',
 			checked: true,
-			readOnly: true,
 			qtip: 'A control with 2 buttons, one for zoom in and one for zoom out. This control is one of the default controls of a map. To style this control use css selectors .ol-zoom-in and .ol-zoom-out.'
+		});
+		var controlZoomClassNameText = Ext.create('Ext.form.field.Text', {
+			fieldLabel: '样式类名',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'controlZoomClassName',
+			value: 'ol-zoom',
+			maxLength: 100,
+			qtip: 'CSS class name. Default is ol-zoom.'
 		});
 		var controlZoomDurationNumber = Ext.create('Ext.form.field.Number', {
 			fieldLabel: '持续时间',
@@ -671,12 +732,21 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			inputValue: '1',
 			qtip: 'A slider type of control for zooming.'
 		});
+		var controlZoomSliderClassNameText = Ext.create('Ext.form.field.Text', {
+			fieldLabel: '样式类名',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'controlZoomSliderClassName',
+			value: 'ol-zoomslider',
+			maxLength: 100,
+			qtip: 'CSS class name. Default is ol-zoomslider'
+		});
 		var controlZoomSliderDurationNumber = Ext.create('Ext.form.field.Number', {
 			fieldLabel: '持续时间',
 			labelAlign: 'right',
 			labelSeparator: '：',
 			name: 'controlZoomSliderDuration',
-			value: 250,
+			value: 200,
 			minValue: 1,
 			allowDecimals: false,
 			qtip: 'Animation duration in milliseconds. Default is 200.'
@@ -701,6 +771,15 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			name: 'controlZoomToExtent',
 			inputValue: '1',
 			qtip: 'A button control which, when pressed, changes the map view to a specific extent. To style this control use the css selector .ol-zoom-extent.'
+		});
+		var controlZoomToExtentClassNameText = Ext.create('Ext.form.field.Text', {
+			fieldLabel: '样式类名',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'controlZoomToExtentClassName',
+			value: 'ol-zoom-extent',
+			maxLength: 100,
+			qtip: 'Class name. Default is ol-zoom-extent.'
 		});
 		var controlZoomToExtentExtentText = Ext.create('Ext.form.field.Text', {
 			colspan: 2,
@@ -1236,9 +1315,7 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 							type: 'table',
 							columns: 3
 						},
-						items: [controlAttributionCollapsibleCheckbox, controlAttributionCollapsedCheckbox, {
-							xtype: 'container'
-						}, controlAttributionLabelText, controlAttributionCollapseLabelText, controlAttributionTipLabelText]
+						items: [controlAttributionClassNameText, controlAttributionCollapsibleCheckbox, controlAttributionCollapsedCheckbox, controlAttributionLabelText, controlAttributionCollapseLabelText, controlAttributionTipLabelText]
 					}]
 				}, {
 					xtype: 'container',
@@ -1250,9 +1327,7 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 							type: 'table',
 							columns: 3
 						},
-						items: [controlFullScreenKeysCheckbox, {
-							xtype: 'container'
-						}, {
+						items: [controlFullScreenClassNameText, controlFullScreenKeysCheckbox, {
 							xtype: 'container'
 						}, controlFullScreenLabelText, controlFullScreenLabelActiveText, controlFullScreenTipLabelText]
 					}]
@@ -1266,7 +1341,11 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 							type: 'table',
 							columns: 3
 						},
-						items: [controlMousePositionCoordinateFormatText, controlMousePositionProjectionText, controlMousePositionUndefinedHTMLText]
+						items: [controlMousePositionClassNameText, controlMousePositionCoordinateFormatNumber, controlMousePositionProjectionText, controlMousePositionUndefinedHTMLText, {
+							xtype: 'container'
+						}, {
+							xtype: 'container'
+						}]
 					}]
 				}, {
 					xtype: 'container',
@@ -1292,9 +1371,7 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 							type: 'table',
 							columns: 3
 						},
-						items: [controlRotateAutoHideCheckbox, controlRotateDurationNumber, {
-							xtype: 'container'
-						}, controlRotateLabelText, controlRotateTipLabelText, {
+						items: [controlRotateClassNameText, controlRotateAutoHideCheckbox, controlRotateDurationNumber, controlRotateLabelText, controlRotateTipLabelText, {
 							xtype: 'container'
 						}]
 					}]
@@ -1308,9 +1385,7 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 							type: 'table',
 							columns: 3
 						},
-						items: [controlScaleLineMinWidthNumber, controlScaleLineUnitsCombobox, {
-							xtype: 'container'
-						}]
+						items: [controlScaleLineClassNameText, controlScaleLineMinWidthNumber, controlScaleLineUnitsCombobox]
 					}]
 				}, {
 					xtype: 'container',
@@ -1322,7 +1397,11 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 							type: 'table',
 							columns: 3
 						},
-						items: [controlZoomDurationNumber, controlZoomZoomInLabelText, controlZoomZoomOutLabelText, controlZoomDeltaNumber, controlZoomZoomInTipLabelText, controlZoomZoomOutTipLabelText]
+						items: [controlZoomClassNameText, {
+							xtype: 'container'
+						}, {
+							xtype: 'container'
+						}, controlZoomDurationNumber, controlZoomZoomInLabelText, controlZoomZoomOutLabelText, controlZoomDeltaNumber, controlZoomZoomInTipLabelText, controlZoomZoomOutTipLabelText]
 					}]
 				}, {
 					xtype: 'container',
@@ -1334,9 +1413,7 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 							type: 'table',
 							columns: 3
 						},
-						items: [controlZoomSliderDurationNumber, {
-							xtype: 'container'
-						}, {
+						items: [controlZoomSliderClassNameText, controlZoomSliderDurationNumber, {
 							xtype: 'container'
 						}, controlZoomSliderMaxResolutionNumber, controlZoomSliderMinResolutionNumber, {
 							xtype: 'container'
@@ -1352,9 +1429,7 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 							type: 'table',
 							columns: 3
 						},
-						items: [controlZoomToExtentExtentText, {
-							xtype: 'container'
-						}, controlZoomToExtentLabelText, controlZoomToExtentTipLabelText, {
+						items: [controlZoomToExtentClassNameText, controlZoomToExtentExtentText, controlZoomToExtentLabelText, controlZoomToExtentTipLabelText, {
 							xtype: 'container'
 						}]
 					}]
