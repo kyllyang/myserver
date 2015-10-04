@@ -135,9 +135,10 @@ CREATE TABLE `ms_gis_ol_control` (
   `zoom_out_label_` varchar(255) DEFAULT NULL,
   `zoom_out_tip_label_` varchar(255) DEFAULT NULL,
   `map_id_` int(11) DEFAULT NULL,
+  `class_name_` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_`),
   UNIQUE KEY `id__UNIQUE` (`id_`)
-) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=799 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -146,7 +147,7 @@ CREATE TABLE `ms_gis_ol_control` (
 
 LOCK TABLES `ms_gis_ol_control` WRITE;
 /*!40000 ALTER TABLE `ms_gis_ol_control` DISABLE KEYS */;
-INSERT INTO `ms_gis_ol_control` VALUES (34,'ol.control.Attribution',NULL,'1','»','1',NULL,NULL,NULL,NULL,NULL,'i',NULL,NULL,NULL,NULL,NULL,NULL,'Attributions',NULL,NULL,NULL,NULL,NULL,NULL,3),(35,'ol.control.FullScreen',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'↔','×',NULL,NULL,NULL,NULL,NULL,'Toggle full-screen',NULL,NULL,NULL,NULL,NULL,NULL,3),(36,'ol.control.MousePosition',NULL,NULL,NULL,NULL,'',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,'',NULL,NULL,NULL,NULL,NULL,3),(37,'ol.control.OverviewMap',NULL,'1','«','1',NULL,NULL,NULL,NULL,NULL,'»',NULL,NULL,NULL,NULL,NULL,NULL,'Overview map',NULL,NULL,NULL,NULL,NULL,NULL,3),(38,'ol.control.Rotate','1',NULL,NULL,NULL,NULL,NULL,'250',NULL,NULL,'⇧',NULL,NULL,NULL,NULL,NULL,NULL,'Reset rotation',NULL,NULL,NULL,NULL,NULL,NULL,3),(39,'ol.control.ScaleLine',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'64',NULL,NULL,NULL,'metric',NULL,NULL,NULL,NULL,3),(40,'ol.control.Zoom',NULL,NULL,NULL,NULL,NULL,'','250',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'+','Zoom in','-','Zoom out',3),(41,'ol.control.ZoomSlider',NULL,NULL,NULL,NULL,NULL,NULL,'250',NULL,NULL,NULL,NULL,NULL,'','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,3),(42,'ol.control.ZoomToExtent',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,'E',NULL,NULL,NULL,NULL,NULL,NULL,'Zoom to extent',NULL,NULL,NULL,NULL,NULL,NULL,3);
+INSERT INTO `ms_gis_ol_control` VALUES (790,'ol.control.Attribution',NULL,'1','»','1',NULL,NULL,NULL,NULL,NULL,'i',NULL,NULL,NULL,NULL,NULL,NULL,'Attributions',NULL,NULL,NULL,NULL,NULL,NULL,3,'ol-attribution'),(791,'ol.control.FullScreen',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'↔','×',NULL,NULL,NULL,NULL,NULL,'Toggle full-screen',NULL,NULL,NULL,NULL,NULL,NULL,3,'ol-full-screen'),(792,'ol.control.MousePosition',NULL,NULL,NULL,NULL,'9',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,'',NULL,NULL,NULL,NULL,NULL,3,'ol-mouse-position'),(793,'ol.control.OverviewMap',NULL,'1','«','1',NULL,NULL,NULL,NULL,NULL,'»',NULL,NULL,NULL,NULL,NULL,NULL,'Overview map',NULL,NULL,NULL,NULL,NULL,NULL,3,NULL),(794,'ol.control.Rotate','1',NULL,NULL,NULL,NULL,NULL,'250',NULL,NULL,'⇧',NULL,NULL,NULL,NULL,NULL,NULL,'Reset rotation',NULL,NULL,NULL,NULL,NULL,NULL,3,'ol-rotate'),(795,'ol.control.ScaleLine',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'64',NULL,NULL,NULL,'metric',NULL,NULL,NULL,NULL,3,'ol-scale-line'),(796,'ol.control.Zoom',NULL,NULL,NULL,NULL,NULL,'1','250',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'+','Zoom in','-','Zoom out',3,'ol-zoom'),(797,'ol.control.ZoomSlider',NULL,NULL,NULL,NULL,NULL,NULL,'200',NULL,NULL,NULL,NULL,NULL,'5000','1000',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,3,'ol-zoomslider'),(798,'ol.control.ZoomToExtent',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,'E',NULL,NULL,NULL,NULL,NULL,NULL,'Zoom to extent',NULL,NULL,NULL,NULL,NULL,NULL,3,'ol-zoom-extent');
 /*!40000 ALTER TABLE `ms_gis_ol_control` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,7 +177,7 @@ CREATE TABLE `ms_gis_ol_interaction` (
   `threshold_` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_`),
   UNIQUE KEY `id__UNIQUE` (`id_`)
-) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=864 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -185,7 +186,7 @@ CREATE TABLE `ms_gis_ol_interaction` (
 
 LOCK TABLES `ms_gis_ol_interaction` WRITE;
 /*!40000 ALTER TABLE `ms_gis_ol_interaction` DISABLE KEYS */;
-INSERT INTO `ms_gis_ol_interaction` VALUES (99,'ol.interaction.DoubleClickZoom','1','250',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(100,'ol.interaction.DragPan',NULL,NULL,NULL,NULL,NULL,NULL,3,NULL,'','','',NULL,NULL,NULL),(101,'ol.interaction.DragRotate',NULL,'250',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(102,'ol.interaction.DragZoom',NULL,'200',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(103,'ol.interaction.KeyboardPan',NULL,'100',NULL,'128',NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(104,'ol.interaction.KeyboardZoom','1','100',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(105,'ol.interaction.MouseWheelZoom',NULL,'250',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(106,'ol.interaction.PinchRotate',NULL,'250',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,'0.3'),(107,'ol.interaction.PinchZoom',NULL,'400',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `ms_gis_ol_interaction` VALUES (855,'ol.interaction.DoubleClickZoom','1','250',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(856,'ol.interaction.DragPan',NULL,NULL,NULL,NULL,NULL,NULL,3,NULL,'','','',NULL,NULL,NULL),(857,'ol.interaction.DragRotate',NULL,'250',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(858,'ol.interaction.DragZoom',NULL,'200',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(859,'ol.interaction.KeyboardPan',NULL,'100',NULL,'128',NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(860,'ol.interaction.KeyboardZoom','1','100',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(861,'ol.interaction.MouseWheelZoom',NULL,'250',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(862,'ol.interaction.PinchRotate',NULL,'250',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,'0.3'),(863,'ol.interaction.PinchZoom',NULL,'400',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `ms_gis_ol_interaction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -254,7 +255,7 @@ CREATE TABLE `ms_gis_ol_map` (
   `renderer_` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_`),
   UNIQUE KEY `unique_id_` (`id_`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -282,7 +283,7 @@ CREATE TABLE `ms_gis_ol_map_layergroup` (
   `name_` varchar(255) DEFAULT NULL,
   `sort_` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=192 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -291,7 +292,7 @@ CREATE TABLE `ms_gis_ol_map_layergroup` (
 
 LOCK TABLES `ms_gis_ol_map_layergroup` WRITE;
 /*!40000 ALTER TABLE `ms_gis_ol_map_layergroup` DISABLE KEYS */;
-INSERT INTO `ms_gis_ol_map_layergroup` VALUES (22,3,1,NULL,NULL,NULL),(23,3,2,NULL,NULL,NULL);
+INSERT INTO `ms_gis_ol_map_layergroup` VALUES (190,3,NULL,NULL,'',NULL),(191,3,NULL,NULL,'',NULL);
 /*!40000 ALTER TABLE `ms_gis_ol_map_layergroup` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -354,7 +355,7 @@ CREATE TABLE `ms_gis_ol_view` (
   `map_id_` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_`),
   UNIQUE KEY `id__UNIQUE` (`id_`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -363,7 +364,7 @@ CREATE TABLE `ms_gis_ol_view` (
 
 LOCK TABLES `ms_gis_ol_view` WRITE;
 /*!40000 ALTER TABLE `ms_gis_ol_view` DISABLE KEYS */;
-INSERT INTO `ms_gis_ol_view` VALUES (2,'100,200',NULL,NULL,'100,200,300,400',NULL,NULL,NULL,NULL,'EPSG:3857','200','500,400,300,200,100',NULL,NULL,NULL,3),(3,'1',NULL,NULL,'1',NULL,NULL,NULL,NULL,'EPSG:3857','1','1',NULL,NULL,NULL,4),(4,'1',NULL,NULL,'1',NULL,NULL,NULL,NULL,'EPSG:3857','1','1',NULL,NULL,NULL,5);
+INSERT INTO `ms_gis_ol_view` VALUES (2,'0,0','4','1','','','','','','EPSG:3857',NULL,'','0','2','2',3),(3,'1',NULL,NULL,'1',NULL,NULL,NULL,NULL,'EPSG:3857','1','1',NULL,NULL,NULL,4),(4,'1',NULL,NULL,'1',NULL,NULL,NULL,NULL,'EPSG:3857','1','1',NULL,NULL,NULL,5);
 /*!40000 ALTER TABLE `ms_gis_ol_view` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -651,4 +652,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-10-02 15:52:12
+-- Dump completed on 2015-10-04 15:09:51
