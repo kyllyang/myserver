@@ -1,5 +1,6 @@
 package org.kyll.myserver.base.gis.ctrl;
 
+import org.apache.commons.lang.StringUtils;
 import org.kyll.myserver.base.QueryCondition;
 import org.kyll.myserver.base.common.paginated.Dataset;
 import org.kyll.myserver.base.gis.entity.*;
@@ -88,8 +89,18 @@ public class ThematicCtrl {
 		olView.setProjection(entityVo.getViewProjection());
 		olView.setCenter(entityVo.getViewCenter());
 		olView.setExtent(entityVo.getViewExtent());
-		olView.setResolutions(entityVo.getViewResolutions());
-		olView.setResolution(entityVo.getViewResolution());
+		olView.setMaxResolution(entityVo.getViewMaxResolution());
+		olView.setMinResolution(entityVo.getViewMinResolution());
+		String resolutions = entityVo.getViewResolutions();
+		olView.setResolutions(resolutions);
+		olView.setResolution(StringUtils.isBlank(resolutions) ? null : entityVo.getViewResolution());
+		olView.setMaxZoom(entityVo.getViewMaxZoom());
+		olView.setMinZoom(entityVo.getViewMinZoom());
+		olView.setZoomFactor(entityVo.getViewZoomFactor());
+		olView.setZoom(entityVo.getViewZoom());
+		olView.setEnableRotation(entityVo.getViewEnableRotation());
+		olView.setConstrainRotation(entityVo.getViewConstrainRotation());
+		olView.setRotation(entityVo.getViewRotation());
 
 		List<OlControl> olControlList = new ArrayList<>();
 		if ("1".equals(entityVo.getControlAttribution())) {
@@ -314,8 +325,17 @@ public class ThematicCtrl {
 				thematicVo.setViewProjection(olView.getProjection());
 				thematicVo.setViewCenter(olView.getCenter());
 				thematicVo.setViewExtent(olView.getExtent());
+				thematicVo.setViewMaxResolution(olView.getMaxResolution());
+				thematicVo.setViewMinResolution(olView.getMinResolution());
 				thematicVo.setViewResolutions(olView.getResolutions());
 				thematicVo.setViewResolution(olView.getResolution());
+				thematicVo.setViewMaxZoom(olView.getMaxZoom());
+				thematicVo.setViewMinZoom(olView.getMinZoom());
+				thematicVo.setViewZoomFactor(olView.getZoomFactor());
+				thematicVo.setViewZoom(olView.getZoom());
+				thematicVo.setViewEnableRotation(olView.getEnableRotation());
+				thematicVo.setViewConstrainRotation(olView.getConstrainRotation());
+				thematicVo.setViewRotation(olView.getRotation());
 			}
 
 			List<OlControl> olControlList = olControlService.getByOlMap(olMap.getId());

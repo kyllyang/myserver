@@ -18,11 +18,11 @@
 </head>
 <body onload="onloadHandler();">
 <form id="loginForm" action="${ctx}/login.ctrl" method="post">
-	<fieldset style="width: 280px; margin-left: auto; margin-right: auto; margin-top: 20%; text-align: center;">
+	<fieldset style="width: 300px; margin-left: auto; margin-right: auto; margin-top: 20%; text-align: center;">
 		<legend>登录</legend>
 		<ul style="list-style-type: none; text-align: right;">
-			<li>用户名称<input type="text" id="username" name="username" style="width: 170px;"></li>
-			<li>密码<input type="password" name="password" style="width: 170px;"></li>
+			<li>用户名称：<input type="text" id="username" name="username" style="width: 170px;"></li>
+			<li>密码：<input type="password" name="password" style="width: 170px;"></li>
 			<li><input type="submit" value="登录"/></li>
 		</ul>
 	</fieldset>

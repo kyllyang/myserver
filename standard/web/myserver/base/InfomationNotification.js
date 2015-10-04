@@ -6,6 +6,7 @@ Ext.define('Base.InfomationNotification', {
 	windowButton: null,
 
 	title: '系统信息',
+	paddingY: 35,
 	autoClose: false,
 	draggable: true,
 	position: 'tr',
@@ -159,7 +160,7 @@ Ext.define('Base.InfomationNotification', {
 	},
 	loadMapAndFunction: function(applicationId, thematicId) {
 		if (!Ext.isEmpty(thematicId)) {
-			myServer.getMapContainer().loadMap(applicationId, thematicId);
+			myServer.getMapContainer().loadMap(thematicId);
 
 			var menuNotification = myServer.getMenuNotification();
 			if (!Ext.isEmpty(menuNotification)) {

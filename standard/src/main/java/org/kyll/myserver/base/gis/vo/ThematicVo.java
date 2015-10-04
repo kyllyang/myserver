@@ -21,8 +21,17 @@ public class ThematicVo implements Vo<Long> {
 	private String viewProjection;
 	private String viewCenter;
 	private String viewExtent;
+	private String viewMaxResolution;
+	private String viewMinResolution;
 	private String viewResolutions;
 	private String viewResolution;
+	private String viewMaxZoom;
+	private String viewMinZoom;
+	private String viewZoomFactor;
+	private String viewZoom;
+	private String viewEnableRotation;
+	private String viewConstrainRotation;
+	private String viewRotation;
 
 	private String layerGroup;
 
@@ -214,6 +223,22 @@ public class ThematicVo implements Vo<Long> {
 		this.viewExtent = viewExtent;
 	}
 
+	public String getViewMaxResolution() {
+		return viewMaxResolution;
+	}
+
+	public void setViewMaxResolution(String viewMaxResolution) {
+		this.viewMaxResolution = viewMaxResolution;
+	}
+
+	public String getViewMinResolution() {
+		return viewMinResolution;
+	}
+
+	public void setViewMinResolution(String viewMinResolution) {
+		this.viewMinResolution = viewMinResolution;
+	}
+
 	public String getViewResolutions() {
 		return viewResolutions;
 	}
@@ -228,6 +253,62 @@ public class ThematicVo implements Vo<Long> {
 
 	public void setViewResolution(String viewResolution) {
 		this.viewResolution = viewResolution;
+	}
+
+	public String getViewMaxZoom() {
+		return viewMaxZoom;
+	}
+
+	public void setViewMaxZoom(String viewMaxZoom) {
+		this.viewMaxZoom = viewMaxZoom;
+	}
+
+	public String getViewMinZoom() {
+		return viewMinZoom;
+	}
+
+	public void setViewMinZoom(String viewMinZoom) {
+		this.viewMinZoom = viewMinZoom;
+	}
+
+	public String getViewZoomFactor() {
+		return viewZoomFactor;
+	}
+
+	public void setViewZoomFactor(String viewZoomFactor) {
+		this.viewZoomFactor = viewZoomFactor;
+	}
+
+	public String getViewZoom() {
+		return viewZoom;
+	}
+
+	public void setViewZoom(String viewZoom) {
+		this.viewZoom = viewZoom;
+	}
+
+	public String getViewEnableRotation() {
+		return viewEnableRotation;
+	}
+
+	public void setViewEnableRotation(String viewEnableRotation) {
+		this.viewEnableRotation = viewEnableRotation;
+	}
+
+	public String getViewConstrainRotation() {
+		return viewConstrainRotation;
+	}
+
+	public void setViewConstrainRotation(String viewConstrainRotation) {
+		this.viewConstrainRotation = viewConstrainRotation;
+	}
+
+	public String getViewRotation() {
+		return viewRotation;
+	}
+
+	public void setViewRotation(String viewRotation) {
+		this.viewRotation = viewRotation;
 	}
 
 	public String getLayerGroup() {

@@ -33,8 +33,17 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 				{name: 'viewProjection'},
 				{name: 'viewCenter'},
 				{name: 'viewExtent'},
+				{name: 'viewMaxResolution'},
+				{name: 'viewMinResolution'},
 				{name: 'viewResolutions'},
 				{name: 'viewResolution'},
+				{name: 'viewMaxZoom'},
+				{name: 'viewMinZoom'},
+				{name: 'viewZoomFactor'},
+				{name: 'viewZoom'},
+				{name: 'viewEnableRotation'},
+				{name: 'viewConstrainRotation'},
+				{name: 'viewRotation'},
 				{name: 'layerGroup'},
 				{name: 'controlAttribution'},
 				{name: 'controlAttributionCollapsible'},
@@ -171,7 +180,7 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			inputValue: '1',
 			qtip: 'When set to true, tiles will be loaded while interacting with the map. This may improve the user experience, but can also make map panning and zooming choppy on devices with slow memory.'
 		});
-		var rendererDisplay = Ext.create('Ext.form.field.Display', {
+		var viewRendererDisplay = Ext.create('Ext.form.field.Display', {
 			columnWidth: 0.13,
 			xtype: 'displayfield',
 			fieldLabel: '渲染机制顺序',
@@ -179,60 +188,75 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			labelSeparator: '：',
 			qtip: 'By default, Canvas, DOM and WebGL renderers are tested for support in that order, and the first supported used. Note that at present only the Canvas renderer supports vector data.'
 		});
-		var projectionText = Ext.create('Ext.form.field.Text', {
+		var viewProjectionText = Ext.create('Ext.form.field.Text', {
 			columnWidth: 0.5,
-			fieldLabel: '<span style="color: #FF0000;">*</span>投影',
+			fieldLabel: '投影',
 			labelAlign: 'right',
 			labelSeparator: '：',
 			name: 'viewProjection',
 			value: 'EPSG:3857',
 			maxLength: 100,
-			allowBlank: false,
 			qtip: 'The projection. Default is EPSG:3857 (Spherical Mercator).'
 		});
-		var centerText = Ext.create('Ext.form.field.Text', {
+		var viewCenterText = Ext.create('Ext.form.field.Text', {
 			columnWidth: 0.5,
-			fieldLabel: '<span style="color: #FF0000;">*</span>中心点',
+			fieldLabel: '中心点',
 			labelAlign: 'right',
 			labelSeparator: '：',
 			name: 'viewCenter',
 			maxLength: 100,
-			allowBlank: false,
 			qtip: 'The initial center for the view. The coordinate system for the center is specified with the projection option. Default is undefined, and layer sources will not be fetched if this is not set.'
 		});
-		var extentText = Ext.create('Ext.form.field.Text', {
-			fieldLabel: '<span style="color: #FF0000;">*</span>范围',
+		var viewExtentText = Ext.create('Ext.form.field.Text', {
+			fieldLabel: '范围',
 			labelAlign: 'right',
 			labelSeparator: '：',
 			name: 'viewExtent',
 			maxLength: 100,
-			allowBlank: false,
 			qtip: 'The extent that constrains the center, in other words, center cannot be set outside this extent. Default is undefined.'
 		});
-		var resolutionsTextarea = Ext.create('Ext.form.field.TextArea', {
+		var viewMaxResolutionNumber = Ext.create('Ext.form.field.Number', {
 			columnWidth: 0.5,
-			fieldLabel: '<span style="color: #FF0000;">*</span>分辨率',
+			fieldLabel: '最大分辨率',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'viewMaxResolution',
+			qtip: 'The maximum resolution used to determine the resolution constraint. It is used together with minResolution (or maxZoom) and zoomFactor. If unspecified it is calculated in such a way that the projection\'s validity extent fits in a 256x256 px tile. If the projection is Spherical Mercator (the default) then maxResolution defaults to 40075016.68557849 / 256 = 156543.03392804097.'
+		});
+		var viewMinResolutionNumber = Ext.create('Ext.form.field.Number', {
+			columnWidth: 0.5,
+			fieldLabel: '最小分辨率',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'viewMinResolution',
+			qtip: 'The minimum resolution used to determine the resolution constraint. It is used together with maxResolution (or minZoom) and zoomFactor. If unspecified it is calculated assuming 29 zoom levels (with a factor of 2). If the projection is Spherical Mercator (the default) then minResolution defaults to 40075016.68557849 / 256 / Math.pow(2, 28) = 0.0005831682455839253.'
+		});
+		var viewResolutionsTextarea = Ext.create('Ext.form.field.TextArea', {
+			columnWidth: 0.5,
+			fieldLabel: '分辨率',
 			labelAlign: 'right',
 			labelSeparator: '：',
 			name: 'viewResolutions',
 			rows: 10,
 			maxLength: 255,
-			allowBlank: false,
 			listeners: {
 				change: function(textarea, newValue, oldValue, eOpts) {
-					if (!Ext.isEmpty(newValue)) {
+					var viewResolution = this.getComponent('editForm').getForm().findField('viewResolution');
+					if (Ext.isEmpty(newValue)) {
+						viewResolution.setValue('');
+					} else {
 						var strs = newValue.split(',');
-						resolutionSlider.setMaxValue(strs.length > 0 ? strs.length : 1);
-						this.getComponent('editForm').getForm().findField('viewResolution').setValue(strs[strs.length - 1]);
+						viewResolutionSlider.setMaxValue(strs.length > 0 ? strs.length : 1);
+						viewResolution.setValue(strs[strs.length - 1]);
 					}
 				},
 				scope: this
 			},
 			qtip: 'Resolutions to determine the resolution constraint. If set the maxResolution, minResolution, minZoom, maxZoom, and zoomFactor options are ignored.'
 		});
-		var resolutionSlider = Ext.create('Ext.slider.Single', {
+		var viewResolutionSlider = Ext.create('Ext.slider.Single', {
 			columnWidth: 0.5,
-			fieldLabel: '<span style="color: #FF0000;">*</span>默认分辨率',
+			fieldLabel: '默认分辨率',
 			labelAlign: 'right',
 			labelSeparator: '：',
 			vertical: true,
@@ -241,7 +265,7 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			minValue: 1,
 			maxValue: 10,
 			tipText: function(thumb) {
-				var str = resolutionsTextarea.getValue();
+				var str = viewResolutionsTextarea.getValue();
 				if (!Ext.isEmpty(str)) {
 					var strs = str.split(',');
 					that.getComponent('editForm').getForm().findField('viewResolution').setValue(strs[strs.length - thumb.value]);
@@ -249,6 +273,79 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 				}
 			},
 			qtip: 'The initial resolution for the view. The units are projection units per pixel (e.g. meters per pixel). An alternative to setting this is to set zoom. Default is undefined, and layer sources will not be fetched if neither this nor zoom are defined.'
+		});
+		var viewMaxZoomNumber = Ext.create('Ext.form.field.Number', {
+			columnWidth: 0.5,
+			fieldLabel: '最大缩放',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'viewMaxZoom',
+			value: 28,
+			minValue: 0,
+			allowDecimals: false,
+			qtip: 'The maximum zoom level used to determine the resolution constraint. It is used together with minZoom (or maxResolution) and zoomFactor. Default is 28. Note that if minResolution is also provided, it is given precedence over maxZoom.'
+		});
+		var viewMinZoomNumber = Ext.create('Ext.form.field.Number', {
+			columnWidth: 0.5,
+			fieldLabel: '最小缩放',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'viewMinZoom',
+			value: 0,
+			minValue: 0,
+			allowDecimals: false,
+			qtip: 'The minimum zoom level used to determine the resolution constraint. It is used together with maxZoom (or minResolution) and zoomFactor. Default is 0. Note that if maxResolution is also provided, it is given precedence over minZoom.'
+		});
+		var viewZoomFactorNumber = Ext.create('Ext.form.field.Number', {
+			columnWidth: 0.5,
+			fieldLabel: '缩放系数',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'viewZoomFactor',
+			value: 2,
+			minValue: 0,
+			allowDecimals: false,
+			qtip: 'The zoom factor used to determine the resolution constraint. Default is 2.'
+		});
+		var viewZoomNumber = Ext.create('Ext.form.field.Number', {
+			columnWidth: 0.5,
+			fieldLabel: '默认缩放',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'viewZoom',
+			minValue: 0,
+			allowDecimals: false,
+			qtip: 'Only used if resolution is not defined. Zoom level used to calculate the initial resolution for the view. The initial resolution is determined using the ol.View#constrainResolution method.'
+		});
+		var viewEnableRotationCheckbox = Ext.create('Ext.form.field.Checkbox', {
+			columnWidth: 0.5,
+			fieldLabel: '开启旋转',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'viewEnableRotation',
+			inputValue: '1',
+			checked: true,
+			qtip: 'Enable rotation. Default is true. If false a rotation constraint that always sets the rotation to zero is used. The constrainRotation option has no effect if enableRotation is false.'
+		});
+		var viewConstrainRotationNumber = Ext.create('Ext.form.field.Number', {
+			columnWidth: 0.5,
+			fieldLabel: '旋转约束',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'viewConstrainRotation',
+			value: 0,
+			minValue: 0,
+			allowDecimals: false,
+			qtip: 'Rotation constraint. false means no constraint. true means no constraint, but snap to zero near zero. A number constrains the rotation to that number of values. For example, 4 will constrain the rotation to 0, 90, 180, and 270 degrees. The default is true.'
+		});
+		var viewRotationNumber = Ext.create('Ext.form.field.Number', {
+			columnWidth: 0.5,
+			fieldLabel: '默认旋转',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'viewRotation',
+			value: 0,
+			qtip: 'The initial rotation for the view in radians (positive rotation clockwise). Default is 0.'
 		});
 		var layerTreePanel = Ext.create('Base.gis.thematic.LayerTreePanel');
 		// control
@@ -1054,7 +1151,7 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 				}, {
 					xtype: 'container',
 					layout: 'column',
-					items: [rendererDisplay, {
+					items: [viewRendererDisplay, {
 						xtype: 'container',
 						itemId: 'rendererContainer',
 						layout: 'hbox',
@@ -1098,11 +1195,27 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 				items: [{
 					xtype: 'container',
 					layout: 'column',
-					items: [projectionText, centerText]
-				}, extentText, {
+					items: [viewProjectionText, viewCenterText]
+				}, viewExtentText, {
 					xtype: 'container',
 					layout: 'column',
-					items: [resolutionsTextarea, resolutionSlider]
+					items: [viewMaxResolutionNumber, viewMinResolutionNumber]
+				}, {
+					xtype: 'container',
+					layout: 'column',
+					items: [viewResolutionsTextarea, viewResolutionSlider]
+				}, {
+					xtype: 'container',
+					layout: 'column',
+					items: [viewMaxZoomNumber, viewMinZoomNumber]
+				}, {
+					xtype: 'container',
+					layout: 'column',
+					items: [viewZoomFactorNumber, viewZoomNumber]
+				}, viewEnableRotationCheckbox, {
+					xtype: 'container',
+					layout: 'column',
+					items: [viewConstrainRotationNumber, viewRotationNumber]
 				}]
 			}, {
 				xtype: 'fieldset',
@@ -1552,7 +1665,7 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 					var resolution = form.findField('viewResolution').getValue();
 					for (var i = 0; i < resolutions.length; i++) {
 						if (Ext.String.trim(resolutions[i]) == Ext.String.trim(resolution)) {
-							resolutionSlider.setValue(resolutions.length - i);
+							viewResolutionSlider.setValue(resolutions.length - i);
 							break;
 						}
 					}
