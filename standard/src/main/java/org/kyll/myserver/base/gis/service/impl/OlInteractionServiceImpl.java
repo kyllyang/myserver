@@ -1,5 +1,6 @@
 package org.kyll.myserver.base.gis.service.impl;
 
+import org.apache.commons.lang.StringUtils;
 import org.kyll.myserver.base.gis.dao.OlInteractionDao;
 import org.kyll.myserver.base.gis.entity.OlInteraction;
 import org.kyll.myserver.base.gis.service.OlInteractionService;
@@ -25,7 +26,11 @@ public class OlInteractionServiceImpl implements OlInteractionService {
 	}
 
 	@Override
-	public List<OlInteraction> getByOlMap(Long id) {
-		return olInteractionDao.find("from OlInteraction t where t.olMap.id = '" + id + "'");
+	public List<OlInteraction> getByOlMap(Long id, String enabled) {
+		StringBuilder hql = new StringBuilder("from OlInteraction t where t.olMap.id = '" + id + "'");
+		if (StringUtils.isNotBlank(enabled)) {
+			hql.append(" and t.interactionEnabled = '").append(enabled).append("'");
+		}
+		return olInteractionDao.find(hql);
 	}
 }

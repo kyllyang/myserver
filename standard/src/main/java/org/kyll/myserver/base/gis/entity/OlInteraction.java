@@ -13,6 +13,7 @@ public class OlInteraction implements Serializable {
 	private Long id;
 	private OlMap olMap;
 	private String interactionClassName;// ol.interaction.DoubleClickZoom, ol.interaction.DragAndDrop, ol.interaction.KeyboardPan, ol.interaction.KeyboardZoom, ol.interaction.MouseWheelZoom, ol.interaction.Pointer, ol.interaction.Select
+	private String interactionEnabled;
 	private String clickTolerance;
 	private String delta;
 	private String duration;
@@ -58,6 +59,15 @@ public class OlInteraction implements Serializable {
 
 	public void setInteractionClassName(String interactionClassName) {
 		this.interactionClassName = interactionClassName;
+	}
+
+	@Column(name = "INTERACTION_ENABLED_")
+	public String getInteractionEnabled() {
+		return interactionEnabled;
+	}
+
+	public void setInteractionEnabled(String interactionEnabled) {
+		this.interactionEnabled = interactionEnabled;
 	}
 
 	@Column(name = "CLICK_TOLERANCE_")

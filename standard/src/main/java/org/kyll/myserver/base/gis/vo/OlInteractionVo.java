@@ -9,6 +9,7 @@ import org.kyll.myserver.base.common.Vo;
 public class OlInteractionVo implements Vo<Long> {
 	private Long id;
 	private String interactionClassName;
+	private String interactionEnabled;
 	private String clickTolerance;
 	private String delta;
 	private String duration;
@@ -41,6 +42,14 @@ public class OlInteractionVo implements Vo<Long> {
 
 	public void setInteractionClassName(String interactionClassName) {
 		this.interactionClassName = interactionClassName;
+	}
+
+	public String getInteractionEnabled() {
+		return interactionEnabled;
+	}
+
+	public void setInteractionEnabled(String interactionEnabled) {
+		this.interactionEnabled = interactionEnabled;
 	}
 
 	public String getClickTolerance() {

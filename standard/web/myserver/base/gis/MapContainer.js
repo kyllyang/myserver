@@ -147,6 +147,72 @@ Ext.define('Base.gis.MapContainer', {
 			}
 		}
 
+		var interactionConfigs = [];
+		for (var i = 0; i < interactions.length; i++) {
+			var interaction = interactions[i];
+			if ('ol.interaction.DoubleClickZoom' == interaction.interactionClassName) {
+				interactionConfigs.push(new ol.interaction.DoubleClickZoom({
+					duration: this._getParseInt(interaction.duration),
+					delta: this._getParseInt(interaction.delta)
+				}));
+			} else if ('ol.interaction.DragAndDrop' == interaction.interactionClassName) {
+				interactionConfigs.push(new ol.interaction.DragAndDrop({
+					projection: Ext.isEmpty(control.projection) ? undefined : interaction.projection
+				}));
+			} else if ('ol.interaction.DragBox' == interaction.interactionClassName) {
+				interactionConfigs.push(new ol.interaction.DragBox({
+					condition: ol.events.condition.shiftKeyOnly,
+					style: new ol.style.Style({
+						stroke: new ol.style.Stroke({
+							color: [0, 0, 255, 1]
+						})
+					})
+				}));
+			} else if ('ol.interaction.DragPan' == interaction.interactionClassName) {
+				interactionConfigs.push(new ol.interaction.DragPan({
+				}));
+			} else if ('ol.interaction.DragRotate' == interaction.interactionClassName) {
+				interactionConfigs.push(new ol.interaction.DragRotate({
+				}));
+			} else if ('ol.interaction.DragRotateAndZoom' == interaction.interactionClassName) {
+				interactionConfigs.push(new ol.interaction.DragRotateAndZoom({
+				}));
+			} else if ('ol.interaction.DragZoom' == interaction.interactionClassName) {
+				interactionConfigs.push(new ol.interaction.DragZoom({
+				}));
+			} else if ('ol.interaction.Draw' == interaction.interactionClassName) {
+				interactionConfigs.push(new ol.interaction.Draw({
+				}));
+			} else if ('ol.interaction.KeyboardPan' == interaction.interactionClassName) {
+				interactionConfigs.push(new ol.interaction.KeyboardPan({
+				}));
+			} else if ('ol.interaction.KeyboardZoom' == interaction.interactionClassName) {
+				interactionConfigs.push(new ol.interaction.KeyboardZoom({
+				}));
+			} else if ('ol.interaction.Modify' == interaction.interactionClassName) {
+				interactionConfigs.push(new ol.interaction.Modify({
+				}));
+			} else if ('ol.interaction.MouseWheelZoom' == interaction.interactionClassName) {
+				interactionConfigs.push(new ol.interaction.MouseWheelZoom({
+				}));
+			} else if ('ol.interaction.PinchRotate' == interaction.interactionClassName) {
+				interactionConfigs.push(new ol.interaction.PinchRotate({
+				}));
+			} else if ('ol.interaction.PinchZoom' == interaction.interactionClassName) {
+				interactionConfigs.push(new ol.interaction.PinchZoom({
+				}));
+			} else if ('ol.interaction.Select' == interaction.interactionClassName) {
+				interactionConfigs.push(new ol.interaction.Select({
+				}));
+			} else if ('ol.interaction.Snap' == interaction.interactionClassName) {
+				interactionConfigs.push(new ol.interaction.Snap({
+				}));
+			} else if ('ol.interaction.Translate' == interaction.interactionClassName) {
+				interactionConfigs.push(new ol.interaction.Translate({
+				}));
+			}
+		}
+
 		this.map = new ol.Map({
 			target: this.mapDivId,
 			loadTilesWhileAnimating: this._getParseBoolean(map.loadTilesWhileAnimating),
@@ -155,19 +221,10 @@ Ext.define('Base.gis.MapContainer', {
 			renderer: this._getRendererTypes(map.renderer),
 			view: new ol.View(viewConfig),
 			controls: controlConfigs,
+			interactions: interactionConfigs,
 			layers: [
 				new ol.layer.Tile({source: new ol.source.OSM()})
 			]
-			/*,
-			 interactions: [
-			 new ol.interaction.DoubleClickZoom(),
-			 new ol.interaction.DragAndDrop(),
-			 new ol.interaction.KeyboardPan(),
-			 new ol.interaction.KeyboardZoom(),
-			 new ol.interaction.MouseWheelZoom(),
-			 new ol.interaction.Pointer(),
-			 new ol.interaction.Select()
-			 ]*/
 		});
 
 		/*this.map.on('moveend', function() {

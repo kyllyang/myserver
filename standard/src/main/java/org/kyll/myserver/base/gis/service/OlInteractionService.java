@@ -10,5 +10,5 @@ import java.util.List;
  * Date: 2015-10-02 15:17
  */
 public interface OlInteractionService extends BaseService<OlInteraction, Long> {
-	List<OlInteraction> getByOlMap(Long id);
+	List<OlInteraction> getByOlMap(Long id, String enabled);
 }

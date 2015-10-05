@@ -1,5 +1,6 @@
 package org.kyll.myserver.base.gis.service.impl;
 
+import org.apache.commons.lang.StringUtils;
 import org.kyll.myserver.base.gis.dao.OlControlDao;
 import org.kyll.myserver.base.gis.entity.OlControl;
 import org.kyll.myserver.base.gis.service.OlControlService;
@@ -25,7 +26,11 @@ public class OlControlServiceImpl implements OlControlService {
 	}
 
 	@Override
-	public List<OlControl> getByOlMap(Long id) {
-		return olControlDao.find("from OlControl t where t.olMap.id = '" + id + "'");
+	public List<OlControl> getByOlMap(Long id, String enabled) {
+		StringBuilder hql = new StringBuilder("from OlControl t where t.olMap.id = '" + id + "'");
+		if (StringUtils.isNotBlank(enabled)) {
+			hql.append(" and t.controlEnabled = '").append(enabled).append("'");
+		}
+		return olControlDao.find(hql);
 	}
 }

@@ -59,6 +59,10 @@ public final class ConstUtils {
 	 */
 	public static final String TIME_FORMAT = "HH:mm:ss";
 	/**
+	 * Openlayers 启用控件
+	 */
+	public static final String GIS_OL_CONTROL_ENABLED = "1";
+	/**
 	 * Openlayers 控件类名
 	 */
 	public static final String GIS_OL_CONTROL_ATTRIBUTION = "ol.control.Attribution";
@@ -70,7 +74,13 @@ public final class ConstUtils {
 	public static final String GIS_OL_CONTROL_ZOOM = "ol.control.Zoom";
 	public static final String GIS_OL_CONTROL_ZOOMSLIDER = "ol.control.ZoomSlider";
 	public static final String GIS_OL_CONTROL_ZOOMTOEXTENT = "ol.control.ZoomToExtent";
-
+	/**
+	 * Openlayers 启用交互
+	 */
+	public static final String GIS_OL_INTERACTION_ENABLED = "1";
+	/**
+	 * Openlayers 交互类名
+	 */
 	public static final String GIS_OL_INTERACTION_DOUBLECLICKZOOM = "ol.interaction.DoubleClickZoom";
 	public static final String GIS_OL_INTERACTION_DRAGANDDROP = "ol.interaction.DragAndDrop";
 	public static final String GIS_OL_INTERACTION_DRAGBOX = "ol.interaction.DragBox";

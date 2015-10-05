@@ -9,6 +9,7 @@ import org.kyll.myserver.base.common.Vo;
 public class OlControlVo implements Vo<Long> {
 	private Long id;
 	private String controlClassName;
+	private String controlEnabled;
 	private String autoHide;
 	private String className;
 	private String collapsed;
@@ -52,6 +53,14 @@ public class OlControlVo implements Vo<Long> {
 
 	public void setControlClassName(String controlClassName) {
 		this.controlClassName = controlClassName;
+	}
+
+	public String getControlEnabled() {
+		return controlEnabled;
+	}
+
+	public void setControlEnabled(String controlEnabled) {
+		this.controlEnabled = controlEnabled;
 	}
 
 	public String getAutoHide() {

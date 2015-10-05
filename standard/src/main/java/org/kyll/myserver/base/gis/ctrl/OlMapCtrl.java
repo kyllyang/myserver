@@ -8,6 +8,7 @@ import org.kyll.myserver.base.gis.vo.OlControlVo;
 import org.kyll.myserver.base.gis.vo.OlInteractionVo;
 import org.kyll.myserver.base.gis.vo.OlMapVo;
 import org.kyll.myserver.base.gis.vo.OlViewVo;
+import org.kyll.myserver.base.util.ConstUtils;
 import org.kyll.myserver.base.util.JsonUtils;
 import org.kyll.myserver.base.util.POJOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,8 +52,8 @@ public class OlMapCtrl {
 			jo.put("map", JsonUtils.convert(POJOUtils.convert(olMap, OlMapVo.class)));
 			jo.put("view", JsonUtils.convert(POJOUtils.convert(olViewService.getByOlMap(mapId), OlViewVo.class)));
 			jo.put("layerGroup", olLayerGroupService.getTreeJson(mapId));
-			jo.put("controls", JsonUtils.convert(POJOUtils.convert(olControlService.getByOlMap(mapId), OlControlVo.class)));
-			jo.put("interactions", JsonUtils.convert(POJOUtils.convert(olInteractionService.getByOlMap(mapId), OlInteractionVo.class)));
+			jo.put("controls", JsonUtils.convert(POJOUtils.convert(olControlService.getByOlMap(mapId, ConstUtils.GIS_OL_CONTROL_ENABLED), OlControlVo.class)));
+			jo.put("interactions", JsonUtils.convert(POJOUtils.convert(olInteractionService.getByOlMap(mapId, ConstUtils.GIS_OL_INTERACTION_ENABLED), OlInteractionVo.class)));
 		}
 		jo.put("result", resultJo);
 

@@ -13,6 +13,7 @@ public class OlControl implements Serializable {
 	private Long id;
 	private OlMap olMap;
 	private String controlClassName;// ol.control.Attribution, ol.control.FullScreen, ol.control.MousePosition, ol.control.OverviewMap, ol.control.Rotate, ol.control.ScaleLine, ol.control.Zoom, ol.control.ZoomSlider, ol.control.ZoomToExtent
+	private String controlEnabled;
 	private String autoHide;
 	private String className;
 	private String collapsed;
@@ -69,6 +70,15 @@ public class OlControl implements Serializable {
 
 	public void setControlClassName(String controlClassName) {
 		this.controlClassName = controlClassName;
+	}
+
+	@Column(name = "CONTROL_ENABLED_")
+	public String getControlEnabled() {
+		return controlEnabled;
+	}
+
+	public void setControlEnabled(String controlEnabled) {
+		this.controlEnabled = controlEnabled;
 	}
 
 	@Column(name = "AUTO_HIDE_")

@@ -816,7 +816,6 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			name: 'interactionDoubleClickZoom',
 			inputValue: '1',
 			checked: true,
-			readOnly: true,
 			qtip: 'Allows the user to zoom by double-clicking on the map.'
 		});
 		var interactionDoubleClickZoomDurationNumber = Ext.create('Ext.form.field.Number', {
@@ -867,7 +866,6 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			name: 'interactionDragPan',
 			inputValue: '1',
 			checked: true,
-			readOnly: true,
 			qtip: 'Allows the user to pan the map by dragging the map.'
 		});
 		var interactionDragPanKineticDecayNumber = Ext.create('Ext.form.field.Number', {
@@ -905,7 +903,6 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			name: 'interactionDragRotate',
 			inputValue: '1',
 			checked: true,
-			readOnly: true,
 			qtip: 'Allows the user to rotate the map by clicking and dragging on the map, normally combined with an ol.events.condition that limits it to when the alt and shift keys are held down.This interaction is only supported for mouse devices.'
 		});
 		var interactionDragRotateDurationNumber = Ext.create('Ext.form.field.Number', {
@@ -941,7 +938,6 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			name: 'interactionDragZoom',
 			inputValue: '1',
 			checked: true,
-			readOnly: true,
 			qtip: 'Allows the user to zoom the map by clicking and dragging on the map, normally combined with an ol.events.condition that limits it to when a key, shift by default, is held down.'
 		});
 		var interactionDragZoomDurationNumber = Ext.create('Ext.form.field.Number', {
@@ -995,7 +991,6 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			name: 'interactionKeyboardPan',
 			inputValue: '1',
 			checked: true,
-			readOnly: true,
 			qtip: 'Allows the user to pan the map using keyboard arrows. Note that, although this interaction is by default included in maps, the keys can only be used when browser focus is on the element to which the keyboard events are attached. By default, this is the map div, though you can change this with the keyboardEventTarget in ol.Map. document never loses focus but, for any other element, focus will have to be on, and returned to, this element if the keys are to function. See also ol.interaction.KeyboardZoom.'
 		});
 		var interactionKeyboardPanDurationNumber = Ext.create('Ext.form.field.Number', {
@@ -1024,7 +1019,6 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			name: 'interactionKeyboardZoom',
 			inputValue: '1',
 			checked: true,
-			readOnly: true,
 			qtip: 'Allows the user to zoom the map using keyboard + and -. Note that, although this interaction is by default included in maps, the keys can only be used when browser focus is on the element to which the keyboard events are attached. By default, this is the map div, though you can change this with the keyboardEventTarget in ol.Map. document never loses focus but, for any other element, focus will have to be on, and returned to, this element if the keys are to function. See also ol.interaction.KeyboardPan.'
 		});
 		var interactionKeyboardZoomDurationNumber = Ext.create('Ext.form.field.Number', {
@@ -1078,7 +1072,6 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			name: 'interactionMouseWheelZoom',
 			inputValue: '1',
 			checked: true,
-			readOnly: true,
 			qtip: 'Allows the user to zoom the map by scrolling the mouse wheel.'
 		});
 		var interactionMouseWheelZoomDurationNumber = Ext.create('Ext.form.field.Number', {
@@ -1097,7 +1090,6 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			name: 'interactionPinchRotate',
 			inputValue: '1',
 			checked: true,
-			readOnly: true,
 			qtip: 'Allows the user to rotate the map by twisting with two fingers on a touch screen.'
 		});
 		var interactionPinchRotateDurationNumber = Ext.create('Ext.form.field.Number', {
@@ -1124,7 +1116,6 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			name: 'interactionPinchZoom',
 			inputValue: '1',
 			checked: true,
-			readOnly: true,
 			qtip: 'Allows the user to zoom the map by pinching with two fingers on a touch screen.'
 		});
 		var interactionPinchZoomDurationNumber = Ext.create('Ext.form.field.Number', {
