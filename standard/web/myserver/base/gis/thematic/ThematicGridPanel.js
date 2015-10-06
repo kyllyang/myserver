@@ -15,6 +15,39 @@ Ext.define('Base.gis.thematic.ThematicGridPanel', {
 				text: '名称',
 				dataIndex: 'name'
 			}],
+			tbar: [{
+				xtype: 'tbseparator'
+			}, {
+				text: '地图',
+				icon: ctx + '/resource/image/icon/map.png',
+				handler: function() {},
+				scope: this
+			}, {
+				text: '视图',
+				icon: ctx + '/resource/image/icon/gisview.png',
+				handler: function() {},
+				scope: this
+			}, {
+				text: '图层',
+				icon: ctx + '/resource/image/icon/layer.png',
+				handler: function() {},
+				scope: this
+			}, {
+				text: '控件',
+				icon: ctx + '/resource/image/icon/control.png',
+				handler: function() {},
+				scope: this
+			}, {
+				text: '交互',
+				icon: ctx + '/resource/image/icon/interaction.png',
+				handler: function() {},
+				scope: this
+			}, {
+				text: '工具栏',
+				icon: ctx + '/resource/image/icon/toolbar.png',
+				handler: function() {},
+				scope: this
+			}],
 			dockedItems: [Ext.create('Ext.form.Panel', {
 				itemId: 'queryForm',
 				dock: 'top',

@@ -40,6 +40,21 @@ var myServer = {
 	getMapObject: function() {
 		return this.getMapContainer().getMap();
 	},
+	createControl: function(opt) {
+		var button = document.createElement('button');
+		button.innerHTML = "<img src=\"" + ctx + opt.icon + "\" title=\"" + opt.tipLabel + "\">";
+		button.addEventListener('click', function(event) {
+			opt.onClick(myServer.getMapContainer(), myServer.getMapObject(), event)
+		}, false);
+
+		var element = document.createElement('div');
+		element.className = opt.className + ' ol-unselectable ol-control';
+		element.appendChild(button);
+
+		return new ol.control.Control({
+			element: element
+		});
+	},
 	setInfomationNotification: function(value) {
 		this.infomationNotification = value;
 	},

@@ -11,10 +11,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>我的服务器</title>
 	<link rel="stylesheet" type="text/css" href="${ctx}/resource/component/ext-4.2.1.883/resources/css/ext-all.css"/>
-	<link rel="stylesheet" type="text/css" href="${ctx}/resource/component/v3.4.0-dist/ol.css"/>
+	<link rel="stylesheet" type="text/css" href="${ctx}/resource/component/v3.9.0-dist/ol.css"/>
 	<script type="text/javascript" src="${ctx}/resource/component/ext-4.2.1.883/ext-all.js"></script>
 	<script type="text/javascript" src="${ctx}/resource/component/ext-4.2.1.883/locale/ext-lang-zh_CN.js"></script>
-	<script type="text/javascript" src="${ctx}/resource/component/v3.4.0-dist/ol.js"></script>
+	<script type="text/javascript" src="${ctx}/resource/component/v3.9.0-dist/ol.js"></script>
 	<script type="text/javascript" src="${ctx}/myserver/myServer.js"></script>
 	<script type="text/javascript">
 		var ctx = '${ctx}';

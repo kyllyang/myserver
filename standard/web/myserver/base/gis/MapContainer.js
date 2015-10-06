@@ -3,7 +3,12 @@ Ext.define('Base.gis.MapContainer', {
 
 	mapDivId: 'mapDiv_' + myServer.uuid(),
 	map: null,
-	mapConfig: null,
+	mapConfig: null,// 地图配置数据
+	defaultInteractionSelect: null,// 默认交互选择
+	defaultInteractionDraw: null,// 默认交互绘制
+	defaultInteractionModify: null,// 默认交互修改
+	defaultInteractionTranslate: null,// 默认交互移动
+	defaultLayerVector: null,// 默认矢量图层
 
 	initComponent: function() {
 		Ext.apply(this, {
@@ -17,6 +22,33 @@ Ext.define('Base.gis.MapContainer', {
 	},
 	getMapConfig: function() {
 		return this.mapConfig;
+	},
+	getDefaultInteractionSelect: function() {
+		return this.defaultInteractionSelect;
+	},
+	setDefaultInteractionSelect: function(interactionSelect) {
+		this.defaultInteractionSelect = interactionSelect;
+	},
+	getDefaultInteractionDraw: function() {
+		return this.defaultInteractionDraw;
+	},
+	setDefaultInteractionDraw: function(interactionDraw) {
+		this.defaultInteractionDraw = interactionDraw;
+	},
+	getDefaultInteractionModify: function() {
+		return this.defaultInteractionModify;
+	},
+	setDefaultInteractionModify: function(interactionModify) {
+		this.defaultInteractionModify = interactionModify;
+	},
+	getDefaultInteractionTranslate: function() {
+		return this.defaultInteractionTranslate;
+	},
+	setDefaultInteractionTranslate: function(interactionTranslate) {
+		this.defaultInteractionTranslate = interactionTranslate;
+	},
+	getDefaultLayerVector: function() {
+		return this.defaultLayerVector;
 	},
 	loadMap: function(thematicId) {
 		Ext.Ajax.request({
@@ -225,6 +257,7 @@ Ext.define('Base.gis.MapContainer', {
 			}
 		}
 
+		// init map
 		this.map = new ol.Map({
 			target: this.mapDivId,
 			loadTilesWhileAnimating: this._getParseBoolean(map.loadTilesWhileAnimating),
@@ -235,14 +268,136 @@ Ext.define('Base.gis.MapContainer', {
 			controls: controlConfigs,
 			interactions: interactionConfigs,
 			layers: [
-				new ol.layer.Tile({source: new ol.source.OSM()})
+				new ol.layer.Tile({
+					source: new ol.source.OSM()
+				})
 			]
 		});
 
+		// init default layer vector
+		this.defaultLayerVector = new ol.layer.Vector({
+			source: new ol.source.Vector({
+				features: new ol.Collection()
+			})
+		});
+		this.map.addLayer(this.defaultLayerVector);
+
+		// init interaction control
+		this.map.addControl(myServer.createControl({
+			icon: '/resource/image/icon/select.png',
+			className: 'toolbar-select',
+			tipLabel: '选择',
+			onClick: function(mapContainer, map, event) {
+				mapContainer.doToolbarRestore();
+				var select = new ol.interaction.Select();
+				mapContainer.setDefaultInteractionSelect(select);
+				map.addInteraction(select);
+			}
+		}));
+		this.map.addControl(myServer.createControl({
+			icon: '/resource/image/icon/point.png',
+			className: 'toolbar-draw-point',
+			tipLabel: '绘制点',
+			onClick: function(mapContainer, map, event) {
+				mapContainer.doToolbarRestore();
+				var draw = new ol.interaction.Draw({
+					features: mapContainer.getDefaultLayerVector().getSource().getFeaturesCollection(),
+					type: 'Point'
+				});
+				mapContainer.setDefaultInteractionDraw(draw);
+				map.addInteraction(draw);
+			}
+		}));
+		this.map.addControl(myServer.createControl({
+			icon: '/resource/image/icon/linestring.png',
+			className: 'toolbar-draw-linestring',
+			tipLabel: '绘制线',
+			onClick: function(mapContainer, map, event) {
+				mapContainer.doToolbarRestore();
+				var draw = new ol.interaction.Draw({
+					features: mapContainer.getDefaultLayerVector().getSource().getFeaturesCollection(),
+					type: 'LineString'
+				});
+				mapContainer.setDefaultInteractionDraw(draw);
+				map.addInteraction(draw);
+			}
+		}));
+		this.map.addControl(myServer.createControl({
+			icon: '/resource/image/icon/polygon.png',
+			className: 'toolbar-draw-polygon',
+			tipLabel: '绘制面',
+			onClick: function(mapContainer, map, event) {
+				mapContainer.doToolbarRestore();
+				var draw = new ol.interaction.Draw({
+					features: mapContainer.getDefaultLayerVector().getSource().getFeaturesCollection(),
+					type: 'Polygon'
+				});
+				mapContainer.setDefaultInteractionDraw(draw);
+				map.addInteraction(draw);
+			}
+		}));
+		this.map.addControl(myServer.createControl({
+			icon: '/resource/image/icon/modify.png',
+			className: 'toolbar-modify',
+			tipLabel: '修改',
+			onClick: function(mapContainer, map, event) {
+				mapContainer.doToolbarRestore();
+
+				var select = new ol.interaction.Select();
+				mapContainer.setDefaultInteractionSelect(select);
+				map.addInteraction(select);
+
+				var modify = new ol.interaction.Modify({
+					features: select.getFeatures()
+				});
+				mapContainer.setDefaultInteractionModify(modify);
+				map.addInteraction(modify);
+			}
+		}));
+		this.map.addControl(myServer.createControl({
+			icon: '/resource/image/icon/translate.png',
+			className: 'toolbar-translate',
+			tipLabel: '移动',
+			onClick: function(mapContainer, map, event) {
+				mapContainer.doToolbarRestore();
+
+				var select = new ol.interaction.Select();
+				mapContainer.setDefaultInteractionSelect(select);
+				map.addInteraction(select);
+
+				var translate = new ol.interaction.Translate({
+					features: select.getFeatures()
+				});
+				mapContainer.setDefaultInteractionTranslate(translate);
+				map.addInteraction(translate);
+			}
+		}));
+		this.map.addControl(myServer.createControl({
+			icon: '/resource/image/icon/erase.png',
+			className: 'toolbar-erase',
+			tipLabel: '擦除',
+			onClick: function(mapContainer, map, event) {
+				mapContainer.getDefaultLayerVector().getSource().clear();
+			}
+		}));
+		this.map.addControl(myServer.createControl({
+			icon: '/resource/image/icon/restore.png',
+			className: 'toolbar-restore',
+			tipLabel: '恢复',
+			onClick: function(mapContainer, map, event) {
+				mapContainer.doToolbarRestore();
+			}
+		}));
 		/*this.map.on('moveend', function() {
 			console.log(this.map.getView().calculateExtent(this.map.getSize()));
 		}, this);*/
 
+	},
+	doToolbarRestore: function() {
+		this.map.removeInteraction(this.getDefaultInteractionSelect());
+		this.map.removeInteraction(this.getDefaultInteractionDraw());
+		this.map.removeInteraction(this.getDefaultInteractionModify());
+		this.map.removeInteraction(this.getDefaultInteractionTranslate());
 	},
 	_getRendererTypes: function(renderer) {
 		if (Ext.isEmpty(renderer)) {
