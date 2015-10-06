@@ -2,6 +2,8 @@ package org.kyll.myserver.base.gis.ctrl;
 
 import net.sf.json.JSONArray;
 import org.kyll.myserver.base.gis.service.OlLayerGroupService;
+import org.kyll.myserver.base.util.JsonUtils;
+import org.kyll.myserver.base.util.POJOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -25,5 +27,13 @@ public class OlLayerGroupCtrl {
 
 		response.setContentType("text/plain");
 		response.getWriter().println(ja.toString());
+	}
+
+	@RequestMapping("/gis/layergroup/save.ctrl")
+	public void save(Long mapId, String layerGroup, HttpServletResponse response) throws Exception {
+		olLayerGroupService.save(mapId, layerGroup);
+
+		response.setContentType("text/plain");
+		response.getWriter().println(JsonUtils.ajaxResult(true));
 	}
 }
