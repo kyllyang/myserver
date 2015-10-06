@@ -91,8 +91,6 @@ public class ThematicVo implements Vo<Long> {
 	private String interactionDoubleClickZoom;
 	private String interactionDoubleClickZoomDuration;
 	private String interactionDoubleClickZoomDelta;
-	private String interactionDragAndDrop;
-	private String interactionDragAndDropProjection;
 	private String interactionDragBox;
 	private String interactionDragBoxCondition;
 	private String interactionDragBoxStyle;
@@ -110,19 +108,12 @@ public class ThematicVo implements Vo<Long> {
 	private String interactionDragZoomCondition;
 	private String interactionDragZoomDuration;
 	private String interactionDragZoomStyle;
-	private String interactionDraw;
-	private String interactionDrawClickTolerance;
-	private String interactionDrawSnapTolerance;
-	private String interactionDrawWrapX;
 	private String interactionKeyboardPan;
 	private String interactionKeyboardPanDuration;
 	private String interactionKeyboardPanPixelDelta;
 	private String interactionKeyboardZoom;
 	private String interactionKeyboardZoomDuration;
 	private String interactionKeyboardZoomDelta;
-	private String interactionModify;
-	private String interactionModifyPixelTolerance;
-	private String interactionModifyWrapX;
 	private String interactionMouseWheelZoom;
 	private String interactionMouseWheelZoomDuration;
 	private String interactionPinchRotate;
@@ -130,12 +121,6 @@ public class ThematicVo implements Vo<Long> {
 	private String interactionPinchRotateThreshold;
 	private String interactionPinchZoom;
 	private String interactionPinchZoomDuration;
-	private String interactionSelect;
-	private String interactionSelectMulti;
-	private String interactionSelectWrapX;
-	private String interactionSnap;
-	private String interactionSnapPixelTolerance;
-	private String interactionTranslate;
 
 	public ThematicVo() {
 	}
@@ -773,22 +758,6 @@ public class ThematicVo implements Vo<Long> {
 		this.interactionDoubleClickZoomDelta = interactionDoubleClickZoomDelta;
 	}
 
-	public String getInteractionDragAndDrop() {
-		return interactionDragAndDrop;
-	}
-
-	public void setInteractionDragAndDrop(String interactionDragAndDrop) {
-		this.interactionDragAndDrop = interactionDragAndDrop;
-	}
-
-	public String getInteractionDragAndDropProjection() {
-		return interactionDragAndDropProjection;
-	}
-
-	public void setInteractionDragAndDropProjection(String interactionDragAndDropProjection) {
-		this.interactionDragAndDropProjection = interactionDragAndDropProjection;
-	}
-
 	public String getInteractionDragBox() {
 		return interactionDragBox;
 	}
@@ -925,38 +894,6 @@ public class ThematicVo implements Vo<Long> {
 		this.interactionDragZoomStyle = interactionDragZoomStyle;
 	}
 
-	public String getInteractionDraw() {
-		return interactionDraw;
-	}
-
-	public void setInteractionDraw(String interactionDraw) {
-		this.interactionDraw = interactionDraw;
-	}
-
-	public String getInteractionDrawClickTolerance() {
-		return interactionDrawClickTolerance;
-	}
-
-	public void setInteractionDrawClickTolerance(String interactionDrawClickTolerance) {
-		this.interactionDrawClickTolerance = interactionDrawClickTolerance;
-	}
-
-	public String getInteractionDrawSnapTolerance() {
-		return interactionDrawSnapTolerance;
-	}
-
-	public void setInteractionDrawSnapTolerance(String interactionDrawSnapTolerance) {
-		this.interactionDrawSnapTolerance = interactionDrawSnapTolerance;
-	}
-
-	public String getInteractionDrawWrapX() {
-		return interactionDrawWrapX;
-	}
-
-	public void setInteractionDrawWrapX(String interactionDrawWrapX) {
-		this.interactionDrawWrapX = interactionDrawWrapX;
-	}
-
 	public String getInteractionKeyboardPan() {
 		return interactionKeyboardPan;
 	}
@@ -1003,30 +940,6 @@ public class ThematicVo implements Vo<Long> {
 
 	public void setInteractionKeyboardZoomDelta(String interactionKeyboardZoomDelta) {
 		this.interactionKeyboardZoomDelta = interactionKeyboardZoomDelta;
-	}
-
-	public String getInteractionModify() {
-		return interactionModify;
-	}
-
-	public void setInteractionModify(String interactionModify) {
-		this.interactionModify = interactionModify;
-	}
-
-	public String getInteractionModifyPixelTolerance() {
-		return interactionModifyPixelTolerance;
-	}
-
-	public void setInteractionModifyPixelTolerance(String interactionModifyPixelTolerance) {
-		this.interactionModifyPixelTolerance = interactionModifyPixelTolerance;
-	}
-
-	public String getInteractionModifyWrapX() {
-		return interactionModifyWrapX;
-	}
-
-	public void setInteractionModifyWrapX(String interactionModifyWrapX) {
-		this.interactionModifyWrapX = interactionModifyWrapX;
 	}
 
 	public String getInteractionMouseWheelZoom() {
@@ -1083,53 +996,5 @@ public class ThematicVo implements Vo<Long> {
 
 	public void setInteractionPinchZoomDuration(String interactionPinchZoomDuration) {
 		this.interactionPinchZoomDuration = interactionPinchZoomDuration;
-	}
-
-	public String getInteractionSelect() {
-		return interactionSelect;
-	}
-
-	public void setInteractionSelect(String interactionSelect) {
-		this.interactionSelect = interactionSelect;
-	}
-
-	public String getInteractionSelectMulti() {
-		return interactionSelectMulti;
-	}
-
-	public void setInteractionSelectMulti(String interactionSelectMulti) {
-		this.interactionSelectMulti = interactionSelectMulti;
-	}
-
-	public String getInteractionSelectWrapX() {
-		return interactionSelectWrapX;
-	}
-
-	public void setInteractionSelectWrapX(String interactionSelectWrapX) {
-		this.interactionSelectWrapX = interactionSelectWrapX;
-	}
-
-	public String getInteractionSnap() {
-		return interactionSnap;
-	}
-
-	public void setInteractionSnap(String interactionSnap) {
-		this.interactionSnap = interactionSnap;
-	}
-
-	public String getInteractionSnapPixelTolerance() {
-		return interactionSnapPixelTolerance;
-	}
-
-	public void setInteractionSnapPixelTolerance(String interactionSnapPixelTolerance) {
-		this.interactionSnapPixelTolerance = interactionSnapPixelTolerance;
-	}
-
-	public String getInteractionTranslate() {
-		return interactionTranslate;
-	}
-
-	public void setInteractionTranslate(String interactionTranslate) {
-		this.interactionTranslate = interactionTranslate;
 	}
 }

@@ -102,6 +102,7 @@ public class ThematicCtrl {
 		olView.setConstrainRotation(entityVo.getViewConstrainRotation());
 		olView.setRotation(entityVo.getViewRotation());
 
+		// control
 		List<OlControl> olControlList = new ArrayList<>();
 		OlControl olControlAttribution = new OlControl();
 		olControlAttribution.setControlEnabled(entityVo.getControlAttribution());
@@ -191,6 +192,7 @@ public class ThematicCtrl {
 		olControlZoomToExtent.setTipLabel(entityVo.getControlZoomToExtentTipLabel());
 		olControlList.add(olControlZoomToExtent);
 
+		// interaction
 		List<OlInteraction> olInteractionList = new ArrayList<>();
 		OlInteraction olInteractionDoubleClickZoom = new OlInteraction();
 		olInteractionDoubleClickZoom.setInteractionClassName(ConstUtils.GIS_OL_INTERACTION_DOUBLECLICKZOOM);
@@ -198,12 +200,6 @@ public class ThematicCtrl {
 		olInteractionDoubleClickZoom.setDelta(entityVo.getInteractionDoubleClickZoomDelta());
 		olInteractionDoubleClickZoom.setDuration(entityVo.getInteractionDoubleClickZoomDuration());
 		olInteractionList.add(olInteractionDoubleClickZoom);
-
-		OlInteraction olInteractionDragAndDrop = new OlInteraction();
-		olInteractionDragAndDrop.setInteractionClassName(ConstUtils.GIS_OL_INTERACTION_DRAGANDDROP);
-		olInteractionDragAndDrop.setInteractionEnabled(entityVo.getInteractionDragAndDrop());
-		olInteractionDragAndDrop.setProjection(entityVo.getInteractionDragAndDropProjection());
-		olInteractionList.add(olInteractionDragAndDrop);
 
 		OlInteraction olInteractionDragBox = new OlInteraction();
 		olInteractionDragBox.setInteractionClassName(ConstUtils.GIS_OL_INTERACTION_DRAGBOX);
@@ -242,14 +238,6 @@ public class ThematicCtrl {
 		olInteractionDragZoom.setStyle(entityVo.getInteractionDragZoomStyle());
 		olInteractionList.add(olInteractionDragZoom);
 
-		OlInteraction olInteractionDraw = new OlInteraction();
-		olInteractionDraw.setInteractionClassName(ConstUtils.GIS_OL_INTERACTION_DRAW);
-		olInteractionDraw.setInteractionEnabled(entityVo.getInteractionDraw());
-		olInteractionDraw.setClickTolerance(entityVo.getInteractionDrawClickTolerance());
-		olInteractionDraw.setSnapTolerance(entityVo.getInteractionDrawSnapTolerance());
-		olInteractionDraw.setWrapX(entityVo.getInteractionDrawWrapX());
-		olInteractionList.add(olInteractionDraw);
-
 		OlInteraction olInteractionKeyboardPan = new OlInteraction();
 		olInteractionKeyboardPan.setInteractionClassName(ConstUtils.GIS_OL_INTERACTION_KEYBOARDPAN);
 		olInteractionKeyboardPan.setInteractionEnabled(entityVo.getInteractionKeyboardPan());
@@ -263,13 +251,6 @@ public class ThematicCtrl {
 		olInteractionKeyboardZoom.setDuration(entityVo.getInteractionKeyboardZoomDuration());
 		olInteractionKeyboardZoom.setDelta(entityVo.getInteractionKeyboardZoomDelta());
 		olInteractionList.add(olInteractionKeyboardZoom);
-
-		OlInteraction olInteractionModify = new OlInteraction();
-		olInteractionModify.setInteractionClassName(ConstUtils.GIS_OL_INTERACTION_MODIFY);
-		olInteractionModify.setInteractionEnabled(entityVo.getInteractionModify());
-		olInteractionModify.setPixelTolerance(entityVo.getInteractionModifyPixelTolerance());
-		olInteractionModify.setWrapX(entityVo.getInteractionModifyWrapX());
-		olInteractionList.add(olInteractionModify);
 
 		OlInteraction olInteractionMouseWheelZoom = new OlInteraction();
 		olInteractionMouseWheelZoom.setInteractionClassName(ConstUtils.GIS_OL_INTERACTION_MOUSEWHEELZOOM);
@@ -289,24 +270,6 @@ public class ThematicCtrl {
 		olInteractionPinchZoom.setInteractionEnabled(entityVo.getInteractionPinchZoom());
 		olInteractionPinchZoom.setDuration(entityVo.getInteractionPinchZoomDuration());
 		olInteractionList.add(olInteractionPinchZoom);
-
-		OlInteraction olInteractionSelect = new OlInteraction();
-		olInteractionSelect.setInteractionClassName(ConstUtils.GIS_OL_INTERACTION_SELECT);
-		olInteractionSelect.setInteractionEnabled(entityVo.getInteractionSelect());
-		olInteractionSelect.setMulti(entityVo.getInteractionSelectMulti());
-		olInteractionSelect.setWrapX(entityVo.getInteractionSelectWrapX());
-		olInteractionList.add(olInteractionSelect);
-
-		OlInteraction olInteractionSnap = new OlInteraction();
-		olInteractionSnap.setInteractionClassName(ConstUtils.GIS_OL_INTERACTION_SNAP);
-		olInteractionSnap.setInteractionEnabled(entityVo.getInteractionSnap());
-		olInteractionSnap.setPixelTolerance(entityVo.getInteractionSnapPixelTolerance());
-		olInteractionList.add(olInteractionSnap);
-
-		OlInteraction olInteractionTranslate = new OlInteraction();
-		olInteractionTranslate.setInteractionClassName(ConstUtils.GIS_OL_INTERACTION_TRANSLATE);
-		olInteractionTranslate.setInteractionEnabled(entityVo.getInteractionTranslate());
-		olInteractionList.add(olInteractionTranslate);
 
 		thematicService.save(POJOUtils.convert(entityVo, Thematic.class, thematicService), olMap, olView, entityVo.getLayerGroup(), olControlList, olInteractionList);
 
@@ -424,9 +387,6 @@ public class ThematicCtrl {
 					thematicVo.setInteractionDoubleClickZoom(olInteraction.getInteractionEnabled());
 					thematicVo.setInteractionDoubleClickZoomDelta(olInteraction.getDelta());
 					thematicVo.setInteractionDoubleClickZoomDuration(olInteraction.getDuration());
-				} else if (ConstUtils.GIS_OL_INTERACTION_DRAGANDDROP.equals(interactionClassName)) {
-					thematicVo.setInteractionDragAndDrop(olInteraction.getInteractionEnabled());
-					thematicVo.setInteractionDragAndDropProjection(olInteraction.getProjection());
 				} else if (ConstUtils.GIS_OL_INTERACTION_DRAGBOX.equals(interactionClassName)) {
 					thematicVo.setInteractionDragBox(olInteraction.getInteractionEnabled());
 					thematicVo.setInteractionDragBoxCondition(olInteraction.getCondition());
@@ -449,11 +409,6 @@ public class ThematicCtrl {
 					thematicVo.setInteractionDragZoomCondition(olInteraction.getCondition());
 					thematicVo.setInteractionDragZoomDuration(olInteraction.getDuration());
 					thematicVo.setInteractionDragZoomStyle(olInteraction.getStyle());
-				} else if (ConstUtils.GIS_OL_INTERACTION_DRAW.equals(interactionClassName)) {
-					thematicVo.setInteractionDraw(olInteraction.getInteractionEnabled());
-					thematicVo.setInteractionDrawClickTolerance(olInteraction.getClickTolerance());
-					thematicVo.setInteractionDrawSnapTolerance(olInteraction.getSnapTolerance());
-					thematicVo.setInteractionDrawWrapX(olInteraction.getWrapX());
 				} else if (ConstUtils.GIS_OL_INTERACTION_KEYBOARDPAN.equals(interactionClassName)) {
 					thematicVo.setInteractionKeyboardPan(olInteraction.getInteractionEnabled());
 					thematicVo.setInteractionKeyboardPanDuration(olInteraction.getDuration());
@@ -462,10 +417,6 @@ public class ThematicCtrl {
 					thematicVo.setInteractionKeyboardZoom(olInteraction.getInteractionEnabled());
 					thematicVo.setInteractionKeyboardZoomDelta(olInteraction.getDelta());
 					thematicVo.setInteractionKeyboardZoomDuration(olInteraction.getDuration());
-				} else if (ConstUtils.GIS_OL_INTERACTION_MODIFY.equals(interactionClassName)) {
-					thematicVo.setInteractionModify(olInteraction.getInteractionEnabled());
-					thematicVo.setInteractionModifyPixelTolerance(olInteraction.getPixelTolerance());
-					thematicVo.setInteractionModifyWrapX(olInteraction.getWrapX());
 				} else if (ConstUtils.GIS_OL_INTERACTION_MOUSEWHEELZOOM.equals(interactionClassName)) {
 					thematicVo.setInteractionMouseWheelZoom(olInteraction.getInteractionEnabled());
 					thematicVo.setInteractionMouseWheelZoomDuration(olInteraction.getDuration());
@@ -476,15 +427,6 @@ public class ThematicCtrl {
 				} else if (ConstUtils.GIS_OL_INTERACTION_PINCHZOOM.equals(interactionClassName)) {
 					thematicVo.setInteractionPinchZoom(olInteraction.getInteractionEnabled());
 					thematicVo.setInteractionPinchZoomDuration(olInteraction.getDuration());
-				} else if (ConstUtils.GIS_OL_INTERACTION_SELECT.equals(interactionClassName)) {
-					thematicVo.setInteractionSelect(olInteraction.getInteractionEnabled());
-					thematicVo.setInteractionSelectMulti(olInteraction.getMulti());
-					thematicVo.setInteractionSelectWrapX(olInteraction.getWrapX());
-				} else if (ConstUtils.GIS_OL_INTERACTION_SNAP.equals(interactionClassName)) {
-					thematicVo.setInteractionSnap(olInteraction.getInteractionEnabled());
-					thematicVo.setInteractionSnapPixelTolerance(olInteraction.getPixelTolerance());
-				} else if (ConstUtils.GIS_OL_INTERACTION_TRANSLATE.equals(interactionClassName)) {
-					thematicVo.setInteractionTranslate(olInteraction.getInteractionEnabled());
 				}
 			}
 		}

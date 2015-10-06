@@ -187,10 +187,6 @@ Ext.define('Base.gis.MapContainer', {
 					duration: this._getParseInt(interaction.duration),
 					delta: this._getParseInt(interaction.delta)
 				}));
-			} else if ('ol.interaction.DragAndDrop' == interaction.interactionClassName) {
-				interactionConfigs.push(new ol.interaction.DragAndDrop({
-					projection: Ext.isEmpty(control.projection) ? undefined : interaction.projection
-				}));
 			} else if ('ol.interaction.DragBox' == interaction.interactionClassName) {
 				interactionConfigs.push(new ol.interaction.DragBox({
 					condition: this._getCondition(interaction.condition),
@@ -216,9 +212,6 @@ Ext.define('Base.gis.MapContainer', {
 					duration: this._getParseInt(interaction.duration),
 					style: this._getStyle(interaction.style)
 				}));
-			} else if ('ol.interaction.Draw' == interaction.interactionClassName) {
-				interactionConfigs.push(new ol.interaction.Draw({
-				}));
 			} else if ('ol.interaction.KeyboardPan' == interaction.interactionClassName) {
 				interactionConfigs.push(new ol.interaction.KeyboardPan({
 					duration: this._getParseInt(interaction.duration),
@@ -228,9 +221,6 @@ Ext.define('Base.gis.MapContainer', {
 				interactionConfigs.push(new ol.interaction.KeyboardZoom({
 					duration: this._getParseInt(interaction.duration),
 					delta: this._getParseInt(interaction.delta)
-				}));
-			} else if ('ol.interaction.Modify' == interaction.interactionClassName) {
-				interactionConfigs.push(new ol.interaction.Modify({
 				}));
 			} else if ('ol.interaction.MouseWheelZoom' == interaction.interactionClassName) {
 				interactionConfigs.push(new ol.interaction.MouseWheelZoom({
@@ -244,15 +234,6 @@ Ext.define('Base.gis.MapContainer', {
 			} else if ('ol.interaction.PinchZoom' == interaction.interactionClassName) {
 				interactionConfigs.push(new ol.interaction.PinchZoom({
 					duration: this._getParseInt(interaction.duration)
-				}));
-			} else if ('ol.interaction.Select' == interaction.interactionClassName) {
-				interactionConfigs.push(new ol.interaction.Select({
-				}));
-			} else if ('ol.interaction.Snap' == interaction.interactionClassName) {
-				interactionConfigs.push(new ol.interaction.Snap({
-				}));
-			} else if ('ol.interaction.Translate' == interaction.interactionClassName) {
-				interactionConfigs.push(new ol.interaction.Translate({
 				}));
 			}
 		}
@@ -388,10 +369,6 @@ Ext.define('Base.gis.MapContainer', {
 				mapContainer.doToolbarRestore();
 			}
 		}));
-		/*this.map.on('moveend', function() {
-			console.log(this.map.getView().calculateExtent(this.map.getSize()));
-		}, this);*/
-
 	},
 	doToolbarRestore: function() {
 		this.map.removeInteraction(this.getDefaultInteractionSelect());
