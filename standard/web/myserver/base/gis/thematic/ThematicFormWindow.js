@@ -178,7 +178,7 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			inputValue: '1',
 			qtip: 'When set to true, tiles will be loaded while interacting with the map. This may improve the user experience, but can also make map panning and zooming choppy on devices with slow memory.'
 		});
-		var viewRendererDisplay = Ext.create('Ext.form.field.Display', {
+		var mapRendererDisplay = Ext.create('Ext.form.field.Display', {
 			columnWidth: 0.13,
 			xtype: 'displayfield',
 			fieldLabel: '渲染机制顺序',
@@ -1154,7 +1154,7 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 				}, {
 					xtype: 'container',
 					layout: 'column',
-					items: [viewRendererDisplay, {
+					items: [mapRendererDisplay, {
 						xtype: 'container',
 						itemId: 'rendererContainer',
 						layout: 'hbox',

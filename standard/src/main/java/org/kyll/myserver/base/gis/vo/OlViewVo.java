@@ -8,6 +8,7 @@ import org.kyll.myserver.base.common.Vo;
  */
 public class OlViewVo implements Vo<Long> {
 	private Long id;
+	private Long mapId;
 	private String center;
 	private String constrainRotation;
 	private String enableRotation;
@@ -33,6 +34,14 @@ public class OlViewVo implements Vo<Long> {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Long getMapId() {
+		return mapId;
+	}
+
+	public void setMapId(Long mapId) {
+		this.mapId = mapId;
 	}
 
 	public String getCenter() {

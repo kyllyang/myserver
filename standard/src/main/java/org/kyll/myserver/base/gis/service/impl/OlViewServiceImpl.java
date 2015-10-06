@@ -1,5 +1,6 @@
 package org.kyll.myserver.base.gis.service.impl;
 
+import org.kyll.myserver.base.gis.dao.OlMapDao;
 import org.kyll.myserver.base.gis.dao.OlViewDao;
 import org.kyll.myserver.base.gis.entity.OlView;
 import org.kyll.myserver.base.gis.service.OlViewService;
@@ -18,6 +19,8 @@ import java.util.List;
 public class OlViewServiceImpl implements OlViewService {
 	@Autowired
 	private OlViewDao olViewDao;
+	@Autowired
+	private OlMapDao olMapDao;
 
 	@Override
 	public OlView get(Long id) {
@@ -28,5 +31,13 @@ public class OlViewServiceImpl implements OlViewService {
 	public OlView getByOlMap(Long id) {
 		List<OlView> list = olViewDao.find("from OlView t where t.olMap.id = '" + id + "'");
 		return list.isEmpty() ? null : list.get(0);
+	}
+
+	@Override
+	public void save(OlView olView, Long mapId) {
+		if (mapId != null) {
+			olView.setOlMap(olMapDao.get(mapId));
+		}
+		olViewDao.save(olView);
 	}
 }

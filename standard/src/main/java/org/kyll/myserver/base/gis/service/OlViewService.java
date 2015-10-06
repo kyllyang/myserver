@@ -9,4 +9,6 @@ import org.kyll.myserver.base.gis.entity.OlView;
  */
 public interface OlViewService extends BaseService<OlView, Long> {
 	OlView getByOlMap(Long id);
+
+	void save(OlView olView, Long mapId);
 }

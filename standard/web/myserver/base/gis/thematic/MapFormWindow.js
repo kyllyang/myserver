@@ -6,7 +6,7 @@ Ext.define('Base.gis.thematic.MapFormWindow', {
 	opener: null,
 
 	title: '地图信息',
-	width: 600,
+	width: 800,
 	height: 160,
 	border: false,
 	modal: true,
