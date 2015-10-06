@@ -15,6 +15,7 @@ public class OlInteraction implements Serializable {
 	private String interactionClassName;// ol.interaction.DoubleClickZoom, ol.interaction.DragAndDrop, ol.interaction.KeyboardPan, ol.interaction.KeyboardZoom, ol.interaction.MouseWheelZoom, ol.interaction.Pointer, ol.interaction.Select
 	private String interactionEnabled;
 	private String clickTolerance;
+	private String condition;
 	private String delta;
 	private String duration;
 	private String kineticDecay;
@@ -25,6 +26,7 @@ public class OlInteraction implements Serializable {
 	private String pixelTolerance;
 	private String projection;
 	private String snapTolerance;
+	private String style;
 	private String threshold;
 	private String wrapX;
 
@@ -77,6 +79,15 @@ public class OlInteraction implements Serializable {
 
 	public void setClickTolerance(String clickTolerance) {
 		this.clickTolerance = clickTolerance;
+	}
+
+	@Column(name = "CONDITION_")
+	public String getCondition() {
+		return condition;
+	}
+
+	public void setCondition(String condition) {
+		this.condition = condition;
 	}
 
 	@Column(name = "DELTA_")
@@ -167,6 +178,15 @@ public class OlInteraction implements Serializable {
 
 	public void setSnapTolerance(String snapTolerance) {
 		this.snapTolerance = snapTolerance;
+	}
+
+	@Column(name = "STYLE_")
+	public String getStyle() {
+		return style;
+	}
+
+	public void setStyle(String style) {
+		this.style = style;
 	}
 
 	@Column(name = "THRESHOLD_")

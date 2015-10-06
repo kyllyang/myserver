@@ -103,15 +103,21 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 				{name: 'interactionDragAndDrop'},
 				{name: 'interactionDragAndDropProjection'},
 				{name: 'interactionDragBox'},
+				{name: 'interactionDragBoxCondition'},
+				{name: 'interactionDragBoxStyle'},
 				{name: 'interactionDragPan'},
 				{name: 'interactionDragPanKineticDecay'},
 				{name: 'interactionDragPanKineticMinVelocity'},
 				{name: 'interactionDragPanKineticDelay'},
 				{name: 'interactionDragRotate'},
+				{name: 'interactionDragRotateCondition'},
 				{name: 'interactionDragRotateDuration'},
 				{name: 'interactionDragRotateAndZoom'},
+				{name: 'interactionDragRotateAndZoomCondition'},
 				{name: 'interactionDragRotateAndZoomDuration'},
 				{name: 'interactionDragZoom'},
+				{name: 'interactionDragZoomCondition'},
+				{name: 'interactionDragZoomStyle'},
 				{name: 'interactionDragZoomDuration'},
 				{name: 'interactionDraw'},
 				{name: 'interactionDrawClickTolerance'},
@@ -651,7 +657,7 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			labelSeparator: '：',
 			name: 'controlScaleLineUnits',
 			value: 'metric',
-			allowBlank: true
+			qtip: 'Units. Default is metric.'
 		});
 		var controlZoomCheckbox = Ext.create('Ext.form.field.Checkbox', {
 			columnWidth: 0.1,
@@ -860,6 +866,30 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			inputValue: '1',
 			qtip: 'Allows the user to draw a vector box by clicking and dragging on the map, normally combined with an ol.events.condition that limits it to when the shift or other key is held down. This is used, for example, for zooming to a specific area of the map (see ol.interaction.DragZoom and ol.interaction.DragRotateAndZoom).This interaction is only supported for mouse devices.'
 		});
+		var interactionDragBoxConditionCombobox = Ext.create('Base.ux.DictComboBox', {
+			invokeCode: 'gis_interaction_condition',
+			fieldLabel: '触发条件',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'interactionDragBoxCondition',
+			value: 'ol.events.condition.shiftKeyOnly',
+			qtip: 'A function that takes an ol.MapBrowserEvent and returns a boolean to indicate whether that event should be handled. Default is ol.events.condition.always.'
+		});
+		var interactionDragBoxStyleTrigger = Ext.create('Ext.form.field.Trigger', {
+			fieldLabel: '样式',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'interactionDragBoxStyle',
+			onTriggerClick: function() {
+				Ext.create('Base.gis.style.StyleWindow', {
+					styleData: Ext.isEmpty(interactionDragBoxStyleTrigger.getValue()) ? null : Ext.decode(interactionDragBoxStyleTrigger.getValue()),
+					onDetermine: function(style) {
+						interactionDragBoxStyleTrigger.setValue(Ext.encode(style));
+					}
+				}).show();
+			},
+			qtip: 'Style for the box.'
+		});
 		var interactionDragPanCheckbox = Ext.create('Ext.form.field.Checkbox', {
 			columnWidth: 0.1,
 			boxLabel: '拖动平移',
@@ -905,6 +935,15 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			checked: true,
 			qtip: 'Allows the user to rotate the map by clicking and dragging on the map, normally combined with an ol.events.condition that limits it to when the alt and shift keys are held down.This interaction is only supported for mouse devices.'
 		});
+		var interactionDragRotateConditionCombobox = Ext.create('Base.ux.DictComboBox', {
+			invokeCode: 'gis_interaction_condition',
+			fieldLabel: '触发条件',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'interactionDragRotateCondition',
+			value: 'ol.events.condition.altShiftKeysOnly',
+			qtip: 'A function that takes an ol.MapBrowserEvent and returns a boolean to indicate whether that event should be handled. Default is ol.events.condition.altShiftKeysOnly.'
+		});
 		var interactionDragRotateDurationNumber = Ext.create('Ext.form.field.Number', {
 			fieldLabel: '持续时间',
 			labelAlign: 'right',
@@ -921,6 +960,15 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			name: 'interactionDragRotateAndZoom',
 			inputValue: '1',
 			qtip: 'Allows the user to zoom and rotate the map by clicking and dragging on the map. By default, this interaction is limited to when the shift key is held down. This interaction is only supported for mouse devices. And this interaction is not included in the default interactions.'
+		});
+		var interactionDragRotateAndZoomConditionCombobox = Ext.create('Base.ux.DictComboBox', {
+			invokeCode: 'gis_interaction_condition',
+			fieldLabel: '触发条件',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'interactionDragRotateAndZoomCondition',
+			value: 'ol.events.condition.shiftKeyOnly',
+			qtip: 'A function that takes an ol.MapBrowserEvent and returns a boolean to indicate whether that event should be handled. Default is ol.events.condition.shiftKeyOnly.'
 		});
 		var interactionDragRotateAndZoomDurationNumber = Ext.create('Ext.form.field.Number', {
 			fieldLabel: '持续时间',
@@ -939,6 +987,30 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			inputValue: '1',
 			checked: true,
 			qtip: 'Allows the user to zoom the map by clicking and dragging on the map, normally combined with an ol.events.condition that limits it to when a key, shift by default, is held down.'
+		});
+		var interactionDragZoomConditionCombobox = Ext.create('Base.ux.DictComboBox', {
+			invokeCode: 'gis_interaction_condition',
+			fieldLabel: '触发条件',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'interactionDragZoomCondition',
+			value: 'ol.events.condition.shiftKeyOnly',
+			qtip: 'A function that takes an ol.MapBrowserEvent and returns a boolean to indicate whether that event should be handled. Default is ol.events.condition.shiftKeyOnly.'
+		});
+		var interactionDragZoomStyleTrigger = Ext.create('Ext.form.field.Trigger', {
+			fieldLabel: '样式',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'interactionDragZoomStyle',
+			onTriggerClick: function() {
+				Ext.create('Base.gis.style.StyleWindow', {
+					styleData: Ext.isEmpty(interactionDragZoomStyleTrigger.getValue()) ? null : Ext.decode(interactionDragZoomStyleTrigger.getValue()),
+					onDetermine: function(style) {
+						interactionDragZoomStyleTrigger.setValue(Ext.encode(style));
+					}
+				}).show();
+			},
+			qtip: 'Style for the box.'
 		});
 		var interactionDragZoomDurationNumber = Ext.create('Ext.form.field.Number', {
 			fieldLabel: '持续时间',
@@ -1465,7 +1537,13 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 					items: [interactionDragBoxCheckbox, {
 						columnWidth: 0.9,
 						xtype: 'container',
-						html: '实现特定方法'
+						layout: {
+							type: 'table',
+							columns: 3
+						},
+						items: [interactionDragBoxConditionCombobox, interactionDragBoxStyleTrigger, {
+							xtype: 'container'
+						}]
 					}]
 				}, {
 					xtype: 'container',
@@ -1489,10 +1567,7 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 							type: 'table',
 							columns: 3
 						},
-						items: [interactionDragRotateDurationNumber, {
-							xtype: 'container',
-							html: '实现特定方法'
-						}, {
+						items: [interactionDragRotateConditionCombobox, interactionDragRotateDurationNumber, {
 							xtype: 'container'
 						}]
 					}]
@@ -1506,10 +1581,7 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 							type: 'table',
 							columns: 3
 						},
-						items: [interactionDragRotateAndZoomDurationNumber, {
-							xtype: 'container',
-							html: '实现特定方法'
-						}, {
+						items: [interactionDragRotateAndZoomConditionCombobox, interactionDragRotateAndZoomDurationNumber, {
 							xtype: 'container'
 						}]
 					}]
@@ -1523,12 +1595,7 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 							type: 'table',
 							columns: 3
 						},
-						items: [interactionDragZoomDurationNumber, {
-							xtype: 'container',
-							html: '实现特定方法'
-						}, {
-							xtype: 'container'
-						}]
+						items: [interactionDragZoomConditionCombobox, interactionDragZoomStyleTrigger, interactionDragZoomDurationNumber]
 					}]
 				}, {
 					xtype: 'container',
@@ -1560,8 +1627,7 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 							columns: 3
 						},
 						items: [interactionKeyboardPanDurationNumber, interactionKeyboardPanPixelDeltaNumber, {
-							xtype: 'container',
-							html: '实现特定方法'
+							xtype: 'container'
 						}]
 					}]
 				}, {
@@ -1575,8 +1641,7 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 							columns: 3
 						},
 						items: [interactionKeyboardZoomDurationNumber, interactionKeyboardZoomDeltaNumber, {
-							xtype: 'container',
-							html: '实现特定方法'
+							xtype: 'container'
 						}]
 					}]
 				}, {
@@ -1678,14 +1743,6 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 						columnWidth: 0.9,
 						xtype: 'container'
 					}]
-				}]
-			}, {
-				xtype: 'fieldset',
-				title: '覆盖',
-				layout: 'form',
-				items: [{
-					xtype: 'button',
-					text: 'A'
 				}]
 			}],
 			buttons:[{

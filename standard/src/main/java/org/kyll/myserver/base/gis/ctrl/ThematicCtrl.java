@@ -208,6 +208,8 @@ public class ThematicCtrl {
 		OlInteraction olInteractionDragBox = new OlInteraction();
 		olInteractionDragBox.setInteractionClassName(ConstUtils.GIS_OL_INTERACTION_DRAGBOX);
 		olInteractionDragBox.setInteractionEnabled(entityVo.getInteractionDragBox());
+		olInteractionDragBox.setCondition(entityVo.getInteractionDragBoxCondition());
+		olInteractionDragBox.setStyle(entityVo.getInteractionDragBoxStyle());
 		olInteractionList.add(olInteractionDragBox);
 
 		OlInteraction olInteractionDragPan = new OlInteraction();
@@ -221,19 +223,23 @@ public class ThematicCtrl {
 		OlInteraction olInteractionDragRotate = new OlInteraction();
 		olInteractionDragRotate.setInteractionClassName(ConstUtils.GIS_OL_INTERACTION_DRAGROTATE);
 		olInteractionDragRotate.setInteractionEnabled(entityVo.getInteractionDragRotate());
+		olInteractionDragRotate.setCondition(entityVo.getInteractionDragRotateCondition());
 		olInteractionDragRotate.setDuration(entityVo.getInteractionDragRotateDuration());
 		olInteractionList.add(olInteractionDragRotate);
 
 		OlInteraction olInteractionDragRotateAndZoom = new OlInteraction();
 		olInteractionDragRotateAndZoom.setInteractionClassName(ConstUtils.GIS_OL_INTERACTION_DRAGROTATEANDZOOM);
 		olInteractionDragRotateAndZoom.setInteractionEnabled(entityVo.getInteractionDragRotateAndZoom());
+		olInteractionDragRotateAndZoom.setCondition(entityVo.getInteractionDragRotateAndZoomCondition());
 		olInteractionDragRotateAndZoom.setDuration(entityVo.getInteractionDragRotateAndZoomDuration());
 		olInteractionList.add(olInteractionDragRotateAndZoom);
 
 		OlInteraction olInteractionDragZoom = new OlInteraction();
 		olInteractionDragZoom.setInteractionClassName(ConstUtils.GIS_OL_INTERACTION_DRAGZOOM);
 		olInteractionDragZoom.setInteractionEnabled(entityVo.getInteractionDragZoom());
+		olInteractionDragZoom.setCondition(entityVo.getInteractionDragZoomCondition());
 		olInteractionDragZoom.setDuration(entityVo.getInteractionDragZoomDuration());
+		olInteractionDragZoom.setStyle(entityVo.getInteractionDragZoomStyle());
 		olInteractionList.add(olInteractionDragZoom);
 
 		OlInteraction olInteractionDraw = new OlInteraction();
@@ -423,6 +429,8 @@ public class ThematicCtrl {
 					thematicVo.setInteractionDragAndDropProjection(olInteraction.getProjection());
 				} else if (ConstUtils.GIS_OL_INTERACTION_DRAGBOX.equals(interactionClassName)) {
 					thematicVo.setInteractionDragBox(olInteraction.getInteractionEnabled());
+					thematicVo.setInteractionDragBoxCondition(olInteraction.getCondition());
+					thematicVo.setInteractionDragBoxStyle(olInteraction.getStyle());
 				} else if (ConstUtils.GIS_OL_INTERACTION_DRAGPAN.equals(interactionClassName)) {
 					thematicVo.setInteractionDragPan(olInteraction.getInteractionEnabled());
 					thematicVo.setInteractionDragPanKineticDecay(olInteraction.getKineticDecay());
@@ -430,13 +438,17 @@ public class ThematicCtrl {
 					thematicVo.setInteractionDragPanKineticMinVelocity(olInteraction.getKineticMinVelocity());
 				} else if (ConstUtils.GIS_OL_INTERACTION_DRAGROTATE.equals(interactionClassName)) {
 					thematicVo.setInteractionDragRotate(olInteraction.getInteractionEnabled());
+					thematicVo.setInteractionDragRotateCondition(olInteraction.getCondition());
 					thematicVo.setInteractionDragRotateDuration(olInteraction.getDuration());
 				} else if (ConstUtils.GIS_OL_INTERACTION_DRAGROTATEANDZOOM.equals(interactionClassName)) {
 					thematicVo.setInteractionDragRotateAndZoom(olInteraction.getInteractionEnabled());
+					thematicVo.setInteractionDragRotateAndZoomCondition(olInteraction.getCondition());
 					thematicVo.setInteractionDragRotateAndZoomDuration(olInteraction.getDuration());
 				} else if (ConstUtils.GIS_OL_INTERACTION_DRAGZOOM.equals(interactionClassName)) {
 					thematicVo.setInteractionDragZoom(olInteraction.getInteractionEnabled());
+					thematicVo.setInteractionDragZoomCondition(olInteraction.getCondition());
 					thematicVo.setInteractionDragZoomDuration(olInteraction.getDuration());
+					thematicVo.setInteractionDragZoomStyle(olInteraction.getStyle());
 				} else if (ConstUtils.GIS_OL_INTERACTION_DRAW.equals(interactionClassName)) {
 					thematicVo.setInteractionDraw(olInteraction.getInteractionEnabled());
 					thematicVo.setInteractionDrawClickTolerance(olInteraction.getClickTolerance());

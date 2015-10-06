@@ -161,45 +161,57 @@ Ext.define('Base.gis.MapContainer', {
 				}));
 			} else if ('ol.interaction.DragBox' == interaction.interactionClassName) {
 				interactionConfigs.push(new ol.interaction.DragBox({
-					condition: ol.events.condition.shiftKeyOnly,
-					style: new ol.style.Style({
-						stroke: new ol.style.Stroke({
-							color: [0, 0, 255, 1]
-						})
-					})
+					condition: this._getCondition(interaction.condition),
+					style: this._getStyle(interaction.style)
 				}));
 			} else if ('ol.interaction.DragPan' == interaction.interactionClassName) {
 				interactionConfigs.push(new ol.interaction.DragPan({
+					kinetic: this._getKinetic(interaction.kineticDecay, interaction.kineticDelay, interaction.kineticMinVelocity)
 				}));
 			} else if ('ol.interaction.DragRotate' == interaction.interactionClassName) {
 				interactionConfigs.push(new ol.interaction.DragRotate({
+					condition: this._getCondition(interaction.condition),
+					duration: this._getParseInt(interaction.duration)
 				}));
 			} else if ('ol.interaction.DragRotateAndZoom' == interaction.interactionClassName) {
 				interactionConfigs.push(new ol.interaction.DragRotateAndZoom({
+					condition: this._getCondition(interaction.condition),
+					duration: this._getParseInt(interaction.duration)
 				}));
 			} else if ('ol.interaction.DragZoom' == interaction.interactionClassName) {
 				interactionConfigs.push(new ol.interaction.DragZoom({
+					condition: this._getCondition(interaction.condition),
+					duration: this._getParseInt(interaction.duration),
+					style: this._getStyle(interaction.style)
 				}));
 			} else if ('ol.interaction.Draw' == interaction.interactionClassName) {
 				interactionConfigs.push(new ol.interaction.Draw({
 				}));
 			} else if ('ol.interaction.KeyboardPan' == interaction.interactionClassName) {
 				interactionConfigs.push(new ol.interaction.KeyboardPan({
+					duration: this._getParseInt(interaction.duration),
+					pixelDelta: this._getParseInt(interaction.pixelDelta)
 				}));
 			} else if ('ol.interaction.KeyboardZoom' == interaction.interactionClassName) {
 				interactionConfigs.push(new ol.interaction.KeyboardZoom({
+					duration: this._getParseInt(interaction.duration),
+					delta: this._getParseInt(interaction.delta)
 				}));
 			} else if ('ol.interaction.Modify' == interaction.interactionClassName) {
 				interactionConfigs.push(new ol.interaction.Modify({
 				}));
 			} else if ('ol.interaction.MouseWheelZoom' == interaction.interactionClassName) {
 				interactionConfigs.push(new ol.interaction.MouseWheelZoom({
+					duration: this._getParseInt(interaction.duration)
 				}));
 			} else if ('ol.interaction.PinchRotate' == interaction.interactionClassName) {
 				interactionConfigs.push(new ol.interaction.PinchRotate({
+					duration: this._getParseInt(interaction.duration),
+					threshold: this._getParseFloat(interaction.threshold)
 				}));
 			} else if ('ol.interaction.PinchZoom' == interaction.interactionClassName) {
 				interactionConfigs.push(new ol.interaction.PinchZoom({
+					duration: this._getParseInt(interaction.duration)
 				}));
 			} else if ('ol.interaction.Select' == interaction.interactionClassName) {
 				interactionConfigs.push(new ol.interaction.Select({
@@ -279,6 +291,82 @@ Ext.define('Base.gis.MapContainer', {
 			extents.push(parseFloat(Ext.String.trim(extentTemps[i])));
 		}
 		return extents;
+	},
+	_getCondition: function(value) {
+		var condition = undefined;
+		if ('ol.events.condition.altKeyOnly' == value) {
+			condition = ol.events.condition.altKeyOnly;
+		} else if ('ol.events.condition.altShiftKeysOnly' == value) {
+			condition = ol.events.condition.altShiftKeysOnly;
+		} else if ('ol.events.condition.platformModifierKeyOnly' == value) {
+			condition = ol.events.condition.platformModifierKeyOnly;
+		} else if ('ol.events.condition.shiftKeyOnly' == value) {
+			condition = ol.events.condition.shiftKeyOnly;
+		}
+		return condition;
+	},
+	_getStyle: function(style) {
+		if (!Ext.isEmpty(style)) {
+			var styleConfig = {};
+			if (!Ext.isEmpty(style.stroke)) {
+				var strokeConfig = {
+					lineCap: style.stroke.lineCap,
+					lineJoin: style.stroke.lineJoin,
+					miterLimit: this._getParseInt(style.stroke.miterLimit)
+				};
+				if (!Ext.isEmpty(style.stroke.color)) {
+					Ext.apply(strokeConfig, {
+						color: this._getColor(style.stroke.color)
+					});
+				}
+				if (!Ext.isEmpty(style.stroke.lineDash)) {
+					Ext.apply(strokeConfig, {
+						lineDash: this._getLineDash(style.stroke.lineDash)
+					});
+				}
+				Ext.apply(styleConfig, {
+					stroke: new ol.style.Stroke(strokeConfig)
+				});
+			}
+			if (!Ext.isEmpty(style.fill)) {
+				if (!Ext.isEmpty(style.fill.color)) {
+					Ext.apply(styleConfig, {
+						fill: new ol.style.Fill({
+							color: this._getColor(style.fill.color)
+						})
+					});
+				}
+			}
+			return new ol.style.Style(styleConfig);
+		}
+		return undefined;
+	},
+	_getColor: function(value) {
+		var color = [];
+		var vs = value.split(',');
+		color.push(parseInt(vs[0].substring(0, 2), 16));
+		color.push(parseInt(vs[0].substring(2, 4), 16));
+		color.push(parseInt(vs[0].substring(4, 6), 16));
+		color.push(parseFloat(vs[1]));
+		return color;
+	},
+	_getLineDash: function(value) {
+		if (Ext.isEmpty(value)) {
+			return undefined;
+		}
+
+		var results = [];
+		var resultTemps = value.split(',');
+		for (var i = 0; i < resultTemps.length; i++) {
+			results.push(parseInt(Ext.String.trim(resultTemps[i])));
+		}
+		return results;
+	},
+	_getKinetic: function(decay, delay, minVelocity) {
+		if (Ext.isEmpty(decay) || Ext.isEmpty(delay) || Ext.isEmpty(minVelocity)) {
+			return undefined;
+		}
+		return new ol.Kinetic(decay, minVelocity, delay);
 	},
 	_getParseInt: function(value) {
 		return Ext.isEmpty(value) ? undefined : parseInt(value);

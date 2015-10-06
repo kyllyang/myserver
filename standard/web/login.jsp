@@ -22,7 +22,9 @@
 		<legend>登录</legend>
 		<ul style="list-style-type: none; text-align: right;">
 			<li>用户名称：<input type="text" id="username" name="username" style="width: 170px;"></li>
+			<li>&nbsp;</li>
 			<li>密码：<input type="password" name="password" style="width: 170px;"></li>
+			<li>&nbsp;</li>
 			<li><input type="submit" value="登录"/></li>
 		</ul>
 	</fieldset>

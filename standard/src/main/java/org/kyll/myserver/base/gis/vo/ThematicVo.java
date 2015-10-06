@@ -94,16 +94,22 @@ public class ThematicVo implements Vo<Long> {
 	private String interactionDragAndDrop;
 	private String interactionDragAndDropProjection;
 	private String interactionDragBox;
+	private String interactionDragBoxCondition;
+	private String interactionDragBoxStyle;
 	private String interactionDragPan;
 	private String interactionDragPanKineticDecay;
 	private String interactionDragPanKineticMinVelocity;
 	private String interactionDragPanKineticDelay;
 	private String interactionDragRotate;
+	private String interactionDragRotateCondition;
 	private String interactionDragRotateDuration;
 	private String interactionDragRotateAndZoom;
+	private String interactionDragRotateAndZoomCondition;
 	private String interactionDragRotateAndZoomDuration;
 	private String interactionDragZoom;
+	private String interactionDragZoomCondition;
 	private String interactionDragZoomDuration;
+	private String interactionDragZoomStyle;
 	private String interactionDraw;
 	private String interactionDrawClickTolerance;
 	private String interactionDrawSnapTolerance;
@@ -791,6 +797,22 @@ public class ThematicVo implements Vo<Long> {
 		this.interactionDragBox = interactionDragBox;
 	}
 
+	public String getInteractionDragBoxCondition() {
+		return interactionDragBoxCondition;
+	}
+
+	public void setInteractionDragBoxCondition(String interactionDragBoxCondition) {
+		this.interactionDragBoxCondition = interactionDragBoxCondition;
+	}
+
+	public String getInteractionDragBoxStyle() {
+		return interactionDragBoxStyle;
+	}
+
+	public void setInteractionDragBoxStyle(String interactionDragBoxStyle) {
+		this.interactionDragBoxStyle = interactionDragBoxStyle;
+	}
+
 	public String getInteractionDragPan() {
 		return interactionDragPan;
 	}
@@ -831,6 +853,14 @@ public class ThematicVo implements Vo<Long> {
 		this.interactionDragRotate = interactionDragRotate;
 	}
 
+	public String getInteractionDragRotateCondition() {
+		return interactionDragRotateCondition;
+	}
+
+	public void setInteractionDragRotateCondition(String interactionDragRotateCondition) {
+		this.interactionDragRotateCondition = interactionDragRotateCondition;
+	}
+
 	public String getInteractionDragRotateDuration() {
 		return interactionDragRotateDuration;
 	}
@@ -845,6 +875,14 @@ public class ThematicVo implements Vo<Long> {
 
 	public void setInteractionDragRotateAndZoom(String interactionDragRotateAndZoom) {
 		this.interactionDragRotateAndZoom = interactionDragRotateAndZoom;
+	}
+
+	public String getInteractionDragRotateAndZoomCondition() {
+		return interactionDragRotateAndZoomCondition;
+	}
+
+	public void setInteractionDragRotateAndZoomCondition(String interactionDragRotateAndZoomCondition) {
+		this.interactionDragRotateAndZoomCondition = interactionDragRotateAndZoomCondition;
 	}
 
 	public String getInteractionDragRotateAndZoomDuration() {
@@ -863,12 +901,28 @@ public class ThematicVo implements Vo<Long> {
 		this.interactionDragZoom = interactionDragZoom;
 	}
 
+	public String getInteractionDragZoomCondition() {
+		return interactionDragZoomCondition;
+	}
+
+	public void setInteractionDragZoomCondition(String interactionDragZoomCondition) {
+		this.interactionDragZoomCondition = interactionDragZoomCondition;
+	}
+
 	public String getInteractionDragZoomDuration() {
 		return interactionDragZoomDuration;
 	}
 
 	public void setInteractionDragZoomDuration(String interactionDragZoomDuration) {
 		this.interactionDragZoomDuration = interactionDragZoomDuration;
+	}
+
+	public String getInteractionDragZoomStyle() {
+		return interactionDragZoomStyle;
+	}
+
+	public void setInteractionDragZoomStyle(String interactionDragZoomStyle) {
+		this.interactionDragZoomStyle = interactionDragZoomStyle;
 	}
 
 	public String getInteractionDraw() {

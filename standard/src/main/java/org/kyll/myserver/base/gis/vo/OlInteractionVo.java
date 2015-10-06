@@ -11,6 +11,7 @@ public class OlInteractionVo implements Vo<Long> {
 	private String interactionClassName;
 	private String interactionEnabled;
 	private String clickTolerance;
+	private String condition;
 	private String delta;
 	private String duration;
 	private String kineticDecay;
@@ -21,6 +22,7 @@ public class OlInteractionVo implements Vo<Long> {
 	private String pixelTolerance;
 	private String projection;
 	private String snapTolerance;
+	private String style;
 	private String threshold;
 	private String wrapX;
 
@@ -58,6 +60,14 @@ public class OlInteractionVo implements Vo<Long> {
 
 	public void setClickTolerance(String clickTolerance) {
 		this.clickTolerance = clickTolerance;
+	}
+
+	public String getCondition() {
+		return condition;
+	}
+
+	public void setCondition(String condition) {
+		this.condition = condition;
 	}
 
 	public String getDelta() {
@@ -138,6 +148,14 @@ public class OlInteractionVo implements Vo<Long> {
 
 	public void setSnapTolerance(String snapTolerance) {
 		this.snapTolerance = snapTolerance;
+	}
+
+	public String getStyle() {
+		return style;
+	}
+
+	public void setStyle(String style) {
+		this.style = style;
 	}
 
 	public String getThreshold() {
