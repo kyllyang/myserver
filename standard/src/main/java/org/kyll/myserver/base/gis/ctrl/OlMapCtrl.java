@@ -28,6 +28,8 @@ public class OlMapCtrl {
 	@Autowired
 	private ThematicService thematicService;
 	@Autowired
+	private OlMapService olMapService;
+	@Autowired
 	private OlViewService olViewService;
 	@Autowired
 	private OlControlService olControlService;
@@ -37,7 +39,7 @@ public class OlMapCtrl {
 	private OlLayerGroupService olLayerGroupService;
 
 	@RequestMapping("/gis/map/config.ctrl")
-	public void input(Long thematicId, HttpServletResponse response) throws Exception {
+	public void config(Long thematicId, HttpServletResponse response) throws Exception {
 		Thematic thematic = thematicService.get(thematicId);
 		OlMap olMap = thematic.getOlMap();
 
@@ -59,5 +61,22 @@ public class OlMapCtrl {
 
 		response.setContentType("text/plain");
 		response.getWriter().println(jo.toString());
+	}
+
+	@RequestMapping("/gis/map/input.ctrl")
+	public void input(Long id, HttpServletResponse response) throws Exception {
+		OlMap entity = olMapService.get(id);
+		OlMapVo entityVo = POJOUtils.convert(entity, OlMapVo.class);
+
+		response.setContentType("text/plain");
+		response.getWriter().println(JsonUtils.convert(entityVo));
+	}
+
+	@RequestMapping("/gis/map/save.ctrl")
+	public void save(OlMapVo entityVo, HttpServletResponse response) throws Exception {
+		olMapService.save(POJOUtils.convert(entityVo, OlMap.class, olMapService));
+
+		response.setContentType("text/plain");
+		response.getWriter().println(JsonUtils.ajaxResult(true));
 	}
 }

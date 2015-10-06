@@ -12,6 +12,9 @@ Ext.define('Base.gis.thematic.ThematicGridPanel', {
 				dataIndex: 'id',
 				hidden: true
 			}, {
+				dataIndex: 'mapId',
+				hidden: true
+			}, {
 				text: '名称',
 				dataIndex: 'name'
 			}],
@@ -20,32 +23,32 @@ Ext.define('Base.gis.thematic.ThematicGridPanel', {
 			}, {
 				text: '地图',
 				icon: ctx + '/resource/image/icon/map.png',
-				handler: function() {},
+				handler: this.doMap,
 				scope: this
 			}, {
 				text: '视图',
 				icon: ctx + '/resource/image/icon/gisview.png',
-				handler: function() {},
+				handler: this.doView,
 				scope: this
 			}, {
 				text: '图层',
 				icon: ctx + '/resource/image/icon/layer.png',
-				handler: function() {},
+				handler: this.doLayer,
 				scope: this
 			}, {
 				text: '控件',
 				icon: ctx + '/resource/image/icon/control.png',
-				handler: function() {},
+				handler: this.doControl,
 				scope: this
 			}, {
 				text: '交互',
 				icon: ctx + '/resource/image/icon/interaction.png',
-				handler: function() {},
+				handler: this.doInteraction,
 				scope: this
 			}, {
 				text: '工具栏',
 				icon: ctx + '/resource/image/icon/toolbar.png',
-				handler: function() {},
+				handler: this.doToolbar,
 				scope: this
 			}],
 			dockedItems: [Ext.create('Ext.form.Panel', {
@@ -131,6 +134,72 @@ Ext.define('Base.gis.thematic.ThematicGridPanel', {
 			},
 			scope: this
 		});
+	},
+	doMap: function() {
+		var records = this.getSelectedRecords();
+		if (records.length == 1) {
+			Ext.create('Base.gis.thematic.MapFormWindow', {
+				opener: this,
+				mapId: records[0].get('mapId')
+			}).show();
+		} else {
+			Ext.Msg.alert("系统提示", "请选择一条数据！");
+		}
+	},
+	doView: function() {
+		var records = this.getSelectedRecords();
+		if (records.length == 1) {
+			Ext.create('Base.gis.thematic.ViewFormWindow', {
+				opener: this,
+				mapId: records[0].get('mapId')
+			}).show();
+		} else {
+			Ext.Msg.alert("系统提示", "请选择一条数据！");
+		}
+	},
+	doLayer: function() {
+		var records = this.getSelectedRecords();
+		if (records.length == 1) {
+			Ext.create('Base.gis.thematic.LayerFormWindow', {
+				opener: this,
+				mapId: records[0].get('mapId')
+			}).show();
+		} else {
+			Ext.Msg.alert("系统提示", "请选择一条数据！");
+		}
+	},
+	doControl: function() {
+		var records = this.getSelectedRecords();
+		if (records.length == 1) {
+			Ext.create('Base.gis.thematic.ControlFormWindow', {
+				opener: this,
+				mapId: records[0].get('mapId')
+			}).show();
+		} else {
+			Ext.Msg.alert("系统提示", "请选择一条数据！");
+		}
+	},
+	doInteraction: function() {
+		var records = this.getSelectedRecords();
+		if (records.length == 1) {
+			Ext.create('Base.gis.thematic.InteractionFormWindow', {
+				opener: this,
+				mapId: records[0].get('mapId')
+			}).show();
+		} else {
+			Ext.Msg.alert("系统提示", "请选择一条数据！");
+		}
+	},
+	doToolbar: function() {
+		var records = this.getSelectedRecords();
+		if (records.length == 1) {
+			Ext.create('Base.gis.thematic.ToolbarFormWindow', {
+				opener: this,
+				mapId: records[0].get('mapId')
+			}).show();
+		} else {
+			Ext.Msg.alert("系统提示", "请选择一条数据！");
+		}
 	},
 	queryData: function() {
 		this.getStore().load();
