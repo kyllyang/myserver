@@ -50,6 +50,29 @@ Ext.define('Base.gis.MapContainer', {
 	getDefaultLayerVector: function() {
 		return this.defaultLayerVector;
 	},
+	createControl: function(opt) {
+		var that = this;
+
+		var button = document.createElement('button');
+		button.innerHTML = "<img src=\"" + ctx + opt.icon + "\" title=\"" + opt.tipLabel + "\">";
+		button.addEventListener('click', function(event) {
+			opt.onClick(that, that.map, event)
+		}, false);
+
+		var element = document.createElement('div');
+		element.className = opt.className + ' ol-unselectable ol-control';
+		element.appendChild(button);
+
+		return new ol.control.Control({
+			element: element
+		});
+	},
+	doToolbarRestore: function() {
+		this.map.removeInteraction(this.getDefaultInteractionSelect());
+		this.map.removeInteraction(this.getDefaultInteractionDraw());
+		this.map.removeInteraction(this.getDefaultInteractionModify());
+		this.map.removeInteraction(this.getDefaultInteractionTranslate());
+	},
 	loadMap: function(thematicId) {
 		Ext.Ajax.request({
 			url: ctx + '/gis/map/config.ctrl',
@@ -264,7 +287,7 @@ Ext.define('Base.gis.MapContainer', {
 		this.map.addLayer(this.defaultLayerVector);
 
 		// init interaction control
-		this.map.addControl(myServer.createControl({
+		this.map.addControl(this.createControl({
 			icon: '/resource/image/icon/select.png',
 			className: 'toolbar-select',
 			tipLabel: '选择',
@@ -275,7 +298,7 @@ Ext.define('Base.gis.MapContainer', {
 				map.addInteraction(select);
 			}
 		}));
-		this.map.addControl(myServer.createControl({
+		this.map.addControl(this.createControl({
 			icon: '/resource/image/icon/point.png',
 			className: 'toolbar-draw-point',
 			tipLabel: '绘制点',
@@ -289,7 +312,7 @@ Ext.define('Base.gis.MapContainer', {
 				map.addInteraction(draw);
 			}
 		}));
-		this.map.addControl(myServer.createControl({
+		this.map.addControl(this.createControl({
 			icon: '/resource/image/icon/linestring.png',
 			className: 'toolbar-draw-linestring',
 			tipLabel: '绘制线',
@@ -303,7 +326,7 @@ Ext.define('Base.gis.MapContainer', {
 				map.addInteraction(draw);
 			}
 		}));
-		this.map.addControl(myServer.createControl({
+		this.map.addControl(this.createControl({
 			icon: '/resource/image/icon/polygon.png',
 			className: 'toolbar-draw-polygon',
 			tipLabel: '绘制面',
@@ -317,7 +340,7 @@ Ext.define('Base.gis.MapContainer', {
 				map.addInteraction(draw);
 			}
 		}));
-		this.map.addControl(myServer.createControl({
+		this.map.addControl(this.createControl({
 			icon: '/resource/image/icon/modify.png',
 			className: 'toolbar-modify',
 			tipLabel: '修改',
@@ -335,7 +358,7 @@ Ext.define('Base.gis.MapContainer', {
 				map.addInteraction(modify);
 			}
 		}));
-		this.map.addControl(myServer.createControl({
+		this.map.addControl(this.createControl({
 			icon: '/resource/image/icon/translate.png',
 			className: 'toolbar-translate',
 			tipLabel: '移动',
@@ -353,15 +376,19 @@ Ext.define('Base.gis.MapContainer', {
 				map.addInteraction(translate);
 			}
 		}));
-		this.map.addControl(myServer.createControl({
+		this.map.addControl(this.createControl({
 			icon: '/resource/image/icon/erase.png',
 			className: 'toolbar-erase',
 			tipLabel: '擦除',
 			onClick: function(mapContainer, map, event) {
+				var select = mapContainer.getDefaultInteractionSelect();
+				if (!Ext.isEmpty(select)) {
+					select.getFeatures().clear();
+				}
 				mapContainer.getDefaultLayerVector().getSource().clear();
 			}
 		}));
-		this.map.addControl(myServer.createControl({
+		this.map.addControl(this.createControl({
 			icon: '/resource/image/icon/restore.png',
 			className: 'toolbar-restore',
 			tipLabel: '恢复',
@@ -369,12 +396,6 @@ Ext.define('Base.gis.MapContainer', {
 				mapContainer.doToolbarRestore();
 			}
 		}));
-	},
-	doToolbarRestore: function() {
-		this.map.removeInteraction(this.getDefaultInteractionSelect());
-		this.map.removeInteraction(this.getDefaultInteractionDraw());
-		this.map.removeInteraction(this.getDefaultInteractionModify());
-		this.map.removeInteraction(this.getDefaultInteractionTranslate());
 	},
 	_getRendererTypes: function(renderer) {
 		if (Ext.isEmpty(renderer)) {
