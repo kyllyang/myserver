@@ -2,7 +2,9 @@ package org.kyll.myserver.base.gis.service.impl;
 
 import org.apache.commons.lang.StringUtils;
 import org.kyll.myserver.base.gis.dao.OlControlDao;
+import org.kyll.myserver.base.gis.dao.OlMapDao;
 import org.kyll.myserver.base.gis.entity.OlControl;
+import org.kyll.myserver.base.gis.entity.OlMap;
 import org.kyll.myserver.base.gis.service.OlControlService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,8 @@ import java.util.List;
 public class OlControlServiceImpl implements OlControlService {
 	@Autowired
 	private OlControlDao olControlDao;
+	@Autowired
+	private OlMapDao olMapDao;
 
 	@Override
 	public OlControl get(Long id) {
@@ -32,5 +36,16 @@ public class OlControlServiceImpl implements OlControlService {
 			hql.append(" and t.controlEnabled = '").append(enabled).append("'");
 		}
 		return olControlDao.find(hql);
+	}
+
+	@Override
+	public void save(Long mapId, List<OlControl> olControlList) {
+		OlMap olMap = olMapDao.get(mapId);
+
+		olControlDao.delete(olControlDao.find("from OlControl t where t.olMap.id = '" + olMap.getId() + "'"));
+		for (OlControl olControl : olControlList) {
+			olControl.setOlMap(olMap);
+			olControlDao.save(olControl);
+		}
 	}
 }

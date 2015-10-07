@@ -8,32 +8,59 @@ import org.kyll.myserver.base.common.Vo;
  */
 public class OlControlVo implements Vo<Long> {
 	private Long id;
-	private String controlClassName;
-	private String controlEnabled;
-	private String autoHide;
-	private String className;
-	private String collapsed;
-	private String collapseLabel;
-	private String collapsible;
-	private String coordinateFormat;
-	private String delta;
-	private String duration;
-	private String extent;
-	private String keys;
-	private String label;
-	private String labelActive;
-	private String layers;
-	private String maxResolution;
-	private String minResolution;
-	private String minWidth;
-	private String projection;
-	private String tipLabel;
-	private String undefinedHTML;
-	private String units;
-	private String zoomInLabel;
-	private String zoomInTipLabel;
-	private String zoomOutLabel;
-	private String zoomOutTipLabel;
+	private Long mapId;
+	private String attribution;
+	private String attributionClassName;
+	private String attributionCollapsible;
+	private String attributionCollapsed;
+	private String attributionLabel;
+	private String attributionCollapseLabel;
+	private String attributionTipLabel;
+	private String fullScreen;
+	private String fullScreenClassName;
+	private String fullScreenKeys;
+	private String fullScreenLabel;
+	private String fullScreenLabelActive;
+	private String fullScreenTipLabel;
+	private String mousePosition;
+	private String mousePositionClassName;
+	private String mousePositionCoordinateFormat;
+	private String mousePositionProjection;
+	private String mousePositionUndefinedHTML;
+	private String overviewMap;
+	private String overviewMapCollapsible;
+	private String overviewMapCollapsed;
+	private String overviewMapLabel;
+	private String overviewMapCollapseLabel;
+	private String overviewMapTipLabel;
+	private String rotate;
+	private String rotateClassName;
+	private String rotateAutoHide;
+	private String rotateDuration;
+	private String rotateLabel;
+	private String rotateTipLabel;
+	private String scaleLine;
+	private String scaleLineClassName;
+	private String scaleLineMinWidth;
+	private String scaleLineUnits;
+	private String zoom;
+	private String zoomClassName;
+	private String zoomDuration;
+	private String zoomZoomInLabel;
+	private String zoomZoomOutLabel;
+	private String zoomDelta;
+	private String zoomZoomInTipLabel;
+	private String zoomZoomOutTipLabel;
+	private String zoomSlider;
+	private String zoomSliderClassName;
+	private String zoomSliderDuration;
+	private String zoomSliderMaxResolution;
+	private String zoomSliderMinResolution;
+	private String zoomToExtent;
+	private String zoomToExtentClassName;
+	private String zoomToExtentExtent;
+	private String zoomToExtentLabel;
+	private String zoomToExtentTipLabel;
 
 	public OlControlVo() {
 	}
@@ -47,211 +74,427 @@ public class OlControlVo implements Vo<Long> {
 		this.id = id;
 	}
 
-	public String getControlClassName() {
-		return controlClassName;
+	public Long getMapId() {
+		return mapId;
 	}
 
-	public void setControlClassName(String controlClassName) {
-		this.controlClassName = controlClassName;
+	public void setMapId(Long mapId) {
+		this.mapId = mapId;
 	}
 
-	public String getControlEnabled() {
-		return controlEnabled;
+	public String getAttribution() {
+		return attribution;
 	}
 
-	public void setControlEnabled(String controlEnabled) {
-		this.controlEnabled = controlEnabled;
+	public void setAttribution(String attribution) {
+		this.attribution = attribution;
 	}
 
-	public String getAutoHide() {
-		return autoHide;
+	public String getAttributionClassName() {
+		return attributionClassName;
 	}
 
-	public void setAutoHide(String autoHide) {
-		this.autoHide = autoHide;
+	public void setAttributionClassName(String attributionClassName) {
+		this.attributionClassName = attributionClassName;
 	}
 
-	public String getClassName() {
-		return className;
+	public String getAttributionCollapsible() {
+		return attributionCollapsible;
 	}
 
-	public void setClassName(String className) {
-		this.className = className;
+	public void setAttributionCollapsible(String attributionCollapsible) {
+		this.attributionCollapsible = attributionCollapsible;
 	}
 
-	public String getCollapsed() {
-		return collapsed;
+	public String getAttributionCollapsed() {
+		return attributionCollapsed;
 	}
 
-	public void setCollapsed(String collapsed) {
-		this.collapsed = collapsed;
+	public void setAttributionCollapsed(String attributionCollapsed) {
+		this.attributionCollapsed = attributionCollapsed;
 	}
 
-	public String getCollapseLabel() {
-		return collapseLabel;
+	public String getAttributionLabel() {
+		return attributionLabel;
 	}
 
-	public void setCollapseLabel(String collapseLabel) {
-		this.collapseLabel = collapseLabel;
+	public void setAttributionLabel(String attributionLabel) {
+		this.attributionLabel = attributionLabel;
 	}
 
-	public String getCollapsible() {
-		return collapsible;
+	public String getAttributionCollapseLabel() {
+		return attributionCollapseLabel;
 	}
 
-	public void setCollapsible(String collapsible) {
-		this.collapsible = collapsible;
+	public void setAttributionCollapseLabel(String attributionCollapseLabel) {
+		this.attributionCollapseLabel = attributionCollapseLabel;
 	}
 
-	public String getCoordinateFormat() {
-		return coordinateFormat;
+	public String getAttributionTipLabel() {
+		return attributionTipLabel;
 	}
 
-	public void setCoordinateFormat(String coordinateFormat) {
-		this.coordinateFormat = coordinateFormat;
+	public void setAttributionTipLabel(String attributionTipLabel) {
+		this.attributionTipLabel = attributionTipLabel;
 	}
 
-	public String getDelta() {
-		return delta;
+	public String getFullScreen() {
+		return fullScreen;
 	}
 
-	public void setDelta(String delta) {
-		this.delta = delta;
+	public void setFullScreen(String fullScreen) {
+		this.fullScreen = fullScreen;
 	}
 
-	public String getDuration() {
-		return duration;
+	public String getFullScreenClassName() {
+		return fullScreenClassName;
 	}
 
-	public void setDuration(String duration) {
-		this.duration = duration;
+	public void setFullScreenClassName(String fullScreenClassName) {
+		this.fullScreenClassName = fullScreenClassName;
 	}
 
-	public String getExtent() {
-		return extent;
+	public String getFullScreenKeys() {
+		return fullScreenKeys;
 	}
 
-	public void setExtent(String extent) {
-		this.extent = extent;
+	public void setFullScreenKeys(String fullScreenKeys) {
+		this.fullScreenKeys = fullScreenKeys;
 	}
 
-	public String getKeys() {
-		return keys;
+	public String getFullScreenLabel() {
+		return fullScreenLabel;
 	}
 
-	public void setKeys(String keys) {
-		this.keys = keys;
+	public void setFullScreenLabel(String fullScreenLabel) {
+		this.fullScreenLabel = fullScreenLabel;
 	}
 
-	public String getLabel() {
-		return label;
+	public String getFullScreenLabelActive() {
+		return fullScreenLabelActive;
 	}
 
-	public void setLabel(String label) {
-		this.label = label;
+	public void setFullScreenLabelActive(String fullScreenLabelActive) {
+		this.fullScreenLabelActive = fullScreenLabelActive;
 	}
 
-	public String getLabelActive() {
-		return labelActive;
+	public String getFullScreenTipLabel() {
+		return fullScreenTipLabel;
 	}
 
-	public void setLabelActive(String labelActive) {
-		this.labelActive = labelActive;
+	public void setFullScreenTipLabel(String fullScreenTipLabel) {
+		this.fullScreenTipLabel = fullScreenTipLabel;
 	}
 
-	public String getLayers() {
-		return layers;
+	public String getMousePosition() {
+		return mousePosition;
 	}
 
-	public void setLayers(String layers) {
-		this.layers = layers;
+	public void setMousePosition(String mousePosition) {
+		this.mousePosition = mousePosition;
 	}
 
-	public String getMaxResolution() {
-		return maxResolution;
+	public String getMousePositionClassName() {
+		return mousePositionClassName;
 	}
 
-	public void setMaxResolution(String maxResolution) {
-		this.maxResolution = maxResolution;
+	public void setMousePositionClassName(String mousePositionClassName) {
+		this.mousePositionClassName = mousePositionClassName;
 	}
 
-	public String getMinResolution() {
-		return minResolution;
+	public String getMousePositionCoordinateFormat() {
+		return mousePositionCoordinateFormat;
 	}
 
-	public void setMinResolution(String minResolution) {
-		this.minResolution = minResolution;
+	public void setMousePositionCoordinateFormat(String mousePositionCoordinateFormat) {
+		this.mousePositionCoordinateFormat = mousePositionCoordinateFormat;
 	}
 
-	public String getMinWidth() {
-		return minWidth;
+	public String getMousePositionProjection() {
+		return mousePositionProjection;
 	}
 
-	public void setMinWidth(String minWidth) {
-		this.minWidth = minWidth;
+	public void setMousePositionProjection(String mousePositionProjection) {
+		this.mousePositionProjection = mousePositionProjection;
 	}
 
-	public String getProjection() {
-		return projection;
+	public String getMousePositionUndefinedHTML() {
+		return mousePositionUndefinedHTML;
 	}
 
-	public void setProjection(String projection) {
-		this.projection = projection;
+	public void setMousePositionUndefinedHTML(String mousePositionUndefinedHTML) {
+		this.mousePositionUndefinedHTML = mousePositionUndefinedHTML;
 	}
 
-	public String getTipLabel() {
-		return tipLabel;
+	public String getOverviewMap() {
+		return overviewMap;
 	}
 
-	public void setTipLabel(String tipLabel) {
-		this.tipLabel = tipLabel;
+	public void setOverviewMap(String overviewMap) {
+		this.overviewMap = overviewMap;
 	}
 
-	public String getUndefinedHTML() {
-		return undefinedHTML;
+	public String getOverviewMapCollapsible() {
+		return overviewMapCollapsible;
 	}
 
-	public void setUndefinedHTML(String undefinedHTML) {
-		this.undefinedHTML = undefinedHTML;
+	public void setOverviewMapCollapsible(String overviewMapCollapsible) {
+		this.overviewMapCollapsible = overviewMapCollapsible;
 	}
 
-	public String getUnits() {
-		return units;
+	public String getOverviewMapCollapsed() {
+		return overviewMapCollapsed;
 	}
 
-	public void setUnits(String units) {
-		this.units = units;
+	public void setOverviewMapCollapsed(String overviewMapCollapsed) {
+		this.overviewMapCollapsed = overviewMapCollapsed;
 	}
 
-	public String getZoomInLabel() {
-		return zoomInLabel;
+	public String getOverviewMapLabel() {
+		return overviewMapLabel;
 	}
 
-	public void setZoomInLabel(String zoomInLabel) {
-		this.zoomInLabel = zoomInLabel;
+	public void setOverviewMapLabel(String overviewMapLabel) {
+		this.overviewMapLabel = overviewMapLabel;
 	}
 
-	public String getZoomInTipLabel() {
-		return zoomInTipLabel;
+	public String getOverviewMapCollapseLabel() {
+		return overviewMapCollapseLabel;
 	}
 
-	public void setZoomInTipLabel(String zoomInTipLabel) {
-		this.zoomInTipLabel = zoomInTipLabel;
+	public void setOverviewMapCollapseLabel(String overviewMapCollapseLabel) {
+		this.overviewMapCollapseLabel = overviewMapCollapseLabel;
 	}
 
-	public String getZoomOutLabel() {
-		return zoomOutLabel;
+	public String getOverviewMapTipLabel() {
+		return overviewMapTipLabel;
 	}
 
-	public void setZoomOutLabel(String zoomOutLabel) {
-		this.zoomOutLabel = zoomOutLabel;
+	public void setOverviewMapTipLabel(String overviewMapTipLabel) {
+		this.overviewMapTipLabel = overviewMapTipLabel;
 	}
 
-	public String getZoomOutTipLabel() {
-		return zoomOutTipLabel;
+	public String getRotate() {
+		return rotate;
 	}
 
-	public void setZoomOutTipLabel(String zoomOutTipLabel) {
-		this.zoomOutTipLabel = zoomOutTipLabel;
+	public void setRotate(String rotate) {
+		this.rotate = rotate;
+	}
+
+	public String getRotateClassName() {
+		return rotateClassName;
+	}
+
+	public void setRotateClassName(String rotateClassName) {
+		this.rotateClassName = rotateClassName;
+	}
+
+	public String getRotateAutoHide() {
+		return rotateAutoHide;
+	}
+
+	public void setRotateAutoHide(String rotateAutoHide) {
+		this.rotateAutoHide = rotateAutoHide;
+	}
+
+	public String getRotateDuration() {
+		return rotateDuration;
+	}
+
+	public void setRotateDuration(String rotateDuration) {
+		this.rotateDuration = rotateDuration;
+	}
+
+	public String getRotateLabel() {
+		return rotateLabel;
+	}
+
+	public void setRotateLabel(String rotateLabel) {
+		this.rotateLabel = rotateLabel;
+	}
+
+	public String getRotateTipLabel() {
+		return rotateTipLabel;
+	}
+
+	public void setRotateTipLabel(String rotateTipLabel) {
+		this.rotateTipLabel = rotateTipLabel;
+	}
+
+	public String getScaleLine() {
+		return scaleLine;
+	}
+
+	public void setScaleLine(String scaleLine) {
+		this.scaleLine = scaleLine;
+	}
+
+	public String getScaleLineClassName() {
+		return scaleLineClassName;
+	}
+
+	public void setScaleLineClassName(String scaleLineClassName) {
+		this.scaleLineClassName = scaleLineClassName;
+	}
+
+	public String getScaleLineMinWidth() {
+		return scaleLineMinWidth;
+	}
+
+	public void setScaleLineMinWidth(String scaleLineMinWidth) {
+		this.scaleLineMinWidth = scaleLineMinWidth;
+	}
+
+	public String getScaleLineUnits() {
+		return scaleLineUnits;
+	}
+
+	public void setScaleLineUnits(String scaleLineUnits) {
+		this.scaleLineUnits = scaleLineUnits;
+	}
+
+	public String getZoom() {
+		return zoom;
+	}
+
+	public void setZoom(String zoom) {
+		this.zoom = zoom;
+	}
+
+	public String getZoomClassName() {
+		return zoomClassName;
+	}
+
+	public void setZoomClassName(String zoomClassName) {
+		this.zoomClassName = zoomClassName;
+	}
+
+	public String getZoomDuration() {
+		return zoomDuration;
+	}
+
+	public void setZoomDuration(String zoomDuration) {
+		this.zoomDuration = zoomDuration;
+	}
+
+	public String getZoomZoomInLabel() {
+		return zoomZoomInLabel;
+	}
+
+	public void setZoomZoomInLabel(String zoomZoomInLabel) {
+		this.zoomZoomInLabel = zoomZoomInLabel;
+	}
+
+	public String getZoomZoomOutLabel() {
+		return zoomZoomOutLabel;
+	}
+
+	public void setZoomZoomOutLabel(String zoomZoomOutLabel) {
+		this.zoomZoomOutLabel = zoomZoomOutLabel;
+	}
+
+	public String getZoomDelta() {
+		return zoomDelta;
+	}
+
+	public void setZoomDelta(String zoomDelta) {
+		this.zoomDelta = zoomDelta;
+	}
+
+	public String getZoomZoomInTipLabel() {
+		return zoomZoomInTipLabel;
+	}
+
+	public void setZoomZoomInTipLabel(String zoomZoomInTipLabel) {
+		this.zoomZoomInTipLabel = zoomZoomInTipLabel;
+	}
+
+	public String getZoomZoomOutTipLabel() {
+		return zoomZoomOutTipLabel;
+	}
+
+	public void setZoomZoomOutTipLabel(String zoomZoomOutTipLabel) {
+		this.zoomZoomOutTipLabel = zoomZoomOutTipLabel;
+	}
+
+	public String getZoomSlider() {
+		return zoomSlider;
+	}
+
+	public void setZoomSlider(String zoomSlider) {
+		this.zoomSlider = zoomSlider;
+	}
+
+	public String getZoomSliderClassName() {
+		return zoomSliderClassName;
+	}
+
+	public void setZoomSliderClassName(String zoomSliderClassName) {
+		this.zoomSliderClassName = zoomSliderClassName;
+	}
+
+	public String getZoomSliderDuration() {
+		return zoomSliderDuration;
+	}
+
+	public void setZoomSliderDuration(String zoomSliderDuration) {
+		this.zoomSliderDuration = zoomSliderDuration;
+	}
+
+	public String getZoomSliderMaxResolution() {
+		return zoomSliderMaxResolution;
+	}
+
+	public void setZoomSliderMaxResolution(String zoomSliderMaxResolution) {
+		this.zoomSliderMaxResolution = zoomSliderMaxResolution;
+	}
+
+	public String getZoomSliderMinResolution() {
+		return zoomSliderMinResolution;
+	}
+
+	public void setZoomSliderMinResolution(String zoomSliderMinResolution) {
+		this.zoomSliderMinResolution = zoomSliderMinResolution;
+	}
+
+	public String getZoomToExtent() {
+		return zoomToExtent;
+	}
+
+	public void setZoomToExtent(String zoomToExtent) {
+		this.zoomToExtent = zoomToExtent;
+	}
+
+	public String getZoomToExtentClassName() {
+		return zoomToExtentClassName;
+	}
+
+	public void setZoomToExtentClassName(String zoomToExtentClassName) {
+		this.zoomToExtentClassName = zoomToExtentClassName;
+	}
+
+	public String getZoomToExtentExtent() {
+		return zoomToExtentExtent;
+	}
+
+	public void setZoomToExtentExtent(String zoomToExtentExtent) {
+		this.zoomToExtentExtent = zoomToExtentExtent;
+	}
+
+	public String getZoomToExtentLabel() {
+		return zoomToExtentLabel;
+	}
+
+	public void setZoomToExtentLabel(String zoomToExtentLabel) {
+		this.zoomToExtentLabel = zoomToExtentLabel;
+	}
+
+	public String getZoomToExtentTipLabel() {
+		return zoomToExtentTipLabel;
+	}
+
+	public void setZoomToExtentTipLabel(String zoomToExtentTipLabel) {
+		this.zoomToExtentTipLabel = zoomToExtentTipLabel;
 	}
 }

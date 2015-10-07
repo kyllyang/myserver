@@ -11,4 +11,6 @@ import java.util.List;
  */
 public interface OlControlService extends BaseService<OlControl, Long> {
 	List<OlControl> getByOlMap(Long id, String enabled);
+
+	void save(Long mapId, List<OlControl> olControlList);
 }
