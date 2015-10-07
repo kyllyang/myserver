@@ -100,6 +100,7 @@ Ext.define('Base.gis.MapContainer', {
 		var layerGroup = this.mapConfig.layerGroup;
 		var controls = this.mapConfig.controls;
 		var interactions = this.mapConfig.interactions;
+		var toolbars = this.mapConfig.toolbars;
 
 		var viewConfig = {
 			projection: view.projection,
@@ -287,115 +288,127 @@ Ext.define('Base.gis.MapContainer', {
 		this.map.addLayer(this.defaultLayerVector);
 
 		// init toolbar
-		this.map.addControl(this.createControl({
-			icon: '/resource/image/icon/select.png',
-			className: 'toolbar-select',
-			tipLabel: '选择',
-			onClick: function(mapContainer, map, event) {
-				mapContainer.doToolbarRestore();
-				var select = new ol.interaction.Select();
-				mapContainer.setDefaultInteractionSelect(select);
-				map.addInteraction(select);
-			}
-		}));
-		this.map.addControl(this.createControl({
-			icon: '/resource/image/icon/point.png',
-			className: 'toolbar-draw-point',
-			tipLabel: '绘制点',
-			onClick: function(mapContainer, map, event) {
-				mapContainer.doToolbarRestore();
-				var draw = new ol.interaction.Draw({
-					features: mapContainer.getDefaultLayerVector().getSource().getFeaturesCollection(),
-					type: 'Point'
-				});
-				mapContainer.setDefaultInteractionDraw(draw);
-				map.addInteraction(draw);
-			}
-		}));
-		this.map.addControl(this.createControl({
-			icon: '/resource/image/icon/linestring.png',
-			className: 'toolbar-draw-linestring',
-			tipLabel: '绘制线',
-			onClick: function(mapContainer, map, event) {
-				mapContainer.doToolbarRestore();
-				var draw = new ol.interaction.Draw({
-					features: mapContainer.getDefaultLayerVector().getSource().getFeaturesCollection(),
-					type: 'LineString'
-				});
-				mapContainer.setDefaultInteractionDraw(draw);
-				map.addInteraction(draw);
-			}
-		}));
-		this.map.addControl(this.createControl({
-			icon: '/resource/image/icon/polygon.png',
-			className: 'toolbar-draw-polygon',
-			tipLabel: '绘制面',
-			onClick: function(mapContainer, map, event) {
-				mapContainer.doToolbarRestore();
-				var draw = new ol.interaction.Draw({
-					features: mapContainer.getDefaultLayerVector().getSource().getFeaturesCollection(),
-					type: 'Polygon'
-				});
-				mapContainer.setDefaultInteractionDraw(draw);
-				map.addInteraction(draw);
-			}
-		}));
-		this.map.addControl(this.createControl({
-			icon: '/resource/image/icon/modify.png',
-			className: 'toolbar-modify',
-			tipLabel: '修改',
-			onClick: function(mapContainer, map, event) {
-				mapContainer.doToolbarRestore();
+		for (var i = 0; i < toolbars.length; i++) {
+			var toolbar = toolbars[i];
+			if ('select' == toolbar.toolbarClassName) {
+				this.map.addControl(this.createControl({
+					icon: '/resource/image/icon/select.png',
+					className: 'toolbar-select',
+					tipLabel: '选择',
+					onClick: function(mapContainer, map, event) {
+						mapContainer.doToolbarRestore();
+						var select = new ol.interaction.Select();
+						mapContainer.setDefaultInteractionSelect(select);
+						map.addInteraction(select);
+					}
+				}));
+			} else if ('drawPoint' == toolbar.toolbarClassName) {
+				this.map.addControl(this.createControl({
+					icon: '/resource/image/icon/point.png',
+					className: 'toolbar-draw-point',
+					tipLabel: '绘制点',
+					onClick: function(mapContainer, map, event) {
+						mapContainer.doToolbarRestore();
+						var draw = new ol.interaction.Draw({
+							features: mapContainer.getDefaultLayerVector().getSource().getFeaturesCollection(),
+							type: 'Point'
+						});
+						mapContainer.setDefaultInteractionDraw(draw);
+						map.addInteraction(draw);
+					}
+				}));
+			} else if ('drawLinestring' == toolbar.toolbarClassName) {
+				this.map.addControl(this.createControl({
+					icon: '/resource/image/icon/linestring.png',
+					className: 'toolbar-draw-linestring',
+					tipLabel: '绘制线',
+					onClick: function(mapContainer, map, event) {
+						mapContainer.doToolbarRestore();
+						var draw = new ol.interaction.Draw({
+							features: mapContainer.getDefaultLayerVector().getSource().getFeaturesCollection(),
+							type: 'LineString'
+						});
+						mapContainer.setDefaultInteractionDraw(draw);
+						map.addInteraction(draw);
+					}
+				}));
+			} else if ('drawPolygon' == toolbar.toolbarClassName) {
+				this.map.addControl(this.createControl({
+					icon: '/resource/image/icon/polygon.png',
+					className: 'toolbar-draw-polygon',
+					tipLabel: '绘制面',
+					onClick: function(mapContainer, map, event) {
+						mapContainer.doToolbarRestore();
+						var draw = new ol.interaction.Draw({
+							features: mapContainer.getDefaultLayerVector().getSource().getFeaturesCollection(),
+							type: 'Polygon'
+						});
+						mapContainer.setDefaultInteractionDraw(draw);
+						map.addInteraction(draw);
+					}
+				}));
+			} else if ('modify' == toolbar.toolbarClassName) {
+				this.map.addControl(this.createControl({
+					icon: '/resource/image/icon/modify.png',
+					className: 'toolbar-modify',
+					tipLabel: '修改',
+					onClick: function(mapContainer, map, event) {
+						mapContainer.doToolbarRestore();
 
-				var select = new ol.interaction.Select();
-				mapContainer.setDefaultInteractionSelect(select);
-				map.addInteraction(select);
+						var select = new ol.interaction.Select();
+						mapContainer.setDefaultInteractionSelect(select);
+						map.addInteraction(select);
 
-				var modify = new ol.interaction.Modify({
-					features: select.getFeatures()
-				});
-				mapContainer.setDefaultInteractionModify(modify);
-				map.addInteraction(modify);
-			}
-		}));
-		this.map.addControl(this.createControl({
-			icon: '/resource/image/icon/translate.png',
-			className: 'toolbar-translate',
-			tipLabel: '移动',
-			onClick: function(mapContainer, map, event) {
-				mapContainer.doToolbarRestore();
+						var modify = new ol.interaction.Modify({
+							features: select.getFeatures()
+						});
+						mapContainer.setDefaultInteractionModify(modify);
+						map.addInteraction(modify);
+					}
+				}));
+			} else if ('translate' == toolbar.toolbarClassName) {
+				this.map.addControl(this.createControl({
+					icon: '/resource/image/icon/translate.png',
+					className: 'toolbar-translate',
+					tipLabel: '移动',
+					onClick: function(mapContainer, map, event) {
+						mapContainer.doToolbarRestore();
 
-				var select = new ol.interaction.Select();
-				mapContainer.setDefaultInteractionSelect(select);
-				map.addInteraction(select);
+						var select = new ol.interaction.Select();
+						mapContainer.setDefaultInteractionSelect(select);
+						map.addInteraction(select);
 
-				var translate = new ol.interaction.Translate({
-					features: select.getFeatures()
-				});
-				mapContainer.setDefaultInteractionTranslate(translate);
-				map.addInteraction(translate);
+						var translate = new ol.interaction.Translate({
+							features: select.getFeatures()
+						});
+						mapContainer.setDefaultInteractionTranslate(translate);
+						map.addInteraction(translate);
+					}
+				}));
+			} else if ('erase' == toolbar.toolbarClassName) {
+				this.map.addControl(this.createControl({
+					icon: '/resource/image/icon/erase.png',
+					className: 'toolbar-erase',
+					tipLabel: '擦除',
+					onClick: function(mapContainer, map, event) {
+						var select = mapContainer.getDefaultInteractionSelect();
+						if (!Ext.isEmpty(select)) {
+							select.getFeatures().clear();
+						}
+						mapContainer.getDefaultLayerVector().getSource().clear();
+					}
+				}));
+			} else if ('restore' == toolbar.toolbarClassName) {
+				this.map.addControl(this.createControl({
+					icon: '/resource/image/icon/restore.png',
+					className: 'toolbar-restore',
+					tipLabel: '恢复',
+					onClick: function(mapContainer, map, event) {
+						mapContainer.doToolbarRestore();
+					}
+				}));
 			}
-		}));
-		this.map.addControl(this.createControl({
-			icon: '/resource/image/icon/erase.png',
-			className: 'toolbar-erase',
-			tipLabel: '擦除',
-			onClick: function(mapContainer, map, event) {
-				var select = mapContainer.getDefaultInteractionSelect();
-				if (!Ext.isEmpty(select)) {
-					select.getFeatures().clear();
-				}
-				mapContainer.getDefaultLayerVector().getSource().clear();
-			}
-		}));
-		this.map.addControl(this.createControl({
-			icon: '/resource/image/icon/restore.png',
-			className: 'toolbar-restore',
-			tipLabel: '恢复',
-			onClick: function(mapContainer, map, event) {
-				mapContainer.doToolbarRestore();
-			}
-		}));
+		}
 	},
 	_getRendererTypes: function(renderer) {
 		if (Ext.isEmpty(renderer)) {
