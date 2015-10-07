@@ -286,7 +286,7 @@ Ext.define('Base.gis.MapContainer', {
 		});
 		this.map.addLayer(this.defaultLayerVector);
 
-		// init interaction control
+		// init toolbar
 		this.map.addControl(this.createControl({
 			icon: '/resource/image/icon/select.png',
 			className: 'toolbar-select',

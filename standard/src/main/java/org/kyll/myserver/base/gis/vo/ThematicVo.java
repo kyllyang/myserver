@@ -122,6 +122,18 @@ public class ThematicVo implements Vo<Long> {
 	private String interactionPinchZoom;
 	private String interactionPinchZoomDuration;
 
+	private String toolbarSelect;
+	private String toolbarDrawPoint;
+	private String toolbarDrawPointStyle;
+	private String toolbarDrawLineString;
+	private String toolbarDrawLineStringStyle;
+	private String toolbarDrawPolygon;
+	private String toolbarDrawPolygonStyle;
+	private String toolbarModify;
+	private String toolbarTranslate;
+	private String toolbarErase;
+	private String toolbarRestore;
+
 	public ThematicVo() {
 	}
 
@@ -996,5 +1008,93 @@ public class ThematicVo implements Vo<Long> {
 
 	public void setInteractionPinchZoomDuration(String interactionPinchZoomDuration) {
 		this.interactionPinchZoomDuration = interactionPinchZoomDuration;
+	}
+
+	public String getToolbarSelect() {
+		return toolbarSelect;
+	}
+
+	public void setToolbarSelect(String toolbarSelect) {
+		this.toolbarSelect = toolbarSelect;
+	}
+
+	public String getToolbarDrawPoint() {
+		return toolbarDrawPoint;
+	}
+
+	public void setToolbarDrawPoint(String toolbarDrawPoint) {
+		this.toolbarDrawPoint = toolbarDrawPoint;
+	}
+
+	public String getToolbarDrawPointStyle() {
+		return toolbarDrawPointStyle;
+	}
+
+	public void setToolbarDrawPointStyle(String toolbarDrawPointStyle) {
+		this.toolbarDrawPointStyle = toolbarDrawPointStyle;
+	}
+
+	public String getToolbarDrawLineString() {
+		return toolbarDrawLineString;
+	}
+
+	public void setToolbarDrawLineString(String toolbarDrawLineString) {
+		this.toolbarDrawLineString = toolbarDrawLineString;
+	}
+
+	public String getToolbarDrawLineStringStyle() {
+		return toolbarDrawLineStringStyle;
+	}
+
+	public void setToolbarDrawLineStringStyle(String toolbarDrawLineStringStyle) {
+		this.toolbarDrawLineStringStyle = toolbarDrawLineStringStyle;
+	}
+
+	public String getToolbarDrawPolygon() {
+		return toolbarDrawPolygon;
+	}
+
+	public void setToolbarDrawPolygon(String toolbarDrawPolygon) {
+		this.toolbarDrawPolygon = toolbarDrawPolygon;
+	}
+
+	public String getToolbarDrawPolygonStyle() {
+		return toolbarDrawPolygonStyle;
+	}
+
+	public void setToolbarDrawPolygonStyle(String toolbarDrawPolygonStyle) {
+		this.toolbarDrawPolygonStyle = toolbarDrawPolygonStyle;
+	}
+
+	public String getToolbarModify() {
+		return toolbarModify;
+	}
+
+	public void setToolbarModify(String toolbarModify) {
+		this.toolbarModify = toolbarModify;
+	}
+
+	public String getToolbarTranslate() {
+		return toolbarTranslate;
+	}
+
+	public void setToolbarTranslate(String toolbarTranslate) {
+		this.toolbarTranslate = toolbarTranslate;
+	}
+
+	public String getToolbarErase() {
+		return toolbarErase;
+	}
+
+	public void setToolbarErase(String toolbarErase) {
+		this.toolbarErase = toolbarErase;
+	}
+
+	public String getToolbarRestore() {
+		return toolbarRestore;
+	}
+
+	public void setToolbarRestore(String toolbarRestore) {
+		this.toolbarRestore = toolbarRestore;
 	}
 }

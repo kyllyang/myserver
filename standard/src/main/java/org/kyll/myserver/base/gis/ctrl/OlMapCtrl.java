@@ -4,10 +4,7 @@ import net.sf.json.JSONObject;
 import org.kyll.myserver.base.gis.entity.OlMap;
 import org.kyll.myserver.base.gis.entity.Thematic;
 import org.kyll.myserver.base.gis.service.*;
-import org.kyll.myserver.base.gis.vo.OlControlVo;
-import org.kyll.myserver.base.gis.vo.OlInteractionVo;
-import org.kyll.myserver.base.gis.vo.OlMapVo;
-import org.kyll.myserver.base.gis.vo.OlViewVo;
+import org.kyll.myserver.base.gis.vo.*;
 import org.kyll.myserver.base.util.ConstUtils;
 import org.kyll.myserver.base.util.JsonUtils;
 import org.kyll.myserver.base.util.POJOUtils;
@@ -37,6 +34,8 @@ public class OlMapCtrl {
 	private OlInteractionService olInteractionService;
 	@Autowired
 	private OlLayerGroupService olLayerGroupService;
+	@Autowired
+	private OlToolbarService olToolbarService;
 
 	@RequestMapping("/gis/map/config.ctrl")
 	public void config(Long thematicId, HttpServletResponse response) throws Exception {
@@ -56,6 +55,7 @@ public class OlMapCtrl {
 			jo.put("layerGroup", olLayerGroupService.getTreeJson(mapId));
 			jo.put("controls", JsonUtils.convert(POJOUtils.convert(olControlService.getByOlMap(mapId, ConstUtils.GIS_OL_CONTROL_ENABLED), OlControlVo.class)));
 			jo.put("interactions", JsonUtils.convert(POJOUtils.convert(olInteractionService.getByOlMap(mapId, ConstUtils.GIS_OL_INTERACTION_ENABLED), OlInteractionVo.class)));
+			jo.put("toolbars", JsonUtils.convert(POJOUtils.convert(olToolbarService.getByOlMap(mapId, ConstUtils.GIS_OL_TOOLBAR_ENABLED), OlToolbarVo.class)));
 		}
 		jo.put("result", resultJo);
 

@@ -98,6 +98,21 @@ public final class ConstUtils {
 	public static final String GIS_OL_INTERACTION_SELECT = "ol.interaction.Select";
 	public static final String GIS_OL_INTERACTION_SNAP = "ol.interaction.Snap";
 	public static final String GIS_OL_INTERACTION_TRANSLATE = "ol.interaction.Translate";
+	/**
+	 * Openlayers 启用工具栏
+	 */
+	public static final String GIS_OL_TOOLBAR_ENABLED = "1";
+	/**
+	 * Openlayers 工具栏项目
+	 */
+	public static final String GIS_OL_TOOLBAR_SELECT = "select";
+	public static final String GIS_OL_TOOLBAR_DRAW_POINT = "drawPoint";
+	public static final String GIS_OL_TOOLBAR_DRAW_LINESTRING = "drawLinestring";
+	public static final String GIS_OL_TOOLBAR_DRAW_POLYGON = "drawPolygon";
+	public static final String GIS_OL_TOOLBAR_MODIFY = "modify";
+	public static final String GIS_OL_TOOLBAR_TRANSLATE = "translate";
+	public static final String GIS_OL_TOOLBAR_ERASE = "erase";
+	public static final String GIS_OL_TOOLBAR_RESTORE = "restore";
 
 	private static ApplicationContext applicationContext;
 	private static boolean assignApplicationContext = false;
