@@ -9,7 +9,7 @@ import org.kyll.myserver.base.gis.entity.OlLayerGroup;
  * Date: 2015-10-01 11:59
  */
 public interface OlLayerGroupService extends BaseService<OlLayerGroup, Long> {
-	JSONArray getTreeJson(Long mapId);
+	JSONArray getTreeJson(Long mapId, Boolean checked);
 
 	void save(Long mapId, String layerGroup);
 }

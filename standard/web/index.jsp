@@ -40,6 +40,8 @@
 				myServer.showInfomationNotification();
 			} else if (key == e.F) {
 				myServer.showFunctionNotification();
+			} else if (key == e.L) {
+				myServer.showLayerGroupNotification();
 			}
 		});
 

@@ -23,7 +23,7 @@ public class OlLayerGroupCtrl {
 
 	@RequestMapping("/gis/layergroup/tree.ctrl")
 	public void tree(Long mapId, HttpServletResponse response) throws Exception {
-		JSONArray ja = olLayerGroupService.getTreeJson(mapId);
+		JSONArray ja = olLayerGroupService.getTreeJson(mapId, null);
 
 		response.setContentType("text/plain");
 		response.getWriter().println(ja.toString());

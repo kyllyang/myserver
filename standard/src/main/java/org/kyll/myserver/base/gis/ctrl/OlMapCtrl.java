@@ -52,7 +52,7 @@ public class OlMapCtrl {
 			Long mapId = olMap.getId();
 			jo.put("map", JsonUtils.convert(POJOUtils.convert(olMap, OlMapVo.class)));
 			jo.put("view", JsonUtils.convert(POJOUtils.convert(olViewService.getByOlMap(mapId), OlViewVo.class)));
-			jo.put("layerGroup", olLayerGroupService.getTreeJson(mapId));
+			jo.put("layerGroup", olLayerGroupService.getTreeJson(mapId, true));
 			jo.put("controls", JsonUtils.convert(POJOUtils.convert(olControlService.getByOlMap(mapId, ConstUtils.GIS_OL_CONTROL_ENABLED), OlControlVo.class)));
 			jo.put("interactions", JsonUtils.convert(POJOUtils.convert(olInteractionService.getByOlMap(mapId, ConstUtils.GIS_OL_INTERACTION_ENABLED), OlInteractionVo.class)));
 			jo.put("toolbars", JsonUtils.convert(POJOUtils.convert(olToolbarService.getByOlMap(mapId, ConstUtils.GIS_OL_TOOLBAR_ENABLED), OlToolbarVo.class)));

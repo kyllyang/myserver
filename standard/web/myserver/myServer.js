@@ -58,6 +58,12 @@ var myServer = {
 	showFunctionNotification: function() {
 		this.getMenuNotification().show();
 	},
+	showLayerGroupNotification: function() {
+		var layerGroupNotification = this.getMapContainer().getLayerGroupNotification();
+		if (!Ext.isEmpty(layerGroupNotification)) {
+			layerGroupNotification.show();
+		}
+	},
 	getBusinessWindowMap: function() {
 		return this.businessWindowMap;
 	},

@@ -43,12 +43,12 @@ public class OlLayerGroupServiceImpl implements OlLayerGroupService {
 	}
 
 	@Override
-	public JSONArray getTreeJson(Long mapId) {
+	public JSONArray getTreeJson(Long mapId, Boolean checked) {
 		List<OlLayerGroup> list = olLayerGroupDao.find("from OlLayerGroup t where t.olMap.id = '" + mapId + "'");
-		return this.recursiveTree(null, list);
+		return this.recursiveTree(null, checked, list);
 	}
 
-	private JSONArray recursiveTree(Long parentId, List<OlLayerGroup> list) {
+	private JSONArray recursiveTree(Long parentId, Boolean checked, List<OlLayerGroup> list) {
 		JSONArray ja = new JSONArray();
 
 		for (OlLayerGroup olLayerGroup : list) {
@@ -74,7 +74,11 @@ public class OlLayerGroupServiceImpl implements OlLayerGroupService {
 					jo.put("leaf", true);
 				}
 
-				JSONArray children = this.recursiveTree(id, list);
+				if (checked != null) {
+					jo.put("checked", checked);
+				}
+
+				JSONArray children = this.recursiveTree(id, checked, list);
 				jo.put("children", children);
 
 				ja.add(jo);

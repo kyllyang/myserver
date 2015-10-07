@@ -9,6 +9,7 @@ Ext.define('Base.gis.MapContainer', {
 	defaultInteractionModify: null,// 默认交互修改
 	defaultInteractionTranslate: null,// 默认交互移动
 	defaultLayerVector: null,// 默认矢量图层
+	layerGroupNotification: null,// 图层结构
 
 	initComponent: function() {
 		Ext.apply(this, {
@@ -49,6 +50,9 @@ Ext.define('Base.gis.MapContainer', {
 	},
 	getDefaultLayerVector: function() {
 		return this.defaultLayerVector;
+	},
+	getLayerGroupNotification: function() {
+		return this.layerGroupNotification;
 	},
 	createControl: function(opt) {
 		var that = this;
@@ -409,6 +413,11 @@ Ext.define('Base.gis.MapContainer', {
 				}));
 			}
 		}
+
+		// init layer group
+		this.layerGroupNotification = Ext.create('Base.gis.LayerGroupNotification', {
+			layerGroup: layerGroup
+		}).show();
 	},
 	_getRendererTypes: function(renderer) {
 		if (Ext.isEmpty(renderer)) {
