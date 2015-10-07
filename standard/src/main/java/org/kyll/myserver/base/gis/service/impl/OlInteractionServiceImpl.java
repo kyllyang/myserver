@@ -2,7 +2,9 @@ package org.kyll.myserver.base.gis.service.impl;
 
 import org.apache.commons.lang.StringUtils;
 import org.kyll.myserver.base.gis.dao.OlInteractionDao;
+import org.kyll.myserver.base.gis.dao.OlMapDao;
 import org.kyll.myserver.base.gis.entity.OlInteraction;
+import org.kyll.myserver.base.gis.entity.OlMap;
 import org.kyll.myserver.base.gis.service.OlInteractionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,8 @@ import java.util.List;
 public class OlInteractionServiceImpl implements OlInteractionService {
 	@Autowired
 	private OlInteractionDao olInteractionDao;
+	@Autowired
+	private OlMapDao olMapDao;
 
 	@Override
 	public OlInteraction get(Long id) {
@@ -32,5 +36,16 @@ public class OlInteractionServiceImpl implements OlInteractionService {
 			hql.append(" and t.interactionEnabled = '").append(enabled).append("'");
 		}
 		return olInteractionDao.find(hql);
+	}
+
+	@Override
+	public void save(Long mapId, List<OlInteraction> olInteractionList) {
+		OlMap olMap = olMapDao.get(mapId);
+
+		olInteractionDao.delete(olInteractionDao.find("from OlInteraction t where t.olMap.id = '" + olMap.getId() + "'"));
+		for (OlInteraction olInteraction : olInteractionList) {
+			olInteraction.setOlMap(olMap);
+			olInteractionDao.save(olInteraction);
+		}
 	}
 }

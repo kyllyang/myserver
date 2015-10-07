@@ -21,526 +21,526 @@ Ext.define('Base.gis.thematic.ControlFormWindow', {
 		Ext.define('FormModel', {
 			extend: 'Ext.data.Model',
 			fields: [
-				{name: 'attribution'},
-				{name: 'attributionClassName'},
-				{name: 'attributionCollapsible'},
-				{name: 'attributionCollapsed'},
-				{name: 'attributionLabel'},
-				{name: 'attributionCollapseLabel'},
-				{name: 'attributionTipLabel'},
-				{name: 'fullScreen'},
-				{name: 'fullScreenClassName'},
-				{name: 'fullScreenKeys'},
-				{name: 'fullScreenLabel'},
-				{name: 'fullScreenLabelActive'},
-				{name: 'fullScreenTipLabel'},
-				{name: 'mousePosition'},
-				{name: 'mousePositionClassName'},
-				{name: 'mousePositionCoordinateFormat'},
-				{name: 'mousePositionProjection'},
-				{name: 'mousePositionUndefinedHTML'},
-				{name: 'overviewMap'},
-				{name: 'overviewMapCollapsible'},
-				{name: 'overviewMapCollapsed'},
-				{name: 'overviewMapLabel'},
-				{name: 'overviewMapCollapseLabel'},
-				{name: 'overviewMapTipLabel'},
-				{name: 'rotate'},
-				{name: 'rotateClassName'},
-				{name: 'rotateAutoHide'},
-				{name: 'rotateDuration'},
-				{name: 'rotateLabel'},
-				{name: 'rotateTipLabel'},
-				{name: 'scaleLine'},
-				{name: 'scaleLineClassName'},
-				{name: 'scaleLineMinWidth'},
-				{name: 'scaleLineUnits'},
-				{name: 'zoom'},
-				{name: 'zoomClassName'},
-				{name: 'zoomDuration'},
-				{name: 'zoomZoomInLabel'},
-				{name: 'zoomZoomOutLabel'},
-				{name: 'zoomDelta'},
-				{name: 'zoomZoomInTipLabel'},
-				{name: 'zoomZoomOutTipLabel'},
-				{name: 'zoomSlider'},
-				{name: 'zoomSliderClassName'},
-				{name: 'zoomSliderDuration'},
-				{name: 'zoomSliderMaxResolution'},
-				{name: 'zoomSliderMinResolution'},
-				{name: 'zoomToExtent'},
-				{name: 'zoomToExtentClassName'},
-				{name: 'zoomToExtentExtent'},
-				{name: 'zoomToExtentLabel'},
-				{name: 'zoomToExtentTipLabel'}
+				{name: 'controlAttribution'},
+				{name: 'controlAttributionClassName'},
+				{name: 'controlAttributionCollapsible'},
+				{name: 'controlAttributionCollapsed'},
+				{name: 'controlAttributionLabel'},
+				{name: 'controlAttributionCollapseLabel'},
+				{name: 'controlAttributionTipLabel'},
+				{name: 'controlFullScreen'},
+				{name: 'controlFullScreenClassName'},
+				{name: 'controlFullScreenKeys'},
+				{name: 'controlFullScreenLabel'},
+				{name: 'controlFullScreenLabelActive'},
+				{name: 'controlFullScreenTipLabel'},
+				{name: 'controlMousePosition'},
+				{name: 'controlMousePositionClassName'},
+				{name: 'controlMousePositionCoordinateFormat'},
+				{name: 'controlMousePositionProjection'},
+				{name: 'controlMousePositionUndefinedHTML'},
+				{name: 'controlOverviewMap'},
+				{name: 'controlOverviewMapCollapsible'},
+				{name: 'controlOverviewMapCollapsed'},
+				{name: 'controlOverviewMapLabel'},
+				{name: 'controlOverviewMapCollapseLabel'},
+				{name: 'controlOverviewMapTipLabel'},
+				{name: 'controlRotate'},
+				{name: 'controlRotateClassName'},
+				{name: 'controlRotateAutoHide'},
+				{name: 'controlRotateDuration'},
+				{name: 'controlRotateLabel'},
+				{name: 'controlRotateTipLabel'},
+				{name: 'controlScaleLine'},
+				{name: 'controlScaleLineClassName'},
+				{name: 'controlScaleLineMinWidth'},
+				{name: 'controlScaleLineUnits'},
+				{name: 'controlZoom'},
+				{name: 'controlZoomClassName'},
+				{name: 'controlZoomDuration'},
+				{name: 'controlZoomcontrolZoomInLabel'},
+				{name: 'controlZoomcontrolZoomOutLabel'},
+				{name: 'controlZoomDelta'},
+				{name: 'controlZoomcontrolZoomInTipLabel'},
+				{name: 'controlZoomcontrolZoomOutTipLabel'},
+				{name: 'controlZoomSlider'},
+				{name: 'controlZoomSliderClassName'},
+				{name: 'controlZoomSliderDuration'},
+				{name: 'controlZoomSliderMaxResolution'},
+				{name: 'controlZoomSliderMinResolution'},
+				{name: 'controlZoomToExtent'},
+				{name: 'controlZoomToExtentClassName'},
+				{name: 'controlZoomToExtentExtent'},
+				{name: 'controlZoomToExtentLabel'},
+				{name: 'controlZoomToExtentTipLabel'}
 			]
 		});
 
-		var attributionCheckbox = Ext.create('Ext.form.field.Checkbox', {
+		var controlAttributionCheckbox = Ext.create('Ext.form.field.Checkbox', {
 			columnWidth: 0.1,
 			boxLabel: '署名',
-			name: 'attribution',
+			name: 'controlAttribution',
 			inputValue: '1',
 			checked: true,
-			qtip: 'Control to show all the attributions associated with the layer sources in the map. This control is one of the default controls included in maps. By default it will show in the bottom right portion of the map, but this can be changed by using a css selector for .ol-attribution.'
+			qtip: 'Control to show all the controlAttributions associated with the layer sources in the map. This control is one of the default controls included in maps. By default it will show in the bottom right portion of the map, but this can be changed by using a css selector for .ol-controlAttribution.'
 		});
-		var attributionClassNameText = Ext.create('Ext.form.field.Text', {
+		var controlAttributionClassNameText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '样式类名',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'attributionClassName',
-			value: 'ol-attribution',
+			name: 'controlAttributionClassName',
+			value: 'ol-controlAttribution',
 			maxLength: 100,
-			qtip: 'CSS class name. Default is ol-attribution.'
+			qtip: 'CSS class name. Default is ol-controlAttribution.'
 		});
-		var attributionCollapsibleCheckbox = Ext.create('Ext.form.field.Checkbox', {
+		var controlAttributionCollapsibleCheckbox = Ext.create('Ext.form.field.Checkbox', {
 			fieldLabel: '可折叠',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'attributionCollapsible',
+			name: 'controlAttributionCollapsible',
 			inputValue: '1',
 			checked: true,
-			qtip: 'Specify if attributions can be collapsed. If you use an OSM source, should be set to false — see OSM Copyright — Default is true.'
+			qtip: 'Specify if controlAttributions can be collapsed. If you use an OSM source, should be set to false — see OSM Copyright — Default is true.'
 		});
-		var attributionCollapsedCheckbox = Ext.create('Ext.form.field.Checkbox', {
+		var controlAttributionCollapsedCheckbox = Ext.create('Ext.form.field.Checkbox', {
 			fieldLabel: '默认折叠',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'attributionCollapsed',
+			name: 'controlAttributionCollapsed',
 			inputValue: '1',
 			checked: true,
-			qtip: 'When set to true, tiles will be loaded while interacting with the map. This may improve the user experience, but can also make map panning and zooming choppy on devices with slow memory.'
+			qtip: 'When set to true, tiles will be loaded while interacting with the map. This may improve the user experience, but can also make map panning and controlZooming choppy on devices with slow memory.'
 		});
-		var attributionLabelText = Ext.create('Ext.form.field.Text', {
+		var controlAttributionLabelText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '标签',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'attributionLabel',
+			name: 'controlAttributionLabel',
 			value: 'i',
 			maxLength: 100,
-			qtip: 'Text label to use for the collapsed attributions button. Default is i. Instead of text, also a Node (e.g. a span element) can be used.'
+			qtip: 'Text label to use for the collapsed controlAttributions button. Default is i. Instead of text, also a Node (e.g. a span element) can be used.'
 		});
-		var attributionCollapseLabelText = Ext.create('Ext.form.field.Text', {
+		var controlAttributionCollapseLabelText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '折叠标签',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'attributionCollapseLabel',
+			name: 'controlAttributionCollapseLabel',
 			value: '»',
 			maxLength: 100,
-			qtip: 'Text label to use for the expanded attributions button. Default is ». Instead of text, also a Node (e.g. a span element) can be used.'
+			qtip: 'Text label to use for the expanded controlAttributions button. Default is ». Instead of text, also a Node (e.g. a span element) can be used.'
 		});
-		var attributionTipLabelText = Ext.create('Ext.form.field.Text', {
+		var controlAttributionTipLabelText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '提示标签',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'attributionTipLabel',
-			value: 'Attributions',
+			name: 'controlAttributionTipLabel',
+			value: 'controlAttributions',
 			maxLength: 100,
-			qtip: 'Text label to use for the button tip. Default is Attributions'
+			qtip: 'Text label to use for the button tip. Default is controlAttributions'
 		});
-		var fullScreenCheckbox = Ext.create('Ext.form.field.Checkbox', {
+		var controlFullScreenCheckbox = Ext.create('Ext.form.field.Checkbox', {
 			columnWidth: 0.1,
 			boxLabel: '全屏',
-			name: 'fullScreen',
+			name: 'controlFullScreen',
 			inputValue: '1',
-			qtip: 'Provides a button that when clicked fills up the full screen with the map. When in full screen mode, a close button is shown to exit full screen mode. The Fullscreen API is used to toggle the map in full screen mode.'
+			qtip: 'Provides a button that when clicked fills up the full screen with the map. When in full screen mode, a close button is shown to exit full screen mode. The controlFullScreen API is used to toggle the map in full screen mode.'
 		});
-		var fullScreenClassNameText = Ext.create('Ext.form.field.Text', {
+		var controlFullScreenClassNameText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '样式类名',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'fullScreenClassName',
+			name: 'controlFullScreenClassName',
 			value: 'ol-full-screen',
 			maxLength: 100,
 			qtip: 'CSS class name. Default is ol-full-screen.'
 		});
-		var fullScreenKeysCheckbox = Ext.create('Ext.form.field.Checkbox', {
+		var controlFullScreenKeysCheckbox = Ext.create('Ext.form.field.Checkbox', {
 			fieldLabel: '按键控制',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'fullScreenKeys',
+			name: 'controlFullScreenKeys',
 			inputValue: '1',
 			qtip: 'Full keyboard access.'
 		});
-		var fullScreenLabelText = Ext.create('Ext.form.field.Text', {
+		var controlFullScreenLabelText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '标签',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'fullScreenLabel',
+			name: 'controlFullScreenLabel',
 			value: '\u2194',
 			maxLength: 100,
 			qtip: 'Text label to use for the button. Default is \u2194 (an arrow). Instead of text, also a Node (e.g. a span element) can be used.'
 		});
-		var fullScreenLabelActiveText = Ext.create('Ext.form.field.Text', {
+		var controlFullScreenLabelActiveText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '激活标签',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'fullScreenLabelActive',
+			name: 'controlFullScreenLabelActive',
 			value: '\u00d7',
 			maxLength: 100,
 			qtip: 'Text label to use for the button when full-screen is active. Default is \u00d7 (a cross). Instead of text, also a Node (e.g. a span element) can be used.'
 		});
-		var fullScreenTipLabelText = Ext.create('Ext.form.field.Text', {
+		var controlFullScreenTipLabelText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '提示标签',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'fullScreenTipLabel',
+			name: 'controlFullScreenTipLabel',
 			value: 'Toggle full-screen',
 			maxLength: 100,
 			qtip: 'Text label to use for the button tip. Default is Toggle full-screen'
 		});
-		var mousePositionCheckbox = Ext.create('Ext.form.field.Checkbox', {
+		var controlMousePositionCheckbox = Ext.create('Ext.form.field.Checkbox', {
 			columnWidth: 0.1,
 			boxLabel: '鼠标位置',
-			name: 'mousePosition',
+			name: 'controlMousePosition',
 			inputValue: '1',
 			qtip: 'A control to show the 2D coordinates of the mouse cursor. By default, these are in the view projection, but can be in any supported projection. By default the control is shown in the top right corner of the map, but this can be changed by using the css selector .ol-mouse-position.'
 		});
-		var mousePositionClassNameText = Ext.create('Ext.form.field.Text', {
+		var controlMousePositionClassNameText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '样式类名',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'mousePositionClassName',
+			name: 'controlMousePositionClassName',
 			value: 'ol-mouse-position',
 			maxLength: 100,
 			qtip: 'CSS class name. Default is ol-mouse-position.'
 		});
-		var mousePositionCoordinateFormatNumber = Ext.create('Ext.form.field.Number', {
+		var controlMousePositionCoordinateFormatNumber = Ext.create('Ext.form.field.Number', {
 			fieldLabel: '坐标格式',
 			labelAlign: 'right',
 			labelSeparator: '：',
 			width: 234,
-			name: 'mousePositionCoordinateFormat',
+			name: 'controlMousePositionCoordinateFormat',
 			value: 9,
 			minValue: 0,
 			allowDecimals: false,
 			qtip: 'Coordinate format.'
 		});
-		var mousePositionProjectionText = Ext.create('Ext.form.field.Text', {
+		var controlMousePositionProjectionText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '投影',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'mousePositionProjection',
+			name: 'controlMousePositionProjection',
 			maxLength: 100,
 			qtip: 'Projection.'
 		});
-		var mousePositionUndefinedHTMLText = Ext.create('Ext.form.field.Text', {
+		var controlMousePositionUndefinedHTMLText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '未定义HTML',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'mousePositionUndefinedHTML',
+			name: 'controlMousePositionUndefinedHTML',
 			maxLength: 100,
 			qtip: 'Markup for undefined coordinates. Default is `` (empty string).'
 		});
-		var overviewMapCheckbox = Ext.create('Ext.form.field.Checkbox', {
+		var controlOverviewMapCheckbox = Ext.create('Ext.form.field.Checkbox', {
 			columnWidth: 0.1,
 			boxLabel: '鹰眼',
-			name: 'overviewMap',
+			name: 'controlOverviewMap',
 			inputValue: '1',
 			qtip: 'Create a new control with a map acting as an overview map for an other defined map.'
 		});
-		var overviewMapCollapsibleCheckbox = Ext.create('Ext.form.field.Checkbox', {
+		var controlOverviewMapCollapsibleCheckbox = Ext.create('Ext.form.field.Checkbox', {
 			fieldLabel: '可折叠',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'overviewMapCollapsible',
+			name: 'controlOverviewMapCollapsible',
 			inputValue: '1',
 			checked: true,
 			qtip: 'Whether the control can be collapsed or not. Default to true.'
 		});
-		var overviewMapCollapsedCheckbox = Ext.create('Ext.form.field.Checkbox', {
+		var controlOverviewMapCollapsedCheckbox = Ext.create('Ext.form.field.Checkbox', {
 			fieldLabel: '默认折叠',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'overviewMapCollapsed',
+			name: 'controlOverviewMapCollapsed',
 			inputValue: '1',
 			checked: true,
 			qtip: 'Whether the control should start collapsed or not (expanded). Default to true.'
 		});
-		var overviewMapLabelText = Ext.create('Ext.form.field.Text', {
+		var controlOverviewMapLabelText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '标签',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'overviewMapLabel',
+			name: 'controlOverviewMapLabel',
 			value: '»',
 			maxLength: 100,
-			qtip: 'Text label to use for the collapsed overviewmap button. Default is ». Instead of text, also a Node (e.g. a span element) can be used.'
+			qtip: 'Text label to use for the collapsed controlOverviewMap button. Default is ». Instead of text, also a Node (e.g. a span element) can be used.'
 		});
-		var overviewMapCollapseLabelText = Ext.create('Ext.form.field.Text', {
+		var controlOverviewMapCollapseLabelText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '折叠标签',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'overviewMapCollapseLabel',
+			name: 'controlOverviewMapCollapseLabel',
 			value: '«',
 			maxLength: 100,
-			qtip: 'Text label to use for the expanded overviewmap button. Default is «. Instead of text, also a Node (e.g. a span element) can be used.'
+			qtip: 'Text label to use for the expanded controlOverviewMap button. Default is «. Instead of text, also a Node (e.g. a span element) can be used.'
 		});
-		var overviewMapTipLabelText = Ext.create('Ext.form.field.Text', {
+		var controlOverviewMapTipLabelText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '提示标签',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'overviewMapTipLabel',
+			name: 'controlOverviewMapTipLabel',
 			value: 'Overview map',
 			maxLength: 100,
 			qtip: 'Text label to use for the button tip. Default is Overview map'
 		});
-		var rotateCheckbox = Ext.create('Ext.form.field.Checkbox', {
+		var controlRotateCheckbox = Ext.create('Ext.form.field.Checkbox', {
 			columnWidth: 0.1,
 			boxLabel: '旋转',
-			name: 'rotate',
+			name: 'controlRotate',
 			inputValue: '1',
 			checked: true,
-			qtip: 'A button control to reset rotation to 0. To style this control use css selector .ol-rotate. A .ol-hidden css selector is added to the button when the rotation is 0.'
+			qtip: 'A button control to reset rotation to 0. To style this control use css selector .ol-controlRotate. A .ol-hidden css selector is added to the button when the rotation is 0.'
 		});
-		var rotateClassNameText = Ext.create('Ext.form.field.Text', {
+		var controlRotateClassNameText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '样式类名',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'rotateClassName',
-			value: 'ol-rotate',
+			name: 'controlRotateClassName',
+			value: 'ol-controlRotate',
 			maxLength: 100,
-			qtip: 'CSS class name. Default is ol-rotate.'
+			qtip: 'CSS class name. Default is ol-controlRotate.'
 		});
-		var rotateAutoHideCheckbox = Ext.create('Ext.form.field.Checkbox', {
+		var controlRotateAutoHideCheckbox = Ext.create('Ext.form.field.Checkbox', {
 			fieldLabel: '自动隐藏',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'rotateAutoHide',
+			name: 'controlRotateAutoHide',
 			inputValue: '1',
 			checked: true,
 			qtip: 'Hide the control when rotation is 0. Default is true.'
 		});
-		var rotateDurationNumber = Ext.create('Ext.form.field.Number', {
+		var controlRotateDurationNumber = Ext.create('Ext.form.field.Number', {
 			fieldLabel: '持续时间',
 			labelAlign: 'right',
 			labelSeparator: '：',
 			width: 234,
-			name: 'rotateDuration',
+			name: 'controlRotateDuration',
 			value: 250,
 			minValue: 1,
 			allowDecimals: false,
 			qtip: 'Animation duration in milliseconds. Default is 250.'
 		});
-		var rotateLabelText = Ext.create('Ext.form.field.Text', {
+		var controlRotateLabelText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '标签',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'rotateLabel',
+			name: 'controlRotateLabel',
 			value: '⇧',
 			maxLength: 100,
-			qtip: 'Text label to use for the rotate button. Default is ⇧. Instead of text, also a Node (e.g. a span element) can be used.'
+			qtip: 'Text label to use for the controlRotate button. Default is ⇧. Instead of text, also a Node (e.g. a span element) can be used.'
 		});
-		var rotateTipLabelText = Ext.create('Ext.form.field.Text', {
+		var controlRotateTipLabelText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '提示标签',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'rotateTipLabel',
+			name: 'controlRotateTipLabel',
 			value: 'Reset rotation',
 			maxLength: 100,
-			qtip: 'Text label to use for the rotate tip. Default is Reset rotation'
+			qtip: 'Text label to use for the controlRotate tip. Default is Reset rotation'
 		});
-		var scaleLineCheckbox = Ext.create('Ext.form.field.Checkbox', {
+		var controlScaleLineCheckbox = Ext.create('Ext.form.field.Checkbox', {
 			columnWidth: 0.1,
 			boxLabel: '比例尺',
-			name: 'scaleLine',
+			name: 'controlScaleLine',
 			inputValue: '1',
 			qtip: 'A control displaying rough x-axis distances, calculated for the center of the viewport. No scale line will be shown when the x-axis distance cannot be calculated in the view projection (e.g. at or beyond the poles in EPSG:4326). By default the scale line will show in the bottom left portion of the map, but this can be changed by using the css selector .ol-scale-line.'
 		});
-		var scaleLineClassNameText = Ext.create('Ext.form.field.Text', {
+		var controlScaleLineClassNameText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '样式类名',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'scaleLineClassName',
+			name: 'controlScaleLineClassName',
 			value: 'ol-scale-line',
 			maxLength: 100,
 			qtip: 'CSS Class name. Default is ol-scale-line.'
 		});
-		var scaleLineMinWidthNumber = Ext.create('Ext.form.field.Number', {
+		var controlScaleLineMinWidthNumber = Ext.create('Ext.form.field.Number', {
 			fieldLabel: '最小宽度',
 			labelAlign: 'right',
 			labelSeparator: '：',
 			width: 234,
-			name: 'scaleLineMinWidth',
+			name: 'controlScaleLineMinWidth',
 			value: 64,
 			minValue: 1,
 			allowDecimals: false,
 			qtip: 'Minimum width in pixels. Default is 64.'
 		});
-		var scaleLineUnitsCombobox = Ext.create('Base.ux.DictComboBox', {
+		var controlScaleLineUnitsCombobox = Ext.create('Base.ux.DictComboBox', {
 			invokeCode: 'gis_control_unit',
 			fieldLabel: '单位',
 			labelAlign: 'right',
 			labelSeparator: '：',
 			width: 234,
-			name: 'scaleLineUnits',
+			name: 'controlScaleLineUnits',
 			value: 'metric',
 			qtip: 'Units. Default is metric.'
 		});
-		var zoomCheckbox = Ext.create('Ext.form.field.Checkbox', {
+		var controlZoomCheckbox = Ext.create('Ext.form.field.Checkbox', {
 			columnWidth: 0.1,
 			boxLabel: '缩放',
-			name: 'zoom',
+			name: 'controlZoom',
 			inputValue: '1',
 			checked: true,
-			qtip: 'A control with 2 buttons, one for zoom in and one for zoom out. This control is one of the default controls of a map. To style this control use css selectors .ol-zoom-in and .ol-zoom-out.'
+			qtip: 'A control with 2 buttons, one for controlZoom in and one for controlZoom out. This control is one of the default controls of a map. To style this control use css selectors .ol-controlZoom-in and .ol-controlZoom-out.'
 		});
-		var zoomClassNameText = Ext.create('Ext.form.field.Text', {
+		var controlZoomClassNameText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '样式类名',
 			labelAlign: 'right',
 			labelSeparator: '：',
 			width: 234,
-			name: 'zoomClassName',
-			value: 'ol-zoom',
+			name: 'controlZoomClassName',
+			value: 'ol-controlZoom',
 			maxLength: 100,
-			qtip: 'CSS class name. Default is ol-zoom.'
+			qtip: 'CSS class name. Default is ol-controlZoom.'
 		});
-		var zoomDurationNumber = Ext.create('Ext.form.field.Number', {
+		var controlZoomDurationNumber = Ext.create('Ext.form.field.Number', {
 			fieldLabel: '持续时间',
 			labelAlign: 'right',
 			labelSeparator: '：',
 			width: 234,
-			name: 'zoomDuration',
+			name: 'controlZoomDuration',
 			value: 250,
 			minValue: 1,
 			allowDecimals: false,
 			qtip: 'Animation duration in milliseconds. Default is 250.'
 		});
-		var zoomZoomInLabelText = Ext.create('Ext.form.field.Text', {
+		var controlZoomcontrolZoomInLabelText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '放大标签',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'zoomZoomInLabel',
+			name: 'controlZoomcontrolZoomInLabel',
 			value: '+',
 			maxLength: 100,
-			qtip: 'Text label to use for the zoom-in button. Default is +. Instead of text, also a Node (e.g. a span element) can be used.'
+			qtip: 'Text label to use for the controlZoom-in button. Default is +. Instead of text, also a Node (e.g. a span element) can be used.'
 		});
-		var zoomZoomOutLabelText = Ext.create('Ext.form.field.Text', {
+		var controlZoomcontrolZoomOutLabelText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '缩小标签',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'zoomZoomOutLabel',
+			name: 'controlZoomcontrolZoomOutLabel',
 			value: '-',
 			maxLength: 100,
-			qtip: 'Text label to use for the zoom-out button. Default is -. Instead of text, also a Node (e.g. a span element) can be used.'
+			qtip: 'Text label to use for the controlZoom-out button. Default is -. Instead of text, also a Node (e.g. a span element) can be used.'
 		});
-		var zoomDeltaNumber = Ext.create('Ext.form.field.Number', {
+		var controlZoomDeltaNumber = Ext.create('Ext.form.field.Number', {
 			fieldLabel: '变焦',
 			labelAlign: 'right',
 			labelSeparator: '：',
 			width: 234,
-			name: 'zoomDelta',
+			name: 'controlZoomDelta',
 			minValue: 1,
 			allowDecimals: false,
-			qtip: 'The zoom delta applied on each click.'
+			qtip: 'The controlZoom delta applied on each click.'
 		});
-		var zoomZoomInTipLabelText = Ext.create('Ext.form.field.Text', {
+		var controlZoomcontrolZoomInTipLabelText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '放大提示标签',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'zoomZoomInTipLabel',
-			value: 'Zoom in',
+			name: 'controlZoomcontrolZoomInTipLabel',
+			value: 'controlZoom in',
 			maxLength: 100,
-			qtip: 'Text label to use for the button tip. Default is Zoom in'
+			qtip: 'Text label to use for the button tip. Default is controlZoom in'
 		});
-		var zoomZoomOutTipLabelText = Ext.create('Ext.form.field.Text', {
+		var controlZoomcontrolZoomOutTipLabelText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '缩小提示标签',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'zoomZoomOutTipLabel',
-			value: 'Zoom out',
+			name: 'controlZoomcontrolZoomOutTipLabel',
+			value: 'controlZoom out',
 			maxLength: 100,
-			qtip: 'Text label to use for the button tip. Default is Zoom out'
+			qtip: 'Text label to use for the button tip. Default is controlZoom out'
 		});
-		var zoomSliderCheckbox = Ext.create('Ext.form.field.Checkbox', {
+		var controlZoomSliderCheckbox = Ext.create('Ext.form.field.Checkbox', {
 			columnWidth: 0.1,
 			boxLabel: '缩放滑块',
-			name: 'zoomSlider',
+			name: 'controlZoomSlider',
 			inputValue: '1',
-			qtip: 'A slider type of control for zooming.'
+			qtip: 'A slider type of control for controlZooming.'
 		});
-		var zoomSliderClassNameText = Ext.create('Ext.form.field.Text', {
+		var controlZoomSliderClassNameText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '样式类名',
 			labelAlign: 'right',
 			labelSeparator: '：',
 			width: 234,
-			name: 'zoomSliderClassName',
-			value: 'ol-zoomslider',
+			name: 'controlZoomSliderClassName',
+			value: 'ol-controlZoomslider',
 			maxLength: 100,
-			qtip: 'CSS class name. Default is ol-zoomslider'
+			qtip: 'CSS class name. Default is ol-controlZoomslider'
 		});
-		var zoomSliderDurationNumber = Ext.create('Ext.form.field.Number', {
+		var controlZoomSliderDurationNumber = Ext.create('Ext.form.field.Number', {
 			fieldLabel: '持续时间',
 			labelAlign: 'right',
 			labelSeparator: '：',
 			width: 234,
-			name: 'zoomSliderDuration',
+			name: 'controlZoomSliderDuration',
 			value: 200,
 			minValue: 1,
 			allowDecimals: false,
 			qtip: 'Animation duration in milliseconds. Default is 200.'
 		});
-		var zoomSliderMaxResolutionNumber = Ext.create('Ext.form.field.Number', {
+		var controlZoomSliderMaxResolutionNumber = Ext.create('Ext.form.field.Number', {
 			fieldLabel: '最大分辨率',
 			labelAlign: 'right',
 			labelSeparator: '：',
 			width: 234,
-			name: 'zoomSliderMaxResolution',
+			name: 'controlZoomSliderMaxResolution',
 			qtip: 'Maximum resolution.'
 		});
-		var zoomSliderMinResolutionNumber = Ext.create('Ext.form.field.Number', {
+		var controlZoomSliderMinResolutionNumber = Ext.create('Ext.form.field.Number', {
 			fieldLabel: '最小分辨率',
 			labelAlign: 'right',
 			labelSeparator: '：',
 			width: 234,
-			name: 'zoomSliderMinResolution',
+			name: 'controlZoomSliderMinResolution',
 			qtip: 'Minimum resolution.'
 		});
-		var zoomToExtentCheckbox = Ext.create('Ext.form.field.Checkbox', {
+		var controlZoomToExtentCheckbox = Ext.create('Ext.form.field.Checkbox', {
 			columnWidth: 0.1,
 			boxLabel: '缩放到范围',
-			name: 'zoomToExtent',
+			name: 'controlZoomToExtent',
 			inputValue: '1',
-			qtip: 'A button control which, when pressed, changes the map view to a specific extent. To style this control use the css selector .ol-zoom-extent.'
+			qtip: 'A button control which, when pressed, changes the map view to a specific extent. To style this control use the css selector .ol-controlZoom-extent.'
 		});
-		var zoomToExtentClassNameText = Ext.create('Ext.form.field.Text', {
+		var controlZoomToExtentClassNameText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '样式类名',
 			labelAlign: 'right',
 			labelSeparator: '：',
 			width: 234,
-			name: 'zoomToExtentClassName',
-			value: 'ol-zoom-extent',
+			name: 'controlZoomToExtentClassName',
+			value: 'ol-controlZoom-extent',
 			maxLength: 100,
-			qtip: 'Class name. Default is ol-zoom-extent.'
+			qtip: 'Class name. Default is ol-controlZoom-extent.'
 		});
-		var zoomToExtentExtentText = Ext.create('Ext.form.field.Text', {
+		var controlZoomToExtentExtentText = Ext.create('Ext.form.field.Text', {
 			colspan: 2,
 			width: 468,
 			fieldLabel: '范围',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'zoomToExtentExtent',
+			name: 'controlZoomToExtentExtent',
 			maxLength: 100,
-			qtip: 'The extent to zoom to. If undefined the validity extent of the view projection is used.'
+			qtip: 'The extent to controlZoom to. If undefined the validity extent of the view projection is used.'
 		});
-		var zoomToExtentLabelText = Ext.create('Ext.form.field.Text', {
+		var controlZoomToExtentLabelText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '标签',
 			labelAlign: 'right',
 			labelSeparator: '：',
 			width: 234,
-			name: 'zoomToExtentLabel',
+			name: 'controlZoomToExtentLabel',
 			value: 'E',
 			maxLength: 100,
 			qtip: 'Text label to use for the button. Default is E. Instead of text, also a Node (e.g. a span element) can be used.'
 		});
-		var zoomToExtentTipLabelText = Ext.create('Ext.form.field.Text', {
+		var controlZoomToExtentTipLabelText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '提示标签',
 			labelAlign: 'right',
 			labelSeparator: '：',
 			width: 234,
-			name: 'zoomToExtentTipLabel',
-			value: 'Zoom to extent',
+			name: 'controlZoomToExtentTipLabel',
+			value: 'controlZoom to extent',
 			maxLength: 100,
-			qtip: 'Text label to use for the button tip. Default is Zoom to extent'
+			qtip: 'Text label to use for the button tip. Default is controlZoom to extent'
 		});
 
 		var formPanel = Ext.create('Ext.form.Panel', {
@@ -560,40 +560,40 @@ Ext.define('Base.gis.thematic.ControlFormWindow', {
 			}, {
 				xtype: 'container',
 				layout: 'column',
-				items: [attributionCheckbox, {
+				items: [controlAttributionCheckbox, {
 					columnWidth: 0.9,
 					xtype: 'container',
 					layout: {
 						type: 'table',
 						columns: 3
 					},
-					items: [attributionClassNameText, attributionCollapsibleCheckbox, attributionCollapsedCheckbox, attributionLabelText, attributionCollapseLabelText, attributionTipLabelText]
+					items: [controlAttributionClassNameText, controlAttributionCollapsibleCheckbox, controlAttributionCollapsedCheckbox, controlAttributionLabelText, controlAttributionCollapseLabelText, controlAttributionTipLabelText]
 				}]
 			}, {
 				xtype: 'container',
 				layout: 'column',
-				items: [fullScreenCheckbox, {
+				items: [controlFullScreenCheckbox, {
 					columnWidth: 0.9,
 					xtype: 'container',
 					layout: {
 						type: 'table',
 						columns: 3
 					},
-					items: [fullScreenClassNameText, fullScreenKeysCheckbox, {
+					items: [controlFullScreenClassNameText, controlFullScreenKeysCheckbox, {
 						xtype: 'container'
-					}, fullScreenLabelText, fullScreenLabelActiveText, fullScreenTipLabelText]
+					}, controlFullScreenLabelText, controlFullScreenLabelActiveText, controlFullScreenTipLabelText]
 				}]
 			}, {
 				xtype: 'container',
 				layout: 'column',
-				items: [mousePositionCheckbox, {
+				items: [controlMousePositionCheckbox, {
 					columnWidth: 0.9,
 					xtype: 'container',
 					layout: {
 						type: 'table',
 						columns: 3
 					},
-					items: [mousePositionClassNameText, mousePositionCoordinateFormatNumber, mousePositionProjectionText, mousePositionUndefinedHTMLText, {
+					items: [controlMousePositionClassNameText, controlMousePositionCoordinateFormatNumber, controlMousePositionProjectionText, controlMousePositionUndefinedHTMLText, {
 						xtype: 'container'
 					}, {
 						xtype: 'container'
@@ -602,86 +602,86 @@ Ext.define('Base.gis.thematic.ControlFormWindow', {
 			}, {
 				xtype: 'container',
 				layout: 'column',
-				items: [overviewMapCheckbox, {
+				items: [controlOverviewMapCheckbox, {
 					columnWidth: 0.9,
 					xtype: 'container',
 					layout: {
 						type: 'table',
 						columns: 3
 					},
-					items: [overviewMapCollapsibleCheckbox, overviewMapCollapsedCheckbox, {
+					items: [controlOverviewMapCollapsibleCheckbox, controlOverviewMapCollapsedCheckbox, {
 						xtype: 'container'
-					}, overviewMapLabelText, overviewMapCollapseLabelText, overviewMapTipLabelText]
+					}, controlOverviewMapLabelText, controlOverviewMapCollapseLabelText, controlOverviewMapTipLabelText]
 				}]
 			}, {
 				xtype: 'container',
 				layout: 'column',
-				items: [rotateCheckbox, {
+				items: [controlRotateCheckbox, {
 					columnWidth: 0.9,
 					xtype: 'container',
 					layout: {
 						type: 'table',
 						columns: 3
 					},
-					items: [rotateClassNameText, rotateAutoHideCheckbox, rotateDurationNumber, rotateLabelText, rotateTipLabelText, {
+					items: [controlRotateClassNameText, controlRotateAutoHideCheckbox, controlRotateDurationNumber, controlRotateLabelText, controlRotateTipLabelText, {
 						xtype: 'container'
 					}]
 				}]
 			}, {
 				xtype: 'container',
 				layout: 'column',
-				items: [scaleLineCheckbox, {
+				items: [controlScaleLineCheckbox, {
 					columnWidth: 0.9,
 					xtype: 'container',
 					layout: {
 						type: 'table',
 						columns: 3
 					},
-					items: [scaleLineClassNameText, scaleLineMinWidthNumber, scaleLineUnitsCombobox]
+					items: [controlScaleLineClassNameText, controlScaleLineMinWidthNumber, controlScaleLineUnitsCombobox]
 				}]
 			}, {
 				xtype: 'container',
 				layout: 'column',
-				items: [zoomCheckbox, {
+				items: [controlZoomCheckbox, {
 					columnWidth: 0.9,
 					xtype: 'container',
 					layout: {
 						type: 'table',
 						columns: 3
 					},
-					items: [zoomClassNameText, {
+					items: [controlZoomClassNameText, {
 						xtype: 'container'
 					}, {
 						xtype: 'container'
-					}, zoomDurationNumber, zoomZoomInLabelText, zoomZoomOutLabelText, zoomDeltaNumber, zoomZoomInTipLabelText, zoomZoomOutTipLabelText]
+					}, controlZoomDurationNumber, controlZoomcontrolZoomInLabelText, controlZoomcontrolZoomOutLabelText, controlZoomDeltaNumber, controlZoomcontrolZoomInTipLabelText, controlZoomcontrolZoomOutTipLabelText]
 				}]
 			}, {
 				xtype: 'container',
 				layout: 'column',
-				items: [zoomSliderCheckbox, {
+				items: [controlZoomSliderCheckbox, {
 					columnWidth: 0.9,
 					xtype: 'container',
 					layout: {
 						type: 'table',
 						columns: 3
 					},
-					items: [zoomSliderClassNameText, zoomSliderDurationNumber, {
+					items: [controlZoomSliderClassNameText, controlZoomSliderDurationNumber, {
 						xtype: 'container'
-					}, zoomSliderMaxResolutionNumber, zoomSliderMinResolutionNumber, {
+					}, controlZoomSliderMaxResolutionNumber, controlZoomSliderMinResolutionNumber, {
 						xtype: 'container'
 					}]
 				}]
 			}, {
 				xtype: 'container',
 				layout: 'column',
-				items: [zoomToExtentCheckbox, {
+				items: [controlZoomToExtentCheckbox, {
 					columnWidth: 0.9,
 					xtype: 'container',
 					layout: {
 						type: 'table',
 						columns: 3
 					},
-					items: [zoomToExtentClassNameText, zoomToExtentExtentText, zoomToExtentLabelText, zoomToExtentTipLabelText, {
+					items: [controlZoomToExtentClassNameText, controlZoomToExtentExtentText, controlZoomToExtentLabelText, controlZoomToExtentTipLabelText, {
 						xtype: 'container'
 					}]
 				}]

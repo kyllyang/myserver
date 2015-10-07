@@ -3,6 +3,7 @@ package org.kyll.myserver.base.gis.ctrl;
 import org.kyll.myserver.base.gis.entity.OlControl;
 import org.kyll.myserver.base.gis.service.OlControlService;
 import org.kyll.myserver.base.gis.vo.OlControlVo;
+import org.kyll.myserver.base.gis.vo.ThematicVo;
 import org.kyll.myserver.base.util.ConstUtils;
 import org.kyll.myserver.base.util.JsonUtils;
 import org.kyll.myserver.base.util.POJOUtils;
@@ -27,72 +28,72 @@ public class OlControlCtrl {
 
 	@RequestMapping("/gis/control/input.ctrl")
 	public void input(Long mapId, HttpServletResponse response) throws Exception {
-		OlControlVo olControlVo = new OlControlVo();
+		ThematicVo olControlVo = new ThematicVo();
 
 		List<OlControl> olControlList = olControlService.getByOlMap(mapId, null);
 		for (OlControl olControl : olControlList) {
 			String controlClassName = olControl.getControlClassName();
 			if (ConstUtils.GIS_OL_CONTROL_ATTRIBUTION.equals(controlClassName)) {
-				olControlVo.setAttribution(olControl.getControlEnabled());
-				olControlVo.setAttributionClassName(olControl.getClassName());
-				olControlVo.setAttributionCollapsed(olControl.getCollapsed());
-				olControlVo.setAttributionCollapseLabel(olControl.getCollapseLabel());
-				olControlVo.setAttributionCollapsible(olControl.getCollapsible());
-				olControlVo.setAttributionLabel(olControl.getLabel());
-				olControlVo.setAttributionTipLabel(olControl.getTipLabel());
+				olControlVo.setControlAttribution(olControl.getControlEnabled());
+				olControlVo.setControlAttributionClassName(olControl.getClassName());
+				olControlVo.setControlAttributionCollapsed(olControl.getCollapsed());
+				olControlVo.setControlAttributionCollapseLabel(olControl.getCollapseLabel());
+				olControlVo.setControlAttributionCollapsible(olControl.getCollapsible());
+				olControlVo.setControlAttributionLabel(olControl.getLabel());
+				olControlVo.setControlAttributionTipLabel(olControl.getTipLabel());
 			} else if (ConstUtils.GIS_OL_CONTROL_FULLSCREEN.equals(controlClassName)) {
-				olControlVo.setFullScreen(olControl.getControlEnabled());
-				olControlVo.setFullScreenClassName(olControl.getClassName());
-				olControlVo.setFullScreenKeys(olControl.getKeys());
-				olControlVo.setFullScreenLabel(olControl.getLabel());
-				olControlVo.setFullScreenLabelActive(olControl.getLabelActive());
-				olControlVo.setFullScreenTipLabel(olControl.getTipLabel());
+				olControlVo.setControlFullScreen(olControl.getControlEnabled());
+				olControlVo.setControlFullScreenClassName(olControl.getClassName());
+				olControlVo.setControlFullScreenKeys(olControl.getKeys());
+				olControlVo.setControlFullScreenLabel(olControl.getLabel());
+				olControlVo.setControlFullScreenLabelActive(olControl.getLabelActive());
+				olControlVo.setControlFullScreenTipLabel(olControl.getTipLabel());
 			} else if (ConstUtils.GIS_OL_CONTROL_MOUSEPOSITION.equals(controlClassName)) {
-				olControlVo.setMousePosition(olControl.getControlEnabled());
-				olControlVo.setMousePositionClassName(olControl.getClassName());
-				olControlVo.setMousePositionCoordinateFormat(olControl.getCoordinateFormat());
-				olControlVo.setMousePositionProjection(olControl.getProjection());
-				olControlVo.setMousePositionUndefinedHTML(olControl.getUndefinedHTML());
+				olControlVo.setControlMousePosition(olControl.getControlEnabled());
+				olControlVo.setControlMousePositionClassName(olControl.getClassName());
+				olControlVo.setControlMousePositionCoordinateFormat(olControl.getCoordinateFormat());
+				olControlVo.setControlMousePositionProjection(olControl.getProjection());
+				olControlVo.setControlMousePositionUndefinedHTML(olControl.getUndefinedHTML());
 			} else if (ConstUtils.GIS_OL_CONTROL_OVERVIEWMAP.equals(controlClassName)) {
-				olControlVo.setOverviewMap(olControl.getControlEnabled());
-				olControlVo.setOverviewMapCollapsed(olControl.getCollapsed());
-				olControlVo.setOverviewMapCollapseLabel(olControl.getCollapseLabel());
-				olControlVo.setOverviewMapCollapsible(olControl.getCollapsible());
-				olControlVo.setOverviewMapLabel(olControl.getLabel());
-				olControlVo.setOverviewMapTipLabel(olControl.getTipLabel());
+				olControlVo.setControlOverviewMap(olControl.getControlEnabled());
+				olControlVo.setControlOverviewMapCollapsed(olControl.getCollapsed());
+				olControlVo.setControlOverviewMapCollapseLabel(olControl.getCollapseLabel());
+				olControlVo.setControlOverviewMapCollapsible(olControl.getCollapsible());
+				olControlVo.setControlOverviewMapLabel(olControl.getLabel());
+				olControlVo.setControlOverviewMapTipLabel(olControl.getTipLabel());
 			} else if (ConstUtils.GIS_OL_CONTROL_ROTATE.equals(controlClassName)) {
-				olControlVo.setRotate(olControl.getControlEnabled());
-				olControlVo.setRotateClassName(olControl.getClassName());
-				olControlVo.setRotateAutoHide(olControl.getAutoHide());
-				olControlVo.setRotateDuration(olControl.getDuration());
-				olControlVo.setRotateLabel(olControl.getLabel());
-				olControlVo.setRotateTipLabel(olControl.getTipLabel());
+				olControlVo.setControlRotate(olControl.getControlEnabled());
+				olControlVo.setControlRotateClassName(olControl.getClassName());
+				olControlVo.setControlRotateAutoHide(olControl.getAutoHide());
+				olControlVo.setControlRotateDuration(olControl.getDuration());
+				olControlVo.setControlRotateLabel(olControl.getLabel());
+				olControlVo.setControlRotateTipLabel(olControl.getTipLabel());
 			} else if (ConstUtils.GIS_OL_CONTROL_SCALELINE.equals(controlClassName)) {
-				olControlVo.setScaleLine(olControl.getControlEnabled());
-				olControlVo.setScaleLineClassName(olControl.getClassName());
-				olControlVo.setScaleLineMinWidth(olControl.getMinWidth());
-				olControlVo.setScaleLineUnits(olControl.getUnits());
+				olControlVo.setControlScaleLine(olControl.getControlEnabled());
+				olControlVo.setControlScaleLineClassName(olControl.getClassName());
+				olControlVo.setControlScaleLineMinWidth(olControl.getMinWidth());
+				olControlVo.setControlScaleLineUnits(olControl.getUnits());
 			} else if (ConstUtils.GIS_OL_CONTROL_ZOOM.equals(controlClassName)) {
-				olControlVo.setZoom(olControl.getControlEnabled());
-				olControlVo.setZoomClassName(olControl.getClassName());
-				olControlVo.setZoomDelta(olControl.getDelta());
-				olControlVo.setZoomZoomInLabel(olControl.getZoomInLabel());
-				olControlVo.setZoomZoomOutLabel(olControl.getZoomOutLabel());
-				olControlVo.setZoomDuration(olControl.getDuration());
-				olControlVo.setZoomZoomInTipLabel(olControl.getZoomInTipLabel());
-				olControlVo.setZoomZoomOutTipLabel(olControl.getZoomOutTipLabel());
+				olControlVo.setControlZoom(olControl.getControlEnabled());
+				olControlVo.setControlZoomClassName(olControl.getClassName());
+				olControlVo.setControlZoomDelta(olControl.getDelta());
+				olControlVo.setControlZoomZoomInLabel(olControl.getZoomInLabel());
+				olControlVo.setControlZoomZoomOutLabel(olControl.getZoomOutLabel());
+				olControlVo.setControlZoomDuration(olControl.getDuration());
+				olControlVo.setControlZoomZoomInTipLabel(olControl.getZoomInTipLabel());
+				olControlVo.setControlZoomZoomOutTipLabel(olControl.getZoomOutTipLabel());
 			} else if (ConstUtils.GIS_OL_CONTROL_ZOOMSLIDER.equals(controlClassName)) {
-				olControlVo.setZoomSlider(olControl.getControlEnabled());
-				olControlVo.setZoomSliderClassName(olControl.getClassName());
-				olControlVo.setZoomSliderDuration(olControl.getDuration());
-				olControlVo.setZoomSliderMaxResolution(olControl.getMaxResolution());
-				olControlVo.setZoomSliderMinResolution(olControl.getMinResolution());
+				olControlVo.setControlZoomSlider(olControl.getControlEnabled());
+				olControlVo.setControlZoomSliderClassName(olControl.getClassName());
+				olControlVo.setControlZoomSliderDuration(olControl.getDuration());
+				olControlVo.setControlZoomSliderMaxResolution(olControl.getMaxResolution());
+				olControlVo.setControlZoomSliderMinResolution(olControl.getMinResolution());
 			} else if (ConstUtils.GIS_OL_CONTROL_ZOOMTOEXTENT.equals(controlClassName)) {
-				olControlVo.setZoomToExtent(olControl.getControlEnabled());
-				olControlVo.setZoomToExtentClassName(olControl.getClassName());
-				olControlVo.setZoomToExtentExtent(olControl.getExtent());
-				olControlVo.setZoomToExtentLabel(olControl.getLabel());
-				olControlVo.setZoomToExtentTipLabel(olControl.getTipLabel());
+				olControlVo.setControlZoomToExtent(olControl.getControlEnabled());
+				olControlVo.setControlZoomToExtentClassName(olControl.getClassName());
+				olControlVo.setControlZoomToExtentExtent(olControl.getExtent());
+				olControlVo.setControlZoomToExtentLabel(olControl.getLabel());
+				olControlVo.setControlZoomToExtentTipLabel(olControl.getTipLabel());
 			}
 		}
 
@@ -101,95 +102,95 @@ public class OlControlCtrl {
 	}
 
 	@RequestMapping("/gis/control/save.ctrl")
-	public void save(OlControlVo entityVo, HttpServletResponse response) throws Exception {
+	public void save(ThematicVo entityVo, HttpServletResponse response) throws Exception {
 		List<OlControl> olControlList = new ArrayList<>();
 
 		OlControl olControlAttribution = new OlControl();
-		olControlAttribution.setControlEnabled(entityVo.getAttribution());
+		olControlAttribution.setControlEnabled(entityVo.getControlAttribution());
 		olControlAttribution.setControlClassName(ConstUtils.GIS_OL_CONTROL_ATTRIBUTION);
-		olControlAttribution.setClassName(entityVo.getAttributionClassName());
-		olControlAttribution.setCollapsed(entityVo.getAttributionCollapsed());
-		olControlAttribution.setCollapseLabel(entityVo.getAttributionCollapseLabel());
-		olControlAttribution.setCollapsible(entityVo.getAttributionCollapsible());
-		olControlAttribution.setLabel(entityVo.getAttributionLabel());
-		olControlAttribution.setTipLabel(entityVo.getAttributionTipLabel());
+		olControlAttribution.setClassName(entityVo.getControlAttributionClassName());
+		olControlAttribution.setCollapsed(entityVo.getControlAttributionCollapsed());
+		olControlAttribution.setCollapseLabel(entityVo.getControlAttributionCollapseLabel());
+		olControlAttribution.setCollapsible(entityVo.getControlAttributionCollapsible());
+		olControlAttribution.setLabel(entityVo.getControlAttributionLabel());
+		olControlAttribution.setTipLabel(entityVo.getControlAttributionTipLabel());
 		olControlList.add(olControlAttribution);
 
 		OlControl olControlFullScreen = new OlControl();
 		olControlFullScreen.setControlClassName(ConstUtils.GIS_OL_CONTROL_FULLSCREEN);
-		olControlFullScreen.setControlEnabled(entityVo.getFullScreen());
-		olControlFullScreen.setClassName(entityVo.getFullScreenClassName());
-		olControlFullScreen.setKeys(entityVo.getFullScreenKeys());
-		olControlFullScreen.setLabel(entityVo.getFullScreenLabel());
-		olControlFullScreen.setLabelActive(entityVo.getFullScreenLabelActive());
-		olControlFullScreen.setTipLabel(entityVo.getFullScreenTipLabel());
+		olControlFullScreen.setControlEnabled(entityVo.getControlFullScreen());
+		olControlFullScreen.setClassName(entityVo.getControlFullScreenClassName());
+		olControlFullScreen.setKeys(entityVo.getControlFullScreenKeys());
+		olControlFullScreen.setLabel(entityVo.getControlFullScreenLabel());
+		olControlFullScreen.setLabelActive(entityVo.getControlFullScreenLabelActive());
+		olControlFullScreen.setTipLabel(entityVo.getControlFullScreenTipLabel());
 		olControlList.add(olControlFullScreen);
 
 		OlControl olControlMousePosition = new OlControl();
 		olControlMousePosition.setControlClassName(ConstUtils.GIS_OL_CONTROL_MOUSEPOSITION);
-		olControlMousePosition.setControlEnabled(entityVo.getMousePosition());
-		olControlMousePosition.setClassName(entityVo.getMousePositionClassName());
-		olControlMousePosition.setCoordinateFormat(entityVo.getMousePositionCoordinateFormat());
-		olControlMousePosition.setProjection(entityVo.getMousePositionProjection());
-		olControlMousePosition.setUndefinedHTML(entityVo.getMousePositionUndefinedHTML());
+		olControlMousePosition.setControlEnabled(entityVo.getControlMousePosition());
+		olControlMousePosition.setClassName(entityVo.getControlMousePositionClassName());
+		olControlMousePosition.setCoordinateFormat(entityVo.getControlMousePositionCoordinateFormat());
+		olControlMousePosition.setProjection(entityVo.getControlMousePositionProjection());
+		olControlMousePosition.setUndefinedHTML(entityVo.getControlMousePositionUndefinedHTML());
 		olControlList.add(olControlMousePosition);
 
 		OlControl olControlOverviewMap = new OlControl();
 		olControlOverviewMap.setControlClassName(ConstUtils.GIS_OL_CONTROL_OVERVIEWMAP);
-		olControlOverviewMap.setControlEnabled(entityVo.getOverviewMap());
-		olControlOverviewMap.setCollapsed(entityVo.getOverviewMapCollapsed());
-		olControlOverviewMap.setCollapseLabel(entityVo.getOverviewMapCollapseLabel());
-		olControlOverviewMap.setCollapsible(entityVo.getOverviewMapCollapsible());
-		olControlOverviewMap.setLabel(entityVo.getOverviewMapLabel());
-		olControlOverviewMap.setTipLabel(entityVo.getOverviewMapTipLabel());
+		olControlOverviewMap.setControlEnabled(entityVo.getControlOverviewMap());
+		olControlOverviewMap.setCollapsed(entityVo.getControlOverviewMapCollapsed());
+		olControlOverviewMap.setCollapseLabel(entityVo.getControlOverviewMapCollapseLabel());
+		olControlOverviewMap.setCollapsible(entityVo.getControlOverviewMapCollapsible());
+		olControlOverviewMap.setLabel(entityVo.getControlOverviewMapLabel());
+		olControlOverviewMap.setTipLabel(entityVo.getControlOverviewMapTipLabel());
 		olControlList.add(olControlOverviewMap);
 
 		OlControl olControlRotate = new OlControl();
 		olControlRotate.setControlClassName(ConstUtils.GIS_OL_CONTROL_ROTATE);
-		olControlRotate.setControlEnabled(entityVo.getRotate());
-		olControlRotate.setClassName(entityVo.getRotateClassName());
-		olControlRotate.setAutoHide(entityVo.getRotateAutoHide());
-		olControlRotate.setDuration(entityVo.getRotateDuration());
-		olControlRotate.setLabel(entityVo.getRotateLabel());
-		olControlRotate.setTipLabel(entityVo.getRotateTipLabel());
+		olControlRotate.setControlEnabled(entityVo.getControlRotate());
+		olControlRotate.setClassName(entityVo.getControlRotateClassName());
+		olControlRotate.setAutoHide(entityVo.getControlRotateAutoHide());
+		olControlRotate.setDuration(entityVo.getControlRotateDuration());
+		olControlRotate.setLabel(entityVo.getControlRotateLabel());
+		olControlRotate.setTipLabel(entityVo.getControlRotateTipLabel());
 		olControlList.add(olControlRotate);
 
 		OlControl olControlScaleLine = new OlControl();
 		olControlScaleLine.setControlClassName(ConstUtils.GIS_OL_CONTROL_SCALELINE);
-		olControlScaleLine.setControlEnabled(entityVo.getScaleLine());
-		olControlScaleLine.setClassName(entityVo.getScaleLineClassName());
-		olControlScaleLine.setMinWidth(entityVo.getScaleLineMinWidth());
-		olControlScaleLine.setUnits(entityVo.getScaleLineUnits());
+		olControlScaleLine.setControlEnabled(entityVo.getControlScaleLine());
+		olControlScaleLine.setClassName(entityVo.getControlScaleLineClassName());
+		olControlScaleLine.setMinWidth(entityVo.getControlScaleLineMinWidth());
+		olControlScaleLine.setUnits(entityVo.getControlScaleLineUnits());
 		olControlList.add(olControlScaleLine);
 
 		OlControl olControlZoom = new OlControl();
 		olControlZoom.setControlClassName(ConstUtils.GIS_OL_CONTROL_ZOOM);
-		olControlZoom.setControlEnabled(entityVo.getZoom());
-		olControlZoom.setClassName(entityVo.getZoomClassName());
-		olControlZoom.setDelta(entityVo.getZoomDelta());
-		olControlZoom.setZoomInLabel(entityVo.getZoomZoomInLabel());
-		olControlZoom.setZoomOutLabel(entityVo.getZoomZoomOutLabel());
-		olControlZoom.setDuration(entityVo.getZoomDuration());
-		olControlZoom.setZoomInTipLabel(entityVo.getZoomZoomInTipLabel());
-		olControlZoom.setZoomOutTipLabel(entityVo.getZoomZoomOutTipLabel());
+		olControlZoom.setControlEnabled(entityVo.getControlZoom());
+		olControlZoom.setClassName(entityVo.getControlZoomClassName());
+		olControlZoom.setDelta(entityVo.getControlZoomDelta());
+		olControlZoom.setZoomInLabel(entityVo.getControlZoomZoomInLabel());
+		olControlZoom.setZoomOutLabel(entityVo.getControlZoomZoomOutLabel());
+		olControlZoom.setDuration(entityVo.getControlZoomDuration());
+		olControlZoom.setZoomInTipLabel(entityVo.getControlZoomZoomInTipLabel());
+		olControlZoom.setZoomOutTipLabel(entityVo.getControlZoomZoomOutTipLabel());
 		olControlList.add(olControlZoom);
 
 		OlControl olControlZoomSlider = new OlControl();
 		olControlZoomSlider.setControlClassName(ConstUtils.GIS_OL_CONTROL_ZOOMSLIDER);
-		olControlZoomSlider.setControlEnabled(entityVo.getZoomSlider());
-		olControlZoomSlider.setClassName(entityVo.getZoomSliderClassName());
-		olControlZoomSlider.setDuration(entityVo.getZoomSliderDuration());
-		olControlZoomSlider.setMaxResolution(entityVo.getZoomSliderMaxResolution());
-		olControlZoomSlider.setMinResolution(entityVo.getZoomSliderMinResolution());
+		olControlZoomSlider.setControlEnabled(entityVo.getControlZoomSlider());
+		olControlZoomSlider.setClassName(entityVo.getControlZoomSliderClassName());
+		olControlZoomSlider.setDuration(entityVo.getControlZoomSliderDuration());
+		olControlZoomSlider.setMaxResolution(entityVo.getControlZoomSliderMaxResolution());
+		olControlZoomSlider.setMinResolution(entityVo.getControlZoomSliderMinResolution());
 		olControlList.add(olControlZoomSlider);
 
 		OlControl olControlZoomToExtent = new OlControl();
 		olControlZoomToExtent.setControlClassName(ConstUtils.GIS_OL_CONTROL_ZOOMTOEXTENT);
-		olControlZoomToExtent.setControlEnabled(entityVo.getZoomToExtent());
-		olControlZoomToExtent.setClassName(entityVo.getZoomToExtentClassName());
-		olControlZoomToExtent.setExtent(entityVo.getZoomToExtentExtent());
-		olControlZoomToExtent.setLabel(entityVo.getZoomToExtentLabel());
-		olControlZoomToExtent.setTipLabel(entityVo.getZoomToExtentTipLabel());
+		olControlZoomToExtent.setControlEnabled(entityVo.getControlZoomToExtent());
+		olControlZoomToExtent.setClassName(entityVo.getControlZoomToExtentClassName());
+		olControlZoomToExtent.setExtent(entityVo.getControlZoomToExtentExtent());
+		olControlZoomToExtent.setLabel(entityVo.getControlZoomToExtentLabel());
+		olControlZoomToExtent.setTipLabel(entityVo.getControlZoomToExtentTipLabel());
 		olControlList.add(olControlZoomToExtent);
 
 		olControlService.save(entityVo.getMapId(), olControlList);
