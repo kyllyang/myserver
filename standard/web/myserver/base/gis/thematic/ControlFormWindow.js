@@ -58,11 +58,11 @@ Ext.define('Base.gis.thematic.ControlFormWindow', {
 				{name: 'controlZoom'},
 				{name: 'controlZoomClassName'},
 				{name: 'controlZoomDuration'},
-				{name: 'controlZoomcontrolZoomInLabel'},
-				{name: 'controlZoomcontrolZoomOutLabel'},
+				{name: 'controlZoomZoomInLabel'},
+				{name: 'controlZoomZoomOutLabel'},
 				{name: 'controlZoomDelta'},
-				{name: 'controlZoomcontrolZoomInTipLabel'},
-				{name: 'controlZoomcontrolZoomOutTipLabel'},
+				{name: 'controlZoomZoomInTipLabel'},
+				{name: 'controlZoomZoomOutTipLabel'},
 				{name: 'controlZoomSlider'},
 				{name: 'controlZoomSliderClassName'},
 				{name: 'controlZoomSliderDuration'},
@@ -382,7 +382,7 @@ Ext.define('Base.gis.thematic.ControlFormWindow', {
 			name: 'controlZoom',
 			inputValue: '1',
 			checked: true,
-			qtip: 'A control with 2 buttons, one for controlZoom in and one for controlZoom out. This control is one of the default controls of a map. To style this control use css selectors .ol-controlZoom-in and .ol-controlZoom-out.'
+			qtip: 'A control with 2 buttons, one for zoom in and one for zoom out. This control is one of the default controls of a map. To style this control use css selectors .ol-zoom-in and .ol-zoom-out.'
 		});
 		var controlZoomClassNameText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '样式类名',
@@ -390,9 +390,9 @@ Ext.define('Base.gis.thematic.ControlFormWindow', {
 			labelSeparator: '：',
 			width: 234,
 			name: 'controlZoomClassName',
-			value: 'ol-controlZoom',
+			value: 'ol-zoom',
 			maxLength: 100,
-			qtip: 'CSS class name. Default is ol-controlZoom.'
+			qtip: 'CSS class name. Default is ol-zoom.'
 		});
 		var controlZoomDurationNumber = Ext.create('Ext.form.field.Number', {
 			fieldLabel: '持续时间',
@@ -405,23 +405,23 @@ Ext.define('Base.gis.thematic.ControlFormWindow', {
 			allowDecimals: false,
 			qtip: 'Animation duration in milliseconds. Default is 250.'
 		});
-		var controlZoomcontrolZoomInLabelText = Ext.create('Ext.form.field.Text', {
+		var controlZoomZoomInLabelText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '放大标签',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'controlZoomcontrolZoomInLabel',
+			name: 'controlZoomZoomInLabel',
 			value: '+',
 			maxLength: 100,
-			qtip: 'Text label to use for the controlZoom-in button. Default is +. Instead of text, also a Node (e.g. a span element) can be used.'
+			qtip: 'Text label to use for the zoom-in button. Default is +. Instead of text, also a Node (e.g. a span element) can be used.'
 		});
-		var controlZoomcontrolZoomOutLabelText = Ext.create('Ext.form.field.Text', {
+		var controlZoomZoomOutLabelText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '缩小标签',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'controlZoomcontrolZoomOutLabel',
+			name: 'controlZoomZoomOutLabel',
 			value: '-',
 			maxLength: 100,
-			qtip: 'Text label to use for the controlZoom-out button. Default is -. Instead of text, also a Node (e.g. a span element) can be used.'
+			qtip: 'Text label to use for the zoom-out button. Default is -. Instead of text, also a Node (e.g. a span element) can be used.'
 		});
 		var controlZoomDeltaNumber = Ext.create('Ext.form.field.Number', {
 			fieldLabel: '变焦',
@@ -431,32 +431,32 @@ Ext.define('Base.gis.thematic.ControlFormWindow', {
 			name: 'controlZoomDelta',
 			minValue: 1,
 			allowDecimals: false,
-			qtip: 'The controlZoom delta applied on each click.'
+			qtip: 'The zoom delta applied on each click.'
 		});
-		var controlZoomcontrolZoomInTipLabelText = Ext.create('Ext.form.field.Text', {
+		var controlZoomZoomInTipLabelText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '放大提示标签',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'controlZoomcontrolZoomInTipLabel',
-			value: 'controlZoom in',
+			name: 'controlZoomZoomInTipLabel',
+			value: 'Zoom in',
 			maxLength: 100,
-			qtip: 'Text label to use for the button tip. Default is controlZoom in'
+			qtip: 'Text label to use for the button tip. Default is Zoom in'
 		});
-		var controlZoomcontrolZoomOutTipLabelText = Ext.create('Ext.form.field.Text', {
+		var controlZoomZoomOutTipLabelText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '缩小提示标签',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			name: 'controlZoomcontrolZoomOutTipLabel',
-			value: 'controlZoom out',
+			name: 'controlZoomZoomOutTipLabel',
+			value: 'Zoom out',
 			maxLength: 100,
-			qtip: 'Text label to use for the button tip. Default is controlZoom out'
+			qtip: 'Text label to use for the button tip. Default is Zoom out'
 		});
 		var controlZoomSliderCheckbox = Ext.create('Ext.form.field.Checkbox', {
 			columnWidth: 0.1,
 			boxLabel: '缩放滑块',
 			name: 'controlZoomSlider',
 			inputValue: '1',
-			qtip: 'A slider type of control for controlZooming.'
+			qtip: 'A slider type of control for zooming.'
 		});
 		var controlZoomSliderClassNameText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '样式类名',
@@ -464,9 +464,9 @@ Ext.define('Base.gis.thematic.ControlFormWindow', {
 			labelSeparator: '：',
 			width: 234,
 			name: 'controlZoomSliderClassName',
-			value: 'ol-controlZoomslider',
+			value: 'ol-zoomslider',
 			maxLength: 100,
-			qtip: 'CSS class name. Default is ol-controlZoomslider'
+			qtip: 'CSS class name. Default is ol-zoomslider'
 		});
 		var controlZoomSliderDurationNumber = Ext.create('Ext.form.field.Number', {
 			fieldLabel: '持续时间',
@@ -497,10 +497,10 @@ Ext.define('Base.gis.thematic.ControlFormWindow', {
 		});
 		var controlZoomToExtentCheckbox = Ext.create('Ext.form.field.Checkbox', {
 			columnWidth: 0.1,
-			boxLabel: '缩放到范围',
+			boxLabel: '缩放范围',
 			name: 'controlZoomToExtent',
 			inputValue: '1',
-			qtip: 'A button control which, when pressed, changes the map view to a specific extent. To style this control use the css selector .ol-controlZoom-extent.'
+			qtip: 'A button control which, when pressed, changes the map view to a specific extent. To style this control use the css selector .ol-zoom-extent.'
 		});
 		var controlZoomToExtentClassNameText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '样式类名',
@@ -508,9 +508,9 @@ Ext.define('Base.gis.thematic.ControlFormWindow', {
 			labelSeparator: '：',
 			width: 234,
 			name: 'controlZoomToExtentClassName',
-			value: 'ol-controlZoom-extent',
+			value: 'ol-zoom-extent',
 			maxLength: 100,
-			qtip: 'Class name. Default is ol-controlZoom-extent.'
+			qtip: 'Class name. Default is ol-zoom-extent.'
 		});
 		var controlZoomToExtentExtentText = Ext.create('Ext.form.field.Text', {
 			colspan: 2,
@@ -520,13 +520,12 @@ Ext.define('Base.gis.thematic.ControlFormWindow', {
 			labelSeparator: '：',
 			name: 'controlZoomToExtentExtent',
 			maxLength: 100,
-			qtip: 'The extent to controlZoom to. If undefined the validity extent of the view projection is used.'
+			qtip: 'The extent to zoom to. If undefined the validity extent of the view projection is used.'
 		});
 		var controlZoomToExtentLabelText = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '标签',
 			labelAlign: 'right',
 			labelSeparator: '：',
-			width: 234,
 			name: 'controlZoomToExtentLabel',
 			value: 'E',
 			maxLength: 100,
@@ -538,9 +537,9 @@ Ext.define('Base.gis.thematic.ControlFormWindow', {
 			labelSeparator: '：',
 			width: 234,
 			name: 'controlZoomToExtentTipLabel',
-			value: 'controlZoom to extent',
+			value: 'Zoom to extent',
 			maxLength: 100,
-			qtip: 'Text label to use for the button tip. Default is controlZoom to extent'
+			qtip: 'Text label to use for the button tip. Default is Zoom to extent'
 		});
 
 		var formPanel = Ext.create('Ext.form.Panel', {
@@ -653,7 +652,7 @@ Ext.define('Base.gis.thematic.ControlFormWindow', {
 						xtype: 'container'
 					}, {
 						xtype: 'container'
-					}, controlZoomDurationNumber, controlZoomcontrolZoomInLabelText, controlZoomcontrolZoomOutLabelText, controlZoomDeltaNumber, controlZoomcontrolZoomInTipLabelText, controlZoomcontrolZoomOutTipLabelText]
+					}, controlZoomDurationNumber, controlZoomZoomInLabelText, controlZoomZoomOutLabelText, controlZoomDeltaNumber, controlZoomZoomInTipLabelText, controlZoomZoomOutTipLabelText]
 				}]
 			}, {
 				xtype: 'container',
