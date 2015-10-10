@@ -2,6 +2,7 @@ package org.kyll.myserver.base.sys.vo;
 
 import org.kyll.myserver.base.sys.entity.Role;
 
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -12,6 +13,7 @@ public class SessionVo {
 	private Long userId;
 	private String username;
 	private Set<Role> roleSet;
+	private Map<String, String> config;
 
 	public SessionVo() {
 	}
@@ -38,5 +40,13 @@ public class SessionVo {
 
 	public void setRoleSet(Set<Role> roleSet) {
 		this.roleSet = roleSet;
+	}
+
+	public Map<String, String> getConfig() {
+		return config;
+	}
+
+	public void setConfig(Map<String, String> config) {
+		this.config = config;
 	}
 }

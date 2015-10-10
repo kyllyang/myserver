@@ -19,11 +19,6 @@
 	<script type="text/javascript">
 		var ctx = '${ctx}';
 
-		myServer.loginUser = {
-			id: '${sessionScope.sessionVo.userId}',
-			username: '${sessionScope.sessionVo.username}'
-		};
-
 		Ext.Loader.setConfig({
 			enabled: true,
 			paths: {
@@ -46,6 +41,16 @@
 		});
 
 		Ext.tip.QuickTipManager.init();
+
+		myServer.loginUser = {
+			id: '${sessionScope.sessionVo.userId}',
+			username: '${sessionScope.sessionVo.username}'
+		};
+
+		myServer.config = new Ext.util.HashMap();
+		<c:forEach items="${sessionScope.sessionVo.config}" var="config">
+			myServer.config.add('<c:out value="${config.key}"/>', '<c:out value="${config.value}"/>');
+		</c:forEach>
 	</script>
 	<script type="text/javascript" src="${ctx}/myserver/index.js"></script>
 </head>

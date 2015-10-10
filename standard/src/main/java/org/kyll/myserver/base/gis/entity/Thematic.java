@@ -13,6 +13,7 @@ public class Thematic implements Serializable {
 	private Long id;
 	private String name;
 	private Integer sort;
+	private String initializationClass;
 	private OlMap olMap;
 
 	public Thematic() {
@@ -45,6 +46,15 @@ public class Thematic implements Serializable {
 
 	public void setSort(Integer sort) {
 		this.sort = sort;
+	}
+
+	@Column(name = "INITIALIZATION_CLASS_")
+	public String getInitializationClass() {
+		return initializationClass;
+	}
+
+	public void setInitializationClass(String initializationClass) {
+		this.initializationClass = initializationClass;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

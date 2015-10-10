@@ -2,8 +2,10 @@ package org.kyll.myserver.base.sys.ctrl;
 
 import org.kyll.myserver.base.QueryCondition;
 import org.kyll.myserver.base.common.paginated.Dataset;
+import org.kyll.myserver.base.sys.entity.Config;
 import org.kyll.myserver.base.sys.entity.Department;
 import org.kyll.myserver.base.sys.entity.Employee;
+import org.kyll.myserver.base.sys.service.ConfigService;
 import org.kyll.myserver.base.sys.service.EmployeeService;
 import org.kyll.myserver.base.sys.vo.SessionVo;
 import org.kyll.myserver.base.sys.vo.EmployeeVo;
@@ -16,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * User: Kyll
@@ -26,6 +31,8 @@ import javax.servlet.http.HttpSession;
 public class EmployeeCtrl {
 	@Autowired
 	private EmployeeService employeeService;
+	@Autowired
+	private ConfigService configService;
 
 	@RequestMapping("/login.ctrl")
 	public void login(String username, String password, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -37,6 +44,13 @@ public class EmployeeCtrl {
 			SessionVo sessionVo = new SessionVo();
 			sessionVo.setUserId(loginUser.getId());
 			sessionVo.setUsername(loginUser.getUsername());
+
+			List<Config> configList = configService.getAll();
+			Map<String, String> configMap = new HashMap<>();
+			for (Config config : configList) {
+				configMap.put(config.getKey(), config.getValue());
+			}
+			sessionVo.setConfig(configMap);
 
 			HttpSession session = request.getSession();
 			session.setAttribute(ConstUtils.SESSION_NAME, sessionVo);

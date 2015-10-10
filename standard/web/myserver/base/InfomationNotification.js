@@ -22,7 +22,8 @@ Ext.define('Base.InfomationNotification', {
 			extend: 'Ext.data.Model',
 			fields: [
 				{name: 'id'},
-				{name: 'name'}
+				{name: 'name'},
+				{name: 'initializationClass'}
 			]
 		});
 

@@ -10,6 +10,7 @@ public class ThematicVo implements Vo<Long> {
 	private Long id;
 	private String name;
 	private Integer sort;
+	private String initializationClass;
 
 	private Long mapId;
 	private String mapLogo;
@@ -160,6 +161,14 @@ public class ThematicVo implements Vo<Long> {
 
 	public void setSort(Integer sort) {
 		this.sort = sort;
+	}
+
+	public String getInitializationClass() {
+		return initializationClass;
+	}
+
+	public void setInitializationClass(String initializationClass) {
+		this.initializationClass = initializationClass;
 	}
 
 	public Long getMapId() {

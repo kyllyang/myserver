@@ -1,10 +1,7 @@
 package org.kyll.myserver.base.app.entity;
 
-import org.kyll.myserver.base.sys.entity.Role;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
 
 /**
  * User: Kyll

@@ -417,7 +417,17 @@ Ext.define('Base.gis.MapContainer', {
 		// init layer group
 		this.layerGroupNotification = Ext.create('Base.gis.LayerGroupNotification', {
 			layerGroup: layerGroup
-		}).show();
+		}).show(null, function() {
+			var thematicComboBox = myServer.getInfomationNotification().thematicComboBox;
+			var initializationClass = thematicComboBox.findRecordByValue(thematicComboBox.getValue()).get('initializationClass');
+			if (!Ext.isEmpty(initializationClass)) {
+				if (Ext.create(initializationClass).initialize) {
+					Ext.create(initializationClass).initialize();
+				} else {
+					Ext.Msg.alert("系统提示", "初始化类缺少 initialize 方法！");
+				}
+			}
+		}, this);
 	},
 	_getRendererTypes: function(renderer) {
 		if (Ext.isEmpty(renderer)) {

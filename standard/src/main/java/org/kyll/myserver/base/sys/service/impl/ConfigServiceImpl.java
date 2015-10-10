@@ -69,6 +69,7 @@ public class ConfigServiceImpl implements ConfigService {
 
 			config.setKey(JsonUtils.getString(jo, "key"));
 			config.setValue(JsonUtils.getString(jo, "value"));
+			config.setDescription(JsonUtils.getString(jo, "description"));
 			config.setSort(JsonUtils.getInteger(jo, "sort"));
 
 			configDao.save(config);

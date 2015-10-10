@@ -10,7 +10,6 @@ Ext.define('Base.app.menu.MenuModuleThematicGridPanel', {
 		var thematicComboBox = Ext.create('Base.app.menu.ThematicComboBox');
 
 		Ext.apply(this, {
-			url: ctx + '/app/mmt/list.ctrl',
 			sortProperty: 'sort',
 			sortDirection: 'asc',
 			enableRowNumber: false,

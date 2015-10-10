@@ -64,7 +64,7 @@ public class ThematicServiceImpl implements ThematicService {
 			hql = new StringBuilder("from Thematic t");
 			hql.append(" order by t.sort asc");
 		} else {
-			hql = new StringBuilder("select t.thematic from MenuApplicationThematic t where t.application.id = '" + moduleId + "'");
+			hql = new StringBuilder("select distinct t.thematic from MenuApplicationThematic t where t.application.id = '" + moduleId + "'");
 			hql.append(" order by t.thematic.sort asc");
 		}
 		return thematicDao.find(hql);

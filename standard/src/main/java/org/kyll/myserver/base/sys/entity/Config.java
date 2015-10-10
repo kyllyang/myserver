@@ -18,6 +18,7 @@ public class Config implements Serializable {
 	private Long id;
 	private String key;
 	private String value;
+	private String description;
 	private Integer sort;
 
 	public Config() {
@@ -50,6 +51,15 @@ public class Config implements Serializable {
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	@Column(name = "DESCRIPTION_")
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@Column(name = "SORT_")

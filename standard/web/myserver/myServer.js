@@ -1,5 +1,6 @@
 var myServer = {
 	loginUser: null,// 登录用户信息 {id, username}
+	config: null,// 系统配置 Ext.util.HashMap
 
 	width: 0,// 浏览器窗口的内部宽度， 不包括工具栏和滚动条
 	height: 0,// 浏览器窗口的内部高度， 不包括工具栏和滚动条

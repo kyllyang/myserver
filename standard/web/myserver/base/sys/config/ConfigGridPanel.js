@@ -33,6 +33,14 @@ Ext.define('Base.sys.config.ConfigGridPanel', {
 				},
 				flex: 1
 			}, {
+				text: '描述',
+				dataIndex: 'description',
+				field: {
+					maxLength: 255,
+					allowBlank: false
+				},
+				flex: 1
+			}, {
 				text: '排序',
 				dataIndex: 'sort',
 				field: {
@@ -118,6 +126,7 @@ Ext.define('Base.sys.config.ConfigGridPanel', {
 		var record = Ext.ModelManager.create({
 			key: 'KEY',
 			value: 'value',
+			description: '',
 			sort: 1
 		}, Ext.getClassName(this.getStore().model));
 		this.getStore().insert(0, record);
@@ -154,6 +163,7 @@ Ext.define('Base.sys.config.ConfigGridPanel', {
 				id: records[i].get('id'),
 				key: records[i].get('key'),
 				value: records[i].get('value'),
+				description: records[i].get('description'),
 				sort: records[i].get('sort')
 			});
 		}

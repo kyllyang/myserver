@@ -24,6 +24,7 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 				{name: 'id'},
 				{name: 'name'},
 				{name: 'sort'},
+				{name: 'initializationClass'},
 				{name: 'mapId'},
 				{name: 'mapLogo'},
 				{name: 'mapLoadTilesWhileAnimating'},
@@ -151,6 +152,14 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 			value: 1,
 			minValue: 1,
 			allowDecimals: false
+		});
+		var initializationClassText = Ext.create('Ext.form.field.Text', {
+			fieldLabel: '初始化类',
+			labelAlign: 'right',
+			labelSeparator: '：',
+			name: 'initializationClass',
+			value: myServer.config.get('APPLICATION_INITIALIZATION_CLASS'),
+			maxLength: 100
 		});
 		var mapLogoFile = Ext.create('Ext.form.field.Text', {
 			fieldLabel: '徽标',
@@ -1143,7 +1152,7 @@ Ext.define('Base.gis.thematic.ThematicFormWindow', {
 				xtype: 'container',
 				layout: 'column',
 				items: [nameText, sortNumber]
-			}, {
+			}, initializationClassText, {
 				xtype: 'fieldset',
 				title: '地图',
 				layout: 'form',
