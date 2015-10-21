@@ -57,7 +57,7 @@ CREATE TABLE `ms_app_menu_application_thematic` (
   `thematic_id` int(11) DEFAULT NULL,
   `id_` int(11) NOT NULL AUTO_INCREMENT,
   UNIQUE KEY `unique_id_` (`id_`)
-) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +66,7 @@ CREATE TABLE `ms_app_menu_application_thematic` (
 
 LOCK TABLES `ms_app_menu_application_thematic` WRITE;
 /*!40000 ALTER TABLE `ms_app_menu_application_thematic` DISABLE KEYS */;
-INSERT INTO `ms_app_menu_application_thematic` VALUES (1,41,1,22),(5,41,1,21),(6,41,1,26),(2,37,3,25);
+INSERT INTO `ms_app_menu_application_thematic` VALUES (1,41,1,22),(5,41,1,21),(14,41,3,32),(2,37,3,25),(6,41,1,30);
 /*!40000 ALTER TABLE `ms_app_menu_application_thematic` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,7 +139,7 @@ CREATE TABLE `ms_gis_ol_control` (
   `control_enabled_` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_`),
   UNIQUE KEY `id__UNIQUE` (`id_`)
-) ENGINE=InnoDB AUTO_INCREMENT=1330 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1348 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -148,7 +148,7 @@ CREATE TABLE `ms_gis_ol_control` (
 
 LOCK TABLES `ms_gis_ol_control` WRITE;
 /*!40000 ALTER TABLE `ms_gis_ol_control` DISABLE KEYS */;
-INSERT INTO `ms_gis_ol_control` VALUES (1321,'ol.control.Attribution',NULL,'1','»','1',NULL,NULL,NULL,NULL,NULL,'i',NULL,NULL,NULL,NULL,NULL,NULL,'Attributions',NULL,NULL,NULL,NULL,NULL,NULL,3,'ol-attribution','1'),(1322,'ol.control.FullScreen',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'↔','×',NULL,NULL,NULL,NULL,NULL,'Toggle full-screen',NULL,NULL,NULL,NULL,NULL,NULL,3,'ol-full-screen','1'),(1323,'ol.control.MousePosition',NULL,NULL,NULL,NULL,'9',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,'',NULL,NULL,NULL,NULL,NULL,3,'ol-mouse-position','1'),(1324,'ol.control.OverviewMap',NULL,'1','«','1',NULL,NULL,NULL,NULL,NULL,'»',NULL,NULL,NULL,NULL,NULL,NULL,'Overview map',NULL,NULL,NULL,NULL,NULL,NULL,3,NULL,'1'),(1325,'ol.control.Rotate','1',NULL,NULL,NULL,NULL,NULL,'250',NULL,NULL,'⇧',NULL,NULL,NULL,NULL,NULL,NULL,'Reset rotation',NULL,NULL,NULL,NULL,NULL,NULL,3,'ol-rotate','1'),(1326,'ol.control.ScaleLine',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'64',NULL,NULL,NULL,'metric',NULL,NULL,NULL,NULL,3,'ol-scale-line','1'),(1327,'ol.control.Zoom',NULL,NULL,NULL,NULL,NULL,'1','250',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'+','Zoom in','-','Zoom out',3,'ol-zoom','1'),(1328,'ol.control.ZoomSlider',NULL,NULL,NULL,NULL,NULL,NULL,'200',NULL,NULL,NULL,NULL,NULL,'','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,3,'ol-zoomslider','1'),(1329,'ol.control.ZoomToExtent',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,'E',NULL,NULL,NULL,NULL,NULL,NULL,'Zoom to extent',NULL,NULL,NULL,NULL,NULL,NULL,3,'ol-zoom-extent','1');
+INSERT INTO `ms_gis_ol_control` VALUES (1339,'ol.control.Attribution',NULL,'1','»','1',NULL,NULL,NULL,NULL,NULL,'i',NULL,NULL,NULL,NULL,NULL,NULL,'Attributions',NULL,NULL,NULL,NULL,NULL,NULL,3,'ol-attribution','1'),(1340,'ol.control.FullScreen',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'↔','×',NULL,NULL,NULL,NULL,NULL,'Toggle full-screen',NULL,NULL,NULL,NULL,NULL,NULL,3,'ol-full-screen','1'),(1341,'ol.control.MousePosition',NULL,NULL,NULL,NULL,'9',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,'',NULL,NULL,NULL,NULL,NULL,3,'ol-mouse-position','1'),(1342,'ol.control.OverviewMap',NULL,'1','«','1',NULL,NULL,NULL,NULL,NULL,'»',NULL,NULL,NULL,NULL,NULL,NULL,'Overview map',NULL,NULL,NULL,NULL,NULL,NULL,3,NULL,'1'),(1343,'ol.control.Rotate','1',NULL,NULL,NULL,NULL,NULL,'250',NULL,NULL,'⇧',NULL,NULL,NULL,NULL,NULL,NULL,'Reset rotation',NULL,NULL,NULL,NULL,NULL,NULL,3,'ol-rotate','1'),(1344,'ol.control.ScaleLine',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'64',NULL,NULL,NULL,'metric',NULL,NULL,NULL,NULL,3,'ol-scale-line','1'),(1345,'ol.control.Zoom',NULL,NULL,NULL,NULL,NULL,'1','250',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'+','Zoom in','-','Zoom out',3,'ol-zoom','1'),(1346,'ol.control.ZoomSlider',NULL,NULL,NULL,NULL,NULL,NULL,'200',NULL,NULL,NULL,NULL,NULL,'','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,3,'ol-zoomslider','1'),(1347,'ol.control.ZoomToExtent',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'',NULL,'E',NULL,NULL,NULL,NULL,NULL,NULL,'Zoom to extent',NULL,NULL,NULL,NULL,NULL,NULL,3,'ol-zoom-extent','1');
 /*!40000 ALTER TABLE `ms_gis_ol_control` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -181,7 +181,7 @@ CREATE TABLE `ms_gis_ol_interaction` (
   `style_` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_`),
   UNIQUE KEY `id__UNIQUE` (`id_`)
-) ENGINE=InnoDB AUTO_INCREMENT=1679 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1701 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -190,7 +190,7 @@ CREATE TABLE `ms_gis_ol_interaction` (
 
 LOCK TABLES `ms_gis_ol_interaction` WRITE;
 /*!40000 ALTER TABLE `ms_gis_ol_interaction` DISABLE KEYS */;
-INSERT INTO `ms_gis_ol_interaction` VALUES (1668,'ol.interaction.DoubleClickZoom','1','250',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1',NULL,NULL),(1669,'ol.interaction.DragBox',NULL,NULL,NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1','ol.events.condition.shiftKeyOnly','{\"stroke\":{\"color\":\"3366FF,1\",\"lineCap\":\"round\",\"lineJoin\":\"round\",\"lineDash\":\"\",\"miterLimit\":10,\"width\":4},\"fill\":{\"color\":\"00CCFF,0.1\"}}'),(1670,'ol.interaction.DragPan',NULL,NULL,NULL,NULL,NULL,NULL,3,NULL,'','','',NULL,NULL,NULL,'1',NULL,NULL),(1671,'ol.interaction.DragRotate',NULL,'250',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1','ol.events.condition.altShiftKeysOnly',NULL),(1672,'ol.interaction.DragRotateAndZoom',NULL,'400',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1','ol.events.condition.shiftKeyOnly',NULL),(1673,'ol.interaction.DragZoom',NULL,'200',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1','ol.events.condition.shiftKeyOnly','{\"stroke\":{\"color\":\"3366FF,1\",\"lineCap\":\"round\",\"lineJoin\":\"round\",\"lineDash\":\"\",\"miterLimit\":10,\"width\":4},\"fill\":{\"color\":\"00CCFF,0.1\"}}'),(1674,'ol.interaction.KeyboardPan',NULL,'100',NULL,'128',NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1',NULL,NULL),(1675,'ol.interaction.KeyboardZoom','1','100',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1',NULL,NULL),(1676,'ol.interaction.MouseWheelZoom',NULL,'250',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1',NULL,NULL),(1677,'ol.interaction.PinchRotate',NULL,'250',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,'0.3','1',NULL,NULL),(1678,'ol.interaction.PinchZoom',NULL,'400',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1',NULL,NULL);
+INSERT INTO `ms_gis_ol_interaction` VALUES (1690,'ol.interaction.DoubleClickZoom','1','250',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1',NULL,NULL),(1691,'ol.interaction.DragBox',NULL,NULL,NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1','ol.events.condition.shiftKeyOnly','{\"stroke\":{\"color\":\"3366FF,1\",\"lineCap\":\"round\",\"lineJoin\":\"round\",\"lineDash\":\"\",\"miterLimit\":10,\"width\":4},\"fill\":{\"color\":\"00CCFF,0.1\"}}'),(1692,'ol.interaction.DragPan',NULL,NULL,NULL,NULL,NULL,NULL,3,NULL,'','','',NULL,NULL,NULL,'1',NULL,NULL),(1693,'ol.interaction.DragRotate',NULL,'250',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1','ol.events.condition.altShiftKeysOnly',NULL),(1694,'ol.interaction.DragRotateAndZoom',NULL,'400',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1','ol.events.condition.shiftKeyOnly',NULL),(1695,'ol.interaction.DragZoom',NULL,'200',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1','ol.events.condition.shiftKeyOnly','{\"stroke\":{\"color\":\"3366FF,1\",\"lineCap\":\"round\",\"lineJoin\":\"round\",\"lineDash\":\"\",\"miterLimit\":10,\"width\":4},\"fill\":{\"color\":\"00CCFF,0.1\"}}'),(1696,'ol.interaction.KeyboardPan',NULL,'100',NULL,'128',NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1',NULL,NULL),(1697,'ol.interaction.KeyboardZoom','1','100',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1',NULL,NULL),(1698,'ol.interaction.MouseWheelZoom',NULL,'250',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1',NULL,NULL),(1699,'ol.interaction.PinchRotate',NULL,'250',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,'0.3','1',NULL,NULL),(1700,'ol.interaction.PinchZoom',NULL,'400',NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1',NULL,NULL);
 /*!40000 ALTER TABLE `ms_gis_ol_interaction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -287,7 +287,7 @@ CREATE TABLE `ms_gis_ol_map_layergroup` (
   `name_` varchar(255) DEFAULT NULL,
   `sort_` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_`)
-) ENGINE=InnoDB AUTO_INCREMENT=308 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=316 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -296,7 +296,7 @@ CREATE TABLE `ms_gis_ol_map_layergroup` (
 
 LOCK TABLES `ms_gis_ol_map_layergroup` WRITE;
 /*!40000 ALTER TABLE `ms_gis_ol_map_layergroup` DISABLE KEYS */;
-INSERT INTO `ms_gis_ol_map_layergroup` VALUES (304,3,NULL,NULL,'瓦片',1),(305,3,1,304,NULL,NULL),(306,3,NULL,NULL,'矢量',1),(307,3,2,306,NULL,NULL);
+INSERT INTO `ms_gis_ol_map_layergroup` VALUES (312,3,NULL,NULL,'瓦片',1),(313,3,1,312,NULL,NULL),(314,3,NULL,NULL,'矢量',1),(315,3,2,314,NULL,NULL);
 /*!40000 ALTER TABLE `ms_gis_ol_map_layergroup` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -331,6 +331,45 @@ CREATE TABLE `ms_gis_ol_overlay` (
 LOCK TABLES `ms_gis_ol_overlay` WRITE;
 /*!40000 ALTER TABLE `ms_gis_ol_overlay` DISABLE KEYS */;
 /*!40000 ALTER TABLE `ms_gis_ol_overlay` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ms_gis_ol_source`
+--
+
+DROP TABLE IF EXISTS `ms_gis_ol_source`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ms_gis_ol_source` (
+  `id_` int(11) NOT NULL,
+  `NAME_` varchar(255) DEFAULT NULL,
+  `SORT_` int(11) DEFAULT NULL,
+  `SOURCE_CLASS_NAME_` varchar(255) DEFAULT NULL,
+  `CULTURE_` varchar(255) DEFAULT NULL,
+  `GUTTER_` varchar(255) DEFAULT NULL,
+  `HIDPI_` varchar(255) DEFAULT NULL,
+  `IMAGERY_SET_` varchar(255) DEFAULT NULL,
+  `KEY_` varchar(255) DEFAULT NULL,
+  `LOGO_` varchar(255) DEFAULT NULL,
+  `MAX_ZOOM_` varchar(255) DEFAULT NULL,
+  `MIN_ZOOM_` varchar(255) DEFAULT NULL,
+  `PROJECTION_` varchar(255) DEFAULT NULL,
+  `SERVER_TYPE_` varchar(255) DEFAULT NULL,
+  `TILE_PIXEL_RATIO_` varchar(255) DEFAULT NULL,
+  `TILE_SIZE_` varchar(255) DEFAULT NULL,
+  `URL_` varchar(255) DEFAULT NULL,
+  `WRAP_X_` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ms_gis_ol_source`
+--
+
+LOCK TABLES `ms_gis_ol_source` WRITE;
+/*!40000 ALTER TABLE `ms_gis_ol_source` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ms_gis_ol_source` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -395,7 +434,7 @@ CREATE TABLE `ms_gis_ol_view` (
 
 LOCK TABLES `ms_gis_ol_view` WRITE;
 /*!40000 ALTER TABLE `ms_gis_ol_view` DISABLE KEYS */;
-INSERT INTO `ms_gis_ol_view` VALUES (2,'0,0','0',NULL,'','','','28','0','EPSG:3857','','','0','2','2',3),(4,'1',NULL,NULL,'1',NULL,NULL,NULL,NULL,'EPSG:3857','1','1',NULL,NULL,NULL,5);
+INSERT INTO `ms_gis_ol_view` VALUES (2,'0,0','0',NULL,'','','','28','0','EPSG:3857',NULL,'','0','2','2',3),(4,'1',NULL,NULL,'1',NULL,NULL,NULL,NULL,'EPSG:3857','1','1',NULL,NULL,NULL,5);
 /*!40000 ALTER TABLE `ms_gis_ol_view` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -411,6 +450,7 @@ CREATE TABLE `ms_gis_thematic` (
   `name_` varchar(255) DEFAULT NULL,
   `sort_` int(11) DEFAULT NULL,
   `map_id_` int(11) DEFAULT NULL,
+  `initialization_class_` varchar(255) DEFAULT NULL,
   UNIQUE KEY `unique_id_` (`id_`)
 ) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -421,7 +461,7 @@ CREATE TABLE `ms_gis_thematic` (
 
 LOCK TABLES `ms_gis_thematic` WRITE;
 /*!40000 ALTER TABLE `ms_gis_thematic` DISABLE KEYS */;
-INSERT INTO `ms_gis_thematic` VALUES (1,'专题一',1,3),(3,'专题二',2,NULL),(4,'专题三',3,NULL),(5,'专题四',4,NULL);
+INSERT INTO `ms_gis_thematic` VALUES (1,'专题一',1,3,'Business.Initialization'),(3,'专题二',2,NULL,NULL),(4,'专题三',3,NULL,NULL),(5,'专题四',4,NULL,NULL);
 /*!40000 ALTER TABLE `ms_gis_thematic` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -468,9 +508,10 @@ CREATE TABLE `ms_sys_config` (
   `key_` varchar(255) DEFAULT NULL,
   `value_` varchar(255) DEFAULT NULL,
   `sort_` int(11) DEFAULT NULL,
+  `description_` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_`),
   UNIQUE KEY `unique_id_` (`id_`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -479,7 +520,7 @@ CREATE TABLE `ms_sys_config` (
 
 LOCK TABLES `ms_sys_config` WRITE;
 /*!40000 ALTER TABLE `ms_sys_config` DISABLE KEYS */;
-INSERT INTO `ms_sys_config` VALUES (1,'ATTACHMENT_PATH','e:\\temp\\myserver',1),(2,'EMPLOYEE_DEFAULT_PASSWORD','123',2);
+INSERT INTO `ms_sys_config` VALUES (1,'ATTACHMENT_PATH','e:\\temp\\myserver',1,'附件存储路径'),(2,'EMPLOYEE_DEFAULT_PASSWORD','123',2,'员工默认密码'),(4,'APPLICATION_INITIALIZATION_CLASS','Business.Initialization',3,'应用初始化类');
 /*!40000 ALTER TABLE `ms_sys_config` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -683,4 +724,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-10-08 21:03:06
+-- Dump completed on 2015-10-21 21:45:41
