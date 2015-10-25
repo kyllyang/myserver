@@ -31,7 +31,7 @@ CREATE TABLE `ms_app_menu` (
   `function_id_` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_`),
   UNIQUE KEY `unique_id_` (`id_`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `ms_app_menu` (
 
 LOCK TABLES `ms_app_menu` WRITE;
 /*!40000 ALTER TABLE `ms_app_menu` DISABLE KEYS */;
-INSERT INTO `ms_app_menu` VALUES (1,NULL,'系统维护','',3,NULL),(2,1,'组织机构','',1,33),(3,1,'角色管理','',2,29),(4,1,'数据字典','',3,36),(5,NULL,'应用模块','',2,NULL),(6,NULL,'地图管理','',1,NULL),(7,5,'模块管理','',1,40),(8,5,'菜单管理','',2,43),(11,6,'专题管理','',3,59),(12,1,'附件管理','',4,60),(13,1,'系统配置','',5,61),(14,6,'矢量图层','',1,62),(15,6,'瓦片图层','',2,63);
+INSERT INTO `ms_app_menu` VALUES (1,NULL,'系统维护','',3,NULL),(2,1,'组织机构','',1,33),(3,1,'角色管理','',2,29),(4,1,'数据字典','',3,36),(5,NULL,'应用模块','',2,NULL),(6,NULL,'地图管理','',1,NULL),(7,5,'模块管理','',1,40),(8,5,'菜单管理','',2,43),(11,6,'专题管理','',4,59),(12,1,'附件管理','',4,60),(13,1,'系统配置','',5,61),(14,6,'矢量图层','',3,62),(15,6,'瓦片图层','',2,63),(16,6,'数据源','',1,64);
 /*!40000 ALTER TABLE `ms_app_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,7 +57,7 @@ CREATE TABLE `ms_app_menu_application_thematic` (
   `thematic_id` int(11) DEFAULT NULL,
   `id_` int(11) NOT NULL AUTO_INCREMENT,
   UNIQUE KEY `unique_id_` (`id_`)
-) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +66,7 @@ CREATE TABLE `ms_app_menu_application_thematic` (
 
 LOCK TABLES `ms_app_menu_application_thematic` WRITE;
 /*!40000 ALTER TABLE `ms_app_menu_application_thematic` DISABLE KEYS */;
-INSERT INTO `ms_app_menu_application_thematic` VALUES (1,41,1,22),(5,41,1,21),(14,41,3,32),(2,37,3,25),(6,41,1,30);
+INSERT INTO `ms_app_menu_application_thematic` VALUES (1,41,1,22),(5,41,1,21),(2,37,3,25),(14,41,3,33),(6,41,1,30);
 /*!40000 ALTER TABLE `ms_app_menu_application_thematic` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -88,7 +88,7 @@ CREATE TABLE `ms_app_module` (
   `func_code_` varchar(20000) DEFAULT NULL,
   PRIMARY KEY (`id_`),
   UNIQUE KEY `unique_id_` (`id_`)
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,7 +97,7 @@ CREATE TABLE `ms_app_module` (
 
 LOCK TABLES `ms_app_module` WRITE;
 /*!40000 ALTER TABLE `ms_app_module` DISABLE KEYS */;
-INSERT INTO `ms_app_module` VALUES (27,41,'系统管理','',3,'1',NULL,NULL),(29,27,'角色管理','',2,'2','1','{className: \'Base.sys.role.RoleContainer\', config: {}}'),(33,27,'组织机构','',1,'2','1','{className: \'Base.sys.org.OrgContainer\', config: {}}'),(36,27,'数据字典','',3,'2','1','{className: \'Base.sys.dict.DictContainer\', config: {}}'),(38,37,'餐厅菜品维护','',1,'2','1','{className: \'Meaord.restaurant.RestaurantGridPanel\', config: {}}'),(39,41,'应用管理','',2,'1',NULL,NULL),(40,39,'模块管理','',1,'2','1','{className: \'Base.app.module.ModuleContainer\', config: {}}'),(41,NULL,'运行维护','',1,'1',NULL,NULL),(42,41,'地图管理','',1,'1',NULL,NULL),(43,39,'菜单管理','',2,'2','1','{className: \'Base.app.menu.MenuContainer\', config: {}}'),(58,53,'aa','',1,'1',NULL,NULL),(59,42,'专题管理','',3,'2','1','{className: \'Base.gis.thematic.ThematicContainer\', config: {}}'),(60,27,'附件管理','',4,'2','1','{className: \'Base.sys.attachment.AttachmentContainer\', config: {}}'),(61,27,'系统配置','',5,'2','1','{className: \'Base.sys.config.ConfigContainer\', config: {}}'),(62,42,'矢量图层','',1,'2','1','{className: \'Base.gis.layer.LayerContainer\', config: {layerClassName: \'ol.layer.Vector\'}}'),(63,42,'瓦片图层','',2,'2','1','{className: \'Base.gis.layer.LayerContainer\', config: {layerClassName: \'ol.layer.Tile\'}}');
+INSERT INTO `ms_app_module` VALUES (27,41,'系统管理','',3,'1',NULL,NULL),(29,27,'角色管理','',2,'2','1','{className: \'Base.sys.role.RoleContainer\', config: {}}'),(33,27,'组织机构','',1,'2','1','{className: \'Base.sys.org.OrgContainer\', config: {}}'),(36,27,'数据字典','',3,'2','1','{className: \'Base.sys.dict.DictContainer\', config: {}}'),(38,37,'餐厅菜品维护','',1,'2','1','{className: \'Meaord.restaurant.RestaurantGridPanel\', config: {}}'),(39,41,'应用管理','',2,'1',NULL,NULL),(40,39,'模块管理','',1,'2','1','{className: \'Base.app.module.ModuleContainer\', config: {}}'),(41,NULL,'运行维护','',1,'1',NULL,NULL),(42,41,'地图管理','',1,'1',NULL,NULL),(43,39,'菜单管理','',2,'2','1','{className: \'Base.app.menu.MenuContainer\', config: {}}'),(58,53,'aa','',1,'1',NULL,NULL),(59,42,'专题管理','',4,'2','1','{className: \'Base.gis.thematic.ThematicContainer\', config: {}}'),(60,27,'附件管理','',4,'2','1','{className: \'Base.sys.attachment.AttachmentContainer\', config: {}}'),(61,27,'系统配置','',5,'2','1','{className: \'Base.sys.config.ConfigContainer\', config: {}}'),(62,42,'矢量图层','',3,'2','1','{className: \'Base.gis.layer.LayerContainer\', config: {layerClassName: \'ol.layer.Vector\'}}'),(63,42,'瓦片图层','',2,'2','1','{className: \'Base.gis.layer.LayerContainer\', config: {layerClassName: \'ol.layer.Tile\'}}'),(64,42,'数据源','',1,'2','1','{className: \'Base.gis.source.SourceContainer\', config: {}}');
 /*!40000 ALTER TABLE `ms_app_module` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -568,7 +568,7 @@ CREATE TABLE `ms_sys_dict` (
   PRIMARY KEY (`id_`),
   UNIQUE KEY `unique_id_` (`id_`),
   UNIQUE KEY `unique_invoke_code_` (`invoke_code_`)
-) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -577,7 +577,7 @@ CREATE TABLE `ms_sys_dict` (
 
 LOCK TABLES `ms_sys_dict` WRITE;
 /*!40000 ALTER TABLE `ms_sys_dict` DISABLE KEYS */;
-INSERT INTO `ms_sys_dict` VALUES (1,'sys','系统维护',NULL,2),(11,'app','应用模块',NULL,3),(12,'app_module','模块',11,1),(13,'app_module_type','类型',12,1),(14,'app_module_funcType','功能类型',12,2),(16,'gis','地图管理',NULL,1),(17,'gis_layer','图层',16,1),(18,'gis_layer_class','图层类型',17,1),(19,'gis_layer_titlesize','瓦片尺寸',17,2),(20,'gis_control','控件',16,2),(21,'gis_control_unit','单位',20,1),(22,'gis_interaction','交互',16,3),(23,'gis_interaction_condition','条件',22,1),(24,'gis_style','样式',16,4),(25,'gis_style_linecap','线帽',24,1),(26,'gis_style_linejoin','线段交点',24,2);
+INSERT INTO `ms_sys_dict` VALUES (1,'sys','系统维护',NULL,2),(11,'app','应用模块',NULL,3),(12,'app_module','模块',11,1),(13,'app_module_type','类型',12,1),(14,'app_module_funcType','功能类型',12,2),(16,'gis','地图管理',NULL,1),(17,'gis_layer','图层',16,2),(18,'gis_layer_class','图层类型',17,1),(19,'gis_layer_titlesize','瓦片尺寸',17,2),(20,'gis_control','控件',16,3),(21,'gis_control_unit','单位',20,1),(22,'gis_interaction','交互',16,4),(23,'gis_interaction_condition','条件',22,1),(24,'gis_style','样式',16,5),(25,'gis_style_linecap','线帽',24,1),(26,'gis_style_linejoin','线段交点',24,2),(27,'gis_source','数据源',16,1),(28,'gis_source_crossOrigin','跨域',27,1),(29,'gis_source_sserverType','服务类型',27,2),(30,'gis_source_tierSizeCalculation','瓦片计算方法',27,3),(31,'gis_source_requestEncoding','请求编码',27,4),(32,'gis_source_tileSize','瓦片尺寸',27,5),(33,'gis_source_state','状态',27,6),(34,'gis_source_operationType','操作类型',27,7);
 /*!40000 ALTER TABLE `ms_sys_dict` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -596,7 +596,7 @@ CREATE TABLE `ms_sys_dict_item` (
   `sort_` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_`),
   UNIQUE KEY `unique_id_` (`id_`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -605,7 +605,7 @@ CREATE TABLE `ms_sys_dict_item` (
 
 LOCK TABLES `ms_sys_dict_item` WRITE;
 /*!40000 ALTER TABLE `ms_sys_dict_item` DISABLE KEYS */;
-INSERT INTO `ms_sys_dict_item` VALUES (12,'2','功能',13,2),(13,'1','模块',13,1),(14,'2','URL',14,2),(15,'1','JavaScript',14,1),(16,'ol.layer.Vector','矢量',18,2),(17,'ol.layer.Tile','瓦片',18,1),(18,'512','512, 512',19,2),(19,'256','256, 256',19,1),(20,'us','美式',21,5),(21,'metric','公制',21,4),(22,'nautical','海里',21,3),(23,'imperial','英制',21,2),(24,'degrees','度',21,1),(25,'ol.events.condition.altKeyOnly','ALT',23,1),(26,'ol.events.condition.altShiftKeysOnly','ALT + SHIFT',23,2),(27,'ol.events.condition.shiftKeyOnly','SHIFT',23,4),(28,'ol.events.condition.platformModifierKeyOnly','Win',23,3),(29,'square','方块',25,3),(30,'round','圆',25,2),(31,'butt','箭头',25,1),(32,'miter','斜接',26,3),(33,'round','圆角',26,2),(34,'bevel','倒角',26,1);
+INSERT INTO `ms_sys_dict_item` VALUES (12,'2','功能',13,2),(13,'1','模块',13,1),(14,'2','URL',14,2),(15,'1','JavaScript',14,1),(16,'ol.layer.Vector','矢量',18,2),(17,'ol.layer.Tile','瓦片',18,1),(18,'512','512, 512',19,2),(19,'256','256, 256',19,1),(20,'us','美式',21,5),(21,'metric','公制',21,4),(22,'nautical','海里',21,3),(23,'imperial','英制',21,2),(24,'degrees','度',21,1),(25,'ol.events.condition.altKeyOnly','ALT',23,1),(26,'ol.events.condition.altShiftKeysOnly','ALT + SHIFT',23,2),(27,'ol.events.condition.shiftKeyOnly','SHIFT',23,4),(28,'ol.events.condition.platformModifierKeyOnly','Win',23,3),(29,'square','方块',25,3),(30,'round','圆',25,2),(31,'butt','箭头',25,1),(32,'miter','斜接',26,3),(33,'round','圆角',26,2),(34,'bevel','倒角',26,1),(35,'use-credentials','用户认证',28,2),(36,'anonymous','匿名',28,1),(37,'carmentaserver','Carmenta Server',29,1),(38,'geoserver','Geo Server',29,2),(39,'mapserver','Map Server',29,3),(40,'qgis','QGIS',29,4),(41,'default','默认',30,1),(42,'truncated','截断',30,2),(43,'KVP','KVP',31,1),(44,'REST','REST',31,2),(45,'512','512',32,2),(46,'256','256',32,1),(47,'error','错误',33,4),(48,'ready','就绪',33,3),(49,'loading','正在加载',33,2),(50,'undefined','未定义',33,1),(51,'image','图像',34,2),(52,'pixel','像素',34,1);
 /*!40000 ALTER TABLE `ms_sys_dict_item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -711,7 +711,7 @@ CREATE TABLE `ms_sys_role_function` (
 
 LOCK TABLES `ms_sys_role_function` WRITE;
 /*!40000 ALTER TABLE `ms_sys_role_function` DISABLE KEYS */;
-INSERT INTO `ms_sys_role_function` VALUES (3,27),(3,29),(3,33),(3,36),(3,39),(3,40),(3,41),(3,42),(3,43),(3,59),(3,60),(3,61),(3,62),(3,63),(5,29),(5,30),(5,31),(5,37),(5,38);
+INSERT INTO `ms_sys_role_function` VALUES (3,27),(3,29),(3,33),(3,36),(3,39),(3,40),(3,41),(3,42),(3,43),(3,59),(3,60),(3,61),(3,62),(3,63),(3,64),(5,29),(5,30),(5,31),(5,37),(5,38);
 /*!40000 ALTER TABLE `ms_sys_role_function` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -724,4 +724,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-10-21 21:45:41
+-- Dump completed on 2015-10-25 20:28:30

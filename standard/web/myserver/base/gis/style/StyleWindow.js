@@ -53,7 +53,6 @@ Ext.define('Base.gis.style.StyleWindow', {
 
 		var strokeColorPicker = Ext.create('Base.gis.style.ColorPicker', {
 			columnWidth: 0.5,
-			xtype: 'textfield',
 			fieldLabel: '颜色',
 			labelAlign: 'right',
 			labelSeparator: '：',
@@ -66,7 +65,6 @@ Ext.define('Base.gis.style.StyleWindow', {
 		});
 		var strokeWidthNumber = Ext.create('Ext.form.field.Number', {
 			columnWidth: 0.5,
-			xtype: 'numberfield',
 			fieldLabel: '线宽',
 			labelAlign: 'right',
 			labelSeparator: '：',
@@ -98,7 +96,6 @@ Ext.define('Base.gis.style.StyleWindow', {
 		});
 		var strokeLineDashText = Ext.create('Ext.form.field.Text', {
 			columnWidth: 0.5,
-			xtype: 'textfield',
 			fieldLabel: '虚线',
 			labelAlign: 'right',
 			labelSeparator: '：',
@@ -108,7 +105,6 @@ Ext.define('Base.gis.style.StyleWindow', {
 		});
 		var strokeMiterLimitNumber = Ext.create('Ext.form.field.Number', {
 			columnWidth: 0.5,
-			xtype: 'numberfield',
 			fieldLabel: '斜接限制',
 			labelAlign: 'right',
 			labelSeparator: '：',
@@ -120,7 +116,6 @@ Ext.define('Base.gis.style.StyleWindow', {
 		});
 		var fillColorPicker = Ext.create('Base.gis.style.ColorPicker', {
 			columnWidth: 0.5,
-			xtype: 'textfield',
 			fieldLabel: '颜色',
 			labelAlign: 'right',
 			labelSeparator: '：',
