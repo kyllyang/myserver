@@ -1,20 +1,17 @@
-package org.kyll.myserver.base.gis.entity;
+package org.kyll.myserver.base.gis.vo;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import org.kyll.myserver.base.common.Vo;
 
 /**
  * User: Kyll
- * Date: 2015-10-21 21:19
+ * Date: 2015-11-03 20:35
  */
-@Entity
-@Table(name = "MS_GIS_OL_SOURCE")
-public class OlSource implements Serializable {
+public class OlSourceVo implements Vo<Long> {
 	private Long id;
 	private String name;
 	private Integer sort;
-	private String sourceType;// ol.source.Image, ol.source.Tile, ol.source.Vector
-	private String sourceClassName;// ol.source.ImageCanvas, ol.source.ImageVector, ol.source.ImageMapGuide, ol.source.ImageStatic, ol.source.ImageWMS, ol.source.Raster, ol.source.BingMaps, ol.source.TileArcGISRest, ol.source.TileJSON, ol.source.TileWMS, ol.source.WMTS, ol.source.MapQuest, ol.source.OSM, ol.source.Stamen, ol.source.XYZ, ol.source.Zoomify, ol.source.TileUTFGrid, ol.source.Vector, ol.source.Cluster, ol.source.TileVector
+	private String sourceType;
+	private String sourceClassName;
 	private String crossOrigin;
 	private String culture;
 	private String dimensions;
@@ -43,7 +40,7 @@ public class OlSource implements Serializable {
 	private String ratio;
 	private String requestEncoding;
 	private String resolutions;
-	private String serverType;// 'carmentaserver', 'geoserver', 'mapserver', 'qgis'
+	private String serverType;
 	private String sizeHeight;
 	private String sizeWidth;
 	private String source;
@@ -59,12 +56,10 @@ public class OlSource implements Serializable {
 	private String useOverlay;
 	private String version;
 
-	public OlSource() {
+	public OlSourceVo() {
 	}
 
-	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
-	@Column(name = "ID_")
+	@Override
 	public Long getId() {
 		return id;
 	}
@@ -73,7 +68,6 @@ public class OlSource implements Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "NAME_")
 	public String getName() {
 		return name;
 	}
@@ -82,7 +76,6 @@ public class OlSource implements Serializable {
 		this.name = name;
 	}
 
-	@Column(name = "SORT_")
 	public Integer getSort() {
 		return sort;
 	}
@@ -91,7 +84,6 @@ public class OlSource implements Serializable {
 		this.sort = sort;
 	}
 
-	@Column(name = "SOURCE_TYPE_")
 	public String getSourceType() {
 		return sourceType;
 	}
@@ -100,7 +92,6 @@ public class OlSource implements Serializable {
 		this.sourceType = sourceType;
 	}
 
-	@Column(name = "SOURCE_CLASS_NAME_")
 	public String getSourceClassName() {
 		return sourceClassName;
 	}
@@ -109,7 +100,6 @@ public class OlSource implements Serializable {
 		this.sourceClassName = sourceClassName;
 	}
 
-	@Column(name = "CROSS_ORIGIN_")
 	public String getCrossOrigin() {
 		return crossOrigin;
 	}
@@ -118,7 +108,6 @@ public class OlSource implements Serializable {
 		this.crossOrigin = crossOrigin;
 	}
 
-	@Column(name = "CULTURE_")
 	public String getCulture() {
 		return culture;
 	}
@@ -127,7 +116,6 @@ public class OlSource implements Serializable {
 		this.culture = culture;
 	}
 
-	@Column(name = "DIMENSIONS_")
 	public String getDimensions() {
 		return dimensions;
 	}
@@ -136,7 +124,6 @@ public class OlSource implements Serializable {
 		this.dimensions = dimensions;
 	}
 
-	@Column(name = "DISPLAY_DPI_")
 	public String getDisplayDpi() {
 		return displayDpi;
 	}
@@ -145,7 +132,6 @@ public class OlSource implements Serializable {
 		this.displayDpi = displayDpi;
 	}
 
-	@Column(name = "DISTANCE_")
 	public String getDistance() {
 		return distance;
 	}
@@ -154,7 +140,6 @@ public class OlSource implements Serializable {
 		this.distance = distance;
 	}
 
-	@Column(name = "EXTENT_")
 	public String getExtent() {
 		return extent;
 	}
@@ -163,7 +148,6 @@ public class OlSource implements Serializable {
 		this.extent = extent;
 	}
 
-	@Column(name = "FORMAT_")
 	public String getFormat() {
 		return format;
 	}
@@ -172,7 +156,6 @@ public class OlSource implements Serializable {
 		this.format = format;
 	}
 
-	@Column(name = "GUTTER_")
 	public String getGutter() {
 		return gutter;
 	}
@@ -181,7 +164,6 @@ public class OlSource implements Serializable {
 		this.gutter = gutter;
 	}
 
-	@Column(name = "HIDPI_")
 	public String getHidpi() {
 		return hidpi;
 	}
@@ -190,7 +172,6 @@ public class OlSource implements Serializable {
 		this.hidpi = hidpi;
 	}
 
-	@Column(name = "IMAGE_EXTENT_")
 	public String getImageExtent() {
 		return imageExtent;
 	}
@@ -199,7 +180,6 @@ public class OlSource implements Serializable {
 		this.imageExtent = imageExtent;
 	}
 
-	@Column(name = "IMAGERY_SET_")
 	public String getImagerySet() {
 		return imagerySet;
 	}
@@ -208,7 +188,6 @@ public class OlSource implements Serializable {
 		this.imagerySet = imagerySet;
 	}
 
-	@Column(name = "IMAGE_SIZE_HEIGHT_")
 	public String getImageSizeHeight() {
 		return imageSizeHeight;
 	}
@@ -217,7 +196,6 @@ public class OlSource implements Serializable {
 		this.imageSizeHeight = imageSizeHeight;
 	}
 
-	@Column(name = "IMAGE_SIZE_WIDTH_")
 	public String getImageSizeWidth() {
 		return imageSizeWidth;
 	}
@@ -226,7 +204,6 @@ public class OlSource implements Serializable {
 		this.imageSizeWidth = imageSizeWidth;
 	}
 
-	@Column(name = "KEY_")
 	public String getKey() {
 		return key;
 	}
@@ -235,7 +212,6 @@ public class OlSource implements Serializable {
 		this.key = key;
 	}
 
-	@Column(name = "LAYER_")
 	public String getLayer() {
 		return layer;
 	}
@@ -244,7 +220,6 @@ public class OlSource implements Serializable {
 		this.layer = layer;
 	}
 
-	@Column(name = "LOGO_")
 	public String getLogo() {
 		return logo;
 	}
@@ -253,7 +228,6 @@ public class OlSource implements Serializable {
 		this.logo = logo;
 	}
 
-	@Column(name = "MATRIX_SET_")
 	public String getMatrixSet() {
 		return matrixSet;
 	}
@@ -262,7 +236,6 @@ public class OlSource implements Serializable {
 		this.matrixSet = matrixSet;
 	}
 
-	@Column(name = "MAX_ZOOM_")
 	public String getMaxZoom() {
 		return maxZoom;
 	}
@@ -271,7 +244,6 @@ public class OlSource implements Serializable {
 		this.maxZoom = maxZoom;
 	}
 
-	@Column(name = "METERS_PER_UNIT_")
 	public String getMetersPerUnit() {
 		return metersPerUnit;
 	}
@@ -280,7 +252,6 @@ public class OlSource implements Serializable {
 		this.metersPerUnit = metersPerUnit;
 	}
 
-	@Column(name = "MIN_ZOOM_")
 	public String getMinZoom() {
 		return minZoom;
 	}
@@ -289,7 +260,6 @@ public class OlSource implements Serializable {
 		this.minZoom = minZoom;
 	}
 
-	@Column(name = "OPAQUE_")
 	public String getOpaque() {
 		return opaque;
 	}
@@ -298,7 +268,6 @@ public class OlSource implements Serializable {
 		this.opaque = opaque;
 	}
 
-	@Column(name = "OPERATION_TYPE_")
 	public String getOperationType() {
 		return operationType;
 	}
@@ -307,7 +276,6 @@ public class OlSource implements Serializable {
 		this.operationType = operationType;
 	}
 
-	@Column(name = "PARAMS_")
 	public String getParams() {
 		return params;
 	}
@@ -316,7 +284,6 @@ public class OlSource implements Serializable {
 		this.params = params;
 	}
 
-	@Column(name = "PREEMPTIVE_")
 	public String getPreemptive() {
 		return preemptive;
 	}
@@ -325,7 +292,6 @@ public class OlSource implements Serializable {
 		this.preemptive = preemptive;
 	}
 
-	@Column(name = "PROJECTION_")
 	public String getProjection() {
 		return projection;
 	}
@@ -334,7 +300,6 @@ public class OlSource implements Serializable {
 		this.projection = projection;
 	}
 
-	@Column(name = "RATIO_")
 	public String getRatio() {
 		return ratio;
 	}
@@ -343,7 +308,6 @@ public class OlSource implements Serializable {
 		this.ratio = ratio;
 	}
 
-	@Column(name = "REQUEST_ENCODING_")
 	public String getRequestEncoding() {
 		return requestEncoding;
 	}
@@ -352,7 +316,6 @@ public class OlSource implements Serializable {
 		this.requestEncoding = requestEncoding;
 	}
 
-	@Column(name = "RESOLUTIONS_")
 	public String getResolutions() {
 		return resolutions;
 	}
@@ -361,7 +324,6 @@ public class OlSource implements Serializable {
 		this.resolutions = resolutions;
 	}
 
-	@Column(name = "SERVER_TYPE_")
 	public String getServerType() {
 		return serverType;
 	}
@@ -370,7 +332,6 @@ public class OlSource implements Serializable {
 		this.serverType = serverType;
 	}
 
-	@Column(name = "SIZE_HEIGHT_")
 	public String getSizeHeight() {
 		return sizeHeight;
 	}
@@ -379,7 +340,6 @@ public class OlSource implements Serializable {
 		this.sizeHeight = sizeHeight;
 	}
 
-	@Column(name = "SIZE_WIDTH_")
 	public String getSizeWidth() {
 		return sizeWidth;
 	}
@@ -388,7 +348,6 @@ public class OlSource implements Serializable {
 		this.sizeWidth = sizeWidth;
 	}
 
-	@Column(name = "SOURCE_")
 	public String getSource() {
 		return source;
 	}
@@ -397,7 +356,6 @@ public class OlSource implements Serializable {
 		this.source = source;
 	}
 
-	@Column(name = "SOURCES_")
 	public String getSources() {
 		return sources;
 	}
@@ -406,7 +364,6 @@ public class OlSource implements Serializable {
 		this.sources = sources;
 	}
 
-	@Column(name = "STATE_")
 	public String getState() {
 		return state;
 	}
@@ -415,7 +372,6 @@ public class OlSource implements Serializable {
 		this.state = state;
 	}
 
-	@Column(name = "STYLE_")
 	public String getStyle() {
 		return style;
 	}
@@ -424,7 +380,6 @@ public class OlSource implements Serializable {
 		this.style = style;
 	}
 
-	@Column(name = "THREADS_")
 	public String getThreads() {
 		return threads;
 	}
@@ -433,7 +388,6 @@ public class OlSource implements Serializable {
 		this.threads = threads;
 	}
 
-	@Column(name = "TIER_SIZE_CALCULATION_")
 	public String getTierSizeCalculation() {
 		return tierSizeCalculation;
 	}
@@ -442,7 +396,6 @@ public class OlSource implements Serializable {
 		this.tierSizeCalculation = tierSizeCalculation;
 	}
 
-	@Column(name = "TILE_PIXEL_RATIO_")
 	public String getTilePixelRatio() {
 		return tilePixelRatio;
 	}
@@ -451,7 +404,6 @@ public class OlSource implements Serializable {
 		this.tilePixelRatio = tilePixelRatio;
 	}
 
-	@Column(name = "TILE_SIZE_")
 	public String getTileSize() {
 		return tileSize;
 	}
@@ -460,7 +412,6 @@ public class OlSource implements Serializable {
 		this.tileSize = tileSize;
 	}
 
-	@Column(name = "URL_")
 	public String getUrl() {
 		return url;
 	}
@@ -469,7 +420,6 @@ public class OlSource implements Serializable {
 		this.url = url;
 	}
 
-	@Column(name = "URLS_")
 	public String getUrls() {
 		return urls;
 	}
@@ -478,7 +428,6 @@ public class OlSource implements Serializable {
 		this.urls = urls;
 	}
 
-	@Column(name = "USE_OVERLAY_")
 	public String getUseOverlay() {
 		return useOverlay;
 	}
@@ -487,7 +436,6 @@ public class OlSource implements Serializable {
 		this.useOverlay = useOverlay;
 	}
 
-	@Column(name = "VERSION_")
 	public String getVersion() {
 		return version;
 	}

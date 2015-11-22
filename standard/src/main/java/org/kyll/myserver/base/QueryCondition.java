@@ -23,6 +23,8 @@ public class QueryCondition {
 	private String key;
 	private String value;
 	private String layerClassName;
+	private String sourceType;
+	private String sourceClassName;
 
 	public QueryCondition() {
 	}
@@ -169,5 +171,21 @@ public class QueryCondition {
 
 	public void setLayerClassName(String layerClassName) {
 		this.layerClassName = layerClassName;
+	}
+
+	public String getSourceType() {
+		return sourceType;
+	}
+
+	public void setSourceType(String sourceType) {
+		this.sourceType = sourceType;
+	}
+
+	public String getSourceClassName() {
+		return sourceClassName;
+	}
+
+	public void setSourceClassName(String sourceClassName) {
+		this.sourceClassName = sourceClassName;
 	}
 }
